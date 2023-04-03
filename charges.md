@@ -444,3 +444,17 @@
     - Update
     - Delete
     - Get / GetById
+
+
+ROLES
+  - Utilisateur non connecté
+  - Connecté sans role
+  - Eleve
+  - Musicien (chef, sous-chef)
+  - Photographe
+  - Rédacteur
+  - Professeur
+  - Comission (cf page comission)
+  - Admin
+  - Archiviste
+
