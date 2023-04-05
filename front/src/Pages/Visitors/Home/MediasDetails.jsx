@@ -1,16 +1,17 @@
 import React from 'react';
+import MediasDatas from './../../../data/Medias';
 import { useParams } from 'react-router-dom';
 
-export default function MediasDetails(props) {
+export default function MediasDetails() {
 
   const {id} = useParams();
-  const {medias} = props;
+  const datas = MediasDatas;
 
-  const album = medias.find((album) => album.id === parseInt(id));
+  const album = datas.find((album) => album.id === parseInt(id));
 
   return (
     <div>
-      <h1>{album.title}</h1>
+      <h4>{album.title}</h4>
       <p>{album.image1}</p>
       <p>{album.image2}</p>
       <p>{album.image3}</p>

@@ -1,15 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import MediasDatas from './../../../data/Medias';
 
-export default function Medias(props) {
+export default function Medias() {
 
-  const {medias} = props;
+  const datas = MediasDatas;
 
   return (
     <div>
-      { medias.map ((album, index) => {
+      { datas.map ((album, index) => {
         return <Link to={`/medias/${album.id}`} key={index}>
-          <h1>{album.title}</h1>
+          <h4>{album.title}</h4>
           <p>{album.image1}</p>
         </Link>
       })}
