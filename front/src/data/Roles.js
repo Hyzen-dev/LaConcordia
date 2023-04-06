@@ -1,4 +1,4 @@
-export default [
+const roles =  [
     {
         id: 1,
         name: 'Administrateur',
@@ -42,3 +42,5 @@ export default [
         updatedAt: '2020-01-01'
     },
 ]
+
+export default roles;

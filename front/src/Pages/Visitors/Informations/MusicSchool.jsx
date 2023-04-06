@@ -5,13 +5,13 @@ export default function MusicSchool() {
   return (
     <div>
       <div>
-        <h3>École de musique</h3>
-        <h5>Effectif actuel</h5>
+        <h2>École de musique</h2>
+        <h3>Effectif actuel</h3>
       </div>
 
       <div>
         <div>
-          <h4>Formations</h4>
+          <h3>Formations</h3>
           <ul>
             <li>Musicale</li>
             <li>Instrumentale</li>
@@ -19,7 +19,7 @@ export default function MusicSchool() {
         </div>
 
         <div>
-          <h4>Professeurs et instruments enseignés</h4>
+          <h3>Professeurs et instruments enseignés</h3>
           <div>
             <ul>
               <li>Percussions</li>
@@ -43,7 +43,7 @@ export default function MusicSchool() {
         </div>
 
         <div>
-          <h4>Ensembles et activités</h4>
+          <h3>Ensembles et activités</h3>
           <ul>
             <li>Une classe d'orchestre</li>
             <li>Une batucada (ensemble de percussions)</li>
@@ -52,7 +52,7 @@ export default function MusicSchool() {
         </div>
 
         <div>
-          <h4>Informations et renseignements</h4>
+          <h3>Informations et renseignements</h3>
           <p>
             <strong>L'école de musique est ouverte du Lundi au Samedi.</strong><br />
             <span>Salle Léon Urbain, École de Musique, rue Ferrer, 62750 LOOS EN GOHELLE</span>

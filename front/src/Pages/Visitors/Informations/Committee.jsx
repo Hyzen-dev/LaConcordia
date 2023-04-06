@@ -6,31 +6,33 @@ import FunctionsDatas from './../../../data/Functions';
 
 export default function Committee() {
 
-  const members = CommitteeDatas;
-  const functions = FunctionsDatas;
-
   return (
     <div>
+      <div>
+        <h2>Commission</h2>
+        <h3>Effectif actuel</h3>
+      </div>
 
-      { functions.map((type) => {
-        return (
-          <div key={type.id}>
-            <h4>{type.name}</h4>
+      <div>
+        {FunctionsDatas.map((type) => {
+          return (
+            <div key={type.id}>
+              <h4>{type.name}</h4>
 
-            { members.map((member)=> {
-              if (member.function.name === type.name) {
-                return (
-                <div key={member.id}>
-                  <p>{member.firstName}</p>
-                  <p>{member.lastName}</p>
-                </div>
-                );
-              }
-            })}
-          </div>
-        )
-      })
-    }
+              {CommitteeDatas.map((member) => {
+                if (member.function === type.name) {
+                  return (
+                    <div key={member.id}>
+                      <p>{member.firstName} {member.lastName}</p>
+                    </div>
+                  );
+                }
+                return null;
+              })}
+            </div>
+          )
+        })}
+      </div>
     </div>
   )
 }

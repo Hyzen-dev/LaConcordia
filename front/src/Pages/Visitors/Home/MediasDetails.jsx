@@ -5,13 +5,13 @@ import { useParams } from 'react-router-dom';
 export default function MediasDetails() {
 
   const {id} = useParams();
-  const datas = MediasDatas;
 
-  const album = datas.find((album) => album.id === parseInt(id));
+  const album = MediasDatas.find((album) => album.id === parseInt(id));
 
   return (
     <div>
-      <h4>{album.title}</h4>
+      <h2>Galerie Médias</h2>
+      <h3>{album.title}</h3>
       <p>{album.image1}</p>
       <p>{album.image2}</p>
       <p>{album.image3}</p>

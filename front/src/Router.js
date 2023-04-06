@@ -5,7 +5,7 @@ import Header from './Components/Header.Component';
 import { About, Events, EventsDetails, Medias, MediasDetails, News, NewsDetails } from './Pages/Visitors/Home/exports';
 import { Band, Committee, MusicSchool } from './Pages/Visitors/Informations/exports';
 import Contact from './Pages/Visitors/Contact/Contact';
-import SignUp from './Pages/Visitors/MemberSpace/SignUp';
+import { SignUp, SignIn } from './Pages/Visitors/MemberSpace/exports';
 
 
 export default function Router() {
@@ -45,6 +45,10 @@ export default function Router() {
 
             <Route path='inscription'>
               <Route index element={<SignUp />} />
+            </Route>
+
+            <Route path='connexion'>
+              <Route index element={<SignIn />} />
             </Route>
 
           </Route>
