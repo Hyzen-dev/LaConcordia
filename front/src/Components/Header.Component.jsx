@@ -8,7 +8,7 @@ export default function Header() {
     <div>
       <Navbar />
       <h2>Souhaitez-vous intégrer notre formation ?</h2>
-      <button><Link to={'/contact'}>Nous rejoindre</Link></button>
+      <button><Link to={'/inscription'}>Nous rejoindre</Link></button>
       <HomeNavbar />
     </div>
   )

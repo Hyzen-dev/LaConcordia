@@ -17,7 +17,7 @@ export default function Committee() {
         {FunctionsDatas.map((type) => {
           return (
             <div key={type.id}>
-              <h4>{type.name}</h4>
+              <h3>{type.name}</h3>
 
               {CommitteeDatas.map((member) => {
                 if (member.function === type.name) {
