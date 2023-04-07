@@ -1,5 +1,5 @@
-import React from 'react';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import Footer from './Components/Footer.Component';
 import Header from './Components/Header.Component';
 import { About, Events, EventsDetails, Medias, MediasDetails, News, NewsDetails } from './Pages/Visitors/Home/exports';
@@ -8,15 +8,27 @@ import Contact from './Pages/Visitors/Contact/Contact';
 import { SignUp, SignIn } from './Pages/Visitors/MemberSpace/exports';
 import { EventsCreate, EventsList, EventsUpdate, MediasCreate, MediasList, MediasUpdate, Messages, NewsCreate, NewsList, NewsUpdate, Notifications, Profil, SheetsCreate, SheetsList, SheetsUpdate, SheetsUsers, UsersUpdate } from './Pages/Users/exports';
 
-
 export default function Router() {
   return (
     <BrowserRouter>
-      <Header />
+      <RouterContainer />
+    </BrowserRouter>
+  );
+}
 
+function RouterContainer() {
+  const location = useLocation();
+  const [isPanelRoute, setIsPanelRoute] = useState(false);
+
+  useEffect(() => {
+    setIsPanelRoute(location.pathname.startsWith('/espace-membre'));
+    console.log(location.pathname.startsWith('/espace-membre'));
+  }, [location.pathname]);
+  return (
+    <>
+      {isPanelRoute ? <h1>TestHeader</h1> : <Header />}
       <Routes>
         <Route path='/'>
-
           <Route index element={<News />} />
 
           <Route path='actualites'>
@@ -57,6 +69,8 @@ export default function Router() {
           </Route>
 
           <Route path='espace-membre'>
+            <Route path=':id' element={<Profil />} />
+
             <Route index element={<Profil />} />
 
             <Route path='notifications'>
@@ -99,6 +113,5 @@ export default function Router() {
         </Route>
       </Routes>
       <Footer />
-    </BrowserRouter>
-  )
+    </> )
 }

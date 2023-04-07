@@ -1,4 +1,6 @@
 import Roles from './Roles';
+import Instruments from './Instruments';
+import Status from './Status';
 
 const users = [
     {
@@ -9,7 +11,9 @@ const users = [
         phone: '06 00 00 00 01',
         civilité: 'Monsieur',
         password: '123',
-        role: Roles[0],
+        role: [Roles[0], Roles[1]],
+        status: [Status[0], Status[5]],
+        instruments: [Instruments[2]],
         createdAt: '2020-01-01',
         updatedAt: '2020-01-01'
     },
@@ -21,7 +25,9 @@ const users = [
         phone: '06 00 00 00 02',
         civilité: 'Monsieur',
         password: '123',
-        role: Roles[0],
+        role: [Roles[4], Roles[2]],
+        status: [Status[1], Status[5]],
+        instruments: [Instruments[2]],
         createdAt: '2020-01-01',
         updatedAt: '2020-01-01'
     },
@@ -33,7 +39,9 @@ const users = [
         phone: '06 00 00 00 03',
         civilité: 'Monsieur',
         password: '123',
-        role: Roles[0],
+        role: [Roles[0]],
+        status: [Status[2]],
+        instruments: [],
         createdAt: '2020-01-01',
         updatedAt: '2020-01-01'
     },
@@ -45,7 +53,9 @@ const users = [
         phone: '06 00 00 00 04',
         civilité: 'Monsieur',
         password: '123',
-        role: Roles[1],
+        role: [Roles[1]],
+        status: Status[2],
+        instruments: [Instruments[2], Instruments[6]],
         createdAt: '2020-01-01',
         updatedAt: '2020-01-01'
     },
@@ -58,6 +68,8 @@ const users = [
         civilité: 'Monsieur',
         password: '123',
         role: Roles[1],
+        status: Status[2],
+        instruments: Instruments[10],
         createdAt: '2020-01-01',
         updatedAt: '2020-01-01'
     },
@@ -70,6 +82,8 @@ const users = [
         civilité: 'Monsieur',
         password: '123',
         role: Roles[2],
+        status: Status[2],
+        instruments: Instruments[3],
         createdAt: '2020-01-01',
         updatedAt: '2020-01-01'
     },
@@ -81,7 +95,9 @@ const users = [
         phone: '06 00 00 00 07',
         civilité: 'Monsieur',
         password: '123',
-        role: Roles[2],
+        role: Roles[3],
+        status: Status[1],
+        instruments: Instruments[13],
         createdAt: '2020-01-01',
         updatedAt: '2020-01-01'
     },
@@ -94,6 +110,8 @@ const users = [
         civilité: 'Monsieur',
         password: '123',
         role: Roles[1],
+        status: Status[4],
+        instruments: null,
         createdAt: '2020-01-01',
         updatedAt: '2020-01-01'
     },
@@ -106,6 +124,8 @@ const users = [
         civilité: 'Monsieur',
         password: '123',
         role: Roles[1],
+        status: Status[5],
+        instruments: null,
         createdAt: '2020-01-01',
         updatedAt: '2020-01-01'
     },
@@ -118,6 +138,8 @@ const users = [
         civilité: 'Monsieur',
         password: '123',
         role: Roles[2],
+        status: Status[6],
+        instruments: Instruments[8],
         createdAt: '2020-01-01',
         updatedAt: '2020-01-01'
     },
@@ -130,6 +152,8 @@ const users = [
         civilité: 'Monsieur',
         password: '123',
         role: Roles[2],
+        status: Status[7],
+        instruments: Instruments[7],
         createdAt: '2020-01-01',
         updatedAt: '2020-01-01'
     },
@@ -142,6 +166,8 @@ const users = [
         civilité: 'Monsieur',
         password: '123',
         role: Roles[6],
+        status: Status[7],
+        instruments: Instruments[0],
         createdAt: '2020-01-01',
         updatedAt: '2020-01-01'
     },
@@ -154,6 +180,8 @@ const users = [
         civilité: 'Monsieur',
         password: '123',
         role: Roles[6],
+        status: Status[7],
+        instruments: Instruments[1],
         createdAt: '2020-01-01',
         updatedAt: '2020-01-01'
     },
@@ -166,6 +194,8 @@ const users = [
         civilité: 'Monsieur',
         password: '123',
         role: Roles[6],
+        status: Status[7],
+        instruments: null,
         createdAt: '2020-01-01',
         updatedAt: '2020-01-01'
     },
@@ -178,6 +208,8 @@ const users = [
         civilité: 'Monsieur',
         password: '123',
         role: Roles[6],
+        status: Status[10],
+        instruments: null,
         createdAt: '2020-01-01',
         updatedAt: '2020-01-01'
     },
@@ -190,6 +222,8 @@ const users = [
         civilité: 'Monsieur',
         password: '123',
         role: Roles[3],
+        status: Status[10],
+        instruments: Instruments[3],
         createdAt: '2020-01-01',
         updatedAt: '2020-01-01'
     },
@@ -202,6 +236,8 @@ const users = [
         civilité: 'Monsieur',
         password: '123',
         role: Roles[4],
+        status: Status[9],
+        instruments: Instruments[4],
         createdAt: '2020-01-01',
         updatedAt: '2020-01-01'
     },
@@ -214,6 +250,8 @@ const users = [
         civilité: 'Monsieur',
         password: '123',
         role: Roles[5],
+        status: Status[9],
+        instruments: Instruments[5],
         createdAt: '2020-01-01',
         updatedAt: '2020-01-01'
     },
@@ -226,6 +264,8 @@ const users = [
         civilité: 'Monsieur',
         password: '123',
         role: Roles[5],
+        status: Status[9],
+        instruments: [Instruments[12], Instruments[11]],
         createdAt: '2020-01-01',
         updatedAt: '2020-01-01'
     },
@@ -238,6 +278,8 @@ const users = [
         civilité: 'Monsieur',
         password: '123',
         role: Roles[4],
+        status: Status[9],
+        instruments: Instruments[2],
         createdAt: '2020-01-01',
         updatedAt: '2020-01-01'
     },

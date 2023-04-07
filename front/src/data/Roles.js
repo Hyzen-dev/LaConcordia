@@ -1,46 +1,46 @@
 const roles =  [
     {
         id: 1,
-        name: 'Administrateur',
+        name: 'administrator',
+        label: 'Administrateur',
         createdAt: '2020-01-01',
         updatedAt: '2020-01-01'
     },
-    {
-        id: 2,
-        name: 'Chef',
-        createdAt: '2020-01-01',
-        updatedAt: '2020-01-01'
-    },
-    {
-        id: 3,
-        name: 'Sous-chef',
-        createdAt: '2020-01-01',
-        updatedAt: '2020-01-01'
-    },
+
     {
         id: 4,
-        name: 'Rédacteur',
+        name: 'redactor',
+        label: 'Rédacteur',
         createdAt: '2020-01-01',
         updatedAt: '2020-01-01'
     },
     {
         id: 5,
-        name: 'Photographe',
+        name: 'photograph',
+        label: 'Photographe',
         createdAt: '2020-01-01',
         updatedAt: '2020-01-01'
     },
     {
         id: 6,
-        name: 'Professeur',
+        name: 'professor',
+        label: 'Professeur',
         createdAt: '2020-01-01',
         updatedAt: '2020-01-01'
     },
     {
         id: 7,
-        name: 'Musicien',
+        name: 'musician',
+        label: 'Musicien',
         createdAt: '2020-01-01',
         updatedAt: '2020-01-01'
     },
+    // {
+    //     id: 8,
+    //     name: 'Commission',
+    //     createdAt: '2020-01-01',
+    //     updatedAt: '2020-01-01'
+    // },
 ]
 
 export default roles;

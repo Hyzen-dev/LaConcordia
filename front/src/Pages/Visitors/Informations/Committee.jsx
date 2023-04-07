@@ -1,11 +1,11 @@
 // Récupérer les utilisateurs avec leurs rôles depuis la BDD
 
 import React from 'react';
-import CommitteeDatas from './../../../data/Committee';
-import FunctionsDatas from './../../../data/Functions';
+import UsersDatas from './../../../data/Users';
+import StatusDatas from '../../../data/Status';
 
 export default function Committee() {
-
+  const CommitteeData = StatusDatas.filter
   return (
     <div>
       <div>
@@ -14,23 +14,27 @@ export default function Committee() {
       </div>
 
       <div>
-        {FunctionsDatas.map((type) => {
-          return (
-            <div key={type.id}>
-              <h3>{type.name}</h3>
+        {StatusDatas.map((status) => {
+          if (status.type === 'Committee') {
+            return (
+              <div key={status.id}>
+                <h3>{status.name}</h3>
 
-              {CommitteeDatas.map((member) => {
-                if (member.function === type.name) {
+                {UsersDatas.map((user) => {
+                if (user.status === status) {
                   return (
-                    <div key={member.id}>
-                      <p>{member.firstName} {member.lastName}</p>
+                    <div key={user.id}>
+                      <p>{user.firstName} {user.lastName}</p>
                     </div>
                   );
                 }
                 return null;
               })}
-            </div>
-          )
+
+              </div>
+            
+        )}
+          
         })}
       </div>
     </div>
