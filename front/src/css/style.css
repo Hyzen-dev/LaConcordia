@@ -1,0 +1,104 @@
+body {
+  font-family: Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+ul {
+  margin: 0px;
+}
+
+li {
+  list-style-type: none;
+}
+
+#headerVisitors {
+  margin-bottom: 100px;
+}
+
+.titleContainer {
+  text-align: center;
+}
+.titleContainer__link {
+  text-decoration: none;
+}
+
+.logoContainer {
+  display: flex;
+  align-items: center;
+}
+.logoContainer__img {
+  height: 25px;
+}
+.logoContainer__title {
+  font-size: 24px;
+}
+
+.homeNavbar {
+  display: flex;
+  justify-content: space-around;
+  padding: 0;
+}
+footer {
+  margin-top: 200px;
+  background-color: rgb(32, 32, 32);
+  z-index: 9999;
+}
+
+#category {
+  text-align: center;
+}
+
+#category h2 {
+  font-size: 26px;
+}
+
+#category h3 {
+  font-size: 14px;
+}
+
+@media screen and (min-width: 480px) {
+  #category h2 {
+    font-size: 36px;
+  }
+  #category h3 {
+    font-size: 18px;
+  }
+}
+.headerUsers {
+  background-color: rgb(109, 182, 76);
+  padding: 30px 0px 10px 10px;
+  font-size: 18px;
+}
+.headerUsers__title {
+  margin: 0px;
+}
+
+#navbarUsers {
+  background-color: rgb(41, 41, 41);
+  padding: 30px;
+}
+
+.usersNavList {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+.usersNavList__subheading {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.usersNavList__subheading:first-child {
+  margin-top: 10px;
+}
+
+#usersPage {
+  color: white;
+}
+
+/*# sourceMappingURL=style.css.map */

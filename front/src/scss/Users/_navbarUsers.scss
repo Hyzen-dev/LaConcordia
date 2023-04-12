@@ -1,0 +1,29 @@
+#navbarUsers {
+    background-color: $main-color-grey;
+    padding: 30px;
+}
+
+.usersNavList {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+
+    &__subheading {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    &__subheading:first-child {
+        margin-top: 10px;
+
+    }
+}
+
+
+
+//     width: 15%;
+//     height: 500px;
+//     position: fixed;
+//     height: 100%;
+//     z-index: -1;

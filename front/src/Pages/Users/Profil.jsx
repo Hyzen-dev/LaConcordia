@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import InformationsForm from '../../Components/InformationsForm.Components';
+import InformationsForm from '../../Components/Users/InformationsForm.Components';
 import { Link, useParams } from 'react-router-dom';
-import AccessForm from '../../Components/AccessForm.Component';
-import Test from '../../Components/Test.Component';
+import AccessForm from '../../Components/Users/AccessForm.Component';
+import SelectComponent from '../../Components/Users/Select.Component';
 import roles from '../../data/Roles';
 import users from '../../data/Users';
 import status from '../../data/Status';
@@ -31,13 +31,17 @@ export default function Profil(props) {
     setShowModal(false);
   }
   return (
-    <div>
-      <h2>Mon Profil</h2>
+    <div id='usersContent'>
+      <div id='category'>
+        <h2>Mon Profil</h2>
+      </div>
 
       <h3>Informations personnelles</h3>
       <InformationsForm />
       <p>Si vous souhaitez modifier vos informations, veuillez nous contacter <Link to={'/contact'}>ici.</Link></p>
+
       <button onClick={() => setShowModal(true)}>Modifier mon mot de passe</button>
+
       <Modal showModal={showModal} setShowModal={setShowModal}>
         <form onSubmit={handleSubmit} action="#">
           <label htmlFor="password">Nouveau mot de passe</label>
@@ -52,16 +56,11 @@ export default function Profil(props) {
       <button>Accès panel</button>
       <AccessForm />
 
-
-
-
-
       <h3>Notifications</h3>
 
-
-      <Test options={roles} userData={userRoles} />
-      <Test options={status} userData={userStatus} />
-      <Test options={instruments} userData={userInstruments} />
+      <SelectComponent options={roles} userData={userRoles} />
+      <SelectComponent options={status} userData={userStatus} />
+      <SelectComponent options={instruments} userData={userInstruments} />
 
     </div>
   )

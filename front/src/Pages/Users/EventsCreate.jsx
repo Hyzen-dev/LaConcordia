@@ -4,6 +4,6 @@ import React from 'react'
 
 export default function EventsCreate() {
   return (
-    <div>EventsCreate</div>
+    <div id='usersContent'>EventsCreate</div>
   )
 }

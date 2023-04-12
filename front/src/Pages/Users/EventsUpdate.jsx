@@ -2,6 +2,6 @@ import React from 'react'
 
 export default function EventsUpdate() {
   return (
-    <div>EventsUpdate</div>
+    <div id='usersContent'>EventsUpdate</div>
   )
 }

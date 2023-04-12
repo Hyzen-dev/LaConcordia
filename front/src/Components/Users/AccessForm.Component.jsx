@@ -1,7 +1,5 @@
 import React from 'react';
-import UsersDatas from './../data/Users';
-import RolesDatas from './../data/Roles';
-import InstrumentsDatas from './../data/Instruments';
+import UsersDatas from '../../data/Users';
 import { useParams } from 'react-router-dom';
 
 export default function AccessForm() {
@@ -10,7 +8,7 @@ export default function AccessForm() {
 
     const user = UsersDatas.find((user) => user.id === parseInt(id));
 
-    const userRole = []
+    const userRole = [];
 
     user.role.map((role) => {
         userRole.push(role.name)

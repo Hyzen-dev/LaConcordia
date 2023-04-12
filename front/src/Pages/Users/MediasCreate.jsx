@@ -4,6 +4,6 @@ import React from 'react'
 
 export default function MediasCreate() {
   return (
-    <div>MediasCreate</div>
+    <div id='usersContent'>MediasCreate</div>
   )
 }

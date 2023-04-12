@@ -4,6 +4,9 @@ import React from 'react'
 
 export default function Band() {
   return (
-    <div>Band</div>
+    <div id='category'>
+      <h2>Harmonie & Clique</h2>
+      <h3>Effectif actuel</h3>
+    </div>
   )
 }

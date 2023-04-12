@@ -5,7 +5,7 @@ import makeAnimated from 'react-select/animated';
 
 const animatedComponents = makeAnimated();
 
-export default function AnimatedMulti(props) {
+export default function SelectComponent(props) {
   const { options, userData } = props;
   
   const formattedOptions = [];

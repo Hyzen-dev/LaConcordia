@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
-import Footer from './Components/Footer.Component';
-import Header from './Components/Header.Component';
+import HeaderVisitors from './Components/Visitors/HeaderVisitors.Component';
+import UsersPage from './Components/Users/UsersPage';
 import { About, Events, EventsDetails, Medias, MediasDetails, News, NewsDetails } from './Pages/Visitors/Home/exports';
 import { Band, Committee, MusicSchool } from './Pages/Visitors/Informations/exports';
 import Contact from './Pages/Visitors/Contact/Contact';
 import { SignUp, SignIn } from './Pages/Visitors/MemberSpace/exports';
 import { EventsCreate, EventsList, EventsUpdate, MediasCreate, MediasList, MediasUpdate, Messages, NewsCreate, NewsList, NewsUpdate, Notifications, Profil, SheetsCreate, SheetsList, SheetsUpdate, SheetsUsers, UsersUpdate } from './Pages/Users/exports';
+import Footer from './Components/Footer.Component';
+
 
 export default function Router() {
   return (
@@ -15,6 +17,7 @@ export default function Router() {
     </BrowserRouter>
   );
 }
+
 
 function RouterContainer() {
   const location = useLocation();
@@ -26,7 +29,7 @@ function RouterContainer() {
   }, [location.pathname]);
   return (
     <>
-      {isPanelRoute ? <h1>TestHeader</h1> : <Header />}
+      {isPanelRoute ? <UsersPage /> : <HeaderVisitors />}
       <Routes>
         <Route path='/'>
           <Route index element={<News />} />

@@ -1,0 +1,39 @@
+.navbar {
+    
+}
+
+.logoContainer {
+    display: flex;
+    align-items: center;
+
+    &__img {
+        height: 25px;
+    }
+
+    &__title {
+        font-size: 24px;
+    }
+}
+
+.navList {
+
+    &__item {
+        
+
+        &__informationsList {
+
+
+            &__item {
+
+            }
+
+            &__link {
+
+            }
+        }
+    }
+
+    &__link {
+
+    }
+}

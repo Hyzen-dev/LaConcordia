@@ -5,7 +5,7 @@ import RolesData from './../../data/Roles';
 
 export default function UsersUpdate() {
   return (
-    <div>
+    <div id='usersContent'>
       <h2>Gestion des utilisateurs</h2>
 
 

@@ -3,7 +3,9 @@ import React from 'react'
 export default function About() {
   return (
     <div>
-      <h2>La Concordia</h2>
+      <div id='category'>
+        <h2>La Concordia</h2>
+      </div>
       <div>
         <h3>Qui sommes-nous ?</h3>
         <p>Implantée à Loos en Gohelle au coeur du bassin minier, l'Harmonie Municipale la Concordia fût créée en 1881, à cette époque elle n'était composée que d'une clique, de tambours et de clairons, au fil des années, elle devint une harmonie complète avec toutes sortes d'instruments indispensables pour jouer la musique classique, moderne et marches militaires.</p>

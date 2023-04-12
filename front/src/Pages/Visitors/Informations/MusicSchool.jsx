@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 export default function MusicSchool() {
   return (
     <div>
-      <div>
+    <div id='category'>
         <h2>École de musique</h2>
         <h3>Effectif actuel</h3>
       </div>
