@@ -10,7 +10,7 @@ export default function HeaderVisitors() {
       <div className='titleContainer'>
         <h2 className='titleContainer__title'>Souhaitez-vous intégrer notre formation ?</h2>
         <button className='titleContainer__button'>
-          <Link to={'/inscription'} className='titleContainer__link'>Nous rejoindre</Link>
+          <Link to={'/inscription'} className='titleContainer__link link'>Nous rejoindre</Link>
         </button>
       </div>
       <HomeNavbar />

@@ -16,10 +16,10 @@ export default function Profil(props) {
   useEffect(() => {
     setUser(users.find(user => user.id === parseInt(id)));
   }, [id]);
-  if (!user || user.length <= 0 || typeof(user.role) !== 'object' || typeof(user.status) !== 'object' || typeof(user.instruments) !== 'object') {
+  if (!user || user.length <= 0 || typeof (user.role) !== 'object' || typeof (user.status) !== 'object' || typeof (user.instruments) !== 'object') {
     return <h1>Utilisateur introuvable</h1>
   }
-  
+
   console.log(user)
   const userRoles = user.role
   const userStatus = user.status
@@ -36,32 +36,39 @@ export default function Profil(props) {
         <h2>Mon Profil</h2>
       </div>
 
-      <h3>Informations personnelles</h3>
-      <InformationsForm />
-      <p>Si vous souhaitez modifier vos informations, veuillez nous contacter <Link to={'/contact'}>ici.</Link></p>
+      <div id='box'>
+        <h3>Informations personnelles</h3>
+        <InformationsForm />
+        <p>Si vous souhaitez modifier vos informations, veuillez nous contacter <Link to={'/contact'}>ici.</Link></p>
 
-      <button onClick={() => setShowModal(true)}>Modifier mon mot de passe</button>
+        <button onClick={() => setShowModal(true)}>Modifier mon mot de passe</button>
 
-      <Modal showModal={showModal} setShowModal={setShowModal}>
-        <form onSubmit={handleSubmit} action="#">
-          <label htmlFor="password">Nouveau mot de passe</label>
-          <input type="password" name="password" id="password" />
-          <label htmlFor="password">Confirmer le mot de passe</label>
-          <input type="password" name="password" id="password" />
-          <button type="submit">Modifier</button>
-        </form>
-      </Modal>
+        <Modal showModal={showModal} setShowModal={setShowModal}>
+          <form onSubmit={handleSubmit} action="#">
+            <label htmlFor="password">Mot de passe actuel</label>
+            <input type="password" name="password" id="password" />
+            <label htmlFor="password">Nouveau mot de passe</label>
+            <input type="password" name="password" id="password" />
+            <label htmlFor="password">Confirmer le mot de passe</label>
+            <input type="password" name="password" id="password" />
+            <button type="submit">Modifier</button>
+          </form>
+        </Modal>
+      </div>
 
-      <h3>Accès réglementé</h3>
-      <button>Accès panel</button>
-      <AccessForm />
+      <div id='box'>
+        <h3>Accès réglementé</h3>
+        <button>Accès panel</button>
+        <AccessForm />
+      </div>
 
-      <h3>Notifications</h3>
+      <div id='box'>
+        <h3>Notifications</h3>
 
-      <SelectComponent options={roles} userData={userRoles} />
-      <SelectComponent options={status} userData={userStatus} />
-      <SelectComponent options={instruments} userData={userInstruments} />
-
+        <SelectComponent options={roles} userData={userRoles} />
+        <SelectComponent options={status} userData={userStatus} />
+        <SelectComponent options={instruments} userData={userInstruments} />
+      </div>
     </div>
   )
 }

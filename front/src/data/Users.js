@@ -12,7 +12,7 @@ const users = [
         civilité: 'Monsieur',
         password: '123',
         role: [Roles[0], Roles[1]],
-        status: [Status[0], Status[5]],
+        status: [Status[0], Status[5], Status[8]],
         instruments: [Instruments[2]],
         createdAt: '2020-01-01',
         updatedAt: '2020-01-01'

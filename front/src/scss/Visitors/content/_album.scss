@@ -1,0 +1,9 @@
+.album {
+    display: flex;
+    flex-direction: column;
+
+    &__photo {
+        width: 200px;
+        margin: 20px auto;
+    }
+}

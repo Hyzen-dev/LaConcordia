@@ -1,0 +1,29 @@
+#headerVisitors {
+    margin-bottom: 50px;
+    background: linear-gradient(96.74deg, rgba(30, 33, 33, 0.6) -0.62%, rgba(32, 32, 32, 0.2) 100%), url(./../assets/headerBackground.jpg);
+    background-position: center;
+    background-size: cover;
+    box-shadow: 0px 1px 6px rgb(200, 200, 200);
+    color: white;
+}
+
+.titleContainer {
+    text-align: center;
+
+    &__title {
+        width: 80%;
+        margin: auto;
+    }
+
+    &__button {
+        margin-top: 30px;
+        border: none;
+        border-radius: 4px;
+        padding: 8px 18px;
+        background-color: $main-color-green;
+    }
+
+    &__link {
+        color: white;
+    }
+}

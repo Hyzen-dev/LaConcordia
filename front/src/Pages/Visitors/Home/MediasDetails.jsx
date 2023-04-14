@@ -14,10 +14,10 @@ export default function MediasDetails() {
         <h2>Galerie Médias</h2>
         <h3>{album.title}</h3>
       </div>
-      <div>
-        <p>{album.image1}</p>
-        <p>{album.image2}</p>
-        <p>{album.image3}</p>
+      <div className='album'>
+        {album.photos.map((photo) => {
+          return <img src={photo} className='album__photo'/>
+        })}
       </div>
     </div>
   )

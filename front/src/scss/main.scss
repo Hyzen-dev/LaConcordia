@@ -1,10 +1,18 @@
 @import './variables.scss';
 @import './base';
-@import './Visitors/headerVisitors';
-@import './Visitors/navbar';
-@import './Visitors/homeNavbar';
-@import './footer';
-@import './page';
+
+@import './Visitors/header/headerVisitors';
+@import './Visitors/header/navbar';
+@import './Visitors/header/homeNavbar';
+@import './Visitors/content/cards';
+@import './Visitors/content/mediasCard';
+@import './Visitors/content/album';
+@import './Visitors/content/article';
+@import './Visitors/content/page';
+@import './Visitors/content/band';
+
 @import './Users/headerUsers';
 @import './Users/navbarUsers';
 @import './Users/usersPage';
+
+@import './footer';
