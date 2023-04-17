@@ -14,27 +14,27 @@ export default function Band() {
         <h3>Effectif actuel</h3>
       </div>
 
-      <div className='band'>
+      <div className='pagePattern'>
         {StatusDatas.map((status) => {
           if (status.type === 'Musician') {
             return (
               <div key={status.id}>
-                <h3 className='band__category'>{status.label}</h3>
+                <h3 className='bandCategory'>{status.label}</h3>
 
-                <div className='band__members'>
+                <div className='separator'></div>
 
-                  {UsersDatas.map((user) => {
 
-                    if (user.status.includes(status)) {
-                      return (
-                        <div key={user.id} className='band__member'>
-                          <p>{user.firstName} {user.lastName}</p>
-                        </div>
-                      );
-                    }
-                    return null;
-                  })}
-                </div>
+                {UsersDatas.map((user) => {
+
+                  if (user.status.includes(status)) {
+                    return (
+                      <div key={user.id}>
+                        <p>{user.firstName} {user.lastName}</p>
+                      </div>
+                    );
+                  }
+                  return null;
+                })}
               </div>
             )
           }
@@ -43,25 +43,20 @@ export default function Band() {
         {InstrumentsDatas.map((instrument) => {
           return (
             <div key={instrument.id}>
-              <h3 className='band__category'>{instrument.label}</h3>
+              <h3 className='bandCategory pagePattern__subheading'>{instrument.label}</h3>
+              <div className='separator'></div>
 
-              <div className='band__separator'></div>
+              {UsersDatas.map((user) => {
 
-              <div className='band__members'>
-
-
-                {UsersDatas.map((user) => {
-
-                  if (user.instruments.includes(instrument)) {
-                    return (
-                      <div key={user.id} className='band__member'>
-                        <p>{user.firstName} {user.lastName}</p>
-                      </div>
-                    );
-                  }
-                  return null;
-                })}
-              </div>
+                if (user.instruments.includes(instrument)) {
+                  return (
+                    <div key={user.id}>
+                      <p>{user.firstName} {user.lastName}</p>
+                    </div>
+                  );
+                }
+                return null;
+              })}
             </div>
           )
         })}

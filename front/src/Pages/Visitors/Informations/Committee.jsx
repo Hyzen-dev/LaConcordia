@@ -12,14 +12,15 @@ export default function Committee() {
         <h3>Effectif actuel</h3>
       </div>
 
-      <div>
+      <div className='committee pagePattern'>
         {/* Affichage des status de type 'Committee' */}
         {StatusDatas.map((status) => {
 
           if (status.type === 'Committee') {
             return (
               <div key={status.id}>
-                <h3>{status.name}</h3>
+                <h3 className='pagePattern__subheading'>{status.label}</h3>
+                <div className='separator'></div>
 
                 {UsersDatas.map((user) => {
 

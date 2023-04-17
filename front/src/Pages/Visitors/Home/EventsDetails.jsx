@@ -14,7 +14,7 @@ export default function EventsDetails() {
         <h2>{event.title}</h2>
         <h3>{event.eventDate}</h3>
       </div>
-      <div className='articleContent'>
+      <div className='pagePattern'>
         <p>{event.content}</p>
       </div>
     </div>

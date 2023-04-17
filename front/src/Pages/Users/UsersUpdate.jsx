@@ -36,7 +36,7 @@ export default function UsersUpdate() {
                         <option value="autre" key={role.id}>{role.name}</option>
                       )
                     }
-                  return null
+                    return null
                   })}
 
                 </select></td>

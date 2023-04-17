@@ -1,4 +1,4 @@
-import React, { useState }  from 'react'
+import React, { useState } from 'react'
 import NewsCard from '../../../Components/Visitors/NewsCard';
 import NewsDatas from './../../../data/News';
 import Sweetpagination from 'sweetpagination';
@@ -31,7 +31,7 @@ export default function News() {
         getData={cards}
         navigation={true}
         getStyle={'pagination-style'}
-      />      
+      />
     </div>
   )
 }

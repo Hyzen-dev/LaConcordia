@@ -1,0 +1,31 @@
+.form__box {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form__checkbox {
+    display: flex;
+    gap: 5px;
+    color: $main-color-grey;
+}
+
+.form__checkbox input {
+    width: 30px;
+    height: 20px;
+}
+
+.signUp p {
+    color: $main-color-grey;
+}
+
+.signUp {
+
+    &__link {
+        color: $main-color-green;
+    }
+
+    &__cgu {
+        font-size: 12px;
+    }
+}

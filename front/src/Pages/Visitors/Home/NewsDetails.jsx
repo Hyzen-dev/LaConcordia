@@ -14,7 +14,7 @@ export default function NewsDetails() {
         <h2>{news.title}</h2>
         <h3>{news.createdAt}</h3>
       </div>
-      <div className='articleContent'>
+      <div className='pagePattern'>
         <p>{news.content}</p>
       </div>
     </div>

@@ -10,21 +10,21 @@ export default function Footer() {
       </div>
       <div className='footer__socialMediasContainer'>
         <div className='footer__socialMediasContainer__edmIns'>
-          <i class="fa-brands fa-instagram" />
+          <i className="fa-brands fa-instagram" />
           <Link to='#' className='footer__socialMediasContainer__link'>Ecole de musique</Link>
         </div>
         <div className='footer__socialMediasContainer__harFb'>
-          <i class="fa-brands fa-facebook" />
+          <i className="fa-brands fa-facebook" />
           <Link to='#' className='footer__socialMediasContainer__link'>Harmonie</Link>
         </div>
         <div className='footer__socialMediasContainer__harIns'>
-          <i class="fa-brands fa-instagram" />
+          <i className="fa-brands fa-instagram" />
           <Link to='#' className='footer__socialMediasContainer__link'>Harmonie</Link>
         </div>
       </div>
       <div className='footer__cguContainer'>
         <div className='footer__cguContainer__legalNotice'>
-          <i class="fa-regular fa-copyright" />
+          <i className="fa-regular fa-copyright" />
           <p>La Concordia - Tous droits réservés - 2023</p>
         </div>
         <Link to='#' className='footer__cguContainer__cgu link'>CGU</Link>

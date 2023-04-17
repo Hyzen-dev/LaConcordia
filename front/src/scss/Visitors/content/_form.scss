@@ -1,0 +1,46 @@
+.form {
+    border: none;
+    padding: 0px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form button {
+    width: 130px;
+    height: 40px;
+    text-transform: uppercase;
+    color: white;
+    background-color: $main-color-green;
+    border: none;
+    border-radius: 3px;
+    font-weight: bold;
+    font-size: 16px;
+    margin-top: 20px;
+    font-family: 'Patua One';
+}
+
+.form input,
+.form textarea,
+.form select {
+    border: 1px solid $main-color-green;
+    background-color: rgb(235, 235, 235);
+    font-size: 18px;
+    padding-left: 10px;
+    width: 100%;
+    border-radius: 1px;
+}
+
+.form input,
+.form select {
+    height: 40px;
+}
+
+.form textarea {
+    resize: none;
+    padding-top: 5px;
+}
+
+.form select {
+    color: rgb(122, 122, 122);
+}

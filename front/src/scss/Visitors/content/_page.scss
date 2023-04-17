@@ -6,18 +6,37 @@
 #category h2 {
     font-size: 26px;
     color: $main-color-darkGrey;
+    font-family: 'Patua One';
 }
 
 #category h3 {
     font-size: 14px;
     color: rgb(100, 100, 100);
+    font-family: 'Patua One';
+}
+
+.pagePattern {
+    margin: 0px 40px;
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    border-top: 1px solid $separator;
+    text-align: justify;
+
+    &__subheading {
+        font-size: 24px;
+        color: $main-color-darkGrey;
+        font-family: 'Patua One';
+        text-align: left;
+    }
 }
 
 @media screen and (min-width: 480px) {
     #category h2 {
         font-size: 36px;
     }
-    
+
     #category h3 {
         font-size: 18px;
     }

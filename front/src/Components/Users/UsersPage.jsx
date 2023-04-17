@@ -6,8 +6,8 @@ import NavbarUsers from './NavbarUsers.Components';
 export default function UsersPage() {
   return (
     <div id='usersPage'>
-        <HeaderUsers />
-        <NavbarUsers />
+      <HeaderUsers />
+      <NavbarUsers />
     </div>
   )
 }

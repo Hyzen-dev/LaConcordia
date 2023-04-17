@@ -26,16 +26,16 @@ export default function Navbar() {
       <ul className={click ? "navbar__list active" : "navbar__list"}>
 
         <li className='navbar__list__title'>
-          <NavLink to={'/'} className='navbar__list__title__link link' activeclassname="active" onClick={{handleClick}}>Accueil</NavLink>
+          <NavLink to={'/'} className='navbar__list__title__link link' activeclassname="active" onClick={{ handleClick }}>Accueil</NavLink>
         </li>
 
-        
+
         <li className='navbar__list__title'>
-          
+
           <div className='navbar__list__title__info' onClick={infoHandleClick}>
             <p>Informations</p>
           </div>
-        
+
           <ul className={infoClick ? "navbar__list__title__sublist active" : "navbar__list__title__sublist"}>
 
 

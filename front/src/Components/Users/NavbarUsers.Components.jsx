@@ -141,7 +141,7 @@ export default function NavbarUsers() {
             <NavLink to={'/espace-membre/utilisateurs'} activeclassname="active" className="usersNavbar__list__link link" onClick={handleClick}>
               Gérer les utilisateurs
             </NavLink>
-            </div>
+          </div>
         </li>
       </ul>
     </nav>

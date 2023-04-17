@@ -16,7 +16,7 @@ export default function MediasDetails() {
       </div>
       <div className='album'>
         {album.photos.map((photo) => {
-          return <img src={photo} className='album__photo'/>
+          return <img src={photo} className='album__photo' />
         })}
       </div>
     </div>

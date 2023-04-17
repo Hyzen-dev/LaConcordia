@@ -15,8 +15,10 @@
         &__logo {
             height: 28px;
         }
+
         &__title {
             font-size: 18px;
+            font-family: 'Patua One';
         }
     }
 
@@ -26,7 +28,9 @@
         flex-direction: column;
         gap: 10px;
 
-        &__edmIns, &__harFb, &__harIns {
+        &__edmIns,
+        &__harFb,
+        &__harIns {
             display: flex;
             align-items: center;
             gap: 10px;

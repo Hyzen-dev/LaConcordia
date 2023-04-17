@@ -12,7 +12,6 @@
         z-index: 999;
         padding: 20px;
         background-color: $main-color-darkGrey;
-
         
         &__logoContainer {
             display: flex;
@@ -23,7 +22,7 @@
             }
     
             &__title {
-                
+                font-family: 'Patua One';
             }
         }
 
