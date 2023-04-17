@@ -11,7 +11,7 @@ export default function InformationsForm() {
     return (
         <div>
             <form method="post">
-                <fieldset>
+            <fieldset className='form'>
                     <input
                         type="text"
                         name='lastname'

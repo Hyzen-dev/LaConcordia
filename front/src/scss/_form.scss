@@ -6,9 +6,9 @@
     gap: 20px;
 }
 
-.form button {
-    width: 130px;
-    height: 40px;
+.form button, .button {
+    padding: 10px 20px;
+    width: fit-content;
     text-transform: uppercase;
     color: white;
     background-color: $main-color-green;
@@ -20,12 +20,17 @@
     font-family: 'Patua One';
 }
 
+.add {
+    margin: auto;
+    display: block;
+}
+
 .form input,
 .form textarea,
 .form select {
     border: 1px solid $main-color-green;
     background-color: rgb(235, 235, 235);
-    font-size: 18px;
+    font-size: 16px;
     padding-left: 10px;
     width: 100%;
     border-radius: 1px;
@@ -33,7 +38,7 @@
 
 .form input,
 .form select {
-    height: 40px;
+    height: 35px;
 }
 
 .form textarea {

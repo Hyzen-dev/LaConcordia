@@ -9,7 +9,7 @@
 .separator {
   border-top: 1px solid rgba(0, 0, 0, 0.25);
   margin: 15px 0px;
-  width: 50%;
+  width: 60%;
 }
 
 li {
@@ -37,6 +37,99 @@ li {
 }
 .pagination-style .paginationUL .pageItem .pageButton.activeButton {
   background-color: #579c38 !important;
+}
+
+#category {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+#category h2 {
+  font-size: 26px;
+  color: rgb(32, 32, 32);
+  font-family: "Patua One";
+}
+
+#category h3 {
+  font-size: 14px;
+  color: rgb(100, 100, 100);
+  font-family: "Patua One";
+}
+
+.pagePattern {
+  margin: 0px 40px;
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  border-top: 1px solid rgba(0, 0, 0, 0.25);
+  text-align: justify;
+}
+.pagePattern__subheading {
+  font-size: 20px;
+  color: rgb(32, 32, 32);
+  font-family: "Patua One";
+  text-align: left;
+}
+
+@media screen and (min-width: 480px) {
+  #category h2 {
+    font-size: 36px;
+  }
+  #category h3 {
+    font-size: 18px;
+  }
+}
+.form {
+  border: none;
+  padding: 0px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form button, .button {
+  padding: 10px 20px;
+  width: fit-content;
+  text-transform: uppercase;
+  color: white;
+  background-color: rgb(109, 182, 76);
+  border: none;
+  border-radius: 3px;
+  font-weight: bold;
+  font-size: 16px;
+  margin-top: 20px;
+  font-family: "Patua One";
+}
+
+.add {
+  margin: auto;
+  display: block;
+}
+
+.form input,
+.form textarea,
+.form select {
+  border: 1px solid rgb(109, 182, 76);
+  background-color: rgb(235, 235, 235);
+  font-size: 16px;
+  padding-left: 10px;
+  width: 100%;
+  border-radius: 1px;
+}
+
+.form input,
+.form select {
+  height: 35px;
+}
+
+.form textarea {
+  resize: none;
+  padding-top: 5px;
+}
+
+.form select {
+  color: rgb(122, 122, 122);
 }
 
 #headerVisitors {
@@ -235,51 +328,8 @@ li {
   justify-content: end;
 }
 
-.form {
-  border: none;
-  padding: 0px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.form button {
-  width: 130px;
-  height: 40px;
-  text-transform: uppercase;
-  color: white;
-  background-color: rgb(109, 182, 76);
-  border: none;
-  border-radius: 3px;
-  font-weight: bold;
-  font-size: 16px;
-  margin-top: 20px;
-  font-family: "Patua One";
-}
-
-.form input,
-.form textarea,
-.form select {
-  border: 1px solid rgb(109, 182, 76);
-  background-color: rgb(235, 235, 235);
-  font-size: 18px;
-  padding-left: 10px;
-  width: 100%;
-  border-radius: 1px;
-}
-
-.form input,
-.form select {
-  height: 40px;
-}
-
-.form textarea {
-  resize: none;
-  padding-top: 5px;
-}
-
-.form select {
-  color: rgb(122, 122, 122);
+.cards:hover {
+  background-color: rgba(87, 156, 56, 0.75);
 }
 
 .mediasCard {
@@ -330,47 +380,6 @@ li {
   padding-left: 20px;
 }
 
-#category {
-  text-align: center;
-  margin-bottom: 40px;
-}
-
-#category h2 {
-  font-size: 26px;
-  color: rgb(32, 32, 32);
-  font-family: "Patua One";
-}
-
-#category h3 {
-  font-size: 14px;
-  color: rgb(100, 100, 100);
-  font-family: "Patua One";
-}
-
-.pagePattern {
-  margin: 0px 40px;
-  padding: 40px 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-  border-top: 1px solid rgba(0, 0, 0, 0.25);
-  text-align: justify;
-}
-.pagePattern__subheading {
-  font-size: 24px;
-  color: rgb(32, 32, 32);
-  font-family: "Patua One";
-  text-align: left;
-}
-
-@media screen and (min-width: 480px) {
-  #category h2 {
-    font-size: 36px;
-  }
-  #category h3 {
-    font-size: 18px;
-  }
-}
 .signIn__details {
   color: rgb(41, 41, 41);
 }
@@ -410,9 +419,11 @@ li {
   background-color: rgb(109, 182, 76);
   padding: 40px 0px 10px 10px;
   font-size: 18px;
+  color: white;
 }
 .headerUsers__title {
   margin: 0px;
+  font-family: "Patua One";
 }
 
 .usersNavbar {
@@ -420,6 +431,7 @@ li {
   padding: 20px 20px 20px 10px;
   box-shadow: 0px 2px 4px rgb(41, 41, 41);
   margin-bottom: 50px;
+  color: white;
 }
 .usersNavbar__list {
   display: flex;
@@ -487,6 +499,7 @@ li {
 }
 .usersNavbar__header__logoContainer__title {
   font-size: 22px;
+  font-family: "Patua One";
 }
 .usersNavbar__header__openIcon {
   color: white;
@@ -496,24 +509,20 @@ li {
   cursor: pointer;
 }
 
-#usersPage {
-  color: white;
-}
-
-#usersContent {
-  width: 85%;
-  margin: auto;
-}
-
-#box {
-  margin-bottom: 60px;
+.profil__box {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
+.profil__contact {
+  color: rgb(109, 182, 76);
+}
 
-#box h3 {
-  margin-bottom: 20px;
+.notifications {
+  flex-direction: row;
+  align-items: start;
+  gap: 10px;
+  color: rgb(41, 41, 41);
 }
 
 .footer {

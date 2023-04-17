@@ -5,7 +5,7 @@ export default function Footer() {
   return (
     <footer className='footer'>
       <div className='footer__logoContainer'>
-        <img src={require('./../assets/logo.png')} className='footer__logoContainer__logo' />
+        <img src={require('./../../assets/logo.png')} className='footer__logoContainer__logo' />
         <h1 className='footer__logoContainer__title'>La Concordia</h1>
       </div>
       <div className='footer__socialMediasContainer'>

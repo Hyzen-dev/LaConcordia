@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import EventCard from '../../../Components/Visitors/EventCard';
+import EventCard from '../../../Components/Cards/EventCard';
 import EventsDatas from './../../../data/Events';
 import Sweetpagination from 'sweetpagination';
 import { Helmet } from 'react-helmet';

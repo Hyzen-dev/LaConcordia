@@ -7,7 +7,7 @@ import { Band, Committee, MusicSchool } from './Pages/Visitors/Informations/expo
 import Contact from './Pages/Visitors/Contact/Contact';
 import { SignUp, SignIn } from './Pages/Visitors/MemberSpace/exports';
 import { EventsCreate, EventsList, EventsUpdate, MediasCreate, MediasList, MediasUpdate, Messages, NewsCreate, NewsList, NewsUpdate, Notifications, Profil, SheetsCreate, SheetsList, SheetsUpdate, SheetsUsers, UsersUpdate } from './Pages/Users/exports';
-import Footer from './Components/Footer.Component';
+import Footer from './Components/Footer/Footer.Component';
 
 
 export default function Router() {

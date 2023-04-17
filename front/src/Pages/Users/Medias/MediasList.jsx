@@ -1,3 +1,5 @@
+// Géré par le rôle : photographe, admin
+
 import React, { useState } from 'react'
 import MediasCard from '../../../Components/Cards/MediasCard';
 import MediasDatas from './../../../data/Medias';
@@ -5,7 +7,7 @@ import Sweetpagination from 'sweetpagination';
 import { Helmet } from 'react-helmet';
 
 
-export default function Medias() {
+export default function MediasList() {
 
   const [currentPageData, setCurrentPageData] = useState(new Array(2).fill());
 
@@ -15,8 +17,11 @@ export default function Medias() {
     <div>
       <Helmet><title>La Concordia - Galerie médias</title></Helmet>
       <div id='category'>
-        <h2>Galerie médias</h2>
+        <h2>Médias</h2>
+        <h3>Modifiez ou supprimez un album</h3>
       </div>
+
+      <button className='button add'>Ajouter un nouvel album</button>
 
       <div className="medias-cards-container">
         {currentPageData && currentPageData[0]?.title && currentPageData.length > 0 ? currentPageData.map((item, k) => (

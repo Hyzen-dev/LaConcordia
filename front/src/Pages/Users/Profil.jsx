@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import InformationsForm from '../../Components/Users/InformationsForm.Components';
+import InformationsForm from '../../Components/Forms/InformationsForm.Components';
 import { Link, useParams } from 'react-router-dom';
-import AccessForm from '../../Components/Users/AccessForm.Component';
-import SelectComponent from '../../Components/Users/Select.Component';
+import SelectComponent from '../../Components/Forms/Select.Component';
 import roles from '../../data/Roles';
 import users from '../../data/Users';
 import status from '../../data/Status';
 import instruments from '../../data/Instruments';
-import Modal from '../../Components/Modal.Component';
+import Modal from '../../Components/Modal/Modal.Component';
 
 export default function Profil(props) {
   const { id } = useParams();
@@ -31,43 +30,55 @@ export default function Profil(props) {
     setShowModal(false);
   }
   return (
-    <div id='usersContent'>
+    <div>
       <div id='category'>
         <h2>Mon Profil</h2>
       </div>
 
-      <div id='box'>
-        <h3>Informations personnelles</h3>
-        <InformationsForm />
-        <p>Si vous souhaitez modifier vos informations, veuillez nous contacter <Link to={'/contact'}>ici.</Link></p>
+      <div className='profil pagePattern'>
 
-        <button onClick={() => setShowModal(true)}>Modifier mon mot de passe</button>
+        <div>
+          <h3 className='pagePattern__subheading'>Informations personnelles</h3>
+          <div className='separator'></div>
+          <div className='profil__box'>
+            <InformationsForm />
+            <p>Si vous souhaitez modifier vos informations, veuillez nous contacter <Link to={'/contact'} className='profil__contact'>ici</Link>.</p>
+            <button onClick={() => setShowModal(true)} className='button'>Modifier mon mot de passe</button>
+          </div>
 
-        <Modal showModal={showModal} setShowModal={setShowModal}>
-          <form onSubmit={handleSubmit} action="#">
-            <label htmlFor="password">Mot de passe actuel</label>
-            <input type="password" name="password" id="password" />
-            <label htmlFor="password">Nouveau mot de passe</label>
-            <input type="password" name="password" id="password" />
-            <label htmlFor="password">Confirmer le mot de passe</label>
-            <input type="password" name="password" id="password" />
-            <button type="submit">Modifier</button>
-          </form>
-        </Modal>
-      </div>
 
-      <div id='box'>
-        <h3>Accès réglementé</h3>
-        <button>Accès panel</button>
-        <AccessForm />
-      </div>
+          <Modal showModal={showModal} setShowModal={setShowModal}>
+            <form onSubmit={handleSubmit} action="#">
+              <label htmlFor="password">Mot de passe actuel</label>
+              <input type="password" name="password" id="password" />
+              <label htmlFor="password">Nouveau mot de passe</label>
+              <input type="password" name="password" id="password" />
+              <label htmlFor="password">Confirmer le mot de passe</label>
+              <input type="password" name="password" id="password" />
+              <button type="submit">Modifier</button>
+            </form>
+          </Modal>
+        </div>
 
-      <div id='box'>
-        <h3>Notifications</h3>
+        <div>
+          <h3 className='pagePattern__subheading'>Accès réglementé</h3>
+          <div className='separator'></div>
+          <div className='profil__box'>
+            <SelectComponent options={roles} userData={userRoles} />
+            <SelectComponent options={status} userData={userStatus} />
+            <SelectComponent options={instruments} userData={userInstruments} />
+          </div>
+        </div>
 
-        <SelectComponent options={roles} userData={userRoles} />
-        <SelectComponent options={status} userData={userStatus} />
-        <SelectComponent options={instruments} userData={userInstruments} />
+        <div>
+          <h3 className='pagePattern__subheading'>Notifications</h3>
+          <div className='separator'></div>
+          <div className='notifications profil__box'>
+            <input type="checkbox" name="checkbox" id="checkbox" className='checkbox' />
+            <label htmlFor="checkbox">Je souhaites recevoir les actualités et les évènements de La Concordia par mail.</label>
+          </div>
+          <button className='button'>Mettre à jour</button>
+        </div>
       </div>
     </div>
   )
