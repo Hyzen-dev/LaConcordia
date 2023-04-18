@@ -166,6 +166,12 @@ li {
   color: rgb(122, 122, 122);
 }
 
+.form .downloadInput {
+  background: none;
+  border: none;
+  display: none;
+}
+
 #headerVisitors {
   margin-bottom: 50px;
   background: linear-gradient(96.74deg, rgba(30, 33, 33, 0.6) -0.62%, rgba(32, 32, 32, 0.2) 100%), url(./../assets/headerBackground.jpg);

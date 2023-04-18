@@ -1,6 +1,7 @@
 // Géré par le rôle : Chef, sous-chef, admin
 
 import React from 'react'
+import CreateForm from '../../../Components/Forms/CreateForm.Component'
 
 export default function SheetsCreate() {
   return (
@@ -10,7 +11,7 @@ export default function SheetsCreate() {
         <h3>Ajouter une nouvelle partition</h3>
       </div>
       <div className='pagePattern'>
-
+        <CreateForm />
       </div>
     </div>
   )

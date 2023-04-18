@@ -1,6 +1,7 @@
 // Géré par le rôle : photographe, admin
 
 import React from 'react'
+import CreateForm from '../../../Components/Forms/CreateForm.Component'
 
 export default function MediasCreate() {
   return (
@@ -10,7 +11,7 @@ export default function MediasCreate() {
         <h3>Création d'un nouvel album</h3>
       </div>
       <div className='pagePattern'>
-
+        <CreateForm />
       </div>
     </div>
   )

@@ -1,6 +1,7 @@
 // Géré par le rôle : rédacteur, admin
 
 import React from 'react'
+import CreateForm from '../../../Components/Forms/CreateForm.Component'
 
 export default function NewsCreate() {
   return (
@@ -10,7 +11,8 @@ export default function NewsCreate() {
         <h3>Création d'une nouvelle actualité</h3>
       </div>
       <div className='pagePattern'>
-        
+        <CreateForm />
       </div>
-    </div>  )
+    </div>
+  )
 }
