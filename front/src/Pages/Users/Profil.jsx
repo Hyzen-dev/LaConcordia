@@ -10,8 +10,11 @@ import Modal from '../../Components/Modal/Modal.Component';
 
 export default function Profil(props) {
   const { id } = useParams();
+
   const [user, setUser] = useState({});
+
   const [showModal, setShowModal] = useState(false);
+
   useEffect(() => {
     setUser(users.find(user => user.id === parseInt(id)));
   }, [id]);
@@ -48,15 +51,29 @@ export default function Profil(props) {
 
 
           <Modal showModal={showModal} setShowModal={setShowModal}>
-            <form onSubmit={handleSubmit} action="#">
-              <label htmlFor="password">Mot de passe actuel</label>
-              <input type="password" name="password" id="password" />
-              <label htmlFor="password">Nouveau mot de passe</label>
-              <input type="password" name="password" id="password" />
-              <label htmlFor="password">Confirmer le mot de passe</label>
-              <input type="password" name="password" id="password" />
-              <button type="submit">Modifier</button>
-            </form>
+            <div className='modal'>
+              <div className='modal__header'>
+                <h2 className='modal__header__title'>Modifier mon mot de passe</h2>
+                <button className='modal__header__button' onClick={() => setShowModal(false)}><i class="fa-solid fa-square-xmark"></i></button>
+              </div>
+              <div className='separator'></div>
+
+              <form onSubmit={handleSubmit} action="#" className='modal__form'>
+                <div>
+                  <label htmlFor="password">Mot de passe actuel</label>
+                  <input type="password" name="password" id="password" />
+                </div>
+                <div>
+                  <label htmlFor="password">Nouveau mot de passe</label>
+                  <input type="password" name="password" id="password" />
+                </div>
+                <div>
+                  <label htmlFor="password">Confirmer le mot de passe</label>
+                  <input type="password" name="password" id="password" />
+                </div>
+                <button type="submit" className='button'>Modifier</button>
+              </form>
+            </div>
           </Modal>
         </div>
 

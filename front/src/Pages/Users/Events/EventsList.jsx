@@ -1,6 +1,7 @@
 // Géré par le rôle : Chef, sous-chef, rédacteur, admin
 
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import EventCard from '../../../Components/Cards/EventCard';
 import EventsDatas from './../../../data/Events';
 import Sweetpagination from 'sweetpagination';
@@ -20,7 +21,7 @@ export default function EventsList() {
         <h3>Modifiez ou supprimez un évènement</h3>
       </div>
 
-      <button className='button add'>Ajouter un nouvel évènement</button>
+      <Link to='/espace-membre/actualites/creation' className='link'><button className='button add'>Ajouter un nouvel évènement</button></Link>
 
       <div className="events-cards-container">
         {currentPageData && currentPageData[0]?.thumbnail && currentPageData.length > 0 ? currentPageData.map((item, k) => (

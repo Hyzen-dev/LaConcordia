@@ -80,6 +80,40 @@ li {
     font-size: 18px;
   }
 }
+.modal {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+.modal__header {
+  display: flex;
+  justify-content: space-between;
+}
+.modal__header__button {
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: rgb(109, 182, 76);
+}
+.modal__header__title {
+  font-size: 18px;
+}
+.modal__form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.modal__form input {
+  width: 100%;
+  margin-top: 10px;
+  border: 1px solid rgb(109, 182, 76);
+  background-color: rgb(235, 235, 235);
+  height: 30px;
+}
+.modal__form button {
+  align-self: end;
+}
+
 .form {
   border: none;
   padding: 0px;
@@ -417,9 +451,21 @@ li {
 
 .headerUsers {
   background-color: rgb(109, 182, 76);
-  padding: 40px 0px 10px 10px;
+  padding: 20px 0px 10px 10px;
   font-size: 18px;
   color: white;
+  display: flex;
+  flex-direction: column;
+}
+.headerUsers__icons {
+  align-self: self-end;
+  margin-right: 5%;
+  display: flex;
+  gap: 20px;
+}
+.headerUsers__icons .link {
+  color: white;
+  font-size: 26px;
 }
 .headerUsers__title {
   margin: 0px;
@@ -434,17 +480,13 @@ li {
   color: white;
 }
 .usersNavbar__list {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
   position: absolute;
-  top: 15%;
-  right: -110%;
+  width: 100%;
   gap: 30px;
-  font-size: 18px;
   padding: 0px;
   text-align: center;
   font-size: 20px;
+  display: none;
 }
 .usersNavbar__list__sublist {
   display: none;
@@ -472,18 +514,14 @@ li {
   cursor: pointer;
   font-weight: bold;
 }
-.usersNavbar__list__subheading__icon i {
-  font-size: 18px;
-  transition-duration: 0.5s;
-  cursor: pointer;
-}
 .usersNavbar__list.active {
   background-color: rgb(41, 41, 41);
   right: 0px;
-  transition: all 0.4s linear;
-  z-index: 1;
   height: 100%;
   padding-top: 40px;
+  display: flex;
+  flex-direction: column;
+  z-index: 1;
 }
 .usersNavbar__header {
   display: flex;
@@ -523,6 +561,29 @@ li {
   align-items: start;
   gap: 10px;
   color: rgb(41, 41, 41);
+}
+
+.usersUpdate {
+  padding: 40px 0px;
+}
+
+.usersUpdateTable__header {
+  text-align: center;
+}
+.usersUpdateTable__rows {
+  height: 50px;
+}
+.usersUpdateTable__profilColumn {
+  display: flex;
+  gap: 15px;
+  background-color: none;
+}
+.usersUpdateTable__profilColumn .button {
+  width: fit-content;
+  height: fit-content;
+  font-size: 14px;
+  margin-top: 0px;
+  padding: 5px;
 }
 
 .footer {

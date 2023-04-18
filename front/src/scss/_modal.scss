@@ -1,0 +1,39 @@
+.modal {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+
+        &__button {
+            background: none;
+            border: none;
+            font-size: 20px;
+            color: $main-color-green;
+        }
+    
+        &__title {
+            font-size: 18px;
+        }
+    }
+
+    &__form {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    &__form input {
+        width: 100%;
+        margin-top: 10px;
+        border: 1px solid $main-color-green;
+        background-color: rgb(235, 235, 235);
+        height: 30px;
+    }
+
+    &__form button {
+        align-self: end;
+    }
+}

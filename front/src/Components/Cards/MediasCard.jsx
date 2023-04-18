@@ -5,12 +5,25 @@ export default function MediasCard(props) {
 
     const { photos, title, id } = props.mediasCard;
 
-    return (
-        <div className='mediasCard'>
-            <Link to={`/medias/${id}`} className='link'>
+    const isUsersPage = window.location.pathname.startsWith('/espace-membre');
+
+    if (isUsersPage) {
+        return (
+            <div className='mediasCard'>
                 <img src={photos[0]} alt="photo" className='mediasCard__img' />
                 <h3 className='mediasCard__title'>{title}</h3>
-            </Link>
-        </div>
-    )
+            </div>
+        )
+    }
+
+    else {
+        return (
+            <div className='mediasCard'>
+                <Link to={`/medias/${id}`} className='link'>
+                    <img src={photos[0]} alt="photo" className='mediasCard__img' />
+                    <h3 className='mediasCard__title'>{title}</h3>
+                </Link>
+            </div>
+        )
+    }
 }

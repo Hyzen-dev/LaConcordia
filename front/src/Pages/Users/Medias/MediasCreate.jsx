@@ -4,6 +4,14 @@ import React from 'react'
 
 export default function MediasCreate() {
   return (
-    <div id='usersContent'>MediasCreate</div>
+    <div>
+      <div id='category'>
+        <h2>Médias</h2>
+        <h3>Création d'un nouvel album</h3>
+      </div>
+      <div className='pagePattern'>
+
+      </div>
+    </div>
   )
 }

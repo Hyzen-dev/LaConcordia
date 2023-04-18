@@ -1,0 +1,28 @@
+.usersUpdate {
+    padding: 40px 0px;
+}
+
+.usersUpdateTable {
+
+    &__header {
+        text-align: center;
+    }
+
+    &__rows {
+        height: 50px;
+    }
+
+    &__profilColumn {
+        display: flex;
+        gap: 15px;
+        background-color: none;
+    }
+
+    &__profilColumn .button {
+        width: fit-content;
+        height: fit-content;
+        font-size: 14px;
+        margin-top: 0px;
+        padding: 5px;
+    }
+}

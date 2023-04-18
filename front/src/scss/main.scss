@@ -4,11 +4,13 @@
 
 @import './page';
 
+@import './modal';
+
 @import './form';
 
-@import './Visitors/header/headerVisitors';
-@import './Visitors/header/homeNavbar';
-@import './Visitors/header/navbar';
+@import './Visitors/pattern/headerVisitors';
+@import './Visitors/pattern/homeNavbar';
+@import './Visitors/pattern/navbar';
 
 @import './Visitors/content/about';
 @import './Visitors/content/album';
@@ -19,8 +21,10 @@
 @import './Visitors/content/signIng';
 @import './Visitors/content/signUp';
 
-@import './Users/headerUsers';
-@import './Users/navbarUsers';
-@import './Users/profil';
+@import './Users/pattern/headerUsers';
+@import './Users/pattern/navbarUsers';
+
+@import './Users/content/profil';
+@import './Users/content/usersUpdate';
 
 @import './footer';

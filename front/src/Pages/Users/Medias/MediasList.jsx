@@ -1,6 +1,7 @@
 // Géré par le rôle : photographe, admin
 
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import MediasCard from '../../../Components/Cards/MediasCard';
 import MediasDatas from './../../../data/Medias';
 import Sweetpagination from 'sweetpagination';
@@ -21,7 +22,7 @@ export default function MediasList() {
         <h3>Modifiez ou supprimez un album</h3>
       </div>
 
-      <button className='button add'>Ajouter un nouvel album</button>
+      <Link to='/espace-membre/medias/creation' className='link'><button className='button add'>Ajouter un nouvel album</button></Link>
 
       <div className="medias-cards-container">
         {currentPageData && currentPageData[0]?.title && currentPageData.length > 0 ? currentPageData.map((item, k) => (

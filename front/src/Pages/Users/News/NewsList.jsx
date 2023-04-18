@@ -1,7 +1,8 @@
 // Géré par le rôle : Rédacteur, admin
 
 
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import NewsCard from '../../../Components/Cards/NewsCard';
 import NewsDatas from './../../../data/News';
 import Sweetpagination from 'sweetpagination';
@@ -21,7 +22,7 @@ export default function NewsList() {
         <h3>Modifiez ou supprimez une actualité</h3>
       </div>
 
-      <button className='button add'>Ajouter une nouvelle actualité</button>
+      <Link to='/espace-membre/actualites/creation' className='link'><button className='button add'>Ajouter une nouvelle actualité</button></Link>
 
       <div className="news-cards-container">
         {currentPageData && currentPageData[0]?.thumbnail && currentPageData.length > 0 ? currentPageData.map((item, k) => (

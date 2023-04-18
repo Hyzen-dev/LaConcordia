@@ -75,7 +75,7 @@ export default function NavbarUsers() {
 
         <li>
           <div className='usersNavbar__list__subheading' onClick={eventHandleClick}>
-            <p>Evenements</p>
+            <p>Évènements</p>
           </div>
 
           <ul className={eventClick ? "usersNavbar__list__sublist active" : "usersNavbar__list__sublist"}>
