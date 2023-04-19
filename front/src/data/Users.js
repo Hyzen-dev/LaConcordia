@@ -13,7 +13,7 @@ const users = [
         password: '123',
         role: [Roles[0], Roles[1]],
         status: [Status[0], Status[5], Status[8]],
-        instruments: [Instruments[2]],
+        instruments: [Instruments[0], Instruments[4]],
         createdAt: '2020-01-01',
         updatedAt: '2020-01-01'
     },

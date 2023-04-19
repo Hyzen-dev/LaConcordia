@@ -1,0 +1,33 @@
+table * {
+    font-size: 14px;
+}
+
+.tablePagePattern {
+    padding: 20px 0px;
+    margin: 0px 30px;
+}
+
+tr {
+    height: 50px;
+}
+
+.table__buttonTd {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    height: 50px;
+}
+
+
+.table__rows button {
+    margin: 0px;
+    height: 20px;
+    padding: 0px 4px;
+    font-size: 10px;
+
+}
+
+.buttonTh {
+    text-align: center;
+}

@@ -569,27 +569,36 @@ li {
   color: rgb(41, 41, 41);
 }
 
-.usersUpdate {
-  padding: 40px 0px;
+table * {
+  font-size: 14px;
 }
 
-.usersUpdateTable__header {
-  text-align: center;
+.tablePagePattern {
+  padding: 20px 0px;
+  margin: 0px 30px;
 }
-.usersUpdateTable__rows {
+
+tr {
   height: 50px;
 }
-.usersUpdateTable__profilColumn {
+
+.table__buttonTd {
   display: flex;
+  justify-content: center;
+  align-items: center;
   gap: 15px;
-  background-color: none;
+  height: 50px;
 }
-.usersUpdateTable__profilColumn .button {
-  width: fit-content;
-  height: fit-content;
-  font-size: 14px;
-  margin-top: 0px;
-  padding: 5px;
+
+.table__rows button {
+  margin: 0px;
+  height: 20px;
+  padding: 0px 4px;
+  font-size: 10px;
+}
+
+.buttonTh {
+  text-align: center;
 }
 
 .footer {

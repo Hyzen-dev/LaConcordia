@@ -8,7 +8,9 @@ import status from '../../data/Status';
 import instruments from '../../data/Instruments';
 import Modal from '../../Components/Modal/Modal.Component';
 
+
 export default function Profil(props) {
+
   const { id } = useParams();
 
   const [user, setUser] = useState({});
@@ -32,6 +34,7 @@ export default function Profil(props) {
     console.log(e.target.password.value)
     setShowModal(false);
   }
+  
   return (
     <div>
       <div id='category'>

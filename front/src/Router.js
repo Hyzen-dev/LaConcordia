@@ -20,7 +20,7 @@ export default function Router() {
 
 
 function RouterContainer() {
-  
+
   const location = useLocation();
   const [isPanelRoute, setIsPanelRoute] = useState(false);
 
@@ -72,6 +72,42 @@ function RouterContainer() {
             <Route index element={<SignIn />} />
           </Route>
 
+
+
+          {/* <Route path='espace-membre'>
+            <Route path=':id' element={<Profil />}>
+              <Route index element={<Profil />} />
+              <Route path='notifications' element={<Notifications />} />
+              <Route path='messages' element={<Messages />} />
+              <Route path='partitions'>
+                <Route path='mes-partitions' element={<SheetsUsers />} />
+                <Route path='gestion' element={<SheetsList />} />
+                <Route path='modification' element={<SheetsUpdate />} />
+                <Route path='creation' element={<SheetsCreate />} />
+              </Route>
+              <Route path='evenements'>
+                <Route path='gestion' element={<EventsList />} />
+                <Route path='modification' element={<EventsUpdate />} />
+                <Route path='creation' element={<EventsCreate />} />
+              </Route>
+              <Route path='medias'>
+                <Route path='gestion' element={<MediasList />} />
+                <Route path='modification' element={<MediasUpdate />} />
+                <Route path='creation' element={<MediasCreate />} />
+              </Route>
+              <Route path='actualites'>
+                <Route path='gestion' element={<NewsList />} />
+                <Route path='modification' element={<NewsUpdate />} />
+                <Route path='creation' element={<NewsCreate />} />
+              </Route>
+              <Route path='utilisateurs' element={<UsersUpdate />} />
+            </Route>
+          </Route> */}
+
+
+
+
+
           <Route path='espace-membre'>
             <Route path=':id' element={<Profil />} />
 
@@ -117,5 +153,5 @@ function RouterContainer() {
         </Route>
       </Routes>
       <Footer />
-    </> )
+    </>)
 }
