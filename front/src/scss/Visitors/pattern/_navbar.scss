@@ -12,15 +12,16 @@
         z-index: 999;
         padding: 20px;
         background-color: $main-color-darkGrey;
-        
+
         &__logoContainer {
             display: flex;
             gap: 10px;
             z-index: 1000;
+
             &__logo {
                 height: 24px;
             }
-    
+
             &__title {
                 font-family: 'Patua One';
             }
@@ -43,10 +44,10 @@
         width: 100%;
         left: 0;
         transform: translateY(-121%);
+        transition: transform 1s;
         top: 100%;
         display: block;
-        transition: transform 1s;
-        
+
         &__title {
             border-top: 1px solid rgba(255, 255, 255, 0.25);
             width: 50%;
@@ -63,7 +64,7 @@
                 margin-top: 20px;
                 font-size: 16px;
                 display: none;
-    
+
                 &__subheading {
                     margin: 20px 0px;
                     font-weight: lighter;
@@ -89,4 +90,81 @@
 
 .navbar.active {
     z-index: 1000;
+}
+
+
+@media screen and (min-width: 480px) {
+
+    .navbar {
+        width: 80%;
+        margin: auto;
+        box-shadow: none;
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 120px;
+        padding-top: 20px;
+
+
+        &__header {
+            background: none;
+            padding: 0px;
+
+            &__openIcon {
+                display: none;
+
+            }
+        }
+
+        &__list {
+            display: flex;
+            background: none;
+            padding: 0px;
+            position: initial;
+            width: 60%;
+            font-size: 16px;
+            transform: none;
+            transition: none;
+
+            &__title {
+                border: none;
+                padding: 0px;
+                font-weight: 300;
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                position: relative;
+
+                &__sublist {
+
+
+                    &__subheading {
+                        margin: 10px 0px;
+                        color: red;
+                    }
+                }
+
+                &__sublist.active {
+                    background-color: rgba(0, 0, 0, 0.60);
+                    font-size: 14px;
+                    position: absolute;
+                    padding: 5px 10px;
+                    margin-top: 25px;
+                    border-radius: 2px;
+                }
+
+                &__dropdown {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                }
+            }
+        }
+
+        &__list.active {
+            display: flex;
+            flex-direction: row;
+            transform: none;
+            transition: none;
+        }
+    }
 }

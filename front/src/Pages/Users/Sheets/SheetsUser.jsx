@@ -6,7 +6,7 @@ import SheetsDatas from './../../../data/Sheets';
 
 export default function SheetsUser() {
   return (
-    <div>
+    <div className='usersPage'>
       <div id='category'>
         <h2>Mes partitions</h2>
       </div>

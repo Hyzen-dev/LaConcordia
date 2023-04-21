@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import HeaderVisitors from './Components/Visitors/HeaderVisitors.Component';
 import UsersPage from './Components/Users/UsersPage';
-import { About, Events, EventsDetails, Medias, MediasDetails, News, NewsDetails } from './Pages/Visitors/Home/exports';
+import { About, Events, EventsDetails, Albums, AlbumDetails, News, NewsDetails } from './Pages/Visitors/Home/exports';
 import { Band, Committee, MusicSchool } from './Pages/Visitors/Informations/exports';
 import Contact from './Pages/Visitors/Contact/Contact';
 import { SignUp, SignIn } from './Pages/Visitors/MemberSpace/exports';
@@ -45,9 +45,9 @@ function RouterContainer() {
             <Route path=':id' element={<EventsDetails />} />
           </Route>
 
-          <Route path='medias'>
-            <Route index element={<Medias />} />
-            <Route path=':id' element={<MediasDetails />} />
+          <Route path='albums'>
+            <Route index element={<Albums />} />
+            <Route path=':id' element={<AlbumDetails />} />
           </Route>
 
           <Route path='apropos'>
@@ -71,42 +71,6 @@ function RouterContainer() {
           <Route path='connexion'>
             <Route index element={<SignIn />} />
           </Route>
-
-
-
-          {/* <Route path='espace-membre'>
-            <Route path=':id' element={<Profil />}>
-              <Route index element={<Profil />} />
-              <Route path='notifications' element={<Notifications />} />
-              <Route path='messages' element={<Messages />} />
-              <Route path='partitions'>
-                <Route path='mes-partitions' element={<SheetsUsers />} />
-                <Route path='gestion' element={<SheetsList />} />
-                <Route path='modification' element={<SheetsUpdate />} />
-                <Route path='creation' element={<SheetsCreate />} />
-              </Route>
-              <Route path='evenements'>
-                <Route path='gestion' element={<EventsList />} />
-                <Route path='modification' element={<EventsUpdate />} />
-                <Route path='creation' element={<EventsCreate />} />
-              </Route>
-              <Route path='medias'>
-                <Route path='gestion' element={<MediasList />} />
-                <Route path='modification' element={<MediasUpdate />} />
-                <Route path='creation' element={<MediasCreate />} />
-              </Route>
-              <Route path='actualites'>
-                <Route path='gestion' element={<NewsList />} />
-                <Route path='modification' element={<NewsUpdate />} />
-                <Route path='creation' element={<NewsCreate />} />
-              </Route>
-              <Route path='utilisateurs' element={<UsersUpdate />} />
-            </Route>
-          </Route> */}
-
-
-
-
 
           <Route path='espace-membre'>
             <Route path=':id' element={<Profil />} />

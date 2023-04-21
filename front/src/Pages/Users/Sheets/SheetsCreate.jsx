@@ -5,7 +5,7 @@ import CreateForm from '../../../Components/Forms/CreateForm.Component'
 
 export default function SheetsCreate() {
   return (
-    <div>
+    <div className='usersPage'>
       <div id='category'>
         <h2>Partitions</h2>
         <h3>Ajouter une nouvelle partition</h3>

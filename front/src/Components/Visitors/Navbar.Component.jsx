@@ -31,15 +31,12 @@ export default function Navbar() {
 
 
         <li className='navbar__list__title'>
-
+          <div className='navbar__list__title__dropdown'>
           <div className='navbar__list__title__info' onClick={infoHandleClick}>
             <p>Informations</p>
           </div>
 
           <ul className={infoClick ? "navbar__list__title__sublist active" : "navbar__list__title__sublist"}>
-
-
-
 
             <li className='navbar__list__title__sublist__subheading'>
               <NavLink to={'/informations/harmonie-clique'} className='navbar__list__title__link link' activeclassname="active" onClick={() => { infoHandleClick(); handleClick(); }}>
@@ -57,6 +54,7 @@ export default function Navbar() {
               </NavLink>
             </li>
           </ul>
+          </div>
         </li>
 
         <li className='navbar__list__title'>

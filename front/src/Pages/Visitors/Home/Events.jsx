@@ -18,19 +18,21 @@ export default function Events() {
         <h2>Évènements à venir</h2>
       </div>
 
-      <div className="events-cards-container">
+      <div className="cardsContainer">
         {currentPageData && currentPageData[0]?.thumbnail && currentPageData.length > 0 ? currentPageData.map((item, k) => (
           <EventCard eventCard={item} key={k} />
         )) : null}
       </div>
 
-      <Sweetpagination
-        currentPageData={setCurrentPageData}
-        dataPerPage={6}
-        getData={cards}
-        navigation={true}
-        getStyle={'pagination-style'}
-      />
+      <div className='pagination'>
+        <Sweetpagination
+          currentPageData={setCurrentPageData}
+          dataPerPage={6}
+          getData={cards}
+          navigation={true}
+          getStyle={'pagination-style'}
+        />
+      </div>
     </div>
   )
 }

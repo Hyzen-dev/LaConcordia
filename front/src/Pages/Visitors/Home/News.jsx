@@ -19,19 +19,21 @@ export default function News() {
         </h2>
       </div>
 
-      <div className="news-cards-container">
+      <div className="cardsContainer">
         {currentPageData && currentPageData[0]?.thumbnail && currentPageData.length > 0 ? currentPageData.map((item, k) => (
           <NewsCard newsCard={item} key={k} />
         )) : null}
       </div>
 
-      <Sweetpagination
-        currentPageData={setCurrentPageData}
-        dataPerPage={6}
-        getData={cards}
-        navigation={true}
-        getStyle={'pagination-style'}
-      />
+      <div className='pagination'>
+        <Sweetpagination
+          currentPageData={setCurrentPageData}
+          dataPerPage={6}
+          getData={cards}
+          navigation={true}
+          getStyle={'pagination-style'}
+        />
+      </div>
     </div>
   )
 }

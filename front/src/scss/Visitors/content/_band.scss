@@ -1,3 +1,30 @@
+.bandPage {
+        gap: 0px;
+}
+
 .bandCategory {
         text-transform: uppercase;
+}
+
+.bandMembers {
+        margin-bottom: 20px;
+}
+
+
+@media screen and (min-width: 480px) {
+
+        .bandPage {
+                flex-direction: row;
+                justify-content: space-between;
+        }
+
+        .clique {
+                text-align: right;
+
+                &__content {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: end;
+                }
+        }
 }

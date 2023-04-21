@@ -53,6 +53,25 @@
     justify-content: end;
 }
 
-.cards:hover {
-    background-color: rgba(87, 156, 56, 0.75);
+
+
+
+@media screen and (min-width: 480px) {
+
+    .cardsContainer {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 90%;
+        margin: auto;
+    }
+
+    .cards {
+        width: 25%;
+        margin: 15px;
+    }
+
+    .pagination {
+        margin-bottom: 150px;
+    }
 }

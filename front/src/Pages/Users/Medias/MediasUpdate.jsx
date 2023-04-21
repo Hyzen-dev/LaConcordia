@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function MediasUpdate() {
   return (
-    <div>
+    <div className='usersPage'>
       <div id='category'>
         <h2>...</h2>
       </div>

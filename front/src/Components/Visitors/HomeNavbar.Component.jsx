@@ -1,31 +1,31 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 export default function HomeNavbar() {
   return (
     <ul className='homeNavbar'>
       <li className='homeNavbar__item'>
-        <Link to={'/actualites'} className='homeNavbar__link link' activeclassname='active' >
+        <NavLink to={'/actualites'} className='homeNavbar__link link' activeclassname='active' >
           Actualités
-        </Link>
+        </NavLink>
       </li>
 
       <li className='homeNavbar__item'>
-        <Link to={'/evenements'} className='homeNavbar__link link'>
+        <NavLink to={'/evenements'} className='homeNavbar__link link'>
           Évènements
-        </Link>
+        </NavLink>
       </li>
 
       <li className='homeNavbar__item'>
-        <Link to={'/medias'} className='homeNavbar__link link'>
+        <NavLink to={'/albums'} className='homeNavbar__link link'>
           Médias
-        </Link>
+        </NavLink>
       </li>
 
       <li className='homeNavbar__item'>
-        <Link to={'/apropos'} className='homeNavbar__link link'>
+        <NavLink to={'/apropos'} className='homeNavbar__link link'>
           À propos
-        </Link>
+        </NavLink>
       </li>
     </ul>
   )

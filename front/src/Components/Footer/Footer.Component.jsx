@@ -1,9 +1,21 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+
+
 
 export default function Footer() {
+
+  const location = useLocation();
+  const [isPanelRoute, setIsPanelRoute] = useState(false);
+
+  useEffect(() => {
+    setIsPanelRoute(location.pathname.startsWith('/espace-membre'));
+    console.log(location.pathname.startsWith('/espace-membre'));
+  }, [location.pathname]);
+
   return (
-    <footer className='footer'>
+    <footer className={isPanelRoute ? "footer usersFooter" : "footer" }>
       <div className='footer__logoContainer'>
         <img src={require('./../../assets/logo.png')} className='footer__logoContainer__logo' />
         <h1 className='footer__logoContainer__title'>La Concordia</h1>

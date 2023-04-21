@@ -55,3 +55,18 @@
     border: none;
     display: none;
 }
+
+
+@media screen and (min-width: 480px) {
+
+    .form {
+
+        &__box {
+            flex-direction: row !important;
+        }
+
+        &__box input {
+            width: 50%;
+        }
+    }
+}

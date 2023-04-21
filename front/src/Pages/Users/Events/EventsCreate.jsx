@@ -5,7 +5,7 @@ import CreateForm from '../../../Components/Forms/CreateForm.Component'
 
 export default function EventsCreate() {
   return (
-    <div>
+    <div className='usersPage'>
       <div id='category'>
         <h2>Évènements</h2>
         <h3>Création d'un nouvel évènement</h3>

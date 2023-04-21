@@ -14,52 +14,114 @@ export default function Band() {
         <h3>Effectif actuel</h3>
       </div>
 
-      <div className='pagePattern'>
-        {StatusDatas.map((status) => {
-          if (status.type === 'Musician') {
-            return (
-              <div key={status.id}>
-                <h3 className='bandCategory'>{status.label}</h3>
+      <div className='pagePattern bandPage'>
+        <div className='harmonie'>
+          {StatusDatas.map((status) => {
+            if (status.type === 'DirectionHarmonie') {
+              return (
+                <div key={status.id}>
+                  <h3 className='bandCategory'>{status.label}</h3>
+                  <div className='separator'></div>
+                  {UsersDatas.map((user) => {
+                    if (user.status.includes(status)) {
+                      return (
+                        <div key={user.id} className='bandMembers'>
+                          <p>{user.firstName} {user.lastName}</p>
+                        </div>
+                      );
+                    }
+                    return null;
+                  })}
+                </div>
+              )
+            }
+          })}
 
-                <div className='separator'></div>
+          {StatusDatas.map((status) => {
+            if (status.type === 'MusicienHarmonie') {
+              return (
+                <div>
+                  {InstrumentsDatas.map((instrument) => {
+                    if (instrument.status.type === status.type) {
+                      return (
+                        <div>
+                          <h3 className='bandCategory'>{instrument.label}</h3>
+                          <div className='separator'></div>
+                          {UsersDatas.map((user) => {
+                            if (user.instruments.includes(instrument)) {
+                              return (
+                                <div key={user.id} className='bandMembers'>
+                                  <p>{user.firstName} {user.lastName}</p>
+                                </div>
+                              )
+                            }
+                            return null;
+                          })}
+                        </div>
+                      )
+                    }
+                    return null;
+                  })}
+                </div>
+              )
+            }
+            return null;
+          })}
+        </div>
 
+        <div className='clique'>
+          {StatusDatas.map((status) => {
+            if (status.type === 'DirectionClique') {
+              return (
+                <div key={status.id} className='clique__content'>
+                  <h3 className='bandCategory'>{status.label}</h3>
+                  <div className='separator'></div>
+                  {UsersDatas.map((user) => {
+                    if (user.status.includes(status)) {
+                      return (
+                        <div key={user.id} className='bandMembers'>
+                          <p>{user.firstName} {user.lastName}</p>
+                        </div>
+                      );
+                    }
+                    return null;
+                  })}
+                </div>
+              )
+            }
+          })}
 
-                {UsersDatas.map((user) => {
-
-                  if (user.status.includes(status)) {
-                    return (
-                      <div key={user.id}>
-                        <p>{user.firstName} {user.lastName}</p>
-                      </div>
-                    );
-                  }
-                  return null;
-                })}
-              </div>
-            )
-          }
-        })}
-
-        {InstrumentsDatas.map((instrument) => {
-          return (
-            <div key={instrument.id}>
-              <h3 className='bandCategory pagePattern__subheading'>{instrument.label}</h3>
-              <div className='separator'></div>
-
-              {UsersDatas.map((user) => {
-
-                if (user.instruments.includes(instrument)) {
-                  return (
-                    <div key={user.id}>
-                      <p>{user.firstName} {user.lastName}</p>
-                    </div>
-                  );
-                }
-                return null;
-              })}
-            </div>
-          )
-        })}
+          {StatusDatas.map((status) => {
+            if (status.type === 'MusicienClique') {
+              return (
+                <div>
+                  {InstrumentsDatas.map((instrument) => {
+                    if (instrument.status.type === status.type) {
+                      return (
+                        <div  className='clique__content'>
+                          <h3 className='bandCategory'>{instrument.label}</h3>
+                          <div className='separator'></div>
+                          {UsersDatas.map((user) => {
+                            if (user.instruments.includes(instrument)) {
+                              return (
+                                <div key={user.id} className='bandMembers'>
+                                  <p>{user.firstName} {user.lastName}</p>
+                                </div>
+                              )
+                            }
+                            return null;
+                          })}
+                        </div>
+                      )
+                    }
+                    return null;
+                  })}
+                </div>
+              )
+            }
+            return null;
+          })}
+        </div>
       </div>
     </div>
   )

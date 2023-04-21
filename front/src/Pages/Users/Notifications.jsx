@@ -11,7 +11,7 @@ export default function Notifications() {
   const [instrumentName, setInstrumentName] = useState("");
 
   return (
-    <div>
+    <div className='usersPage'>
       <div id='category'>
         <h2>Mes notifications</h2>
       </div>

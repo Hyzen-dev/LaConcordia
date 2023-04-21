@@ -15,7 +15,7 @@ export default function NewsList() {
   const [cards, setCards] = useState(NewsDatas);
 
   return (
-    <div>
+    <div className='usersPage'>
       <Helmet><title>La Concordia - Actualités</title></Helmet>
       <div id='category'>
         <h2>Actualités</h2>

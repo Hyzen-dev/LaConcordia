@@ -27,16 +27,12 @@
 
 
 
+@media screen and (min-width: 480px) {
 
-
-
-
-// .headerUsers {
-//     
-//     padding: 20px;
-//     width: 85%;
-//     position: absolute;
-//     left: 15%;
-
-
-// }
+    .headerUsers {
+        padding: 20px;
+        width: 80%;
+        position: absolute;
+        left: 20%;
+    }
+}

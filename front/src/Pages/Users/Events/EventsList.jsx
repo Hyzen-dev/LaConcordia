@@ -14,7 +14,7 @@ export default function EventsList() {
   const [cards, setCards] = useState(EventsDatas);
 
   return (
-    <div>
+    <div className='usersPage'>
       <Helmet><title>La Concordia - Evènements</title></Helmet>
       <div id='category'>
         <h2>Évènements</h2>

@@ -79,6 +79,11 @@ li {
   #category h3 {
     font-size: 18px;
   }
+  .pagePattern {
+    width: 70%;
+    margin: auto;
+    padding: 40px 12%;
+  }
 }
 .modal {
   display: flex;
@@ -172,6 +177,14 @@ li {
   display: none;
 }
 
+@media screen and (min-width: 480px) {
+  .form__box {
+    flex-direction: row !important;
+  }
+  .form__box input {
+    width: 50%;
+  }
+}
 #headerVisitors {
   margin-bottom: 50px;
   background: linear-gradient(96.74deg, rgba(30, 33, 33, 0.6) -0.62%, rgba(32, 32, 32, 0.2) 100%), url(./../assets/headerBackground.jpg);
@@ -201,6 +214,15 @@ li {
   color: white;
 }
 
+@media screen and (min-width: 480px) {
+  .titleContainer {
+    margin-bottom: 100px;
+  }
+  .titleContainer__title {
+    font-size: 32px;
+    width: 35%;
+  }
+}
 .homeNavbar {
   display: flex;
   justify-content: space-around;
@@ -260,9 +282,9 @@ li {
   width: 100%;
   left: 0;
   transform: translateY(-121%);
+  transition: transform 1s;
   top: 100%;
   display: block;
-  transition: transform 1s;
 }
 .navbar__list__title {
   border-top: 1px solid rgba(255, 255, 255, 0.25);
@@ -300,6 +322,66 @@ li {
   z-index: 1000;
 }
 
+@media screen and (min-width: 480px) {
+  .navbar {
+    width: 80%;
+    margin: auto;
+    box-shadow: none;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 120px;
+    padding-top: 20px;
+  }
+  .navbar__header {
+    background: none;
+    padding: 0px;
+  }
+  .navbar__header__openIcon {
+    display: none;
+  }
+  .navbar__list {
+    display: flex;
+    background: none;
+    padding: 0px;
+    position: initial;
+    width: 60%;
+    font-size: 16px;
+    transform: none;
+    transition: none;
+  }
+  .navbar__list__title {
+    border: none;
+    padding: 0px;
+    font-weight: 300;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: relative;
+  }
+  .navbar__list__title__sublist__subheading {
+    margin: 10px 0px;
+    color: red;
+  }
+  .navbar__list__title__sublist.active {
+    background-color: rgba(0, 0, 0, 0.6);
+    font-size: 14px;
+    position: absolute;
+    padding: 5px 10px;
+    margin-top: 25px;
+    border-radius: 2px;
+  }
+  .navbar__list__title__dropdown {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .navbar__list.active {
+    display: flex;
+    flex-direction: row;
+    transform: none;
+    transition: none;
+  }
+}
 .aboutContent {
   display: flex;
   flex-direction: column;
@@ -316,10 +398,43 @@ li {
   margin: 20px auto;
 }
 
+@media screen and (min-width: 480px) {
+  .album {
+    flex-direction: row;
+    width: 70%;
+    margin: auto;
+    flex-wrap: wrap;
+  }
+  .album__photo {
+    width: 30%;
+  }
+}
+.bandPage {
+  gap: 0px;
+}
+
 .bandCategory {
   text-transform: uppercase;
 }
 
+.bandMembers {
+  margin-bottom: 20px;
+}
+
+@media screen and (min-width: 480px) {
+  .bandPage {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .clique {
+    text-align: right;
+  }
+  .clique__content {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+  }
+}
 .cards {
   margin: 40px;
   box-shadow: 0px 6px 12px rgb(200, 200, 200);
@@ -368,27 +483,51 @@ li {
   justify-content: end;
 }
 
-.cards:hover {
-  background-color: rgba(87, 156, 56, 0.75);
+@media screen and (min-width: 480px) {
+  .cardsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 90%;
+    margin: auto;
+  }
+  .cards {
+    width: 25%;
+    margin: 15px;
+  }
+  .pagination {
+    margin-bottom: 150px;
+  }
 }
-
-.mediasCard {
+.albumCard {
   margin: 50px;
   box-shadow: 0px 6px 12px rgb(200, 200, 200);
   border-radius: 2px;
   overflow: hidden;
   background-color: rgb(32, 32, 32);
 }
-.mediasCard__img {
+.albumCard__img {
   width: 100%;
   height: 50%;
 }
-.mediasCard__title {
+.albumCard__title {
   text-align: center;
   color: white;
   padding: 12px 0px 20px 0px;
 }
 
+@media screen and (min-width: 480px) {
+  .albumCard {
+    width: 25%;
+    margin: 15px;
+  }
+  .albumCard__img {
+    height: 80%;
+  }
+  .albumCard__title {
+    padding: 0px;
+  }
+}
 .musicSchool__professor {
   display: flex;
   justify-content: space-between;
@@ -478,6 +617,14 @@ li {
   font-family: "Patua One";
 }
 
+@media screen and (min-width: 480px) {
+  .headerUsers {
+    padding: 20px;
+    width: 80%;
+    position: absolute;
+    left: 20%;
+  }
+}
 .usersNavbar {
   background-color: rgb(41, 41, 41);
   padding: 20px 20px 20px 10px;
@@ -553,6 +700,55 @@ li {
   cursor: pointer;
 }
 
+@media screen and (min-width: 480px) {
+  .usersNavbar {
+    width: 20%;
+    height: 500px;
+    position: fixed;
+    height: 100%;
+    z-index: 1;
+    padding: 0px;
+  }
+  .usersNavbar__header {
+    background-color: rgb(32, 32, 32);
+    height: 150px;
+    align-items: start;
+  }
+  .usersNavbar__header__logoContainer {
+    display: block;
+    margin: 15px 0px 0px 15px;
+  }
+  .usersNavbar__header__logoContainer__logo {
+    height: 40px;
+  }
+  .usersNavbar__header__openIcon {
+    display: none;
+  }
+  .usersNavbar__list {
+    position: absolute;
+    width: 100%;
+    gap: 30px;
+    padding: 0px;
+    text-align: center;
+    font-size: 20px;
+    display: flex;
+    flex-direction: column;
+    font-size: 18px;
+    position: initial;
+    gap: 0px;
+  }
+  .usersNavbar__list__subheading {
+    border: none;
+  }
+  .usersNavbar__list.active {
+    right: 0px;
+    height: 100%;
+    padding-top: 40px;
+    display: flex;
+    flex-direction: column;
+    z-index: 1;
+  }
+}
 .profil__box {
   display: flex;
   flex-direction: column;
@@ -601,6 +797,14 @@ tr {
   text-align: center;
 }
 
+@media screen and (min-width: 480px) {
+  .tablePagePattern {
+    padding: 40px 20%;
+    width: 70%;
+    margin: auto;
+    padding-bottom: 100px;
+  }
+}
 .footer {
   background-color: rgb(32, 32, 32);
   margin-top: 50px;
@@ -649,6 +853,28 @@ tr {
 .footer__cguContainer__cgu {
   font-weight: 600;
   color: white;
+}
+
+@media screen and (min-width: 480px) {
+  .footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    padding: 10px;
+  }
+  .footer__socialMediasContainer {
+    flex-direction: row;
+  }
+  .footer__cguContainer {
+    flex-direction: row;
+  }
+  .usersFooter {
+    position: fixed;
+    z-index: 999;
+    bottom: 0;
+    width: 100%;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */

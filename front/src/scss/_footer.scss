@@ -59,3 +59,29 @@
         }
     }
 }
+
+
+@media screen and (min-width: 480px) {
+    .footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        padding: 10px;
+
+        &__socialMediasContainer{
+            flex-direction: row;
+        }
+
+        &__cguContainer {
+            flex-direction: row;
+        }
+    }
+
+    .usersFooter {
+        position: fixed;
+        z-index: 999;
+        bottom: 0;
+        width: 100%;
+    }
+}

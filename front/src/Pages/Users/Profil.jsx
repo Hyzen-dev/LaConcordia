@@ -36,7 +36,7 @@ export default function Profil(props) {
   }
   
   return (
-    <div>
+    <div className='usersPage'>
       <div id='category'>
         <h2>Mon Profil</h2>
       </div>
