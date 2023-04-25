@@ -1,7 +1,7 @@
 const albums = [
   {
     id: 1,
-    name: "CAVALCADE DE WINGLES",
+    name: " CAVALCADE DE WINGLES",
     thumbnail: 'https://mdbootstrap.com/img/Photos/Horizontal/Nature/full%20page/img(22).webp',
   },
   {
@@ -16,7 +16,7 @@ const albums = [
   },
   {
     id: 4,
-    name: "TITRE DE L",
+    name: "TITRE DE L'ALBUM 4",
     thumbnail: 'https://mdbootstrap.com/img/Photos/Horizontal/Nature/full%20page/img(25).webp',
   },
   {

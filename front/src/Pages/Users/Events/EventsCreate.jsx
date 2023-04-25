@@ -1,7 +1,7 @@
-// Géré par le rôle : Chef, sous-chef, rédacteur, admin
-
 import React from 'react'
 import CreateForm from '../../../Components/Forms/CreateForm.Component'
+
+// Page EventsCreate qui affiche le formulaire de création d'un nouvel évènement.
 
 export default function EventsCreate() {
   return (
@@ -11,6 +11,7 @@ export default function EventsCreate() {
         <h3>Création d'un nouvel évènement</h3>
       </div>
       <div className='pagePattern'>
+        {/* Intégration du composant "CreateForm" */}
         <CreateForm />
       </div>
     </div>

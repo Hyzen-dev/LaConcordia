@@ -6,7 +6,7 @@ import { About, Events, EventsDetails, Albums, AlbumDetails, News, NewsDetails }
 import { Band, Committee, MusicSchool } from './Pages/Visitors/Informations/exports';
 import Contact from './Pages/Visitors/Contact/Contact';
 import { SignUp, SignIn } from './Pages/Visitors/MemberSpace/exports';
-import { EventsCreate, EventsList, EventsUpdate, MediasCreate, MediasList, MediasUpdate, Messages, NewsCreate, NewsList, NewsUpdate, Notifications, Profil, SheetsCreate, SheetsList, SheetsUpdate, SheetsUsers, UsersUpdate } from './Pages/Users/exports';
+import { EventsCreate, EventsList, EventsUpdate, AlbumsCreate, AlbumsList, MediasUpdate, Messages, NewsCreate, NewsList, NewsUpdate, Notifications, Profil, SheetsCreate, SheetsList, SheetsUpdate, SheetsUsers, UsersUpdate } from './Pages/Users/exports';
 import Footer from './Components/Footer/Footer.Component';
 
 
@@ -99,9 +99,9 @@ function RouterContainer() {
             </Route>
 
             <Route path='medias'>
-              <Route path='gestion' element={<MediasList />} />
+              <Route path='gestion' element={<AlbumsList />} />
               <Route path='modification' element={<MediasUpdate />} />
-              <Route path='creation' element={<MediasCreate />} />
+              <Route path='creation' element={<AlbumsCreate />} />
             </Route>
 
             <Route path='actualites'>

@@ -1,5 +1,7 @@
 import React from 'react'
 
+// Page About, qui retourne l'histoire de La Condordia sous forme de paragraphes 
+
 export default function About() {
   return (
     <div>

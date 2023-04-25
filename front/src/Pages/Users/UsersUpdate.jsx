@@ -7,8 +7,7 @@ export default function UsersUpdate() {
 
   const [showModal, setShowModal] = useState(false);
 
-  const [userName, setUserName] = useState("");
-  const [selectedUser, setSelectedUser] = useState({})
+  const [selectedUser, setSelectedUser] = useState({});
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -16,7 +15,6 @@ export default function UsersUpdate() {
   }
 
   const handleModal = (data) => {
-
     setSelectedUser(data);
     setShowModal(true);
   }
@@ -27,14 +25,14 @@ export default function UsersUpdate() {
         <h2>Gestion des utilisateurs</h2>
       </div>
 
-      <div className='tablePagePattern pagePattern'>
+      <div className='tablePagePattern'>
 
         <table className='table'>
           <thead>
             <tr>
               <th className='table__header'>NOM</th>
               <th className='table__header'>Prénom</th>
-              <th className='table__header buttonTh'>Profil</th>
+              <th className='table__buttonHeader'>Profil</th>
             </tr>
           </thead>
 
@@ -45,31 +43,28 @@ export default function UsersUpdate() {
                   <td>{user.lastName}</td>
                   <td>{user.firstName}</td>
                   <td className='table__buttonTd'>
-                    <button className='button' onClick={() => handleModal(user)}>Modifier</button>
-
-
-
-                    <button className='button'>Archiver</button>
+                    <button className='button' onClick={() => handleModal(user)}><i class="fa-solid fa-pencil"></i></button>
+                    <button className='button'><i className="fa-solid fa-xmark"></i></button>
                   </td>
                 </tr>
               )
             })}
           </tbody>
         </table>
-      </div>
-      <Modal showModal={showModal} setShowModal={setShowModal}>
-        <div className='modal'>
-          <div className='modal__header'>
-            <h2 className='modal__header__title'>Modifier le profil de {selectedUser.firstName} {selectedUser.lastName}</h2>
-            <button className='modal__header__button' onClick={() => setShowModal(false)}><i className="fa-solid fa-square-xmark"></i></button>
+        <Modal showModal={showModal} setShowModal={setShowModal}>
+          <div className='modal'>
+            <div className='modal__header'>
+              <h2 className='modal__header__title'>Modifier le profil de {selectedUser.firstName} {selectedUser.lastName}</h2>
+              <button className='modal__header__button' onClick={() => setShowModal(false)}><i className="fa-solid fa-square-xmark"></i></button>
+            </div>
+            <div className='separator'></div>
+
+            <form onSubmit={handleSubmit} action="#" className='modal__form'>
+
+            </form>
           </div>
-          <div className='separator'></div>
-
-          <form onSubmit={handleSubmit} action="#" className='modal__form'>
-
-          </form>
-        </div>
-      </Modal>
+        </Modal>
+      </div>
     </div>
   )
 }

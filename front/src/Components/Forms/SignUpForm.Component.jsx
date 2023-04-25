@@ -2,19 +2,23 @@ import React from 'react';
 import { useState } from 'react';
 import ReCAPTCHA from "react-google-recaptcha";
 
+// Composant SignUpForm utilisé sur la page "SignUp"
+
 export default function SignUpForm() {
 
+    // Création de la fonction "onCaptchaChange" qui permet l'affichage de la valeur de la réponse du Captcha dans la console.
     const onCaptchaChange = (value) => {
         console.log("Captcha value:", value);
     }
 
+    // Utilisation du Hook useState pour définir les variables relatives aux champs du formulaire et leur état.
     const [firstName, setFirstName] = useState("")
     const [lastName, setLastName] = useState("")
     const [email, setEmail] = useState("")
     const [phone, setPhone] = useState("")
-    const [civility, setCivility] = useState("")
     const [password, setPassword] = useState("")
 
+    // Création de la fonction "verification" qui empeche le navigateur de recharger la page lors du clic sur le bouton "Se connecter" du formulaire.
     const verification = (event) => {
         event.preventDefault()
     }
@@ -28,6 +32,7 @@ export default function SignUpForm() {
                             type="text"
                             name='lastname'
                             placeholder='Nom *'
+                            // Lors de la modification du champs par l'utilisateur, la valeur de "lastName" est mise à jour avec les informations renseignées
                             onChange={(event) => setLastName(event.currentTarget.value)}
                             value={lastName}
                         />
@@ -36,6 +41,7 @@ export default function SignUpForm() {
                             type="text"
                             name='firstname'
                             placeholder='Prénom *'
+                            // Lors de la modification du champs par l'utilisateur, la valeur de "firstName" est mise à jour avec les informations renseignées
                             onChange={(event) => setFirstName(event.currentTarget.value)}
                             value={firstName}
                         />
@@ -46,6 +52,7 @@ export default function SignUpForm() {
                             type="email"
                             name='email'
                             placeholder='E-mail *'
+                            // Lors de la modification du champs par l'utilisateur, la valeur de "email" est mise à jour avec les informations renseignées
                             onChange={(event) => setEmail(event.currentTarget.value)}
                             value={email}
                         />
@@ -55,12 +62,13 @@ export default function SignUpForm() {
                             name='phone'
                             placeholder='Téléphone'
                             maxLength={"10"}
+                            // Lors de la modification du champs par l'utilisateur, la valeur de "phone" est mise à jour avec les informations renseignées
                             onChange={(event) => setPhone(event.currentTarget.value)}
                             value={phone}
                         />
                     </div>
 
-                    <select name="civility" onSelect={(event) => setCivility(event.currentTarget.value)}>
+                    <select name="civility">
                         <option value="Civilité" disabled>Civilité</option>
                         <option value="Madame">Madame</option>
                         <option value="Monsieur">Monsieur</option>
@@ -69,6 +77,7 @@ export default function SignUpForm() {
                     <input
                         type="password"
                         name="password1"
+                        // Lors de la modification du champs par l'utilisateur, la valeur de "password" est mise à jour avec les informations renseignées
                         onChange={(event) => setPassword(event.currentTarget.value)}
                         value={password}
                         placeholder='Mot de passe *'
@@ -83,13 +92,13 @@ export default function SignUpForm() {
                         </label>
                     </div>
 
+                    {/* Intégration du Captcha afin de renforcer la sécurité du formulaire */}
                     <ReCAPTCHA
                         sitekey="###"
                         onChange={onCaptchaChange}
                     />
 
                     <button type="submit">S'inscrire</button>
-
                 </fieldset>
             </form>
         </div>

@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+// Page MusicSchool, qui retourne les informations relatives à l'école de musique.
+
 export default function MusicSchool() {
   return (
     <div>

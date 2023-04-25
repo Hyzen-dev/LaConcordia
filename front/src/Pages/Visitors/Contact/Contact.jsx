@@ -1,6 +1,10 @@
 import React from 'react'
 import ContactForm from '../../../Components/Forms/ContactForm.Component'
 
+
+// Page Contact, qui intégre les coordonnées de l'école de musique ainsi qu'un Composant formulaire de contact. Les messages envoyés via ce formulaire de contact sont consultables sur l'espace utilisateur par les *ROLES*
+
+
 export default function Contact() {
   return (
     <div>
@@ -22,12 +26,10 @@ export default function Contact() {
         <div>
           <h3 className='pagePattern__subheading'>Formulaire</h3>
           <div className='separator'></div>
+
+          {/* Intégration du composant "ContactForm" */}
           <ContactForm />
         </div>
-
-
-
-
       </div>
     </div>
   )

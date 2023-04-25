@@ -1,8 +1,8 @@
 import EventsCreate from "./Events/EventsCreate";
 import EventsList from "./Events/EventsList";
 import EventsUpdate from "./Events/EventsUpdate";
-import MediasCreate from "./Medias/MediasCreate";
-import MediasList from "./Medias/MediasList";
+import AlbumsCreate from "./Medias/AlbumsCreate";
+import AlbumsList from "./Medias/AlbumsList";
 import MediasUpdate from "./Medias/MediasUpdate";
 import Messages from "./Messages";
 import NewsCreate from "./News/NewsCreate";
@@ -17,4 +17,4 @@ import SheetsUsers from "./Sheets/SheetsUser";
 import UsersUpdate from "./UsersUpdate";
 
 
-export { EventsCreate, EventsList, EventsUpdate, MediasCreate, MediasList, MediasUpdate, Messages, NewsCreate, NewsList, NewsUpdate, Notifications, Profil, SheetsCreate, SheetsList, SheetsUpdate, SheetsUsers, UsersUpdate }
+export { EventsCreate, EventsList, EventsUpdate, AlbumsCreate, AlbumsList, MediasUpdate, Messages, NewsCreate, NewsList, NewsUpdate, Notifications, Profil, SheetsCreate, SheetsList, SheetsUpdate, SheetsUsers, UsersUpdate }

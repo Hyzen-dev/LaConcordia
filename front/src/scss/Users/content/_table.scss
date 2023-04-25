@@ -2,44 +2,46 @@ table * {
     font-size: 14px;
 }
 
-.tablePagePattern {
-    padding: 20px 0px;
-    margin: 0px 30px;
+table {
+    width: 100%;
 }
 
-tr {
-    height: 50px;
+.tablePagePattern {
+    border-top: 1px solid $separator;
+    padding: 20px;
+    width: 90%;
+    margin: auto;
+}
+
+.table__header {
+    text-align: left;
+    padding-bottom: 10px;
 }
 
 .table__buttonTd {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 15px;
-    height: 50px;
+    justify-content: space-around;
 }
 
-
-.table__rows button {
+table .button {
     margin: 0px;
-    height: 20px;
-    padding: 0px 4px;
-    font-size: 10px;
-
+    padding: 5px 0px;
+    width: 40%;
 }
 
-.buttonTh {
-    text-align: center;
+td {
+    padding-bottom: 20px;
 }
-
-
 
 
 @media screen and (min-width: 480px) {
-    .tablePagePattern {
-        padding: 40px 20%;
-        width: 70%;
-        margin: auto;
-        padding-bottom: 100px;
+
+    table * {
+        font-size: 18px;
     }
+
+    .tablePagePattern {
+        padding: 50px 100px;
+    }
+
 }

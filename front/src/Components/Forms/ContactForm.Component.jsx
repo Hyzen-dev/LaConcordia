@@ -1,5 +1,7 @@
 import React from 'react';
 
+// Le composant formulaire de contact utilise la méthode post afin de protéger les informations confidentielles envoyées par le visiteur, comme l'adresse mail. Cette méthode permet également l'envoi de données en grande quantité, comme les messages
+
 export default function ContactForm() {
     return (
         <div>

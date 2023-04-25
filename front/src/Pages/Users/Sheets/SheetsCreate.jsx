@@ -1,7 +1,8 @@
-// Géré par le rôle : Chef, sous-chef, admin
-
 import React from 'react'
 import CreateForm from '../../../Components/Forms/CreateForm.Component'
+
+
+// Page SheetsCreate qui affiche le formulaire de création d'une nouvelle partition.
 
 export default function SheetsCreate() {
   return (
@@ -11,6 +12,7 @@ export default function SheetsCreate() {
         <h3>Ajouter une nouvelle partition</h3>
       </div>
       <div className='pagePattern'>
+        {/* Intégration du composant "CreateForm" */}
         <CreateForm />
       </div>
     </div>

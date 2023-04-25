@@ -1,8 +1,8 @@
-// Récupérer les utilisateurs avec leurs rôles depuis la BDD
-
 import React from 'react';
 import UsersDatas from './../../../data/Users';
 import StatusDatas from '../../../data/Status';
+
+// Page Committee, qui permet l'affichage des membres de la commission.
 
 export default function Committee() {
   return (
@@ -13,18 +13,15 @@ export default function Committee() {
       </div>
 
       <div className='committee pagePattern'>
-        {/* Affichage des status de type 'Committee' */}
-        {StatusDatas.map((status) => {
 
+        {/* Les données "StatusDatas" sont mappées afin d'afficher les labels des status dont le type est "Committee". Pour chacun de ces labels, les membres ayant ce status sont affichés grace à l'utilisation de la fonction ".map" sur les données "UsersDatas". */}
+        {StatusDatas.map((status) => {
           if (status.type === 'Committee') {
             return (
               <div key={status.id}>
                 <h3 className='pagePattern__subheading'>{status.label}</h3>
                 <div className='separator'></div>
-
                 {UsersDatas.map((user) => {
-
-                  // Pour chaques utilisateurs, affichage de son nom et prénom si son status correspond au status affiché en h3
                   if (user.status.includes(status)) {
                     return (
                       <div key={user.id}>
