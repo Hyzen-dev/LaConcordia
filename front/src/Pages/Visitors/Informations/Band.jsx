@@ -1,13 +1,16 @@
 import React from 'react';
-import UsersDatas from './../../../data/Users';
+import { Helmet } from 'react-helmet';
 import InstrumentsDatas from '../../../data/Instruments';
 import StatusDatas from '../../../data/Status';
+import UsersDatas from './../../../data/Users';
 
 // Page Band, qui permet l'affichage des membres de l'harmonie et de la clique.
 
 export default function Band() {
   return (
     <div>
+      <Helmet><title>La Concordia - Harmonie & Clique</title></Helmet>
+
       <div id='category'>
         <h2>Harmonie & Clique</h2>
         <h3>Effectif actuel</h3>

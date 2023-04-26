@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import Sweetpagination from 'sweetpagination';
-import AlbumCard from '../../../Components/Cards/AlbumCard';
-import AlbumsDatas from '../../../data/Albums';
 import { Helmet } from 'react-helmet';
+import Sweetpagination from 'sweetpagination';
+import AlbumCard from '../../../Components/Cards/AlbumCard.Component';
+import AlbumsDatas from '../../../data/Albums';
 
 // Page AlbumsList qui renvoi la liste des albums déjà créés.
 
@@ -27,7 +27,7 @@ export default function AlbumsList() {
 
       <Link to='/espace-membre/medias/creation' className='link'><button className='button add'>Ajouter un nouvel album</button></Link>
 
-      <div className="medias-cards-container">
+      <div className="medias-cards-container usersCardsContainer">
 
         {/* Utilisation d'une expression JSX qui vérifie si "currentPageData" existe et contient au moins un élément avec une propriété "title". Si c'est le cas, la méthode map() est utilisée pour créer une nouvelle liste de Composant "AlbumCard". Si "currentPageData" est vide ou n'a pas de propriété "title", rien n'est renvoyé. */}
         {currentPageData && currentPageData[0]?.thumbnail && currentPageData.length > 0 ? currentPageData.map((item, k) => (

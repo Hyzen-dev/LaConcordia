@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
-import EventCard from '../../../Components/Cards/EventCard';
-import EventsDatas from './../../../data/Events';
-import Sweetpagination from 'sweetpagination';
+import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
+import Sweetpagination from 'sweetpagination';
+import EventCard from '../../../Components/Cards/EventCard.Component';
+import EventsDatas from './../../../data/Events';
 
 // Page Events, qui retourne la liste des évènements consultables par les visiteurs.
 
@@ -17,7 +17,7 @@ export default function Events() {
   return (
     <div>
       {/* Utilisation de la bibliothèque Helmet pour modifier la balise html "head" */}
-      <Helmet><title>La Concordia - Evènements</title></Helmet>
+      <Helmet><title>La Concordia - Évènements</title></Helmet>
       <div id='category'>
         <h2>Évènements à venir</h2>
       </div>

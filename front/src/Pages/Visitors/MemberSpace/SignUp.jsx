@@ -1,12 +1,15 @@
-import React from 'react'
-import SignUpForm from '../../../Components/Forms/SignUpForm.Component'
+import React from 'react';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
+import SignUpForm from '../../../Components/Forms/SignUpForm.Component';
 
 // Page SignUp, qui permet l'affichage du formulaire "SignUpForm" ainsi qu'un lien menant vers le formulaire de connexion.
 
 export default function SignUp() {
   return (
     <div>
+      <Helmet><title>La Concordia - Inscription</title></Helmet>
+
       <div id='category'>
         <h2>Inscription</h2>
         <h3>Inscrivez-vous</h3>

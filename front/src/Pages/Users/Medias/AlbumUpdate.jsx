@@ -1,22 +1,22 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import NewsDatas from './../../../data/News';
 import UpdateForm from '../../../Components/Forms/UpdateForm.Component';
+import AlbumsDatas from './../../../data/Albums';
 
-export default function NewsUpdate() {
+export default function AlbumUpdate() {
 
   const { id } = useParams();
 
-  const news = NewsDatas.find((news) => news.id === parseInt(id));
+  const album = AlbumsDatas.find((album) => album.id === parseInt(id));
 
   return (
     <div>
-      <Helmet><title>La Concordia - Actualié</title></Helmet>
+      <Helmet><title>La Concordia - Galerie médias</title></Helmet>
 
       <div className='usersPage'>
         <div id='category'>
-          <h2>Modification de l'actualité "{news.title}"</h2>
+          <h2>Modification de l'album "{album.name}"</h2>
         </div>
         <div className='pagePattern'>
           <form action="post">

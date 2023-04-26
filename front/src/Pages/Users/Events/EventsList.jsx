@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import EventCard from '../../../Components/Cards/EventCard';
-import EventsDatas from './../../../data/Events';
-import Sweetpagination from 'sweetpagination';
 import { Helmet } from 'react-helmet';
+import Sweetpagination from 'sweetpagination';
+import EventCard from '../../../Components/Cards/EventCard.Component';
+import EventsDatas from './../../../data/Events';
 
 // Page EventList qui renvoi la liste des évènements déjà créés.
 
@@ -18,7 +18,7 @@ export default function EventsList() {
   return (
     <div className='usersPage'>
       {/* Utilisation de la bibliothèque Helmet pour modifier la balise html 'head' */}
-      <Helmet><title>La Concordia - Evènements</title></Helmet>
+      <Helmet><title>La Concordia - Évènements</title></Helmet>
 
       <div id='category'>
         <h2>Évènements</h2>
@@ -27,7 +27,7 @@ export default function EventsList() {
 
       <Link to='/espace-membre/evenements/creation' className='link'><button className='button add'>Ajouter un nouvel évènement</button></Link>
 
-      <div className="events-cards-container">
+      <div className="events-cards-container usersCardsContainer">
 
         {/* Utilisation d'une expression JSX qui vérifie si "currentPageData" existe et contient au moins un élément avec une propriété "thumbnail". Si c'est le cas, la méthode map() est utilisée pour créer une nouvelle liste de Composant "EventCard". Si "currentPageData" est vide ou n'a pas de propriété "thumbnail", rien n'est renvoyé. */}
         {currentPageData && currentPageData[0]?.thumbnail && currentPageData.length > 0 ? currentPageData.map((item, k) => (

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import NewsCard from '../../../Components/Cards/NewsCard';
-import NewsDatas from './../../../data/News';
-import Sweetpagination from 'sweetpagination';
 import { Helmet } from 'react-helmet';
+import Sweetpagination from 'sweetpagination';
+import NewsCard from '../../../Components/Cards/NewsCard.Component';
+import NewsDatas from './../../../data/News';
 
 // Page NewsList qui renvoi la liste des actualités déjà créées.
 
@@ -27,7 +27,7 @@ export default function NewsList() {
 
       <Link to='/espace-membre/actualites/creation' className='link'><button className='button add'>Ajouter une nouvelle actualité</button></Link>
 
-      <div className="news-cards-container">
+      <div className="news-cards-container usersCardsContainer">
         {/* Utilisation d'une expression JSX qui vérifie si "currentPageData" existe et contient au moins un élément avec une propriété "thumbnail". Si c'est le cas, la méthode map() est utilisée pour créer une nouvelle liste de Composant "NewsCard". Si "currentPageData" est vide ou n'a pas de propriété "thumbnail", rien n'est renvoyé. */}
         {currentPageData && currentPageData[0]?.thumbnail && currentPageData.length > 0 ? currentPageData.map((item, k) => (
           <NewsCard newsCard={item} key={k} />

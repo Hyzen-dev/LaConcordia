@@ -1,6 +1,6 @@
 import React from 'react';
-import UsersDatas from '../../data/Users';
 import { useParams } from 'react-router-dom';
+import UsersDatas from '../../data/Users';
 
 export default function InformationsForm() {
 

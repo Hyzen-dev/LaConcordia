@@ -1,5 +1,5 @@
-import Roles from './Roles';
 import Instruments from './Instruments';
+import Roles from './Roles';
 import Status from './Status';
 
 const users = [

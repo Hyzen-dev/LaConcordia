@@ -15,8 +15,10 @@ export default function AlbumCard(props) {
     if (isUsersPage) {
         return (
             <div className='albumCard'>
-                <img src={thumbnail} alt="photo" className='albumCard__img' />
-                <h3 className='albumCard__title'>{name}</h3>
+                <Link to={`/espace-membre/medias/gestion/${id}`} className='link'>
+                    <img src={thumbnail} alt="photo" className='albumCard__img' />
+                    <h3 className='albumCard__title'>{name}</h3>
+                </Link>
             </div>
         )
     }

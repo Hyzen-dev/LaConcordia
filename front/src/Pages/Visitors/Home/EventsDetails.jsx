@@ -1,6 +1,7 @@
 import React from 'react';
-import EventsDatas from './../../../data/Events';
 import { useParams } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
+import EventsDatas from './../../../data/Events';
 
 // Page EventsDetail qui retourne le détail de l'évènement sur lequel le visiteur a cliqué.
 
@@ -14,6 +15,8 @@ export default function EventsDetails() {
 
   return (
     <div>
+      <Helmet><title>La Concordia - Évènements</title></Helmet>
+
       <div id='category'>
         <h2>{event.title}</h2>
         <h3>{event.eventDate}</h3>

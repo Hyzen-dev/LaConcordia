@@ -1,5 +1,6 @@
-import React from 'react'
-import ContactForm from '../../../Components/Forms/ContactForm.Component'
+import React from 'react';
+import { Helmet } from 'react-helmet';
+import ContactForm from '../../../Components/Forms/ContactForm.Component';
 
 
 // Page Contact, qui intégre les coordonnées de l'école de musique ainsi qu'un Composant formulaire de contact. Les messages envoyés via ce formulaire de contact sont consultables sur l'espace utilisateur par les *ROLES*
@@ -8,6 +9,8 @@ import ContactForm from '../../../Components/Forms/ContactForm.Component'
 export default function Contact() {
   return (
     <div>
+      <Helmet><title>La Concordia - Contact</title></Helmet>
+
       <div id='category'>
         <h2>Contact</h2>
         <h3>Vous avez une question ?</h3>

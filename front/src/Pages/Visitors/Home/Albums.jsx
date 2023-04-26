@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
-import AlbumCard from '../../../Components/Cards/AlbumCard';
-import AlbumsDatas from '../../../data/Albums';
-import Sweetpagination from 'sweetpagination';
+import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
+import Sweetpagination from 'sweetpagination';
+import AlbumCard from '../../../Components/Cards/AlbumCard.Component';
+import AlbumsDatas from '../../../data/Albums';
 
 // Page Medias, qui retourne la liste des albums consultables par les visiteurs.
 

@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
-
+import { Link, useLocation } from 'react-router-dom';
 
 
 export default function Footer() {
@@ -11,7 +9,6 @@ export default function Footer() {
 
   useEffect(() => {
     setIsPanelRoute(location.pathname.startsWith('/espace-membre'));
-    console.log(location.pathname.startsWith('/espace-membre'));
   }, [location.pathname]);
 
   return (

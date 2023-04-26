@@ -11,9 +11,8 @@
         color: $main-color-grey;
         font-weight: 300;
     }
-
-    &__link:focus {
-        color: $main-color-darkGrey;
-        font-weight: 500;
-    }
 }
+
+.homeNavbar__link--active {
+    font-weight: bold ;
+  }

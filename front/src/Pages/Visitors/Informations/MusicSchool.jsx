@@ -1,11 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 
 // Page MusicSchool, qui retourne les informations relatives à l'école de musique.
 
 export default function MusicSchool() {
   return (
     <div>
+      <Helmet><title>La Concordia - École de musique</title></Helmet>
+
       <div id='category'>
         <h2>École de musique</h2>
         <h3>Effectif actuel</h3>

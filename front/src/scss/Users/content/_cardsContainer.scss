@@ -1,0 +1,12 @@
+@media screen and (min-width: 480px) {
+
+
+    .usersCardsContainer {
+        width: 90%;
+        margin: auto;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 50px;
+    }
+}

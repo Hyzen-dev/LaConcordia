@@ -1,6 +1,7 @@
 import React from 'react';
-import NewsDatas from './../../../data/News';
 import { useParams } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
+import NewsDatas from './../../../data/News';
 
 // Page NewsDetails qui retourne le détail de l'actualité sur laquelle le visiteur a cliqué.
 
@@ -14,6 +15,8 @@ export default function NewsDetails() {
 
   return (
     <div>
+      <Helmet><title>La Concordia - Actualités</title></Helmet>
+
       <div id='category'>
         <h2>{news.title}</h2>
         <h3>{news.createdAt}</h3>

@@ -1,5 +1,5 @@
-import React, { useState, useRef } from 'react';
-import ModalPhoto from '../../Components/Modal/ModalPhoto.Component';
+import React, { useState } from 'react';
+import ModalPhoto from '../Modal/ModalPhoto.Component';
 
 // Composant MediasCard qui est utilisé sur la page AlbumDetails.
 

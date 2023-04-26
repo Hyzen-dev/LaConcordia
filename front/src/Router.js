@@ -6,7 +6,7 @@ import { About, Events, EventsDetails, Albums, AlbumDetails, News, NewsDetails }
 import { Band, Committee, MusicSchool } from './Pages/Visitors/Informations/exports';
 import Contact from './Pages/Visitors/Contact/Contact';
 import { SignUp, SignIn } from './Pages/Visitors/MemberSpace/exports';
-import { EventsCreate, EventsList, EventsUpdate, AlbumsCreate, AlbumsList, MediasUpdate, Messages, NewsCreate, NewsList, NewsUpdate, Notifications, Profil, SheetsCreate, SheetsList, SheetsUpdate, SheetsUsers, UsersUpdate } from './Pages/Users/exports';
+import { EventsCreate, EventsList, EventsUpdate, AlbumsCreate, AlbumsList, AlbumUpdate, Messages, NewsCreate, NewsList, NewsUpdate, Notifications, Profil, SheetsCreate, SheetsList, SheetsUpdate, SheetsUsers, UsersUpdate } from './Pages/Users/exports';
 import Footer from './Components/Footer/Footer.Component';
 
 
@@ -26,7 +26,6 @@ function RouterContainer() {
 
   useEffect(() => {
     setIsPanelRoute(location.pathname.startsWith('/espace-membre'));
-    console.log(location.pathname.startsWith('/espace-membre'));
   }, [location.pathname]);
   return (
     <>
@@ -86,30 +85,38 @@ function RouterContainer() {
             </Route>
 
             <Route path='partitions'>
+              <Route path='gestion'>
+                <Route index element={<SheetsList />} />
+                <Route path=':id' element={<SheetsUpdate />} />
+              </Route>
               <Route path='mes-partitions' element={<SheetsUsers />} />
-              <Route path='gestion' element={<SheetsList />} />
-              <Route path='modification' element={<SheetsUpdate />} />
               <Route path='creation' element={<SheetsCreate />} />
             </Route>
 
             <Route path='evenements'>
-              <Route path='gestion' element={<EventsList />} />
-              <Route path='modification' element={<EventsUpdate />} />
+              <Route path='gestion'>
+                <Route index element={<EventsList />} />
+                <Route path=':id' element={<EventsUpdate />} />
+              </Route>
               <Route path='creation' element={<EventsCreate />} />
             </Route>
 
             <Route path='medias'>
-              <Route path='gestion' element={<AlbumsList />} />
-              <Route path='modification' element={<MediasUpdate />} />
+              <Route path='gestion'>
+                <Route index element={<AlbumsList />} />
+                <Route path=':id' element={<AlbumUpdate />} />
+              </Route>
               <Route path='creation' element={<AlbumsCreate />} />
             </Route>
 
             <Route path='actualites'>
-              <Route path='gestion' element={<NewsList />} />
-              <Route path='modification' element={<NewsUpdate />} />
+              <Route path='gestion'>
+                <Route index element={<NewsList />} />
+                <Route path=':id' element={<NewsUpdate />} />
+              </Route>
               <Route path='creation' element={<NewsCreate />} />
             </Route>
-            
+
             <Route path='utilisateurs'>
               <Route index element={<UsersUpdate />} />
             </Route>

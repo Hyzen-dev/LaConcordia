@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
+import Sweetpagination from 'sweetpagination';
+import MediasCard from '../../../Components/Cards/MediasCard.Component';
 import AlbumsDatas from '../../../data/Albums';
 import PhotosDatas from '../../../data/Photos';
-import { useParams } from 'react-router-dom';
-import Sweetpagination from 'sweetpagination';
-import MediasCard from '../../../Components/Cards/MediasCard';
 
 // Page AlbumDetail, qui renvoi l'ensemble des médias de l'album sur lequel l'utilisateur à cliqué.
 
@@ -29,6 +30,8 @@ export default function AlbumDetails() {
 
     return (
         <div>
+            <Helmet><title>La Concordia - Galerie médias</title></Helmet>
+
             <div id='category'>
                 <h2>Galerie Médias</h2>
                 <h3>{album.name}</h3>
@@ -45,7 +48,7 @@ export default function AlbumDetails() {
                 </div>
 
                 <div className='pagination'>
-                    
+
                     {/* Intégration du module SweetPagination, qui permet l'affichage de 6 cartes médias par page */}
                     <Sweetpagination
                         currentPageData={setCurrentPageData}

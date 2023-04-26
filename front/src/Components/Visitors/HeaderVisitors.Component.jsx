@@ -1,7 +1,7 @@
 import React from 'react';
-import Navbar from './Navbar.Component';
 import { Link } from 'react-router-dom';
 import HomeNavbar from './HomeNavbar.Component';
+import Navbar from './Navbar.Component';
 
 export default function HeaderVisitors() {
   return (

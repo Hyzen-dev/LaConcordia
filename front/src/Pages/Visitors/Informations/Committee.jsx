@@ -1,12 +1,15 @@
 import React from 'react';
-import UsersDatas from './../../../data/Users';
+import { Helmet } from 'react-helmet';
 import StatusDatas from '../../../data/Status';
+import UsersDatas from './../../../data/Users';
 
 // Page Committee, qui permet l'affichage des membres de la commission.
 
 export default function Committee() {
   return (
     <div>
+      <Helmet><title>La Concordia - Commission</title></Helmet>
+
       <div id='category'>
         <h2>Commission</h2>
         <h3>Effectif actuel</h3>

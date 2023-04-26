@@ -1,6 +1,6 @@
-import React from 'react'
+import React from 'react';
 import HeaderUsers from './HeaderUsers.Component';
-import NavbarUsers from './NavbarUsers.Components';
+import NavbarUsers from './NavbarUsers.Component';
 
 
 export default function UsersPage() {

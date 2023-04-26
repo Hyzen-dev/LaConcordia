@@ -1,4 +1,22 @@
 .notificationCircle {
-    color: red;
+    color: $main-color-green;
     font-size: 10px;
+    animation: pulse 2.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0% {
+        color: $main-color-grey;
+        transform: scale(1);
+    }
+
+    50% {
+        color: $main-color-green;
+        transform: scale(1.2);
+    }
+
+    100% {
+        color: $main-color-grey;
+        transform: scale(1);
+    }
 }

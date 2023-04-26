@@ -1,10 +1,13 @@
-import React from 'react'
+import React from 'react';
+import { Helmet } from 'react-helmet';
 
 // Page About, qui retourne l'histoire de La Condordia sous forme de paragraphes 
 
 export default function About() {
   return (
     <div>
+      <Helmet><title>La Concordia - A propos</title></Helmet>
+
       <div id='category'>
         <h2>La Concordia</h2>
       </div>

@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
-import NewsCard from '../../../Components/Cards/NewsCard';
-import NewsDatas from './../../../data/News';
-import Sweetpagination from 'sweetpagination';
+import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
+import Sweetpagination from 'sweetpagination';
+import NewsCard from '../../../Components/Cards/NewsCard.Component';
+import NewsDatas from './../../../data/News';
 
 // Page News, qui retourne la liste des actualités consultables par les visiteurs.
 

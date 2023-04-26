@@ -1,6 +1,5 @@
-import React from 'react'
-import { useState } from 'react'
-import ReactModal from 'react-modal'
+import React from 'react';
+import ReactModal from 'react-modal';
 
 ReactModal.setAppElement('#modalElement')
 

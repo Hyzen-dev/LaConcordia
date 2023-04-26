@@ -3,10 +3,6 @@ import { Link } from 'react-router-dom';
 
 export default function HeaderUsers() {
 
-
-
-
-
   return (
     <header className='headerUsers'>
       <div className='headerUsers__icons'>
