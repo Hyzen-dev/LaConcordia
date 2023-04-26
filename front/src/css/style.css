@@ -885,6 +885,11 @@ td {
     padding: 50px 100px;
   }
 }
+.notificationCircle {
+  color: red;
+  font-size: 10px;
+}
+
 .footer {
   background-color: rgb(32, 32, 32);
   margin-top: 50px;
@@ -941,7 +946,6 @@ td {
     align-items: center;
     justify-content: space-around;
     flex-wrap: wrap;
-    padding: 10px;
   }
   .footer__socialMediasContainer {
     flex-direction: row;
@@ -951,7 +955,6 @@ td {
   }
   .usersFooter {
     position: relative;
-    z-index: 999;
     bottom: 0;
     width: 100%;
   }

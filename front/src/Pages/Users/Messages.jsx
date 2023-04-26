@@ -19,6 +19,7 @@ export default function Messages() {
   }
 
   return (
+
     <div className='usersPage'>
       <div id='category'>
         <h2>Mes messages</h2>

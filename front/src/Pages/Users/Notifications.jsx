@@ -3,23 +3,29 @@ import Modal from '../../Components/Modal/Modal.Component';
 import UsersDatas from './../../data/Users';
 import SheetsDatas from './../../data/Sheets';
 
+// Page Notifications qui affiche la liste des notifications relatives aux partitions mise en ligne concernant les instruments joués par l'utilisateur
+
 export default function Notifications() {
 
+  const [sheetsData, setSheetsData] = useState(SheetsDatas);
 
-
-
-
-
-
-
-
-  
-  const [selectedNotification, setSelectedNotification] = useState(null);
-
-  const handleModal = (notification, instrumentName) => {
-    setSelectedNotification({ notification, instrumentName });
+  const handleDeleteSheet = (id) => {
+    const newSheetsData = sheetsData.filter((sheet) => sheet.id !== id);
+    setSheetsData(newSheetsData);
   };
 
+  const [readNotifications, setReadNotifications] = useState([]);
+
+  // Utilisation du Hook useState pour définir la notification selectionnée et son état. "selectedNotification" est initialisé comme étant "null".
+  const [selectedNotification, setSelectedNotification] = useState(null);
+
+  // Création de la fonction "handleModal" qui prend en paramètre "notification" et "instrumentName". Cette fonction permet de modifier l'état de "selectedNotification" en lui envoyant les valeurs de ces paramètres.
+  const handleModal = (notification, instrumentName) => {
+    setSelectedNotification({ notification, instrumentName });
+    setReadNotifications([...readNotifications, notification.id]);
+  };
+
+  // Création de la fonction "closeModal" qui permet, lors de la fermeture de la modale, de retourner l'état de "selectedNotification" en "null".
   const closeModal = () => {
     setSelectedNotification(null);
   };
@@ -30,43 +36,45 @@ export default function Notifications() {
         <h2>Mes notifications</h2>
       </div>
 
-        <div className='tablePagePattern'>
-          <table className='table'>
-            <thead>
-              <tr>
-                <th className='table__header'>Date</th>
-                <th className='table__header'>Sujet</th>
-                <th className='table__buttonHeader'>Notification</th>
-              </tr>
-            </thead>
+      <div className='tablePagePattern'>
+        <table className='table'>
+          <thead>
+            <tr>
+              <th className='table__header'>Date</th>
+              <th className='table__header'>Sujet</th>
+              <th className='table__buttonHeader'>Notification</th>
+            </tr>
+          </thead>
 
-            <tbody>
-              {SheetsDatas.map((sheet) => {
+          <tbody>
+
+            {/* Création d'un tableau qui, pour chaque partition, si l'utilisateur et la partition ont au moins un instrument en commun, retourne une nouvelle ligne de tableau */}
+            {sheetsData.map((sheet) => {
+              const sharedInstrument = sheet.instruments.filter(val => UsersDatas[0].instruments.includes(val))
+              const isRead = readNotifications.includes(sheet.id);
+              if (sharedInstrument.length != 0) {
                 return (
-                  <React.Fragment key={sheet.id}>
-                    {UsersDatas[0].instruments.map((userInstrument) => {
-                      if (sheet.instruments.includes(userInstrument)) {
-                        return (
-                          <tr key={userInstrument.id} className='table__rows'>
-                            <td>{sheet.createdAt}</td>
-                            <td>Nouvelle partition</td>
-                            <td className='table__buttonTd'>
-                              <button className='button' onClick={() => handleModal(sheet, userInstrument.name)}>
-                                <i className="fa-solid fa-eye"></i>
-                              </button>
-                              <button className='button'><i className="fa-solid fa-xmark"></i></button>
-                            </td>
-                          </tr>
-                        );
-                      }
-                    })}
-                  </React.Fragment>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
+                  <tr key={sheet.id} style={{ fontStyle: isRead ? "normal" : "italic" }}>
+                    <td>{sheet.createdAt}</td>
+                    <td>Nouvelle partition</td>
+                    <td className='table__buttonTd'>
+                      <button className='button' onClick={() => handleModal(sheet)}>
+                        <i className="fa-solid fa-eye"></i>
+                      </button>
+                      <button className='button' onClick={() => handleDeleteSheet(sheet.id)}>
+                        <i className="fa-solid fa-xmark"></i>
+                      </button>
+                    </td>
+                    {!isRead ? <td><i className="fa-solid fa-circle notificationCircle"></i></td> : <td></td> }
+                  </tr>
+                )
+              }
+            })}
+          </tbody>
+        </table>
+      </div>
 
+      {/* Vérification de l'état de "selectedNotification" : si cette varaible est définie et non nulle, le composant "Modal" est rendu */}
       {selectedNotification && (
         <Modal showModal={true} setShowModal={closeModal}>
           <div className='modal'>
@@ -77,7 +85,15 @@ export default function Notifications() {
               </button>
             </div>
             <div className='separator'></div>
-            <p>{selectedNotification.notification.author.firstName} {selectedNotification.notification.author.lastName} a mis une nouvelle partition de {selectedNotification.instrumentName} à votre disposition</p>
+            <p>{selectedNotification.notification.author.firstName} {selectedNotification.notification.author.lastName} a mis en ligne une nouvelle partition !</p>
+
+            {/* Utilisation de la fonction ".map()" qui parcours la liste des instruments liés à la notification concernée pour en afficher la liste. */}
+            {selectedNotification.notification.instruments.map((instrument) => {
+              return (
+                <p>{instrument.label}</p>
+              )
+            })}
+            <button className='button'>Voir la partition</button>
           </div>
         </Modal>
       )}
