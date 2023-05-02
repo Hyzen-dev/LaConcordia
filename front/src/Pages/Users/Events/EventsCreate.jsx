@@ -8,7 +8,6 @@ export default function EventsCreate() {
   return (
     <div>
       <Helmet><title>La Concordia - Évènements</title></Helmet>
-
       <div className='usersPage'>
         <div id='category'>
           <h2>Évènements</h2>

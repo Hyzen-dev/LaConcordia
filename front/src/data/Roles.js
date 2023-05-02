@@ -35,12 +35,6 @@ const roles =  [
         createdAt: '2020-01-01',
         updatedAt: '2020-01-01'
     },
-    // {
-    //     id: 8,
-    //     name: 'Commission',
-    //     createdAt: '2020-01-01',
-    //     updatedAt: '2020-01-01'
-    // },
 ]
 
 export default roles;

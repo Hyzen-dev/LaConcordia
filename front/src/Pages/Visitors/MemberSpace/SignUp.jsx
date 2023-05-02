@@ -6,6 +6,9 @@ import SignUpForm from '../../../Components/Forms/SignUpForm.Component';
 // Page SignUp, qui permet l'affichage du formulaire "SignUpForm" ainsi qu'un lien menant vers le formulaire de connexion.
 
 export default function SignUp() {
+
+
+  
   return (
     <div>
       <Helmet><title>La Concordia - Inscription</title></Helmet>

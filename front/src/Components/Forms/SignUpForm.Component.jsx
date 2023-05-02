@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import ReCAPTCHA from "react-google-recaptcha";
+import { useDispatch } from 'react-redux';
+import { userSignUp } from '../../store/actions/userActions';
 
 // Composant SignUpForm utilisé sur la page "SignUp"
 
 export default function SignUpForm() {
+
+    const dispatch = useDispatch();
 
     // Création de la fonction "onCaptchaChange" qui permet l'affichage de la valeur de la réponse du Captcha dans la console.
     const onCaptchaChange = (value) => {
@@ -20,6 +24,13 @@ export default function SignUpForm() {
     // Création de la fonction "verification" qui empeche le navigateur de recharger la page lors du clic sur le bouton "Se connecter" du formulaire.
     const verification = (event) => {
         event.preventDefault()
+        dispatch(userSignUp({
+            firstName,
+            lastName,
+            email,
+            phone,
+            password
+        }))
     }
 
     return (

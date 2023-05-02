@@ -2,6 +2,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 import StatusDatas from '../../../data/Status';
 import UsersDatas from './../../../data/Users';
+import UserStatus from './../../../data/User-Status';
 
 // Page Committee, qui permet l'affichage des membres de la commission.
 
@@ -24,19 +25,30 @@ export default function Committee() {
               <div key={status.id}>
                 <h3 className='pagePattern__subheading'>{status.label}</h3>
                 <div className='separator'></div>
-                {UsersDatas.map((user) => {
-                  if (user.status.includes(status)) {
+
+                {UserStatus.map((userstatus) => {
+                  if (userstatus.statusId === status.id) {
                     return (
-                      <div key={user.id}>
-                        <p>{user.firstName} {user.lastName}</p>
+                      <div key={userstatus.userId}>
+                        {UsersDatas.map((user) => {
+                          if (userstatus.userId === user.id) {
+                            return (
+                              <div key={user.id}>
+                                <p>{user.firstName} {user.lastName}</p>
+                              </div>
+                            )
+                          }
+                          return null;
+                        })}
                       </div>
-                    );
+                    )
                   }
                   return null;
                 })}
               </div>
             )
           }
+          return null;
         })}
       </div>
     </div>

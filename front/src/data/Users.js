@@ -1,7 +1,3 @@
-import Instruments from './Instruments';
-import Roles from './Roles';
-import Status from './Status';
-
 const users = [
     {
         id: 1,
@@ -11,9 +7,6 @@ const users = [
         phone: '06 00 00 00 01',
         civilité: 'Monsieur',
         password: '123',
-        role: [Roles[0], Roles[1]],
-        status: [Status[0], Status[5], Status[8]],
-        instruments: [Instruments[0], Instruments[4]],
         createdAt: '2020-01-01',
         updatedAt: '2020-01-01'
     },
@@ -25,9 +18,6 @@ const users = [
         phone: '06 00 00 00 02',
         civilité: 'Monsieur',
         password: '123',
-        role: [Roles[4], Roles[2]],
-        status: [Status[1], Status[5], Status[12]],
-        instruments: [Instruments[15]],
         createdAt: '2020-01-01',
         updatedAt: '2020-01-01'
     },
@@ -39,9 +29,6 @@ const users = [
         phone: '06 00 00 00 03',
         civilité: 'Monsieur',
         password: '123',
-        role: [Roles[0]],
-        status: [Status[2], Status[10], Status[11]],
-        instruments: [Instruments[5]],
         createdAt: '2020-01-01',
         updatedAt: '2020-01-01'
     },
@@ -53,9 +40,6 @@ const users = [
         phone: '06 00 00 00 04',
         civilité: 'Monsieur',
         password: '123',
-        role: [Roles[1]],
-        status: [Status[2], Status[12], Status[9]],
-        instruments: [Instruments[10]],
         createdAt: '2020-01-01',
         updatedAt: '2020-01-01'
     },
@@ -67,9 +51,6 @@ const users = [
         phone: '06 00 00 00 05',
         civilité: 'Monsieur',
         password: '123',
-        role: [Roles[1]],
-        status: [Status[2]],
-        instruments: [Instruments[11]],
         createdAt: '2020-01-01',
         updatedAt: '2020-01-01'
     },
@@ -81,9 +62,6 @@ const users = [
         phone: '06 00 00 00 06',
         civilité: 'Monsieur',
         password: '123',
-        role: [Roles[2]],
-        status: [Status[2], Status[12], Status[11]],
-        instruments: [Instruments[3], Instruments[9]],
         createdAt: '2020-01-01',
         updatedAt: '2020-01-01'
     },
@@ -95,9 +73,6 @@ const users = [
         phone: '06 00 00 00 07',
         civilité: 'Monsieur',
         password: '123',
-        role: [Roles[3]],
-        status: [Status[1], Status[12]],
-        instruments: [Instruments[13]],
         createdAt: '2020-01-01',
         updatedAt: '2020-01-01'
     },
@@ -109,9 +84,6 @@ const users = [
         phone: '06 00 00 00 08',
         civilité: 'Monsieur',
         password: '123',
-        role: [Roles[1]],
-        status: [Status[4], Status[11]],
-        instruments: [Instruments[6]],
         createdAt: '2020-01-01',
         updatedAt: '2020-01-01'
     },
@@ -123,9 +95,6 @@ const users = [
         phone: '06 00 00 00 09',
         civilité: 'Monsieur',
         password: '123',
-        role: [Roles[1]],
-        status: [Status[5], Status[11], Status[12]],
-        instruments: [Instruments[2], Instruments[7], Instruments[11]],
         createdAt: '2020-01-01',
         updatedAt: '2020-01-01'
     },
@@ -137,9 +106,6 @@ const users = [
         phone: '06 00 00 00 10',
         civilité: 'Monsieur',
         password: '123',
-        role: [Roles[2]],
-        status: [Status[6], Status[10], Status[11]],
-        instruments: [Instruments[3]],
         createdAt: '2020-01-01',
         updatedAt: '2020-01-01'
     },
@@ -151,9 +117,6 @@ const users = [
         phone: '06 00 00 00 11',
         civilité: 'Monsieur',
         password: '123',
-        role: [Roles[2]],
-        status: [Status[7], Status[12]],
-        instruments: [Instruments[12]],
         createdAt: '2020-01-01',
         updatedAt: '2020-01-01'
     },
@@ -165,9 +128,6 @@ const users = [
         phone: '06 00 00 00 12',
         civilité: 'Monsieur',
         password: '123',
-        role: [Roles[6]],
-        status: [Status[7], Status[12]],
-        instruments: [Instruments[14]],
         createdAt: '2020-01-01',
         updatedAt: '2020-01-01'
     },
@@ -179,9 +139,6 @@ const users = [
         phone: '06 00 00 00 13',
         civilité: 'Monsieur',
         password: '123',
-        role: [Roles[6]],
-        status: [Status[7], Status[12]],
-        instruments: [Instruments[13], Instruments[14]],
         createdAt: '2020-01-01',
         updatedAt: '2020-01-01'
     },
@@ -193,9 +150,6 @@ const users = [
         phone: '06 00 00 00 14',
         civilité: 'Monsieur',
         password: '123',
-        role: [Roles[6]],
-        status: [Status[7], Status[11], Status[12]],
-        instruments: [Instruments[4], Instruments[5], Instruments[8]],
         createdAt: '2020-01-01',
         updatedAt: '2020-01-01'
     },
@@ -207,9 +161,6 @@ const users = [
         phone: '06 00 00 00 15',
         civilité: 'Monsieur',
         password: '123',
-        role: [Roles[6]],
-        status: [Status[10], Status[11]],
-        instruments: [Instruments[0]],
         createdAt: '2020-01-01',
         updatedAt: '2020-01-01'
     },
@@ -221,9 +172,6 @@ const users = [
         phone: '06 00 00 00 16',
         civilité: 'Monsieur',
         password: '123',
-        role: [Roles[3]],
-        status: [Status[10], Status[12]],
-        instruments: [Instruments[9]],
         createdAt: '2020-01-01',
         updatedAt: '2020-01-01'
     },
@@ -235,9 +183,6 @@ const users = [
         phone: '06 00 00 00 17',
         civilité: 'Monsieur',
         password: '123',
-        role: [Roles[4]],
-        status: [Status[9], Status[12]],
-        instruments: [Instruments[4], Instruments[15]],
         createdAt: '2020-01-01',
         updatedAt: '2020-01-01'
     },
@@ -249,9 +194,6 @@ const users = [
         phone: '06 00 00 00 18',
         civilité: 'Monsieur',
         password: '123',
-        role: [Roles[5]],
-        status: [Status[9], Status[12]],
-        instruments: [Instruments[5], Instruments[15]],
         createdAt: '2020-01-01',
         updatedAt: '2020-01-01'
     },
@@ -263,9 +205,6 @@ const users = [
         phone: '06 00 00 00 19',
         civilité: 'Monsieur',
         password: '123',
-        role: [Roles[5]],
-        status: [Status[12]],
-        instruments: [Instruments[12], Instruments[11]],
         createdAt: '2020-01-01',
         updatedAt: '2020-01-01'
     },
@@ -277,9 +216,6 @@ const users = [
         phone: '06 00 00 00 20',
         civilité: 'Monsieur',
         password: '123',
-        role: [Roles[4]],
-        status: [Status[11], Status[3]],
-        instruments: [Instruments[2]],
         createdAt: '2020-01-01',
         updatedAt: '2020-01-01'
     },

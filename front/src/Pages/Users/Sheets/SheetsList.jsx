@@ -1,7 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import SheetsDatas from './../../../data/Sheets';
+import SheetsData from './../../../data/Sheets';
+import InstrumentsData from './../../../data/Instruments';
+import SheetInstrument from '../../../data/Sheet-Instrument';
 
 
 // Page SheetsList qui renvoi la liste des partitions déjà créées.
@@ -29,16 +31,32 @@ export default function SheetsList() {
             </thead>
 
             <tbody>
-              {SheetsDatas.map((sheet) => {
+              {SheetsData.map((sheet) => {
                 return (
                   <tr key={sheet.id} className='table__rows'>
 
                     <td>{sheet.title}</td>
 
-                    <td>
-                      {sheet.instruments.map((instrument) => {
-                        return instrument.label + ' ';
-                      })}
+                    <td >
+                      <div className='table__rows__instruments'>
+                        {SheetInstrument.map((sheetinstrument) => {
+                          if (sheetinstrument.sheetId === sheet.id) {
+                            return (
+                              <p>
+                                {InstrumentsData.map((instrument) => {
+                                  if (sheetinstrument.instrumentId === instrument.id) {
+                                    return (
+                                      instrument.label + ' '
+                                    )
+                                  }
+                                  return null
+                                })}
+                              </p>
+                            )
+                          }
+                          return null
+                        })}
+                      </div>
                     </td>
 
                     <td className='table__buttonTd'>

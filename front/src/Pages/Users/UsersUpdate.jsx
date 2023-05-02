@@ -10,6 +10,8 @@ export default function UsersUpdate() {
 
   const [selectedUser, setSelectedUser] = useState({});
 
+  const [users, setUsers] = useState(UsersData);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setShowModal(false);
@@ -18,6 +20,11 @@ export default function UsersUpdate() {
   const handleModal = (data) => {
     setSelectedUser(data);
     setShowModal(true);
+  }
+
+  const handleDelete = (id) => {
+    const filteredUsers = users.filter((user) => user.id !== id);
+    setUsers(filteredUsers);
   }
 
   return (
@@ -41,14 +48,14 @@ export default function UsersUpdate() {
             </thead>
 
             <tbody>
-              {UsersData.map((user) => {
+              {users.map((user) => {
                 return (
                   <tr key={user.id} className='table__rows'>
                     <td>{user.lastName}</td>
                     <td>{user.firstName}</td>
                     <td className='table__buttonTd'>
                       <button className='button' onClick={() => handleModal(user)}><i className="fa-solid fa-pencil"></i></button>
-                      <button className='button'><i className="fa-solid fa-xmark"></i></button>
+                      <button className='button' onClick={() => handleDelete(user.id)}><i className="fa-solid fa-xmark"></i></button>
                     </td>
                   </tr>
                 )
@@ -70,6 +77,7 @@ export default function UsersUpdate() {
           </Modal>
         </div>
       </div>
+
     </div>
   )
 }

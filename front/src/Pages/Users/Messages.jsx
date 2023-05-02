@@ -14,12 +14,10 @@ export default function Messages() {
 
   const [readMessages, setReadMessages] = useState([]);
 
-
   const handleModal = (data) => {
     setSelectedMessage(data);
     setShowModal(true)
     setReadMessages([...readMessages, data.id]);
-    ;
   }
 
   const handleDelete = (id) => {

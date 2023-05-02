@@ -8,6 +8,7 @@ import instruments from '../../data/Instruments';
 import roles from '../../data/Roles';
 import status from '../../data/Status';
 import users from '../../data/Users';
+import UserRole from './../../data/User-Role';
 
 
 export default function Profil(props) {
@@ -18,12 +19,16 @@ export default function Profil(props) {
 
   const [showModal, setShowModal] = useState(false);
 
+
   useEffect(() => {
     setUser(users.find(user => user.id === parseInt(id)));
   }, [id]);
+
   if (!user || user.length <= 0 || typeof (user.role) !== 'object' || typeof (user.status) !== 'object' || typeof (user.instruments) !== 'object') {
+
     return <h1>Utilisateur introuvable</h1>
   }
+
 
   console.log(user)
   const userRoles = user.role
