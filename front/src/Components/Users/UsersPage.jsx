@@ -3,10 +3,11 @@ import HeaderUsers from './HeaderUsers.Component';
 import NavbarUsers from './NavbarUsers.Component';
 
 
-export default function UsersPage() {
+export default function UsersPage(props) {
+  const { user } = props;
   return (
     <div id='usersPage'>
-      <HeaderUsers />
+      <HeaderUsers user={user} />
       <NavbarUsers />
     </div>
   )

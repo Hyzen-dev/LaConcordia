@@ -1,45 +1,69 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import Modal from '../../Components/Modal/Modal.Component';
 import InformationsForm from '../../Components/Forms/InformationsForm.Components';
 import SelectComponent from '../../Components/Forms/Select.Component';
-import instruments from '../../data/Instruments';
-import roles from '../../data/Roles';
-import status from '../../data/Status';
-import users from '../../data/Users';
+// import instruments from '../../data/Instruments';
+// import roles from '../../data/Roles';
+// import status from '../../data/Status';
+// import users from '../../data/Users';
 import UserRole from './../../data/User-Role';
+import { useApi } from '../../Router';
 
 
 export default function Profil(props) {
-
-  const { id } = useParams();
-
-  const [user, setUser] = useState({});
+  const { user } = props;
+  const [roles, setRoles] = useState(null);
+  const [status, setStatus] = useState(null);
+  const [instruments, setInstruments] = useState(null);
 
   const [showModal, setShowModal] = useState(false);
 
-
   useEffect(() => {
-    setUser(users.find(user => user.id === parseInt(id)));
-  }, [id]);
+    
 
-  if (!user || user.length <= 0 || typeof (user.role) !== 'object' || typeof (user.status) !== 'object' || typeof (user.instruments) !== 'object') {
+    const fetchRoles = async () => {
+      const response = await useApi.roles.GetAll()
+      return setRoles(response.data.data)
+    }
 
-    return <h1>Utilisateur introuvable</h1>
-  }
+    const fetchStatus = async () => {
+      const response = await useApi.status.GetAll()
+      return setStatus(response.data.data)
+    }
+
+    const fetchInstruments = async () => {
+      const response = await useApi.instruments.GetAll()
+      return setInstruments(response.data.data)
+    }
+
+    fetchRoles()
+    fetchStatus()
+    fetchInstruments()
+  }, []);
+
+  // if (!user || user.length <= 0 || typeof (user.role) !== 'object' || typeof (user.status) !== 'object' || typeof (user.instruments) !== 'object') {
+
+  //   return <h1>Utilisateur introuvable</h1>
+  // }
 
 
   console.log(user)
-  const userRoles = user.role
-  const userStatus = user.status
-  const userInstruments = user.instruments
+  console.log(roles)
+  console.log(status)
+  console.log(instruments)
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(e.target.password.value)
     setShowModal(false);
   }
+
+  if (!user) return <h1>Chargement en cours</h1>
+  if (!roles) return <h1>Chargement en cours</h1>
+  if (!status) return <h1>Chargement en cours</h1>
+  if (!instruments) return <h1>Chargement en cours</h1>
 
   return (
     <div>
@@ -56,7 +80,7 @@ export default function Profil(props) {
             <h3 className='pagePattern__subheading'>Informations personnelles</h3>
             <div className='separator'></div>
             <div className='profil__box'>
-              <InformationsForm />
+              <InformationsForm user={user} />
               <p>Si vous souhaitez modifier vos informations, veuillez nous contacter <Link to={'/contact'} className='profil__contact'>ici</Link>.</p>
               <button onClick={() => setShowModal(true)} className='button'>Modifier mon mot de passe</button>
             </div>
@@ -93,9 +117,9 @@ export default function Profil(props) {
             <h3 className='pagePattern__subheading'>Accès réglementé</h3>
             <div className='separator'></div>
             <div className='profil__box'>
-              <SelectComponent options={roles} userData={userRoles} />
-              <SelectComponent options={status} userData={userStatus} />
-              <SelectComponent options={instruments} userData={userInstruments} />
+              <SelectComponent options={roles} userData={user.userRoles} />
+              <SelectComponent options={status} userData={user.userStatus} />
+              <SelectComponent options={instruments} userData={user.userInstruments} />
             </div>
           </div>
 

@@ -14,7 +14,19 @@ exports.Create = async (req, res) => {
 
 exports.GetAll = async (req, res) => {
     try {
+        const status = await Status.findAll();
 
+        const formattedStatus = [];
+
+        status.forEach((statusData) => {
+            formattedStatus.push({ name: statusData.name, label: statusData.label, type: statusData.type })
+        });
+
+        return res.status(200).json({
+            error: false,
+            message: "Les statuts ont bien été récupérés",
+            data: formattedStatus
+        })
     } catch (error){
         console.log("error");
         return res.status(500).json({

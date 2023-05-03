@@ -8,9 +8,11 @@ import Contact from './Pages/Visitors/Contact/Contact';
 import { SignUp, SignIn } from './Pages/Visitors/MemberSpace/exports';
 import { EventsCreate, EventsList, EventsUpdate, AlbumsCreate, AlbumsList, AlbumUpdate, Messages, NewsCreate, NewsList, NewsUpdate, Notifications, Profil, SheetsCreate, SheetsList, SheetsUpdate, SheetsUsers, UsersUpdate } from './Pages/Users/exports';
 import Footer from './Components/Footer/Footer.Component';
+import ApiHandler from './service/ApiHandler'
 
+export const useApi = new ApiHandler(localStorage.getItem('accessToken') || null);
 
-export default function Router() {
+export function Router() {
   return (
     <BrowserRouter>
       <RouterContainer />
@@ -20,6 +22,27 @@ export default function Router() {
 
 
 function RouterContainer() {
+  const [user, setUser] = useState(null);
+
+  let isLogged = false;
+  if (!isLogged) {
+    isLogged = localStorage.getItem('accessToken');
+
+    if (isLogged) isLogged = true;
+    else isLogged = false;
+  }
+
+  useEffect(() => {
+    const fetchProfile = async () => {
+      const response = await useApi.user.GetProfile()
+      return setUser(response.data.data)
+    }
+
+    if (isLogged) {
+      fetchProfile()
+    }
+  }, [isLogged])
+
 
   const location = useLocation();
   const [isPanelRoute, setIsPanelRoute] = useState(false);
@@ -27,9 +50,11 @@ function RouterContainer() {
   useEffect(() => {
     setIsPanelRoute(location.pathname.startsWith('/espace-membre'));
   }, [location.pathname]);
+
+  if (isLogged && !user) return <h1>Chargement...</h1>;
   return (
     <>
-      {isPanelRoute ? <UsersPage /> : <HeaderVisitors />}
+      {isPanelRoute ? <UsersPage user={user} /> : <HeaderVisitors user={user} />}
       <Routes>
         <Route path='/'>
           <Route index element={<News />} />
@@ -63,64 +88,67 @@ function RouterContainer() {
             <Route index element={<Contact />} />
           </Route>
 
-          <Route path='inscription'>
-            <Route index element={<SignUp />} />
-          </Route>
-
-          <Route path='connexion'>
-            <Route index element={<SignIn />} />
-          </Route>
-
-          <Route path='espace-membre'>
-            <Route path=':id' element={<Profil />} />
-
-            <Route index element={<Profil />} />
-
-            <Route path='notifications'>
-              <Route index element={<Notifications />} />
-            </Route>
-
-            <Route path='messages'>
-              <Route index element={<Messages />} />
-            </Route>
-
-            <Route path='partitions'>
-              <Route path='gestion'>
-                <Route index element={<SheetsList />} />
-                <Route path=':id' element={<SheetsUpdate />} />
+          {!isLogged ?
+            <>
+              <Route path='inscription'>
+                <Route index element={<SignUp />} />
               </Route>
-              <Route path='mes-partitions' element={<SheetsUsers />} />
-              <Route path='creation' element={<SheetsCreate />} />
-            </Route>
 
-            <Route path='evenements'>
-              <Route path='gestion'>
-                <Route index element={<EventsList />} />
-                <Route path=':id' element={<EventsUpdate />} />
+              <Route path='connexion'>
+                <Route index element={<SignIn />} />
               </Route>
-              <Route path='creation' element={<EventsCreate />} />
-            </Route>
+            </>
+            :
+            <Route path='espace-membre'>
 
-            <Route path='medias'>
-              <Route path='gestion'>
-                <Route index element={<AlbumsList />} />
-                <Route path=':id' element={<AlbumUpdate />} />
+              <Route index element={<Profil user={user} />} />
+
+              <Route path='notifications'>
+                <Route index element={<Notifications />} />
               </Route>
-              <Route path='creation' element={<AlbumsCreate />} />
-            </Route>
 
-            <Route path='actualites'>
-              <Route path='gestion'>
-                <Route index element={<NewsList />} />
-                <Route path=':id' element={<NewsUpdate />} />
+              <Route path='messages'>
+                <Route index element={<Messages />} />
               </Route>
-              <Route path='creation' element={<NewsCreate />} />
-            </Route>
 
-            <Route path='utilisateurs'>
-              <Route index element={<UsersUpdate />} />
+              <Route path='partitions'>
+                <Route path='gestion'>
+                  <Route index element={<SheetsList />} />
+                  <Route path=':id' element={<SheetsUpdate />} />
+                </Route>
+                <Route path='mes-partitions' element={<SheetsUsers />} />
+                <Route path='creation' element={<SheetsCreate />} />
+              </Route>
+
+              <Route path='evenements'>
+                <Route path='gestion'>
+                  <Route index element={<EventsList />} />
+                  <Route path=':id' element={<EventsUpdate />} />
+                </Route>
+                <Route path='creation' element={<EventsCreate />} />
+              </Route>
+
+              <Route path='medias'>
+                <Route path='gestion'>
+                  <Route index element={<AlbumsList />} />
+                  <Route path=':id' element={<AlbumUpdate />} />
+                </Route>
+                <Route path='creation' element={<AlbumsCreate />} />
+              </Route>
+
+              <Route path='actualites'>
+                <Route path='gestion'>
+                  <Route index element={<NewsList />} />
+                  <Route path=':id' element={<NewsUpdate />} />
+                </Route>
+                <Route path='creation' element={<NewsCreate />} />
+              </Route>
+
+              <Route path='utilisateurs'>
+                <Route index element={<UsersUpdate />} />
+              </Route>
             </Route>
-          </Route>
+          }
         </Route>
       </Routes>
       <Footer />

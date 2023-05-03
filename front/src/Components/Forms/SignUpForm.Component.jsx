@@ -1,14 +1,12 @@
 import React, { useState } from 'react';
 import ReCAPTCHA from "react-google-recaptcha";
-import { useDispatch } from 'react-redux';
-import { userSignUp } from '../../store/actions/userActions';
+import { useApi } from '../../Router';
+import { useNavigate } from 'react-router-dom';
 
 // Composant SignUpForm utilisé sur la page "SignUp"
 
 export default function SignUpForm() {
-
-    const dispatch = useDispatch();
-
+    const navigate = useNavigate();
     // Création de la fonction "onCaptchaChange" qui permet l'affichage de la valeur de la réponse du Captcha dans la console.
     const onCaptchaChange = (value) => {
         console.log("Captcha value:", value);
@@ -22,15 +20,25 @@ export default function SignUpForm() {
     const [password, setPassword] = useState("")
 
     // Création de la fonction "verification" qui empeche le navigateur de recharger la page lors du clic sur le bouton "Se connecter" du formulaire.
-    const verification = (event) => {
+    const verification = async (event) => {
         event.preventDefault()
-        dispatch(userSignUp({
+
+        const userData = {
             firstName,
             lastName,
             email,
-            phone,
+            phoneNumber: phone,
             password
-        }))
+        }
+
+        const response = await useApi.user.SignUp(userData);
+
+        if (response) {
+            console.log(response);
+            navigate('/connexion');
+        } else {
+            console.log('Une erreur est survenue');
+        }
     }
 
     return (

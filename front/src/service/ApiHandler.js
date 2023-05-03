@@ -13,29 +13,75 @@ class ApiHandler {
         if (!endpoint) {
             return {error: true, message: "aucun endpoint a été défini"}
         }
-        const options = {
+        const reqOptions = {
+            method: "POST",
             data: data || {},
+            headers: {}
         }
+        console.log(reqOptions)
         if (accessToken) {
-            options.Authorization = `Bearer ${accessToken}`
+            reqOptions.headers.Authorization = `Bearer ${accessToken}`
         }
-        return axios.post(`${this.baseUrl}${endpoint}`, options)
+
+        return axios(`${this.baseUrl}${endpoint}`, reqOptions)
         .then((res) => res)
-        .catch((error) => error.response.data || { error: true, message: "une erreur est survenue" })
+        .catch((error) => error?.response?.data || { error: true, message: "une erreur est survenue" })
+    }
+    
+    #GET_REQUEST = (endpoint, id) => {
+        if (!endpoint) {
+            return {error: true, message: "aucun endpoint a été défini"}
+        }
+
+        const reqOptions = {
+            method: "GET",
+        }
+
+        const apiUrl = !id ? `${this.baseUrl}${endpoint}` : `${this.baseUrl}${endpoint}/${id}`
+
+        return axios(apiUrl, reqOptions)
+        .then((res) => res)
+        .catch((error) => error?.response?.data || { error: true, message: "une erreur est survenue" })
     }
 
 
-    // User methode
+    // User methods
     user = {
         SignUp: async (data) => {
+            // console.log(data)
             return await this.#POST_REQUEST("/user/signup", data)
         },
-        SignIn: () => {
-            console.log('SignIn')
+        SignIn: async (data) => {
+            return await this.#POST_REQUEST("/user/signin", data)
+        },
+        GetProfile: async () => {
+            return await this.#POST_REQUEST("/user/profile", {}, this.accessToken)
+        }
+    }
+
+    // Roles methods
+    roles = {
+        GetAll: async () => {
+            return await this.#GET_REQUEST("/role")
+        }
+    }
+
+    // Status methods
+    status = {
+        GetAll: async () => {
+            return await this.#GET_REQUEST("/status")
+        }
+    }
+
+    // Instruments methods
+    instruments = {
+        GetAll: async () => {
+            return await this.#GET_REQUEST("/instrument")
         }
     }
 
     updateAccessToken = (token) => {
+        // localStorage.setItem("accessToken", token)
         return this.accessToken = token
     }
 }

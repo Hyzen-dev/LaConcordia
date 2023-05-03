@@ -14,7 +14,19 @@ exports.Create = async (req, res) => {
 
 exports.GetAll = async (req, res) => {
     try {
+        const roles = await Role.findAll();
 
+        const formattedRoles = [];
+
+        roles.forEach((role) => {
+            formattedRoles.push({ name: role.name, label: role.label })
+        });
+
+        return res.status(200).json({
+            error: false,
+            message: "Les rôles ont bien été récupérés",
+            data: formattedRoles
+        })
     } catch (error){
         console.log("error");
         return res.status(500).json({

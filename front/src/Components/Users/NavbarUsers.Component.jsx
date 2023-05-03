@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
-
 export default function NavbarUsers() {
 
   const [click, setClick] = useState(false);
@@ -39,7 +38,7 @@ export default function NavbarUsers() {
 
         <li>
           <div className='usersNavbar__list__subheading'>
-            <NavLink to={'/espace-membre/1'} activeclassname="active" className="usersNavbar__list__link link" onClick={handleClick}>
+            <NavLink to={'/espace-membre'} activeclassname="active" className="usersNavbar__list__link link" onClick={handleClick}>
               Profil
             </NavLink>
           </div>

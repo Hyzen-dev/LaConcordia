@@ -27,10 +27,6 @@ User.init({
         type: DataTypes.STRING,
         allowNull: true
       },
-      title: {
-        type: DataTypes.STRING,
-        allowNull: false
-      },
       password: {
         type: DataTypes.TEXT('long'),
         allowNull: false

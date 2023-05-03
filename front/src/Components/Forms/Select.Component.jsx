@@ -7,6 +7,7 @@ const animatedComponents = makeAnimated();
 export default function SelectComponent(props) {
   const { options, userData } = props;
 
+  console.log(options)
   const formattedOptions = [];
   options.forEach((option) => {
     formattedOptions.push({

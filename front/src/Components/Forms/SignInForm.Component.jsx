@@ -1,25 +1,34 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { userSignIn } from '../../store/actions/userActions';
-
-
+import { useNavigate } from 'react-router-dom';
+import { useApi } from '../../Router';
 
 // Composant SignInForm utilisé sur la page "SignIn".
 
 export default function SignInForm() {
-
-  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
 
   // Création de la fonction "verification" qui empeche le navigateur de recharger la page lors du clic sur le bouton "Se connecter" du formulaire.
-  const verification = (event) => {
+  const verification = async (event) => {
     event.preventDefault()
-    dispatch(userSignIn({
+    const userData = {
       email,
       password
-    }))
+    }
+
+    const response = await useApi.user.SignIn(userData);
+    console.log("Response : ", response)
+    if (response && response.data && response.data.token) {
+      setEmail("");
+      setPassword("");
+      localStorage.setItem("accessToken", response.data.token);
+      useApi.updateAccessToken(response.data.token);
+      navigate("/espace-membre");
+    } else {
+      alert("E-mail ou mot de passe incorrect")
+    }
   }
 
   return (

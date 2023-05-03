@@ -1,13 +1,7 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
 import UsersDatas from '../../data/Users';
 
-export default function InformationsForm() {
-
-    const { id } = useParams();
-
-    const user = UsersDatas.find((user) => user.id === parseInt(id));
-
+export default function InformationsForm({ user }) {
     return (
         <div>
             <form method="post">
