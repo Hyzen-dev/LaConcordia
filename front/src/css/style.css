@@ -39,6 +39,13 @@ li {
   background-color: #579c38 !important;
 }
 
+.loadingScreen {
+  width: 50px;
+  height: 100vh;
+  margin: auto;
+  padding-top: 200px;
+}
+
 #category {
   text-align: center;
   margin-bottom: 40px;
@@ -89,7 +96,7 @@ li {
     padding: 40px 12%;
   }
   .usersPage {
-    padding-top: 12%;
+    padding-top: 150px;
     padding-left: 20%;
     min-height: 500px;
   }
@@ -692,9 +699,11 @@ li {
 @media screen and (min-width: 480px) {
   .headerUsers {
     padding: 20px;
-    width: 80%;
+    width: 100%;
     position: absolute;
-    left: 20%;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    padding-left: 25%;
   }
 }
 .usersNavbar {
@@ -772,6 +781,12 @@ li {
   cursor: pointer;
 }
 
+.disconnected {
+  text-align: center;
+  font-style: italic;
+  margin-top: 40px;
+}
+
 @media screen and (min-width: 480px) {
   .usersNavbar {
     width: 20%;
@@ -786,11 +801,13 @@ li {
     align-items: start;
   }
   .usersNavbar__header__logoContainer {
-    display: block;
-    margin: 15px 0px 0px 15px;
+    align-items: center;
+    height: 100%;
+    width: fit-content;
+    margin: auto;
   }
   .usersNavbar__header__logoContainer__logo {
-    height: 40px;
+    height: 30px;
   }
   .usersNavbar__header__openIcon {
     display: none;

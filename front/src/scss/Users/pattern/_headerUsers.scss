@@ -28,8 +28,11 @@
 
     .headerUsers {
         padding: 20px;
-        width: 80%;
+        width: 100%;
         position: absolute;
-        left: 20%;
+        flex-direction: row-reverse;
+        justify-content: space-between;
+        padding-left: 25%;
+        
     }
 }

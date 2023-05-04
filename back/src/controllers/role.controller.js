@@ -38,7 +38,29 @@ exports.GetAll = async (req, res) => {
 
 exports.GetById = async (req, res) => {
     try {
+        const { id } = req.params;
 
+        if (!id || isNaN(id)) {
+            return res.status(400).json({
+                error: true,
+                message: "Requête invalide."
+            });
+        }
+
+        const role = await Role.findOne({ where: { id: id } });
+
+        if (!role) {
+            return res.status(404).json({
+                error: true,
+                message: "Le rôle est introuvable."
+            });
+        }
+
+        return res.status(200).json({
+            error: false,
+            message: "Le rôle a été récupéré.",
+            post: role
+        });
     } catch (error){
         console.log("error");
         return res.status(500).json({

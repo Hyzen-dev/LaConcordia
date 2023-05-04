@@ -8,7 +8,8 @@ import Contact from './Pages/Visitors/Contact/Contact';
 import { SignUp, SignIn } from './Pages/Visitors/MemberSpace/exports';
 import { EventsCreate, EventsList, EventsUpdate, AlbumsCreate, AlbumsList, AlbumUpdate, Messages, NewsCreate, NewsList, NewsUpdate, Notifications, Profil, SheetsCreate, SheetsList, SheetsUpdate, SheetsUsers, UsersUpdate } from './Pages/Users/exports';
 import Footer from './Components/Footer/Footer.Component';
-import ApiHandler from './service/ApiHandler'
+import ApiHandler from './service/ApiHandler';
+import LoadingScreen from './Components/LoadingScreen.Component';
 
 export const useApi = new ApiHandler(localStorage.getItem('accessToken') || null);
 
@@ -51,7 +52,7 @@ function RouterContainer() {
     setIsPanelRoute(location.pathname.startsWith('/espace-membre'));
   }, [location.pathname]);
 
-  if (isLogged && !user) return <h1>Chargement...</h1>;
+  if (isLogged && !user) return <LoadingScreen />;
   return (
     <>
       {isPanelRoute ? <UsersPage user={user} /> : <HeaderVisitors user={user} />}

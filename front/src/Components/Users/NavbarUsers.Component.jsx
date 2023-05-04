@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
-export default function NavbarUsers() {
+export default function NavbarUsers(props) {
 
   const [click, setClick] = useState(false);
   const handleClick = () => setClick(!click);
@@ -19,12 +19,21 @@ export default function NavbarUsers() {
   const newsHandleClick = () => setNewsClick(!newsClick);
 
 
+  const { user } = props;
+
+  let isLogged = true
+  const disconnectedClick = () => {
+    isLogged = false
+    localStorage.clear()
+  }
+
+
   return (
     <nav className='usersNavbar'>
 
       <div className='usersNavbar__header'>
         <div className='usersNavbar__header__logoContainer'>
-          <img src={require('./../../assets/logo.png')} className='usersNavbar__header__logoContainer__logo' />
+          <img src={require('./../../assets/logo.png')} className='usersNavbar__header__logoContainer__logo' alt='logo' />
 
           <h1 className='usersNavbar__header__logoContainer__title'>La Concordia</h1>
         </div>
@@ -142,7 +151,16 @@ export default function NavbarUsers() {
             </NavLink>
           </div>
         </li>
+        <li>
+          <div className='disconnected'>
+            <NavLink to={'/'} activeclassname="active" className="usersNavbar__list__link link" onClick={() => { handleClick(); disconnectedClick(); }}>
+              Déconnexion
+            </NavLink>
+          </div>
+        </li>
       </ul>
-    </nav>
+
+
+    </nav >
   )
 }

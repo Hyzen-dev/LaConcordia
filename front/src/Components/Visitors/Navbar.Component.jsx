@@ -66,7 +66,7 @@ export default function Navbar(props) {
         </li>
 
         <li className='navbar__list__title'>
-          <NavLink to={isLogged ? 'espace-membre' : '/inscription'} className='navbar__list__title__link link' activeclassname="active" onClick={handleClick}>Espace Membre</NavLink>
+          <NavLink to={isLogged ? 'espace-membre' : '/connexion'} className='navbar__list__title__link link' activeclassname="active" onClick={handleClick}>Espace Membre</NavLink>
         </li>
       </ul>
     </nav>

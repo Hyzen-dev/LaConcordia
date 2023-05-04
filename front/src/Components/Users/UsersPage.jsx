@@ -8,7 +8,7 @@ export default function UsersPage(props) {
   return (
     <div id='usersPage'>
       <HeaderUsers user={user} />
-      <NavbarUsers />
+      <NavbarUsers user={user} />
     </div>
   )
 }

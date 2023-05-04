@@ -86,17 +86,22 @@
     }
 }
 
-
+.disconnected {
+    text-align: center;
+    font-style: italic;
+    margin-top: 40px;
+    
+}
 
 
 @media screen and (min-width: 480px) {
 
     .usersNavbar {
-    width: 20%;
-    height: 500px;
-    position: fixed;
-    height: 100%;
-    padding: 0px;
+        width: 20%;
+        height: 500px;
+        position: fixed;
+        height: 100%;
+        padding: 0px;
 
         &__header {
             background-color: $main-color-darkGrey;
@@ -104,11 +109,13 @@
             align-items: start;
 
             &__logoContainer {
-                display: block;
-                margin: 15px 0px 0px 15px;
+                align-items: center;
+                height: 100%;
+                width: fit-content;
+                margin: auto;
 
                 &__logo {
-                    height: 40px;
+                    height: 30px;
                 }
             }
 
@@ -167,7 +174,3 @@
         }
     }
 }
-
-
-
-
