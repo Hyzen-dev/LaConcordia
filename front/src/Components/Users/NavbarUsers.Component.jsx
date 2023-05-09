@@ -4,19 +4,45 @@ import { Link, NavLink } from 'react-router-dom';
 export default function NavbarUsers(props) {
 
   const [click, setClick] = useState(false);
-  const handleClick = () => setClick(!click);
+  const handleClick = () => {
+    setClick(!click);
+    setSheetClick(false)
+    setEventClick(false)
+    setMediasClick(false)
+    setNewsClick(false)
+  }
 
   const [sheetClick, setSheetClick] = useState(false);
-  const sheetHandleClick = () => setSheetClick(!sheetClick);
+  const sheetHandleClick = () => {
+    setSheetClick(!sheetClick);
+    setEventClick(false)
+    setMediasClick(false)
+    setNewsClick(false)
+  }
 
   const [eventClick, setEventClick] = useState(false);
-  const eventHandleClick = () => setEventClick(!eventClick);
+  const eventHandleClick = () => {
+    setEventClick(!eventClick);
+    setSheetClick(false)
+    setMediasClick(false)
+    setNewsClick(false)
+  }
 
   const [mediasClick, setMediasClick] = useState(false);
-  const mediasHandleClick = () => setMediasClick(!mediasClick);
+  const mediasHandleClick = () => {
+    setMediasClick(!mediasClick);
+    setSheetClick(false)
+    setEventClick(false)
+    setNewsClick(false)
+  }
 
   const [newsClick, setNewsClick] = useState(false);
-  const newsHandleClick = () => setNewsClick(!newsClick);
+  const newsHandleClick = () => {
+    setNewsClick(!newsClick);
+    setSheetClick(false)
+    setEventClick(false)
+    setMediasClick(false)
+  }
 
 
   const { user, logout } = props;
