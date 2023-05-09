@@ -10,11 +10,7 @@ module.exports = {
         autoIncrement: true,
         allowNull: false
       },
-      title: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
-      mediasFile: {
+      file: {
         type: Sequelize.STRING,
         allowNull: false
       },

@@ -1,8 +1,36 @@
 const UserInstrument = require("../models/user-instrument.model");
+const Status = require("../models/status.model");
 
 exports.Create = async (req, res) => {
     try {
+        const { name, label, statusId } = req.body;
 
+        if (!name || !label || !statusId) {
+            return res.status(400).json({
+                error: true,
+                message: "Requête invalide."
+            });
+        }
+
+        const isStatusExist = await Status.findOne({ where: { id: statusId } });
+
+        if (!isStatusExist) {
+            return res.status(404).json({
+                error: true,
+                message: "Le statut est introuvable."
+            });
+        }
+
+        await new UserInstrument({
+            name: name,
+            label: label,
+            statusId: statusId
+        }).save();
+
+        return res.status(201).json({
+            error: false,
+            message: "La relation entre utilisateur et instrument a bien été créée.",
+        });
     } catch (error){
         console.log("error");
         return res.status(500).json({

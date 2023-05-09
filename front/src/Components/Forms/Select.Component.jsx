@@ -7,32 +7,36 @@ const animatedComponents = makeAnimated();
 export default function SelectComponent(props) {
   const { options, userData } = props;
 
-  console.log(options)
+
+
   const formattedOptions = [];
-  options.forEach((option) => {
-    formattedOptions.push({
-      value: option.name,
-      label: option.label
-    })
-  })
-
   const defaultValues = [];
+  if (options?.length > 0) {
 
-  formattedOptions.forEach((option) => {
-    userData.forEach((data) => {
-      if (data.name === option.value) {
-        defaultValues.push(option)
-      }
+    options.forEach((option) => {
+      formattedOptions.push({
+        value: option.name,
+        label: option.label
+      })
     })
-  })
+
+
+    formattedOptions.forEach((option) => {
+      userData.forEach((data) => {
+        if (data.name === option.value) {
+          defaultValues.push(option)
+        }
+      })
+    })
+  }
 
   return (
     <Select
       closeMenuOnSelect={false}
       components={animatedComponents}
-      defaultValue={defaultValues}
+      defaultValue={defaultValues || []}
       isMulti
-      options={formattedOptions}
+      options={formattedOptions || []}
     />
   );
 }

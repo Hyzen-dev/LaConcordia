@@ -2,7 +2,34 @@ const Status = require("../models/status.model");
 
 exports.Create = async (req, res) => {
     try {
+        const { name, label, type } = req.body;
 
+        if (!name || !label || !type) {
+            return res.status(400).json({
+                error: true,
+                message: "Requête invalide."
+            });
+        }
+
+        const typesAvailable = ["committee", "directionharmonie", "directionclique", "musicienharmonie", "musicienclique"];
+
+        if (!typesAvailable.includes(type)) {
+            return res.status(400).json({
+                error: true,
+                message: "Le type de statut est invalide. Types disponibles : " + typesAvailable.join(", ")
+            });
+        }
+
+        await new Status({
+            name: name,
+            label: label,
+            type: type
+        }).save();
+
+        return res.status(201).json({
+            error: false,
+            message: "Le statut a bien été créé.",
+        });
     } catch (error){
         console.log("error");
         return res.status(500).json({
@@ -16,16 +43,10 @@ exports.GetAll = async (req, res) => {
     try {
         const status = await Status.findAll();
 
-        const formattedStatus = [];
-
-        status.forEach((statusData) => {
-            formattedStatus.push({ name: statusData.name, label: statusData.label, type: statusData.type })
-        });
-
         return res.status(200).json({
             error: false,
             message: "Les statuts ont bien été récupérés",
-            data: formattedStatus
+            data: status
         })
     } catch (error){
         console.log("error");

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 export default function NavbarUsers(props) {
 
@@ -19,12 +19,10 @@ export default function NavbarUsers(props) {
   const newsHandleClick = () => setNewsClick(!newsClick);
 
 
-  const { user } = props;
+  const { user, logout } = props;
 
-  let isLogged = true
   const disconnectedClick = () => {
-    isLogged = false
-    localStorage.clear()
+    logout("logout");
   }
 
 
@@ -33,9 +31,10 @@ export default function NavbarUsers(props) {
 
       <div className='usersNavbar__header'>
         <div className='usersNavbar__header__logoContainer'>
-          <img src={require('./../../assets/logo.png')} className='usersNavbar__header__logoContainer__logo' alt='logo' />
-
-          <h1 className='usersNavbar__header__logoContainer__title'>La Concordia</h1>
+          <Link to='/' className='link'>
+            <img src={require('./../../assets/logo.png')} className='usersNavbar__header__logoContainer__logo' alt='logo' />
+            <h1 className='usersNavbar__header__logoContainer__title'>La Concordia</h1>
+          </Link>
         </div>
 
         <div className='usersNavbar__header__openIcon' onClick={handleClick}>

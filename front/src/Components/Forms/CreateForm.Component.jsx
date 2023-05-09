@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 
 // Composant CreateForm, utilisé sur les pages "EventsCreate", "AlbumsCreate", "NewsCreate" et "SheetsCreate".
 
-export default function CreateForm() {
+export default function CreateForm({ setFile }) {
 
     // Utilisation du hook useLocation afin de déterminer l'url actuel
     const location = useLocation();
@@ -17,8 +17,12 @@ export default function CreateForm() {
     let createFormContent;
 
     // Création de la fonction "handleMediasChange" qui permet l'affichage sur la page de la photo de couverture ou la partition choisi par l'utilisateur grace au bouton "Ajouter".
-    const handleMediasChange = (event) => {
+    const handleMediasChange = (event, type) => {
+        console.log(event.target)
         setMedias(URL.createObjectURL(event.target.files[0]));
+        if (type === "partition") {
+            setFile(URL.createObjectURL(event.target.files[0]));
+        }
     }
 
 
@@ -86,7 +90,7 @@ export default function CreateForm() {
                     <label htmlFor="title" className='pagePattern__subheading'>{title}</label>
                     <input type="text" name='title' placeholder='Ajouter le titre' />
                     <label htmlFor="download" className='button'>Importer la partition</label>
-                    <input type="file" name="download" id='download' className='downloadInput' onChange={handleMediasChange} />
+                    <input type="file" name="download" id='download' className='downloadInput' onChange={(event) => handleMediasChange(event, "partition")} />
                     {medias && <img src={medias} alt="Uploaded file" width={'60%'} />}
                     <button className='button'>{save}</button>
                 </div>

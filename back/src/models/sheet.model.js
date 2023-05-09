@@ -18,6 +18,10 @@ Sheet.init({
         type: DataTypes.STRING,
         allowNull: false
       },
+      artist: {
+        type: DataTypes.STRING,
+        allowNull: false
+      },
       authorId: {
         type: DataTypes.INTEGER,
       },

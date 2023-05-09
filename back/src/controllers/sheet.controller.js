@@ -2,7 +2,26 @@ const Sheet = require("../models/sheet.model");
 
 exports.Create = async (req, res) => {
     try {
+        const { title, sheetFile, artist, authorId} = req.body;
 
+        if (!title || !sheetFile || !artist || !authorId) {
+            return res.status(400).json({
+                error: true,
+                message: "Requête invalide."
+            });
+        }
+
+        await new Sheet({
+            title: title,
+            sheetFile: sheetFile,
+            artist: artist,
+            authorId: authorId
+        }).save();
+
+        return res.status(201).json({
+            error: false,
+            message: "La partition a bien été créée."
+        });
     } catch (error){
         console.log("error");
         return res.status(500).json({
@@ -16,16 +35,10 @@ exports.GetAll = async (req, res) => {
     try {        
         const sheets = await Sheet.findAll();
 
-        const formattedSheet = [];
-
-        sheets.forEach((sheet) => {
-            formattedSheet.push({ title: sheet.title, sheetFile: sheet.sheetFile, authorId: sheet.authorId })
-        });
-
         return res.status(200).json({
             error: false,
             message: "Les partitions ont bien été récupérées",
-            data: formattedSheet
+            data: sheets
         })
     } catch (error){
         console.log("error");

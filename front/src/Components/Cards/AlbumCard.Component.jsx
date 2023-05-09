@@ -28,8 +28,8 @@ export default function AlbumCard(props) {
         return (
             <div className='albumCard'>
                 <Link to={`/albums/${id}`} className='link'>
-                    <img src={thumbnail} alt="photo" className='albumCard__img' />
-                    <h3 className='albumCard__title'>{name}</h3>
+                        <img src={thumbnail} alt="photo" className='albumCard__img' />
+                        <h3 className='albumCard__title'>{name}</h3>
                 </Link>
             </div>
         )

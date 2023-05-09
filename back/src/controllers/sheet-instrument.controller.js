@@ -1,7 +1,38 @@
 const SheetInstrument = require("../models/sheet-instrument.model");
+const Sheet = require("../models/sheet.model");
+const Instrument = require("../models/instrument.model");
 
 exports.Create = async (req, res) => {
     try {
+        const { sheetId, instrumentId } = req.body;
+
+        if (!sheetId || isNaN(sheetId) || !instrumentId || isNaN(instrumentId)) {
+            return res.status(400).json({
+                error: true,
+                message: "Requête invalide."
+            });
+        }
+
+        const isSheetExist = await Sheet.findOne({ where: { id: sheetId } });
+
+        const isInstrumentExist = await Instrument.findOne({ where: { id: instrumentId } });
+
+        if (!isSheetExist || !isInstrumentExist) {
+            return res.status(404).json({
+                error: true,
+                message: !isSheetExist && !isInstrumentExist ? "La partition et l'instrument sont introuvables." : !isSheetExist ? "La partition est introuvable." : "L'instrument est introuvable."
+            });
+        }
+
+        await new SheetInstrument({
+            sheetId: sheetId,
+            instrumentId: instrumentId
+        }).save();
+
+        return res.status(201).json({
+            error: false,
+            message: "La relation entre partition et instrument a bien été créée."
+        });
 
     } catch (error){
         console.log("error");
@@ -16,16 +47,10 @@ exports.GetAll = async (req, res) => {
     try {
         const sheetInstruments = await SheetInstrument.findAll();
 
-        const formattedSheetInstrument = [];
-
-        sheetInstruments.forEach((sheetInstrument) => {
-            formattedSheetInstrument.push({ sheetId: sheetInstrument.sheetId, instrumentId: sheetInstrument.instrumentId })
-        });
-
         return res.status(200).json({
             error: false,
             message: "Les relations entre instruments et partitions ont bien été récupérées",
-            data: formattedSheetInstrument
+            data: sheetInstruments
         })
     } catch (error){
         console.log("error");

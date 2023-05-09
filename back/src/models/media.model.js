@@ -10,11 +10,7 @@ Media.init({
         autoIncrement: true,
         allowNull: false
       },
-      title: {
-        type: DataTypes.STRING,
-        allowNull: false
-      },
-      mediasFile: {
+      file: {
         type: DataTypes.STRING,
         allowNull: false
       },

@@ -14,6 +14,10 @@ Album.init({
         type: DataTypes.STRING,
         allowNull: false
       },
+      thumbnail: {
+        type: DataTypes.BLOB('long'),
+        allowNull: false
+      },
 }, {
     sequelize,
     tableName: 'albums',

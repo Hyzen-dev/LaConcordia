@@ -31,6 +31,15 @@ User.init({
         type: DataTypes.TEXT('long'),
         allowNull: false
       },
+      notification: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false
+      },
+      deletionDate: {
+        type: DataTypes.DATE,
+        allowNull: true
+      },
       isActive: {
         type: DataTypes.BOOLEAN,
         allowNull: false,

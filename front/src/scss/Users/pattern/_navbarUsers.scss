@@ -72,6 +72,7 @@
             &__title {
                 font-size: 22px;
                 font-family: 'Patua One';
+                color: white;
             }
         }
 
@@ -89,7 +90,7 @@
 .disconnected {
     text-align: center;
     font-style: italic;
-    margin-top: 40px;
+    margin-top: 30px;
     
 }
 
@@ -105,7 +106,7 @@
 
         &__header {
             background-color: $main-color-darkGrey;
-            height: 150px;
+            height: 73px;
             align-items: start;
 
             &__logoContainer {
@@ -117,6 +118,11 @@
                 &__logo {
                     height: 30px;
                 }
+            }
+
+            &__logoContainer .link {
+                display: flex;
+                gap: 10px;
             }
 
             &__openIcon {

@@ -2,19 +2,19 @@ const photos = [
     {
         id: 1,
         title: "Photo 1",
-        picture: 'https://mdbootstrap.com/img/Photos/Horizontal/Nature/full%20page/img(28).webp',
+        picture: 'https://mdbootstrap.com/img/Photos/Horizontal/Nature/full%20page/img(7).webp',
         albumId: 1
     },
     {
         id: 2,
         title: "Photo 2",
-        picture: 'https://mdbootstrap.com/img/Photos/Horizontal/Nature/full%20page/img(29).webp',
+        picture: 'https://mdbootstrap.com/img/Photos/Horizontal/Nature/full%20page/img(8).webp',
         albumId: 1
     },
     {
         id: 3,
         title: "Photo 3",
-        picture: 'https://mdbootstrap.com/img/Photos/Horizontal/Nature/full%20page/img(19).webp',
+        picture: 'https://mdbootstrap.com/img/Photos/Horizontal/Nature/full%20page/img(9).webp',
         albumId: 1
     },
     {

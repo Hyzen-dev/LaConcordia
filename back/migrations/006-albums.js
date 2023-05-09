@@ -14,6 +14,10 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
+      thumbnail: {
+        type: Sequelize.TEXT('long'),
+        allowNull: false
+      },
       createdAt: {
         type: Sequelize.DATE,
         allowNull: false

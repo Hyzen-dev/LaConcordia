@@ -31,6 +31,17 @@ const sendMail = async (type, args, email) => {
                 html: `<b>Your account verification code is : ${code}.</b>`, // html body
             });
 
+        } else if (type === "contact") {
+            const { firstname, lastname, mail, phone, subject, content } = args;
+
+            // send mail with defined transport object
+            info = await transporter.sendMail({
+                from: `"MyAPI 👻" <noreply@laconcordia.fr>`, // sender address
+                to: `${email}`, // list of receivers
+                subject: "Contact ✔", // Subject line
+                text: `Nous avons bien reçu votre demande, nous vous répondrons dans les plus brefs délais - ${firstname} ${lastname} (${mail}) : ${content}.`, // plain text body
+                html: `<b>Nous avons bien reçu votre demande, nous vous répondrons dans les plus brefs délais - ${firstname} ${lastname} (${mail}) : ${content}.</b>`, // html body
+            });
         }
 
         console.log("Message sent: %s", info.messageId);

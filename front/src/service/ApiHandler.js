@@ -40,7 +40,7 @@ class ApiHandler {
         const apiUrl = !id ? `${this.baseUrl}${endpoint}` : `${this.baseUrl}${endpoint}/${id}`
 
         return axios(apiUrl, reqOptions)
-        .then((res) => res)
+        .then((res) => res.data)
         .catch((error) => error?.response?.data || { error: true, message: "une erreur est survenue" })
     }
 

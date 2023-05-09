@@ -2,7 +2,31 @@ const UserStatus = require("../models/user-status.model");
 
 exports.Create = async (req, res) => {
     try {
+        const { userId, statusId } = req.body;
 
+        if (!userId || !statusId || isNaN(userId) || isNaN(statusId)) {
+            return res.status(400).json({
+                error: true,
+                message: "Requête invalide."
+            });
+        }
+
+        const isStatusExist = await Status.findOne({ where: { id: statusId } });
+        const isUserExist = await User.findOne({ where: { id: userId } });
+
+        if (!isStatusExist || !isUserExist) {
+            return res.status(404).json({
+                error: true,
+                message: !isStatusExist && !isUserExist ? "L'utilisateur et le status sont introuvables." : !isStatusExist ? "Le status est introuvable." : "L'utilisateur est introuvable."
+            });
+        }
+
+        await new UserStatus({ userId: userId, statusId: statusId }).save();
+
+        return res.status(201).json({
+            error: false,
+            message: "La relation entre utilisateur et status a bien été créée."
+        });
     } catch (error){
         console.log("error");
         return res.status(500).json({

@@ -2,7 +2,28 @@ const News = require("../models/news.model");
 
 exports.Create = async (req, res) => {
     try {
+        const { title, description, content, authorId } = req.body;
+        const thumbnail = req.file.filename;
 
+        if (!title || !thumbnail || !description || !content || !authorId) {
+            return res.status(400).json({
+                error: true,
+                message: "Requête invalide."
+            });
+        }
+
+        await new News({
+            title: title,
+            thumbnail: thumbnail,
+            description: description,
+            content: content,
+            authorId: authorId
+        }).save();
+        
+        return res.status(201).json({
+            error: false,
+            message: "L'actualité a bien été créée."
+        });
     } catch (error){
         console.log("error");
         return res.status(500).json({
@@ -16,15 +37,10 @@ exports.GetAll = async (req, res) => {
     try {
         const news = await News.findAll();
 
-        const formattedNews = [];
-
-        news.forEach((newsData) => {
-            formattedNews.push({ title: newsData.title, thumbnail: newsData.thumbnail, content: newsData.content, authorId: newsData.authorId })
-        });
         return res.status(200).json({
             error: false,
             message: "Les actualités ont bien été récupérés",
-            data: formattedNews
+            data: news
         })
     } catch (error){
         console.log("error");

@@ -5,7 +5,8 @@ import SignInForm from '../../../Components/Forms/SignInForm.Component';
 
 // Page SignIn, qui permet l'affichage du formulaire "SignInForm" ainsi qu'un lien menant vers le formulaire d'inscritpion.
 
-export default function SignIn() {
+export default function SignIn(props) {
+  const { fetchProfile } = props;
   return (
     <div>
       <Helmet><title>La Concordia - Connexion</title></Helmet>
@@ -18,7 +19,7 @@ export default function SignIn() {
         <div className='pagePattern'>
 
           {/* Affichage du composant SignInForm */}
-          <SignInForm />
+          <SignInForm fetchProfile={fetchProfile} />
           <p className='signIn__details'>Pas encore inscrit ? <Link to={'/inscription'} className='signIn__details__link'>Inscrivez-vous.</Link></p>
         </div>
       </div>

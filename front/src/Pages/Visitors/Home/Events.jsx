@@ -22,23 +22,27 @@ export default function Events() {
         <h2>Évènements à venir</h2>
       </div>
 
-      <div className="cardsContainer">
-        {/* Utilisation d'une expression JSX qui vérifie si "currentPageData" existe et contient au moins un élément avec une propriété "name". Si c'est le cas, la méthode map() est utilisée pour créer une nouvelle liste de Composants "EventCard". Si "currentPageData" est vide ou n'a pas de propriété "thumbnail", rien n'est renvoyé. */}
-        {currentPageData && currentPageData[0]?.thumbnail && currentPageData.length > 0 ? currentPageData.map((item, k) => (
-          <EventCard eventCard={item} key={k} />
-        )) : null}
-      </div>
+      <div className='cardPagePattern'>
 
-      <div className='pagination'>
 
-        {/* Intégration du module "SweetPagination", qui permet l'affichage de 6 cartes évènement par page */}
-        <Sweetpagination
-          currentPageData={setCurrentPageData}
-          dataPerPage={6}
-          getData={cards}
-          navigation={true}
-          getStyle={'pagination-style'}
-        />
+        <div className="cardsContainer">
+          {/* Utilisation d'une expression JSX qui vérifie si "currentPageData" existe et contient au moins un élément avec une propriété "name". Si c'est le cas, la méthode map() est utilisée pour créer une nouvelle liste de Composants "EventCard". Si "currentPageData" est vide ou n'a pas de propriété "thumbnail", rien n'est renvoyé. */}
+          {currentPageData && currentPageData[0]?.thumbnail && currentPageData.length > 0 ? currentPageData.map((item, k) => (
+            <EventCard eventCard={item} key={k} />
+          )) : null}
+        </div>
+
+        <div className='pagination'>
+
+          {/* Intégration du module "SweetPagination", qui permet l'affichage de 6 cartes évènement par page */}
+          <Sweetpagination
+            currentPageData={setCurrentPageData}
+            dataPerPage={6}
+            getData={cards}
+            navigation={true}
+            getStyle={'pagination-style'}
+          />
+        </div>
       </div>
     </div>
   )

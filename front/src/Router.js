@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation, Navigate } from "react-router-dom";
 import HeaderVisitors from './Components/Visitors/HeaderVisitors.Component';
 import UsersPage from './Components/Users/UsersPage';
 import { About, Events, EventsDetails, Albums, AlbumDetails, News, NewsDetails } from './Pages/Visitors/Home/exports';
@@ -11,38 +11,93 @@ import Footer from './Components/Footer/Footer.Component';
 import ApiHandler from './service/ApiHandler';
 import LoadingScreen from './Components/LoadingScreen.Component';
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 export const useApi = new ApiHandler(localStorage.getItem('accessToken') || null);
 
 export function Router() {
   return (
     <BrowserRouter>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover={false}
+        theme="light"
+      />
       <RouterContainer />
     </BrowserRouter>
   );
 }
 
+export const toastNotification = (type, message) => {
+  return toast[type](message, {
+    position: "top-right",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: false,
+    draggable: true,
+    progress: undefined,
+    theme: "colored",
+  });
+}
+
+export const updateToastNotification = (id, type, message) => {
+  return toast.update(id, { 
+    render: message,
+    type: type, 
+    isLoading: false,
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: false,
+    draggable: true,
+    progress: undefined,
+    theme: "colored",
+  })
+}
 
 function RouterContainer() {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState({});
+  const [isLogged, setIsLogged] = useState(Boolean(localStorage.getItem('accessToken')) || false);
 
-  let isLogged = false;
-  if (!isLogged) {
-    isLogged = localStorage.getItem('accessToken');
 
-    if (isLogged) isLogged = true;
-    else isLogged = false;
+  const logout = (reason) => {
+    if (reason === "logout") {
+      toastNotification('info', 'Vous êtes désormais déconnecté.')
+    } else {
+      toastNotification('error', 'Votre session a expirée, veuillez vous reconnecter.')
+    }
+    setUser({})
+    setIsLogged(false)
+    return localStorage.removeItem('accessToken')
+  }
+
+  const fetchProfile = async () => {
+    const response = await useApi.user.GetProfile()
+    if (response && !response.error) {
+      console.log(response.data.data)
+      setUser(response.data.data)
+      setIsLogged(true)
+      return true
+    } else if (response && response.error) {
+      logout()
+      return false
+    }
   }
 
   useEffect(() => {
-    const fetchProfile = async () => {
-      const response = await useApi.user.GetProfile()
-      return setUser(response.data.data)
-    }
-
     if (isLogged) {
       fetchProfile()
     }
-  }, [isLogged])
+  }, [])
 
 
   const location = useLocation();
@@ -55,7 +110,7 @@ function RouterContainer() {
   if (isLogged && !user) return <LoadingScreen />;
   return (
     <>
-      {isPanelRoute ? <UsersPage user={user} /> : <HeaderVisitors user={user} />}
+      {isPanelRoute ? <UsersPage logout={logout} isLogged={isLogged} setIsLogged={setIsLogged} user={user} /> : <HeaderVisitors isLogged={isLogged} />}
       <Routes>
         <Route path='/'>
           <Route index element={<News />} />
@@ -89,15 +144,17 @@ function RouterContainer() {
             <Route index element={<Contact />} />
           </Route>
 
-          {!isLogged ?
+          {!isLogged || user?.length <= 0 ?
             <>
               <Route path='inscription'>
                 <Route index element={<SignUp />} />
               </Route>
 
               <Route path='connexion'>
-                <Route index element={<SignIn />} />
+                <Route index element={<SignIn fetchProfile={fetchProfile} />} />
               </Route>
+
+              <Route path='*' element={<Navigate to='/' replace />} />
             </>
             :
             <Route path='espace-membre'>

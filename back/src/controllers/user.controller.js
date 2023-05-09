@@ -16,7 +16,7 @@ exports.SignUp = async (req, res) => {
         const { firstName, lastName, email, password } = req.body;
         let { phoneNumber } = req.body;
 
-        if (!firstName || !lastName || !email || !password) {
+        if (!firstName || !lastName || !email || !password ) {
             return res.status(400).json({
                 error: true,
                 message: "Requête invalide."
@@ -258,7 +258,8 @@ exports.SignIn = async (req, res) => {
 
         // Générer un token
         // Il va permettre de vérifier l'identité de l'utilisateur lors de ses requêtes vers l'API
-        const token = jwt.sign({ id: user.id }, "LKKJSDFEFKONERLNERLNK", { expiresIn: "1h" });
+        // ExpiresIn : 30 seconds
+        const token = jwt.sign({ id: user.id }, "LKKJSDFEFKONERLNERLNK", { expiresIn: '1h' });
 
         const userData = {
             accessToken: token,

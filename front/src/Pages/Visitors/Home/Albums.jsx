@@ -23,24 +23,26 @@ export default function Medias() {
                 <h2>Galerie médias</h2>
             </div>
 
-            <div className="cardsContainer">
+            <div className='cardPagePattern'>
 
-                {/* Utilisation d'une expression JSX qui vérifie si "currentPageData" existe et contient au moins un élément avec une propriété "name". Si c'est le cas, la méthode map() est utilisée pour créer une nouvelle liste de Composant AlbumCard. Si "currentPageData" est vide ou n'a pas de propriété "name", rien n'est renvoyé. */}
-                {currentPageData && currentPageData[0]?.name && currentPageData.length > 0 ? currentPageData.map((item, k) => {
-                    return <AlbumCard albumCard={item} key={k} />
-                }) : null}
-            </div>
+                <div className='albumCardContainer'>
+                    {/* Utilisation d'une expression JSX qui vérifie si "currentPageData" existe et contient au moins un élément avec une propriété "name". Si c'est le cas, la méthode map() est utilisée pour créer une nouvelle liste de Composant AlbumCard. Si "currentPageData" est vide ou n'a pas de propriété "name", rien n'est renvoyé. */}
+                    {currentPageData && currentPageData[0]?.name && currentPageData.length > 0 ? currentPageData.map((item, k) => {
+                        return <AlbumCard albumCard={item} key={k} />
+                    }) : null}
+                </div>
 
-            <div className='pagination'>
+                <div className='pagination'>
 
-                {/* Intégration du module "SweetPagination", qui permet l'affichage de 6 cartes albums par page */}
-                <Sweetpagination
-                    currentPageData={setCurrentPageData}
-                    dataPerPage={6}
-                    getData={cards}
-                    navigation={true}
-                    getStyle={'pagination-style'}
-                />
+                    {/* Intégration du module "SweetPagination", qui permet l'affichage de 6 cartes albums par page */}
+                    <Sweetpagination
+                        currentPageData={setCurrentPageData}
+                        dataPerPage={6}
+                        getData={cards}
+                        navigation={true}
+                        getStyle={'pagination-style'}
+                    />
+                </div>
             </div >
         </div>
     )

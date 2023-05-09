@@ -2,8 +2,34 @@ const Role = require("../models/role.model");
 
 exports.Create = async (req, res) => {
     try {
+        const { name, label } = req.body;
 
-    } catch (error){
+        if (!name || !label) {
+            return res.status(400).json({
+                error: true,
+                message: "Requête invalide."
+            });
+        }
+
+        const role = await Role.findOne({ where: { name: name } });
+
+        if (role) {
+            return res.status(409).json({
+                error: true,
+                message: "Le rôle existe déjà."
+            });
+        }
+
+        await new Role({
+            name: name,
+            label: label
+        }).save();
+
+        return res.status(201).json({
+            error: false,
+            message: "Le rôle a bien été créé."
+        });
+    } catch (error) {
         console.log("error");
         return res.status(500).json({
             error: true,
@@ -16,18 +42,12 @@ exports.GetAll = async (req, res) => {
     try {
         const roles = await Role.findAll();
 
-        const formattedRoles = [];
-
-        roles.forEach((role) => {
-            formattedRoles.push({ name: role.name, label: role.label })
-        });
-
         return res.status(200).json({
             error: false,
             message: "Les rôles ont bien été récupérés",
-            data: formattedRoles
+            data: roles
         })
-    } catch (error){
+    } catch (error) {
         console.log("error");
         return res.status(500).json({
             error: true,
@@ -61,7 +81,7 @@ exports.GetById = async (req, res) => {
             message: "Le rôle a été récupéré.",
             post: role
         });
-    } catch (error){
+    } catch (error) {
         console.log("error");
         return res.status(500).json({
             error: true,
@@ -73,7 +93,7 @@ exports.GetById = async (req, res) => {
 exports.Update = async (req, res) => {
     try {
 
-    } catch (error){
+    } catch (error) {
         console.log("error");
         return res.status(500).json({
             error: true,
@@ -85,7 +105,7 @@ exports.Update = async (req, res) => {
 exports.Delete = async (req, res) => {
     try {
 
-    } catch (error){
+    } catch (error) {
         console.log("error");
         return res.status(500).json({
             error: true,

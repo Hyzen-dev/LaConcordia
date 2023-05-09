@@ -18,6 +18,10 @@ News.init({
         type: DataTypes.STRING,
         allowNull: false
       },
+      description: {
+        type: DataTypes.TEXT('long'),
+        allowNull: false
+      },
       content: {
         type: DataTypes.TEXT('long'),
         allowNull: false

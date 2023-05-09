@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const newsController = require("../controllers/news.controller");
+const upload = require("../utils/multer.utils");
 
-
-router.post('/create', newsController.Create);
+router.post('/create', upload.single('thumbnail'), newsController.Create);
 
 router.get('/', newsController.GetAll);
 

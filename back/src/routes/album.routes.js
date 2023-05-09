@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const albumController = require("../controllers/album.controller");
+const upload = require("../utils/multer.utils");
 
-
-router.post('/create', albumController.Create);
+router.post('/create', upload.single("thumbnail"), albumController.Create);
 
 router.get('/', albumController.GetAll);
 

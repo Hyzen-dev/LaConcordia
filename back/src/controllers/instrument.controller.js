@@ -1,8 +1,36 @@
 const Instrument = require("../models/instrument.model");
+const Status = require("../models/status.model");
 
 exports.Create = async (req, res) => {
     try {
+        const { name, label, statusId } = req.body;
 
+        if (!name || !label || !statusId) {
+            return res.status(400).json({
+                error: true,
+                message: "Requête invalide."
+            });
+        }
+
+        const isStatusExist = await Status.findOne({ where: { id: statusId } });
+
+        if (!isStatusExist) {
+            return res.status(404).json({
+                error: true,
+                message: "Le statut est introuvable."
+            });
+        }
+
+        await new Instrument({
+            name: name,
+            label: label,
+            statusId: statusId
+        }).save();
+
+        return res.status(201).json({
+            error: false,
+            message: "L'instrument a bien été créé."
+        });
     } catch (error){
         console.log("error");
         return res.status(500).json({
@@ -16,15 +44,10 @@ exports.GetAll = async (req, res) => {
     try {
         const instruments = await Instrument.findAll();
 
-        const formattedInstruments = [];
-
-        instruments.forEach((instrument) => {
-            formattedInstruments.push({ name: instrument.name, label: instrument.label, statusId: instrument.statusId })
-        });
         return res.status(200).json({
             error: false,
             message: "Les instruments ont bien été récupérés",
-            data: formattedInstruments
+            data: instruments
         })
     } catch (error){
         console.log("error");

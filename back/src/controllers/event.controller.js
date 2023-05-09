@@ -2,7 +2,30 @@ const Event = require("../models/event.model");
 
 exports.Create = async (req, res) => {
     try {
+        const { title, address, content, eventDate, authorId } = req.body;
+        const thumbnail = req.file.filename;
 
+        if (!title || !thumbnail || !address || !content || !eventDate || !authorId) {
+            return res.status(400).json({
+                error: true,
+                message: "Requête invalide."
+            });
+        }
+
+        // Join the user name from the authorId from user table
+        await new Event({
+            title: title,
+            thumbnail: thumbnail,
+            address: address,
+            content: content,
+            eventDate: eventDate,
+            authorId: authorId
+        }).save();
+
+        return res.status(201).json({
+            error: false,
+            message: "L'évènement a bien été créé."
+        });
     } catch (error){
         console.log("error");
         return res.status(500).json({
@@ -16,15 +39,10 @@ exports.GetAll = async (req, res) => {
     try {
         const events = await Event.findAll();
 
-        const formattedEvent = [];
-
-        events.forEach((event) => {
-            formattedEvent.push({ title: event.title, content: event.content, thumbnail: event.thumbnail, authorId: event.authorId, eventDate: event.eventDate })
-        });
         return res.status(200).json({
             error: false,
             message: "Les évènements ont bien été récupérés",
-            data: formattedEvent
+            data: events
         })
     } catch (error){
         console.log("error");

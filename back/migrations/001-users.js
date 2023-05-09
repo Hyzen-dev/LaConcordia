@@ -31,6 +31,15 @@ module.exports = {
         type: Sequelize.TEXT('long'),
         allowNull: false
       },
+      notification: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+        defaultValue: false
+      },
+      deletionDate: {
+        type: Sequelize.DATE,
+        allowNull: true
+      },
       isActive: {
         type: Sequelize.BOOLEAN,
         allowNull: false,

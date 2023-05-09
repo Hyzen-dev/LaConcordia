@@ -2,16 +2,17 @@ import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
 export default function Navbar(props) {
-  const { user } = props;
-  let isLogged = false;
-  if (localStorage.getItem('accessToken') && user) {
-    isLogged = true;
-  }
+  const { isLogged } = props;
+  
   const [click, setClick] = useState(false);
-  const handleClick = () => setClick(!click);
-
+  const handleClick = () => {
+    setClick(!click);
+    setInfoClick(false)
+  }
+  
   const [infoClick, setInfoClick] = useState(false);
   const infoHandleClick = () => setInfoClick(!infoClick);
+  
 
   return (
     <nav className={click ? "navbar active" : "navbar"}>
@@ -30,34 +31,34 @@ export default function Navbar(props) {
       <ul className={click ? "navbar__list active" : "navbar__list"}>
 
         <li className='navbar__list__title'>
-          <NavLink to={'/'} className='navbar__list__title__link link' activeclassname="active" >Accueil</NavLink>
+          <NavLink to={'/'} className='navbar__list__title__link link' activeclassname="active" onClick={handleClick}>Accueil</NavLink>
         </li>
 
 
         <li className='navbar__list__title'>
           <div className='navbar__list__title__dropdown'>
-          <div className='navbar__list__title__info' onClick={infoHandleClick}>
-            <p>Informations</p>
-          </div>
+            <div className='navbar__list__title__info' onClick={infoHandleClick}>
+              <p>Informations</p>
+            </div>
 
-          <ul className={infoClick ? "navbar__list__title__sublist active" : "navbar__list__title__sublist"}>
+            <ul className={infoClick ? "navbar__list__title__sublist active" : "navbar__list__title__sublist"}>
 
-            <li className='navbar__list__title__sublist__subheading'>
-              <NavLink to={'/informations/harmonie-clique'} className='navbar__list__title__link link' activeclassname="active">
-                Harmonie & Clique
-              </NavLink>
-            </li>
-            <li className='navbar__list__title__sublist__subheading'>
-              <NavLink to={'/informations/ecole-de-musique'} className='navbar__list__title__link link' activeclassname="active">
-                École de musique
-              </NavLink>
-            </li>
-            <li className='navbar__list__title__sublist__subheading'>
-              <NavLink to={'/informations/commission'} className='navbar__list__title__link link' activeclassname="active">
-                Commission
-              </NavLink>
-            </li>
-          </ul>
+              <li className='navbar__list__title__sublist__subheading'>
+                <NavLink to={'/informations/harmonie-clique'} className='navbar__list__title__link link' activeclassname="active" onClick={handleClick}>
+                  Harmonie & Clique
+                </NavLink>
+              </li>
+              <li className='navbar__list__title__sublist__subheading'>
+                <NavLink to={'/informations/ecole-de-musique'} className='navbar__list__title__link link' activeclassname="active" onClick={handleClick}>
+                  École de musique
+                </NavLink>
+              </li>
+              <li className='navbar__list__title__sublist__subheading'>
+                <NavLink to={'/informations/commission'} className='navbar__list__title__link link' activeclassname="active" onClick={handleClick}>
+                  Commission
+                </NavLink>
+              </li>
+            </ul>
           </div>
         </li>
 

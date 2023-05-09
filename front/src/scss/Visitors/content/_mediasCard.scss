@@ -1,20 +1,18 @@
-.mediasContainer {
+.mediasCardContainer {
+    width: 80%;
+    margin: auto;
+}
+
+.mediasCard {
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    margin-bottom: 20px;
-    flex-wrap: wrap;
+    align-items: center;
 
-    &__card {
-        overflow: hidden;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        position: relative;
-
-        &__photo {
-            width: 200px;
-        }
+    &__photo {
+        width: 100%;
     }
 }
 
@@ -22,12 +20,22 @@
     display: none;
 
     &__button {
-        width: 50%;
-        font-size: 10px;
-        padding: 5px;
+        padding: 10px 20px;
         margin: 0px;
         cursor: pointer;
+        font-size: 16px;
     }
+}
+
+.mediasActionsContainer.active {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    position: absolute;
+    background-color: rgba(87, 156, 56, 0.75);
+    width: 100%;
+    height: 100%;
 }
 
 .firstButton {
@@ -38,48 +46,43 @@
     background-color: $main-color-grey;
 }
 
-.mediasActionsContainer.active {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-    padding: 10px;
-    position: absolute;
-    background-color: rgba(87, 156, 56, 0.75);
-    width: 200px;
-    height: 100%;
-}
-
-
-
 
 @media screen and (min-width: 480px) {
 
-    .mediasContainer {
-        flex-direction: row;
-        width: 80%;
+    .mediasCardContainer {
+        width: 85%;
         margin: auto;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
         margin-bottom: 50px;
+    }
 
-        &__card {
-            width: 30%;
-            margin: auto;
+    .mediasCard {
+        margin: auto;
+    }
 
-            &__photo {
-                height: 200px;
-                width: 100%;
-            }
+    .mediasActionsContainer {
+
+        &__button {
+            padding: 5px 10px;
+            font-size: 15px;
         }
     }
+}
 
 
-    .mediasActionsContainer__button {
-        font-size: 16px;
+@media screen and (min-width: 1280px) {
+
+    .mediasCardContainer {
+        grid-template-columns: repeat(3, 1fr);
     }
+    
+    .mediasActionsContainer {
 
-
-    .mediasActionsContainer.active {
-        width: 100%;
-        padding: 40px 20px;
+        &__button {
+            padding: 10px 20px;
+            font-size: 20px;
+        }
     }
 }

@@ -8,6 +8,13 @@
   font-family: 'Roboto';
 }
 
+#root {
+  display: flex;
+  flex-direction: column;
+  // justify-content: space-between;
+  min-height: 100vh;
+}
+
 .separator {
   border-top: 1px solid $separator;
   margin: 15px 0px;
@@ -47,9 +54,19 @@ li {
   }
 }
 
+
 .loadingScreen {
-  width: 50px;
-  height: 100vh;
-  margin: auto;
-  padding-top: 200px;
+  width: 64px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@media screen and (min-width: 480px) {
+
+
+  .loadingScreen {
+    left: 60%;
+  }
 }

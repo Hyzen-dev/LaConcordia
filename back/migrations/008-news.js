@@ -18,6 +18,10 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
+      description: {
+        type: Sequelize.TEXT('long'),
+        allowNull: false
+      },
       content: {
         type: Sequelize.TEXT('long'),
         allowNull: false

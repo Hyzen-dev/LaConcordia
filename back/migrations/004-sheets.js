@@ -18,6 +18,10 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
+      artist: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
       authorId: {
         type: Sequelize.INTEGER,
         references: {
