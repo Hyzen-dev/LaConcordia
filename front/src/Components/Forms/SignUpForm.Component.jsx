@@ -75,11 +75,13 @@ export default function SignUpForm() {
             return;
         }
 
-        const response = await useApi.user.SignUp(userData);
         const toastId = toastNotification('loading', 'Veuillez patienter...');
-        
+        const response = await useApi.user.SignUp(userData);
+        if (!response) {
+            return updateToastNotification(toastId, 'error', 'Une erreur est survenue, veuillez réessayer plus tard.');
+        }
         if (response.error) {
-            console.log('Une erreur est survenue');
+            // console.log('Une erreur est survenue');
             if (response.message) {
                 updateToastNotification(toastId, 'error', 'Une erreur est survenue : ' + response.message + '.')
             } else {

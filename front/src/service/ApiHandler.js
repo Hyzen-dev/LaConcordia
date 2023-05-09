@@ -18,7 +18,6 @@ class ApiHandler {
             data: data || {},
             headers: {}
         }
-        console.log(reqOptions)
         if (accessToken) {
             reqOptions.headers.Authorization = `Bearer ${accessToken}`
         }
@@ -44,6 +43,24 @@ class ApiHandler {
         .catch((error) => error?.response?.data || { error: true, message: "une erreur est survenue" })
     }
 
+    #PATCH_REQUEST = (endpoint, data, accessToken) => {
+        if (!endpoint) {
+            return {error: true, message: "aucun endpoint a été défini"}
+        }
+        const reqOptions = {
+            method: "PATCH",
+            data: data || {},
+            headers: {}
+        }
+        if (accessToken) {
+            reqOptions.headers.Authorization = `Bearer ${accessToken}`
+        }
+
+        return axios(`${this.baseUrl}${endpoint}`, reqOptions)
+        .then((res) => res)
+        .catch((error) => error?.response?.data || { error: true, message: "une erreur est survenue" })
+    }
+
 
     // User methods
     user = {
@@ -56,6 +73,12 @@ class ApiHandler {
         },
         GetProfile: async () => {
             return await this.#POST_REQUEST("/user/profile", {}, this.accessToken)
+        },
+        GetAll: async () => {
+            return await this.#GET_REQUEST("/user")
+        },
+        ArchiveUser: async (data) => {
+            return await this.#PATCH_REQUEST("/user/archive", data, this.accessToken)
         }
     }
 
@@ -77,6 +100,13 @@ class ApiHandler {
     instruments = {
         GetAll: async () => {
             return await this.#GET_REQUEST("/instrument")
+        }
+    }
+
+    // Messages methods
+    message = {
+        GetAll: async () => {
+            return await this.#GET_REQUEST("/message")
         }
     }
 

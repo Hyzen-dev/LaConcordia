@@ -28,6 +28,8 @@ export default function AlbumDetails() {
         setCards(photos)
     }, [])
 
+    const [selectedCard, setSelectedCard] = useState(null);
+
     return (
         <div>
             <Helmet><title>La Concordia - Galerie médias</title></Helmet>
@@ -41,8 +43,8 @@ export default function AlbumDetails() {
                 <div className='mediasCardContainer'>
                     {/* Utilisation d'une expression JSX qui vérifie si currentPageData existe et contient au moins un élément avec une propriété name. Si c'est le cas, la méthode map() est utilisée pour créer une nouvelle liste de Composants MediasCard. Si currentPageData est vide ou n'a pas de propriété name, rien n'est renvoyé. */}
                     {currentPageData && currentPageData[0]?.title && currentPageData.length > 0 ? currentPageData.map((item, k) => (
-                        console.log(item),
-                        <MediasCard mediasCard={item} key={k} album={album.name}/>
+                        // console.log(item),
+                        <MediasCard selectedCard={selectedCard} setSelectedCard={setSelectedCard} mediasCard={item} key={k} album={album.name}/>
                     )) : null}
                 </div>
 

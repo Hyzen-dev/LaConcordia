@@ -84,6 +84,7 @@ function RouterContainer() {
     const response = await useApi.user.GetProfile()
     if (response && !response.error) {
       console.log(response.data.data)
+      if (response.data.data.deletionDate) return logout();
       setUser(response.data.data)
       setIsLogged(true)
       return true

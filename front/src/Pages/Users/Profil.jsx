@@ -92,7 +92,7 @@ export default function Profil(props) {
                     <form onSubmit={handleSubmit} action="#" className='modal__form'>
                       <div>
                         <label htmlFor="password">Mot de passe actuel</label>
-                        <input type="password" name="password" id="password" />
+                        <input type="password" name="password" id="password" placeholder='*********' />
                       </div>
                       <div>
                         <label htmlFor="password">Nouveau mot de passe</label>
@@ -112,9 +112,9 @@ export default function Profil(props) {
                 <h3 className='pagePattern__subheading'>Accès réglementé</h3>
                 <div className='separator'></div>
                 <div className='profil__box'>
-                  <SelectComponent options={roles} userData={user.userRoles} />
-                  <SelectComponent options={status} userData={user.userStatus} />
-                  <SelectComponent options={instruments} userData={user.userInstruments} />
+                  <SelectComponent readonly={true} options={user.userRoles} userData={user.userRoles} />
+                  <SelectComponent readonly={true} options={status} userData={user.userStatus} />
+                  <SelectComponent readonly={true} options={instruments} userData={user.userInstruments} />
                 </div>
               </div>
 

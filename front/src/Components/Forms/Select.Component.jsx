@@ -5,9 +5,9 @@ import makeAnimated from 'react-select/animated';
 const animatedComponents = makeAnimated();
 
 export default function SelectComponent(props) {
-  const { options, userData } = props;
+  const { readonly, options, userData } = props;
 
-
+  console.log(readonly)
 
   const formattedOptions = [];
   const defaultValues = [];
@@ -32,6 +32,7 @@ export default function SelectComponent(props) {
 
   return (
     <Select
+      isDisabled={readonly}
       closeMenuOnSelect={false}
       components={animatedComponents}
       defaultValue={defaultValues || []}

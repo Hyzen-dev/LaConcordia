@@ -47,7 +47,7 @@ export default function CreateForm({ setFile }) {
 
     } else if (location.pathname.startsWith('/espace-membre/actualite')) {
         title = "Titre de l'actualité";
-        save = "Engistrer l'actualité";
+        save = "Enregistrer l'actualité";
 
         return (
             createFormContent = (
@@ -82,7 +82,7 @@ export default function CreateForm({ setFile }) {
 
     } else if (location.pathname.startsWith('/espace-membre/partitions')) {
         title = "Titre de la partition";
-        save = "Engistrer la partition";
+        save = "Enregistrer la partition";
 
         return (
             createFormContent = (

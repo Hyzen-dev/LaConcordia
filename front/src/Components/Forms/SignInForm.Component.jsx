@@ -39,23 +39,30 @@ export default function SignInForm(props) {
       return;
     }
 
+    const toastId = toastNotification('loading', 'Connexion en cours...')
     const response = await useApi.user.SignIn(userData);
 
-    const toastId = toastNotification('loading', 'Connexion en cours...')
 
     if (response && response.data && response.data.token) {
       updateToastNotification(toastId, 'success', 'Connexion réussie, redirection en cours...');
-      setEmail("");
-      setPassword("");
+
       localStorage.setItem("accessToken", response.data.token);
       useApi.updateAccessToken(response.data.token);
       const profileResponse = await fetchProfile();
 
       if (profileResponse) {
         navigate("/espace-membre");
-      }
+
+        setEmail("");
+        setPassword("");
+      } 
     } else {
-      updateToastNotification(toastId, 'error', 'E-mail ou mot de passe incorrect');
+      if (response.archived) {
+        updateToastNotification(toastId, 'error', response.message);
+        navigate("/contact#contactForm");
+      } else {
+        updateToastNotification(toastId, 'error', 'E-mail ou mot de passe incorrect');
+      }
       // alert("E-mail ou mot de passe incorrect")
     }
   }

@@ -249,6 +249,14 @@ exports.SignIn = async (req, res) => {
             });
         }
 
+        if (user.deletionDate) {
+            return res.status(401).json({
+                error: true,
+                archived: true,
+                message: "Votre compte est désactivé, veuillez contacter un administrateur."
+            })
+        }
+
         if (!user.isActive) {
             return res.status(401).json({
                 error: true,
@@ -279,6 +287,27 @@ exports.SignIn = async (req, res) => {
         });
     }
 }
+
+
+exports.GetAll = async (req, res) => {
+    try {
+        const users = await User.findAll();
+
+        return res.status(200).json({
+            error: false,
+            message: "Les utilisateurs ont bien été récupérés",
+            data: users
+        })
+    } catch (error) {
+        console.log("error");
+        return res.status(500).json({
+            error: true,
+            message: "Une erreur interne est survenue, veuillez réessayer plus tard."
+        })
+    }
+}
+
+
 
 exports.GetProfile = async (req, res) => {
     try {
@@ -359,6 +388,7 @@ exports.GetProfile = async (req, res) => {
                 lastName: user.lastName,
                 email: user.email,
                 phone: user.phone,
+                deletionDate: user.deletionDate,
                 userInstruments,
                 userStatus,
                 userRoles
@@ -366,6 +396,59 @@ exports.GetProfile = async (req, res) => {
         })
     } catch (error) {
         console.error(error)
+        return res.status(500).json({
+            error: true,
+            message: "Une erreur interne est survenue, veuillez réessayer plus tard."
+        });
+    }
+}
+
+
+exports.ArchiveUser = async (req, res) => {
+    try {
+        const { id, state } = req.body;
+
+        if (!id || isNaN(id)) {
+            return res.status(400).json({
+                error: true,
+                message: "Requête invalide."
+            });
+        }
+
+        const user = await User.findOne({ where: { id: id } });
+
+        if (!user) {
+            return res.status(404).json({
+                error: true,
+                message: "Utilisateur introuvable."
+            });
+        }
+
+        const userData = {
+            deletionDate: state ? new Date(Date.now()) : null,
+        }
+
+        if (state && user.deletionDate) {
+            return res.status(400).json({
+                error: true,
+                message: "L'utilisateur est déjà archivé."
+            });
+        } else if (!state && !user.deletionDate) {
+            return res.status(400).json({
+                error: true,
+                message: "L'utilisateur n'est pas archivé."
+            });
+        }
+
+
+        await user.update(userData);
+
+        return res.status(200).json({
+            error: false,
+            message: state ? "L'utilisateur a bien été archivé." : "L'utilisateur a bien été désarchivé."
+        });
+    } catch (error) {
+        console.error(error);
         return res.status(500).json({
             error: true,
             message: "Une erreur interne est survenue, veuillez réessayer plus tard."

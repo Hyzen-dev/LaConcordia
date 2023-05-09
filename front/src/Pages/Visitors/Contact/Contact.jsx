@@ -26,7 +26,7 @@ export default function Contact() {
           <p>+33 X.XX.XX.XX.XX</p>
         </div>
 
-        <div>
+        <div id='contactForm'>
           <h3 className='pagePattern__subheading'>Formulaire</h3>
           <div className='separator'></div>
 

@@ -39,6 +39,14 @@ td {
     gap: 5px;
 }
 
+.button--blue {
+    background-color: rgb(69, 69, 224);
+}
+
+.button--red {
+    background-color: rgb(252, 31, 31);
+}
+
 @media screen and (min-width: 480px) {
 
     table * {

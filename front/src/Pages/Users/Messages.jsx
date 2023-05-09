@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import Modal from '../../Components/Modal/Modal.Component';
 import ContactDatas from './../../data/Contact';
+import { useApi } from '../../Router';
 
 
 export default function Messages() {
@@ -13,6 +14,18 @@ export default function Messages() {
   const [messages, setMessages] = useState(ContactDatas);
 
   const [readMessages, setReadMessages] = useState([]);
+
+  const [allMessages, setAllMessages] = useState([])
+
+  const fetchAllMessages = async () => {
+    const response = await useApi.message.GetAll();
+    return setAllMessages(response.data);
+  }
+
+  useEffect(() => {
+    fetchAllMessages()
+  }, []);
+
 
   const handleModal = (data) => {
     setSelectedMessage(data);
@@ -26,6 +39,16 @@ export default function Messages() {
   }
 
 
+
+  const compareMessagesByDate = (a, b) => {
+    if (a.createdAt > b.createdAt) {
+      return -1; // a avant b
+    } else if (a.createdAt < b.createdAt) {
+      return 1; // b avant a
+    } else {
+      return 0; // aucun changement
+    }
+  }
 
   return (
     <div>
@@ -46,13 +69,23 @@ export default function Messages() {
             </thead>
 
             <tbody>
-              {messages.map((contact) => {
+              {allMessages.sort(compareMessagesByDate).map((contact) => {
                 const isRead = readMessages.includes(contact.id);
+
+                const formattedDate = `${new Date(contact.createdAt).toLocaleDateString('fr-FR', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric'
+                })} - ${new Date(contact.createdAt).toLocaleTimeString('fr-FR', {
+                  hour: '2-digit',
+                  minute: '2-digit'
+                })}`;
+
 
                 return (
                   <tr key={contact.id} style={{ fontStyle: isRead ? "normal" : "italic" }}>
+                    <td>{formattedDate}</td>
                     <td>{contact.subject}</td>
-                    <td>{contact.createdAt}</td>
                     <td className='table__buttonTd'>
                       {/* Lors du clic sur le bouton, la fonction "handleModal" est appelée avec l'objet "contact" en paramètre d'entrée */}
                       <button className='button' onClick={() => handleModal(contact)}><i className="fa-solid fa-eye"></i></button>
@@ -68,14 +101,21 @@ export default function Messages() {
             <Modal showModal={showModal} setShowModal={setShowModal}>
               <div className='modal'>
                 <div className='modal__header'>
-                  <h2 className='modal__header__title'>Message du {selectedMessage.createdAt} - {selectedMessage.subject}</h2>
+                  <h2 className='modal__header__title'>Message du {`${new Date(selectedMessage.createdAt).toLocaleDateString('fr-FR', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                  })} - ${new Date(selectedMessage.createdAt).toLocaleTimeString('fr-FR', {
+                    hour: '2-digit',
+                    minute: '2-digit'
+                  })}`} - {selectedMessage.subject}</h2>
                   <button className='modal__header__button' onClick={() => setShowModal(false)}><i className="fa-solid fa-square-xmark"></i></button>
                 </div>
 
                 <div className='separator'></div>
 
                 <div>
-                  <p>{selectedMessage.message}</p>
+                  <p>{selectedMessage.content}</p>
                 </div>
 
                 <h3>Contact</h3>
