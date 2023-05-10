@@ -60,7 +60,6 @@ export default function UserUpdate() {
                     </div>
 
                     <div className='profil pagePattern'>
-                        <form action="" method="post">
                             <div>
                                 <h3 className='pagePattern__subheading'>Informations personnelles</h3>
                                 <div className='separator'></div>
@@ -81,7 +80,6 @@ export default function UserUpdate() {
                                 <div className='separator'></div>
                                 <SelectComponent options={instruments} userData={user.userInstruments} />
                             </div>
-                        </form>
                     </div>
                 </>}
             </div>

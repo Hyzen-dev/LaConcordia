@@ -71,6 +71,7 @@ export default function Messages(props) {
           <div id='category'>
             <h2>Mes messages</h2>
           </div>
+          
           <div className='tablePagePattern'>
             <table className='table'>
               <thead>

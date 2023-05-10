@@ -37,6 +37,12 @@ export default function UsersUpdate() {
     }
   }
 
+  const [showArchivedUsers, setShowArchivedUsers] = useState(false);
+
+  const handleArchiveUsers = () => {
+    setShowArchivedUsers(!showArchivedUsers);
+  }
+
   return (
     <div>
       <Helmet><title>La Concordia - Gestion des utilisteurs</title></Helmet>
@@ -48,7 +54,6 @@ export default function UsersUpdate() {
           </div>
 
           <div className='tablePagePattern'>
-
             <table className='table'>
               <thead>
                 <tr>
@@ -60,44 +65,75 @@ export default function UsersUpdate() {
 
               <tbody>
                 {allUsers.sort(sortUsers).map((user) => {
-                  return (
-                    <tr key={user.id} className='table__rows'>
-                      <td>{user.lastName}</td>
-                      <td>{user.firstName}</td>
-                      <td className='table__buttonTd'>
-                        <Link to={`/espace-membre/utilisateurs/${user.id}`} className='link button'>
-                          <button className='button'>
-                            <i className="fa-solid fa-pencil"></i>
-                          </button>
-                        </Link>
+                  if (!user.deletionDate) {
+                    return (
+                      <tr key={user.id} className='table__rows'>
+                        <td>{user.lastName}</td>
+                        <td>{user.firstName}</td>
+                        <td className='table__buttonTd'>
+                          <Link to={`/espace-membre/utilisateurs/${user.id}`} className='link button'>
+                            <button className='button'>
+                              <i className="fa-solid fa-pencil"></i>
+                            </button>
+                          </Link>
 
-                        {user.deletionDate ?
-                          <button className='button button--blue' onClick={() => handleDelete(user.id, false)}><i className="fa-solid fa-arrows-rotate"></i></button>
-                          :
                           <button className='button button--red' onClick={() => handleDelete(user.id, true)} ><i className="fa-solid fa-xmark"></i></button>
-                        }
-                      </td>
-                    </tr>
-                  )
+
+                          {/* {user.deletionDate ?
+                            <button className='button button--blue' onClick={() => handleDelete(user.id, false)}><i className="fa-solid fa-arrows-rotate"></i></button>
+                            :
+                            null
+                          } */}
+                        </td>
+                      </tr>
+                    );
+                  } else {
+                    return null;
+                  }
                 })}
               </tbody>
             </table>
 
-            {/* <Modal showModal={showModal} setShowModal={setShowModal}>
-            <div className='modal'>
-            <div className='modal__header'>
-            <h2 className='modal__header__title'>Modifier le profil de {selectedUser.firstName} {selectedUser.lastName}</h2>
-            <button className='modal__header__button' onClick={() => setShowModal(false)}><i className="fa-solid fa-square-xmark"></i></button>
-            </div>
-            <div className='separator'></div>
-            <form onSubmit={handleSubmit} action="#" className='modal__form'>
-            <SelectComponent options={roles} userData={selectedUser.userRoles} />
-            <SelectComponent options={status} userData={selectedUser.userStatus} />
-            <SelectComponent options={instruments} userData={selectedUser.userInstruments} />
-            </form>
-            </div>
-          </Modal> */}
+            <button className='button archiveMessagesButton' onClick={handleArchiveUsers}>Utilisateurs archivés</button>
 
+            {showArchivedUsers ?
+              allUsers.filter((user) => user.deletionDate).length <= 0 ?
+                <p className='table__noData'>Aucun message archivé</p>
+                :
+                <table className='table'>
+                  <thead>
+                    <tr>
+                      <th className='table__header'>Nom</th>
+                      <th className='table__header'>Prénom</th>
+                      <th className='table__buttonHeader'>Profil</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    {allUsers.sort(sortUsers).map((user) => {
+                      if (user.deletionDate) {
+                        return (
+                          <tr key={user.id} className='table__rows'>
+                            <td>{user.lastName}</td>
+                            <td>{user.firstName}</td>
+                            <td className='table__buttonTd'>
+                              <Link to={`/espace-membre/utilisateurs/${user.id}`} className='link button'>
+                                <button className='button'>
+                                  <i className="fa-solid fa-pencil"></i>
+                                </button>
+                              </Link>
+
+                              <button className='button button--blue' onClick={() => handleDelete(user.id, false)}><i className="fa-solid fa-arrows-rotate"></i></button>
+                            </td>
+                          </tr>
+                        );
+                      } else {
+                        return null;
+                      }
+                    })}
+                  </tbody>
+                </table>
+              : null}
           </div>
         </>}
       </div>
