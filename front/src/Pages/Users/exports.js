@@ -15,6 +15,8 @@ import SheetsList from "./Sheets/SheetsList";
 import SheetsUpdate from "./Sheets/SheetsUpdate";
 import SheetsUsers from "./Sheets/SheetsUser";
 import UsersUpdate from "./UsersUpdate";
+import UserUpdate from "./UserUpdate";
 
 
-export { EventsCreate, EventsList, EventsUpdate, AlbumsCreate, AlbumsList, AlbumUpdate, Messages, NewsCreate, NewsList, NewsUpdate, Notifications, Profil, SheetsCreate, SheetsList, SheetsUpdate, SheetsUsers, UsersUpdate }
+
+export { EventsCreate, EventsList, EventsUpdate, AlbumsCreate, AlbumsList, AlbumUpdate, Messages, NewsCreate, NewsList, NewsUpdate, Notifications, Profil, SheetsCreate, SheetsList, SheetsUpdate, SheetsUsers, UsersUpdate, UserUpdate }

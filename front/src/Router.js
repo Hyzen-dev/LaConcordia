@@ -6,13 +6,14 @@ import { About, Events, EventsDetails, Albums, AlbumDetails, News, NewsDetails }
 import { Band, Committee, MusicSchool } from './Pages/Visitors/Informations/exports';
 import Contact from './Pages/Visitors/Contact/Contact';
 import { SignUp, SignIn } from './Pages/Visitors/MemberSpace/exports';
-import { EventsCreate, EventsList, EventsUpdate, AlbumsCreate, AlbumsList, AlbumUpdate, Messages, NewsCreate, NewsList, NewsUpdate, Notifications, Profil, SheetsCreate, SheetsList, SheetsUpdate, SheetsUsers, UsersUpdate } from './Pages/Users/exports';
+import { EventsCreate, EventsList, EventsUpdate, AlbumsCreate, AlbumsList, AlbumUpdate, Messages, NewsCreate, NewsList, NewsUpdate, Notifications, Profil, SheetsCreate, SheetsList, SheetsUpdate, SheetsUsers, UsersUpdate, UserUpdate } from './Pages/Users/exports';
 import Footer from './Components/Footer/Footer.Component';
 import ApiHandler from './service/ApiHandler';
 import LoadingScreen from './Components/LoadingScreen.Component';
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { all } from 'axios';
 
 export const useApi = new ApiHandler(localStorage.getItem('accessToken') || null);
 
@@ -50,9 +51,9 @@ export const toastNotification = (type, message) => {
 }
 
 export const updateToastNotification = (id, type, message) => {
-  return toast.update(id, { 
+  return toast.update(id, {
     render: message,
-    type: type, 
+    type: type,
     isLoading: false,
     autoClose: 5000,
     hideProgressBar: false,
@@ -101,6 +102,36 @@ function RouterContainer() {
   }, [])
 
 
+
+
+  // Création des states relatifs aux messages / messages lus / message selectionné
+  
+  const [selectedMessage, setSelectedMessage] = useState({});
+  const [readMessages, setReadMessages] = useState([]);
+  const [allMessages, setAllMessages] = useState([])
+  const [messageIsRead, setMessageIsRead] = useState(selectedMessage.isRead);
+
+  const fetchAllMessages = async () => {
+    const response = await useApi.message.GetAll();
+    return setAllMessages(response.data);
+  }
+
+  useEffect(() => {
+    fetchAllMessages()
+  }, []);
+
+
+
+
+
+
+
+
+
+
+
+
+
   const location = useLocation();
   const [isPanelRoute, setIsPanelRoute] = useState(false);
 
@@ -111,7 +142,7 @@ function RouterContainer() {
   if (isLogged && !user) return <LoadingScreen />;
   return (
     <>
-      {isPanelRoute ? <UsersPage logout={logout} isLogged={isLogged} setIsLogged={setIsLogged} user={user} /> : <HeaderVisitors isLogged={isLogged} />}
+      {isPanelRoute ? <UsersPage logout={logout} isLogged={isLogged} setIsLogged={setIsLogged} user={user} allMessages={allMessages} /> : <HeaderVisitors isLogged={isLogged} />}
       <Routes>
         <Route path='/'>
           <Route index element={<News />} />
@@ -167,7 +198,19 @@ function RouterContainer() {
               </Route>
 
               <Route path='messages'>
-                <Route index element={<Messages />} />
+                <Route index element={
+                  <Messages
+                    selectedMessage={selectedMessage}
+                    setSelectedMessage={setSelectedMessage}
+                    readMessages={readMessages}
+                    setReadMessages={setReadMessages}
+                    allMessages={allMessages}
+                    setAllMessages={setAllMessages}
+                    messageIsRead={messageIsRead}
+                    setMessageIsRead={setMessageIsRead}
+                    fetchAllMessages={fetchAllMessages}
+                  />}
+                />
               </Route>
 
               <Route path='partitions'>
@@ -205,6 +248,7 @@ function RouterContainer() {
 
               <Route path='utilisateurs'>
                 <Route index element={<UsersUpdate />} />
+                <Route path=':id' element={<UserUpdate />} />
               </Route>
             </Route>
           }

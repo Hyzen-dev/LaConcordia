@@ -15,5 +15,6 @@ router.post('/profile', authenticateUser, userController.GetProfile);
 router.get('/', userController.GetAll);
 
 router.patch('/archive', [authenticateUser, restricted(["administrator"])], userController.ArchiveUser);
+router.post('/find', [authenticateUser, restricted(["administrator"])], userController.GetById);
 
 module.exports = router;

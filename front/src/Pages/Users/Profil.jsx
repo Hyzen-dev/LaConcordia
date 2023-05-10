@@ -5,11 +5,6 @@ import Modal from '../../Components/Modal/Modal.Component';
 import InformationsForm from '../../Components/Forms/InformationsForm.Components';
 import SelectComponent from '../../Components/Forms/Select.Component';
 import LoadingScreen from '../../Components/LoadingScreen.Component';
-// import instruments from '../../data/Instruments';
-// import roles from '../../data/Roles';
-// import status from '../../data/Status';
-// import users from '../../data/Users';
-import UserRole from './../../data/User-Role';
 import { useApi } from '../../Router';
 
 export default function Profil(props) {
@@ -40,11 +35,6 @@ export default function Profil(props) {
     fetchStatus()
     fetchInstruments()
   }, []);
-
-  // console.log(user)
-  // console.log(roles)
-  // console.log(status)
-  // console.log(instruments)
 
   const handleSubmit = (e) => {
     e.preventDefault();

@@ -11,7 +11,7 @@ class ApiHandler {
 
     #POST_REQUEST = (endpoint, data, accessToken) => {
         if (!endpoint) {
-            return {error: true, message: "aucun endpoint a été défini"}
+            return { error: true, message: "aucun endpoint a été défini" }
         }
         const reqOptions = {
             method: "POST",
@@ -23,13 +23,13 @@ class ApiHandler {
         }
 
         return axios(`${this.baseUrl}${endpoint}`, reqOptions)
-        .then((res) => res)
-        .catch((error) => error?.response?.data || { error: true, message: "une erreur est survenue" })
+            .then((res) => res)
+            .catch((error) => error?.response?.data || { error: true, message: "une erreur est survenue" })
     }
-    
+
     #GET_REQUEST = (endpoint, id) => {
         if (!endpoint) {
-            return {error: true, message: "aucun endpoint a été défini"}
+            return { error: true, message: "aucun endpoint a été défini" }
         }
 
         const reqOptions = {
@@ -39,13 +39,13 @@ class ApiHandler {
         const apiUrl = !id ? `${this.baseUrl}${endpoint}` : `${this.baseUrl}${endpoint}/${id}`
 
         return axios(apiUrl, reqOptions)
-        .then((res) => res.data)
-        .catch((error) => error?.response?.data || { error: true, message: "une erreur est survenue" })
+            .then((res) => res.data)
+            .catch((error) => error?.response?.data || { error: true, message: "une erreur est survenue" })
     }
 
     #PATCH_REQUEST = (endpoint, data, accessToken) => {
         if (!endpoint) {
-            return {error: true, message: "aucun endpoint a été défini"}
+            return { error: true, message: "aucun endpoint a été défini" }
         }
         const reqOptions = {
             method: "PATCH",
@@ -57,8 +57,8 @@ class ApiHandler {
         }
 
         return axios(`${this.baseUrl}${endpoint}`, reqOptions)
-        .then((res) => res)
-        .catch((error) => error?.response?.data || { error: true, message: "une erreur est survenue" })
+            .then((res) => res)
+            .catch((error) => error?.response?.data || { error: true, message: "une erreur est survenue" })
     }
 
 
@@ -79,8 +79,11 @@ class ApiHandler {
         },
         ArchiveUser: async (data) => {
             return await this.#PATCH_REQUEST("/user/archive", data, this.accessToken)
+        },
+        GetById: async (data) => {
+            return await this.#POST_REQUEST("/user/find", data, this.accessToken)
         }
-    }
+    } 
 
     // Roles methods
     roles = {
@@ -107,8 +110,16 @@ class ApiHandler {
     message = {
         GetAll: async () => {
             return await this.#GET_REQUEST("/message")
+        },
+        ArchiveMessage: async (data) => {
+            return await this.#PATCH_REQUEST("/message/archive", data, this.accessToken)
+        },
+        IsReadMessage: async (data) => {
+            return await this.#PATCH_REQUEST("/message/read", data, this.accessToken)
         }
     }
+
+
 
     updateAccessToken = (token) => {
         // localStorage.setItem("accessToken", token)

@@ -35,7 +35,7 @@ exports.Create = async (req, res) => {
             mail,
             phone: phoneNumber || null,
             subject,
-            content
+            deletionDate
         }).save();
 
         return res.status(201).json({
@@ -124,5 +124,111 @@ exports.Delete = async (req, res) => {
             error: true,
             message: "Une erreur interne est survenue, veuillez réessayer plus tard."
         })
+    }
+}
+
+exports.ArchiveMessage = async (req, res) => {
+    try {
+        const { id, state } = req.body;
+
+        if (!id || isNaN(id)) {
+            return res.status(400).json({
+                error: true,
+                message: "Requête invalide."
+            });
+        }
+
+        const message = await Message.findOne({ where: { id: id } });
+
+        if (!message) {
+            return res.status(404).json({
+                error: true,
+                message: "Message introuvable."
+            });
+        }
+
+        const messageData = {
+            deletionDate: state ? new Date(Date.now()) : null,
+        }
+
+        console.log(state)
+
+        if (state && message.deletionDate) {
+            return res.status(400).json({
+                error: true,
+                archived: true,
+                message: "Le message est déjà archivé."
+            });
+        } else if (!state && !message.deletionDate) {
+            return res.status(400).json({
+                error: true,
+                archived: false,
+                message: "Le message n'est pas archivé."
+            });
+        }
+
+        await message.update(messageData);
+
+        return res.status(200).json({
+            error: false,
+            message: state ? "Le message a bien été archivé." : "Le message a bien été désarchivé."
+        });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({
+            error: true,
+            message: "Une erreur interne est survenue, veuillez réessayer plus tard."
+        });
+    }
+}
+
+exports.IsReadMessage = async (req, res) => {
+    try {
+        const { id, state } = req.body;
+
+        if (!id || isNaN(id)) {
+            return res.status(400).json({
+                error: true,
+                message: "Requête invalide."
+            });
+        }
+
+        const message = await Message.findOne({ where: { id: id } });
+
+        if (!message) {
+            return res.status(404).json({
+                error: true,
+                message: "Message introuvable."
+            });
+        }
+
+        const messageData = {
+            isRead: state ? true : false,
+        }
+
+        if (state && message.isRead) {
+            return res.status(400).json({
+                error: true,
+                message: "Le message est déjà marqué comme lu."
+            });
+        } else if (!state && !message.isRead) {
+            return res.status(400).json({
+                error: true,
+                message: "Le message n'est pas marqué comme lu."
+            });
+        }
+
+        await message.update(messageData);
+
+        return res.status(200).json({
+            error: false,
+            message: state ? "Le message est marqué comme lu." : "Le message n'est plus marqué comme lu."
+        });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({
+            error: true,
+            message: "Une erreur interne est survenue, veuillez réessayer plus tard."
+        });
     }
 }

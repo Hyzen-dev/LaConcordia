@@ -1,5 +1,4 @@
 import React from 'react';
-import UsersDatas from '../../data/Users';
 
 export default function InformationsForm({ user }) {
     return (

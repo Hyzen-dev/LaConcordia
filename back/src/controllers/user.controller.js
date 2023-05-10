@@ -16,7 +16,7 @@ exports.SignUp = async (req, res) => {
         const { firstName, lastName, email, password } = req.body;
         let { phoneNumber } = req.body;
 
-        if (!firstName || !lastName || !email || !password ) {
+        if (!firstName || !lastName || !email || !password) {
             return res.status(400).json({
                 error: true,
                 message: "Requête invalide."
@@ -298,6 +298,82 @@ exports.GetAll = async (req, res) => {
             message: "Les utilisateurs ont bien été récupérés",
             data: users
         })
+        // const formattedUser = [];
+
+        // await users.map(async (user, index) => {
+
+        //     // Rôles 
+        //     const roles = await UserRole.findAll({ where: { userId: user.id } });
+        //     const rolesDetails = await Role.findAll();
+        //     const userRoles = [];
+        //     roles.forEach((role) => {
+        //         rolesDetails.forEach((role2) => {
+        //             if (role2.id === role.roleId) {
+        //                 const userRoleData = {
+        //                     name: role2.name,
+        //                     label: role2.label
+        //                 }
+        //                 userRoles.push(userRoleData);
+        //             }
+        //         })
+        //     });
+
+        //     // Instruments
+        //     const instruments = await UserInstrument.findAll({ where: { userId: user.id } });
+        //     const instrumentsDetails = await Instrument.findAll();
+        //     const userInstruments = [];
+        //     instruments.forEach((instrument) => {
+        //         instrumentsDetails.forEach((instrument2) => {
+        //             if (instrument2.id === instrument.instrumentId) {
+        //                 const instrumentData = {
+        //                     name: instrument2.name,
+        //                     label: instrument2.label,
+        //                 }
+        //                 userInstruments.push(instrumentData);
+        //             }
+        //         })
+        //     });
+
+        //     // Status
+        //     const status = await UserStatus.findAll({ where: { userId: user.id } });
+        //     const statusDetails = await Status.findAll();
+        //     const userStatus = [];
+        //     status.forEach((data) => {
+        //         statusDetails.forEach((status2) => {
+        //             if (status2.id === data.statusId) {
+        //                 const statusData = {
+        //                     name: status2.name,
+        //                     label: status2.label,
+        //                     type: status2.type
+        //                 }
+        //                 userStatus.push(statusData);
+        //             }
+        //         })
+        //     });
+
+        //     // user.dataValues.userRoles = userRoles;
+        //     // user.dataValues.userInstruments = userInstruments;
+        //     // user.dataValues.userStatus = userStatus;
+
+
+        //     await formattedUser.push({
+        //         id: user.id,
+        //         firstName: user.firstName,
+        //         lastName: user.lastName,
+        //         email: user.email,
+        //         phone: user.phone,
+        //         deletionDate: user.deletionDate,
+        //         userInstruments,
+        //         userStatus,
+        //         userRoles
+        //     });
+
+        //     if (index === users.length - 1) {
+              
+        //     }
+        // })
+
+
     } catch (error) {
         console.log("error");
         return res.status(500).json({
@@ -382,7 +458,101 @@ exports.GetProfile = async (req, res) => {
 
         return res.status(200).json({
             error: false,
-            data: 
+            data:
+            {
+                firstName: user.firstName,
+                lastName: user.lastName,
+                email: user.email,
+                phone: user.phone,
+                deletionDate: user.deletionDate,
+                userInstruments,
+                userStatus,
+                userRoles
+            }
+        })
+    } catch (error) {
+        console.error(error)
+        return res.status(500).json({
+            error: true,
+            message: "Une erreur interne est survenue, veuillez réessayer plus tard."
+        });
+    }
+}
+
+exports.GetById = async (req, res) => {
+    try {
+        const { id } = req.body;
+
+        if (!id || isNaN(id)) {
+            return res.status(400).json({
+                error: true,
+                message: "Requête invalide."
+            });
+        }
+
+        const user = await User.findOne({ where: { id: id } });
+
+        if (!user) {
+            return res.status(404).json({
+                error: true,
+                message: "Utilisateur introuvable."
+            });
+        }
+
+        // Rôles 
+        const roles = await UserRole.findAll({ where: { userId: user.id } });
+        const rolesDetails = await Role.findAll();
+        const userRoles = [];
+        roles.forEach((role) => {
+            rolesDetails.forEach((role2) => {
+                if (role2.id === role.roleId) {
+                    const userRoleData = {
+                        name: role2.name,
+                        label: role2.label
+                    }
+                    userRoles.push(userRoleData);
+                }
+            })
+        });
+
+        console.log(userRoles);
+        // Instruments
+        const instruments = await UserInstrument.findAll({ where: { userId: user.id } });
+
+        const instrumentsDetails = await Instrument.findAll();
+        const userInstruments = [];
+        instruments.forEach((instrument) => {
+            instrumentsDetails.forEach((instrument2) => {
+                if (instrument2.id === instrument.instrumentId) {
+                    const instrumentData = {
+                        name: instrument2.name,
+                        label: instrument2.label,
+                    }
+                    userInstruments.push(instrumentData);
+                }
+            })
+        });
+        // Status
+        const status = await UserStatus.findAll({ where: { userId: user.id } });
+
+        const statusDetails = await Status.findAll();
+        const userStatus = [];
+        status.forEach((data) => {
+            statusDetails.forEach((status2) => {
+                if (status2.id === data.statusId) {
+                    const statusData = {
+                        name: status2.name,
+                        label: status2.label,
+                        type: status2.type
+                    }
+                    userStatus.push(statusData);
+                }
+            })
+        });
+
+        return res.status(200).json({
+            error: false,
+            data:
             {
                 firstName: user.firstName,
                 lastName: user.lastName,

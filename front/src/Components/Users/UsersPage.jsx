@@ -4,7 +4,7 @@ import NavbarUsers from './NavbarUsers.Component';
 import { useNavigate } from 'react-router-dom';
 
 export default function UsersPage(props) {
-  const { user, isLogged, logout } = props;
+  const { user, isLogged, logout, allMessages } = props;
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -16,7 +16,7 @@ export default function UsersPage(props) {
   }, []);
   return (
     <div id='usersPage'>
-      <HeaderUsers user={user} />
+      <HeaderUsers user={user} allMessages={allMessages} />
       <NavbarUsers logout={logout} user={user} />
     </div>
   )

@@ -33,7 +33,16 @@ Message.init({
       content: {
         type: DataTypes.TEXT('long'),
         allowNull: false
-      }, 
+      },
+      isRead: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false
+      },
+      deletionDate: {
+        type: DataTypes.DATE,
+        allowNull: true
+      },
 }, {
     sequelize,
     tableName: 'messages',
