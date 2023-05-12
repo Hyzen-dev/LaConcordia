@@ -6,10 +6,9 @@ const { authenticateUser } = require("../middlewares/authentication.middleware")
 const restricted = require("../middlewares/restricted.middleware");
 
 router.post('/create', [authenticateUser, restricted(["administrator", "photographer"]), upload.array('medias')], mediaController.Create);
+router.post('/find', mediaController.GetById);
 
 router.get('/', mediaController.GetAll);
-
-router.get('/:id', mediaController.GetById);
 
 router.patch('/update', mediaController.Update);
 

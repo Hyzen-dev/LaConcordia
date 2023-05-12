@@ -11,14 +11,14 @@ export default function EventsUpdate() {
   const event = EventsDatas.find((event) => event.id === parseInt(id));
 
   return (
-    <div>
+    <div className='pagePattern'>
       <Helmet><title>La Concordia - Évènements</title></Helmet>
 
       <div className='usersPage'>
         <div id='category'>
           <h2>Modification de l'évènement "{event.title}"</h2>
         </div>
-        <div className='pagePattern'>
+        <div className='pagePattern__content'>
           <form action="post">
             <fieldset className='form'>
               <UpdateForm />

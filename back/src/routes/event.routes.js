@@ -4,10 +4,9 @@ const eventContoller = require("../controllers/event.controller");
 
 
 router.post('/create', eventContoller.Create);
+router.post('/find', eventContoller.GetById);
 
 router.get('/', eventContoller.GetAll);
-
-router.get('/:id', eventContoller.GetById);
 
 router.patch('/update', eventContoller.Update);
 

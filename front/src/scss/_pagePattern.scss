@@ -1,0 +1,159 @@
+#category {
+    text-align: center;
+    border-bottom: 1px solid $separator;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+
+#category h2 {
+    font-size: 26px;
+    color: $main-color-darkGrey;
+    font-family: 'Patua One';
+}
+
+#category h3 {
+    font-size: 14px;
+    color: rgb(100, 100, 100);
+    font-family: 'Patua One';
+}
+
+.pagePattern, .usersPage, .tablePage {
+    padding: 0px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 50px;
+    position: relative;
+    min-height: 500px;
+
+    &__content {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        width: 90%;
+        margin: 0 auto;
+    }
+
+    &__subheading {
+        font-size: 20px;
+        color: $main-color-darkGrey;
+        font-family: 'Patua One';
+        text-align: left;
+    }
+}
+
+.tablePage__content {
+    width: 100%;
+}
+
+
+@media screen and (min-width: 480px) {
+
+    #category h2 {
+        font-size: 34px;
+    }
+    
+    #category h3 {
+        font-size: 18px;
+    }
+}
+
+
+
+@media screen and (min-width: 769px) {
+
+    #category h2 {
+        font-size: 40px;
+    }
+
+    .pagePattern {
+        padding: 0px 200px;
+
+        &__content {
+            width: 70%;
+        }
+    }
+    
+    .usersPage {
+        margin-left: 20%;
+        margin-top: 100px;
+        padding: 0px 150px;
+
+        &__content {
+            width: 70%;
+        }
+    }
+
+    .tablePage {
+        margin-left: 20%;
+        margin-top: 100px;
+        padding: 0px 150px;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// .pagePattern {
+//     position: relative;
+//     padding: 40px 20px;
+//     width: 80%;
+//     margin: auto;
+//     display: flex;
+//     flex-direction: column;
+//     gap: 10px;
+//     border-top: 1px solid $separator;
+//     text-align: justify;
+
+//     &__subheading {
+//         font-size: 20px;
+//         color: $main-color-darkGrey;
+//         font-family: 'Patua One';
+//         text-align: left;
+//     }
+// }
+
+// .cardPagePattern {
+//     margin-bottom: 50px;
+// }
+
+
+
+
+
+
+// @media screen and (min-width: 480px) {
+//     #category h2 {
+//         font-size: 36px;
+//     }
+
+//     #category h3 {
+//         font-size: 18px;
+//     }
+
+//     .pagePattern {
+//         width: 70%;
+//         margin: 0px auto;
+//         padding: 0px 12%;
+//         padding-left: 12%;
+
+//     }
+
+
+
+//     .cardPagePattern {
+//         width: 80%;
+//         margin: auto;
+//         margin-bottom: 50px;
+//         position: relative;
+//     }

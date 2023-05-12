@@ -1,60 +1,57 @@
-table * {
-    font-size: 14px;
-}
-
 table {
     width: 100%;
 }
 
-.tablePagePattern {
-    border-top: 1px solid $separator;
-    padding: 20px;
-    width: 90%;
-    margin: auto;
-}
-
-.table__header {
-    text-align: left;
-    padding-bottom: 10px;
-}
-
-.table__buttonTd {
-    display: flex;
-    justify-content: space-around;
-}
-
-table .button {
-    margin: 0px;
-    padding: 5px 0px;
-    width: 40%;
-}
-
 td {
-    padding-bottom: 20px;
+    height: 50px;
 }
 
-
-.table__rows__instruments {
+.buttonCell {
     display: flex;
-    gap: 5px;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
 }
 
-.button--blue {
-    background-color: rgb(69, 69, 224);
-}
 
-.button--red {
-    background-color: rgb(252, 31, 31);
-}
 
-@media screen and (min-width: 480px) {
 
-    table * {
-        font-size: 18px;
-    }
+// .noDataTable {
+//     text-align: center;
+//     font-style: italic;
+// }
 
-    .tablePagePattern {
-        padding: 50px 100px;
-    }
+// table * {
+//     // font-size: 14px;
+// }
 
-}
+// table {
+//     width: 100%;
+// }
+
+
+// .table__header {
+//     text-align: left;
+//     padding-bottom: 10px;
+// }
+
+
+
+// td {
+//     padding-bottom: 20px;
+// }
+
+
+// .table__rows__instruments {
+//     display: flex;
+//     gap: 5px;
+// }
+
+
+
+// @media screen and (min-width: 480px) {
+
+//     table * {
+//         // font-size: 18px;
+//     }
+// }

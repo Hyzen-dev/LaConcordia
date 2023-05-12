@@ -11,14 +11,13 @@ export default function AlbumUpdate() {
   const album = AlbumsDatas.find((album) => album.id === parseInt(id));
 
   return (
-    <div>
+    <div className='usersPage'>
       <Helmet><title>La Concordia - Galerie médias</title></Helmet>
 
-      <div className='usersPage'>
         <div id='category'>
-          <h2>Modification de l'album "{album.name}"</h2>
+          <h2>Modification de l'album <br /> "{album.name}"</h2>
         </div>
-        <div className='pagePattern'>
+        <div className='usersPage__content'>
           <form action="post">
             <fieldset className='form'>
               <UpdateForm />
@@ -26,6 +25,5 @@ export default function AlbumUpdate() {
           </form>
         </div>
       </div>
-    </div>
   )
 }

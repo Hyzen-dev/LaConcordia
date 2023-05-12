@@ -1,27 +1,42 @@
-import React from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useEffect, useState } from 'react'
+import { Link, useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import EventsDatas from './../../../data/Events';
+import { useApi } from '../../../Router';
+import MainLoadingScreen from '../../../Components/LoadingScreen/MainLoadingScreen.Component';
 
 // Page EventsDetail qui retourne le détail de l'évènement sur lequel le visiteur a cliqué.
 
 export default function EventsDetails() {
 
-  // Utilisation du Hook useParams pour récupérer l'id de l'évènement.
+  const [event, setEvent] = useState({})
   const { id } = useParams();
 
-  // Création de la variable "event" qui recherche dans les données "EventsDatas", l'évènement ayant un id correspondant à l'id présent dans l'url.
-  const event = EventsDatas.find((event) => event.id === parseInt(id));
+  const fetchEvent = async () => {
+    const response = await useApi.events.GetById({ id: parseInt(id) });
+    return setEvent(response.data.data);
+  }
+  useEffect(() => {
+    fetchEvent()
+  }, []);
 
+  const formattedDate = `${new Date(event.eventDate).toLocaleDateString('fr-FR', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  })} - ${new Date(event.eventDate).toLocaleTimeString('fr-FR', {
+    hour: '2-digit',
+    minute: '2-digit'
+  })}`;
+
+  if (event.length <= 0) return <MainLoadingScreen />;
   return (
-    <div>
+    <div className='pagePattern'>
       <Helmet><title>La Concordia - Évènements</title></Helmet>
-
       <div id='category'>
         <h2>{event.title}</h2>
-        <h3>{event.eventDate}</h3>
+        <h3>{formattedDate}</h3>
       </div>
-      <div className='pagePattern'>
+      <div className='pagePattern__content'>
         <p>{event.content}</p>
       </div>
     </div>

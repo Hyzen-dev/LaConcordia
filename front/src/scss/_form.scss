@@ -7,28 +7,11 @@
 
 }
 
-.form button, .button {
-    cursor: pointer;
-    padding: 10px 20px;
-    width: fit-content;
-    text-transform: uppercase;
-    color: white;
-    background-color: $main-color-green;
-    border: none;
-    border-radius: 3px;
-    font-weight: bold;
-    font-size: 16px;
-    margin-top: 20px;
-    font-family: 'Patua One';
-    display: flex;
-    justify-content: center;
-    text-decoration: none;
-}
-
 
 .add {
     margin: auto;
     display: block;
+    margin-bottom: 20px;
 }
 
 .form input,

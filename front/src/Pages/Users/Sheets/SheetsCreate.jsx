@@ -12,33 +12,31 @@ export default function SheetsCreate() {
   const [file, setFile] = useState(null);
 
   return (
-    <div>
+    <div className='usersPage'>
       <Helmet><title>La Concordia - Partitions</title></Helmet>
 
-      <div className='usersPage'>
-        <div id='category'>
-          <h2>Partitions</h2>
-          <h3>Ajouter une nouvelle partition</h3>
-        </div>
-        <div className='pagePattern'>
-          {/* Intégration du composant "CreateForm" */}
-          <CreateForm setFile={setFile} />
+      <div id='category'>
+        <h2>Partitions</h2>
+        <h3>Ajouter une nouvelle partition</h3>
+      </div>
+      <div className='usersPage__content'>
+        {/* Intégration du composant "CreateForm" */}
+        <CreateForm setFile={setFile} />
 
 
-          {file ?
-            <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js">
-              <div
-                style={{
-                  border: '1px solid rgba(0, 0, 0, 0.3)',
-                  height: '600px',
-                  padding: '20px 0px',
-                }}
-              ><Viewer fileUrl={file} />
-              </div>
-            </Worker>
-            : null}
+        {file ?
+          <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js">
+            <div
+              style={{
+                border: '1px solid rgba(0, 0, 0, 0.3)',
+                height: '600px',
+                padding: '20px 0px',
+              }}
+            ><Viewer fileUrl={file} />
+            </div>
+          </Worker>
+          : null}
 
-        </div>
       </div>
     </div>
   )

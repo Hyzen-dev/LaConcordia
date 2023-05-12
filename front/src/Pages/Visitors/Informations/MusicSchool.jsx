@@ -6,7 +6,7 @@ import { Helmet } from 'react-helmet';
 
 export default function MusicSchool() {
   return (
-    <div>
+    <div className='pagePattern'>
       <Helmet><title>La Concordia - École de musique</title></Helmet>
 
       <div id='category'>
@@ -14,7 +14,7 @@ export default function MusicSchool() {
         <h3>Effectif actuel</h3>
       </div>
 
-      <div className='musicSchool pagePattern'>
+      <div className='musicSchool pagePattern__content'>
         <div>
           <h3 className='pagePattern__subheading'>Formations</h3>
           <div className='separator'></div>

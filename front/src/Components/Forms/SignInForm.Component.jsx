@@ -88,7 +88,7 @@ export default function SignInForm(props) {
             />
             {errors.includes('password') && <label htmlFor='passwordInput'>Veuillez renseigner un mot de passe</label>}
           </div>
-          <button type="submit">Se connecter</button>
+          <button type="submit" className='greenButton'>Se connecter</button>
         </fieldset>
       </form>
     </div >

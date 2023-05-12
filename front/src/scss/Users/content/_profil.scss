@@ -1,4 +1,7 @@
 .profil {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
 
     &__box {
         display: flex;
@@ -10,6 +13,8 @@
         color: $main-color-green;
     }
 }
+
+
 
 .notifications {
     flex-direction: row;

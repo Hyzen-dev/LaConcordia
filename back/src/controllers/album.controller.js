@@ -1,5 +1,5 @@
 const Album = require("../models/album.model");
-
+const Media = require("../models/media.model");
 exports.Create = async (req, res) => {
     try {
         const { title } = req.body;
@@ -52,7 +52,7 @@ exports.GetAll = async (req, res) => {
 
 exports.GetById = async (req, res) => {
     try {
-        const { id } = req.params;
+        const { id } = req.body;
 
         if (!id || isNaN(id)) {
             return res.status(400).json({
@@ -70,10 +70,12 @@ exports.GetById = async (req, res) => {
             });
         }
 
+        const medias = await Media.findAll({ where: { albumId: album.id } });
+
         return res.status(200).json({
             error: false,
             message: "L'album a été récupéré.",
-            post: album
+            data: {album, medias}
         });
     } catch (error){
         console.log("error");

@@ -11,10 +11,12 @@ router.post('/signin', userController.SignIn);
 router.post('/verify', userController.VerifyAccount);
 router.post('/verify-resend', userController.ResendVerification);
 router.post('/profile', authenticateUser, userController.GetProfile);
+router.post('/find', [authenticateUser, restricted(["administrator"])], userController.GetById);
 
-router.get('/', userController.GetAll);
+router.get('/all', [authenticateUser, restricted(["administrator"])], userController.GetAll);
+router.get('/allbase', userController.GetAllBase);
 
 router.patch('/archive', [authenticateUser, restricted(["administrator"])], userController.ArchiveUser);
-router.post('/find', [authenticateUser, restricted(["administrator"])], userController.GetById);
+router.patch('/update', [authenticateUser, restricted(["administrator"])], userController.UserUpdate)
 
 module.exports = router;

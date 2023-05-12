@@ -10,7 +10,7 @@ export default function HeaderVisitors(props) {
       <Navbar isLogged={isLogged} />
       <div className='titleContainer'>
         <h2 className='titleContainer__title'>Souhaitez-vous intégrer notre formation ?</h2>
-        <button className='titleContainer__button'>
+        <button className='greenButton headerVisitorButton'>
           <Link to={'/inscription'} className='titleContainer__link link'>Nous rejoindre</Link>
         </button>
       </div>

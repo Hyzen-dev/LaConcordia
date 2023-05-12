@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 export default function AlbumCard(props) {
 
     // Intégration des données name, thumbnail et id en tant que props
-    const { name, thumbnail, id } = props.albumCard;
+    const { title, thumbnail, id } = props.albumCard;
 
     // Création de la variable "isUsersPage" qui vérifie si l'url actuel débute par "espace-membre". Le but étant que si l'url ne débute pas par "espace-membre", un lien redirige le visiteur pour consulter les médias de l'album.
     const isUsersPage = window.location.pathname.startsWith('/espace-membre');
@@ -17,7 +17,7 @@ export default function AlbumCard(props) {
             <div className='albumCard'>
                 <Link to={`/espace-membre/medias/gestion/${id}`} className='link'>
                     <img src={thumbnail} alt="photo" className='albumCard__img' />
-                    <h3 className='albumCard__title'>{name}</h3>
+                    <h3 className='albumCard__title'>{title}</h3>
                 </Link>
             </div>
         )
@@ -29,7 +29,7 @@ export default function AlbumCard(props) {
             <div className='albumCard'>
                 <Link to={`/albums/${id}`} className='link'>
                         <img src={thumbnail} alt="photo" className='albumCard__img' />
-                        <h3 className='albumCard__title'>{name}</h3>
+                        <h3 className='albumCard__title'>{title}</h3>
                 </Link>
             </div>
         )

@@ -1,7 +1,6 @@
 .modal {
     display: flex;
     flex-direction: column;
-    margin-top: 20px;
 
     &__mediasTitle {
         color: white;
@@ -12,14 +11,6 @@
     &__header {
         display: flex;
         justify-content: space-between;
-
-        &__button {
-            background: none;
-            border: none;
-            font-size: 20px;
-            color: $main-color-green;
-            cursor: pointer;
-        }
 
         &__title {
             font-size: 18px;
@@ -40,16 +31,9 @@
         height: 30px;
     }
 
-    &__form button {
-        align-self: flex-end;
-        cursor: pointer;
-    }
 }
 
-.photoModal__button {
-    align-self: flex-end;
-    padding: 0px;
-}
+
 
 @media screen and (min-width: 480px) {
 

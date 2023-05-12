@@ -1,0 +1,256 @@
+button, .button {
+    cursor: pointer;
+    border: none;
+    padding: 10px 20px;
+    width: fit-content;
+    border-radius: 4px;
+    color: white;
+    font-weight: bold;
+
+}
+
+.greenButton {
+    background-color: $main-color-green;
+    text-transform: uppercase;
+    font-size: 14px;
+    font-family: 'Patua One';
+}
+
+.headerVisitorButton a {
+    font-family: 'Patua One';
+    font-size: 16px;
+}
+
+.firstButton {
+    background-color: $main-color-darkGrey;
+}
+
+.secondButton {
+    background-color: $main-color-grey;
+}
+
+.mediasActionsContainer__button {
+    padding: 10px 20px;
+    margin: 0px;
+    border-radius: 4px;
+    color: white;
+    text-decoration: none;
+}
+
+.sendButton {
+    align-self: flex-end;
+}
+
+.archiveButton {
+    align-self: center;
+}
+
+.importButton {
+    align-self: center;
+    max-width: 300px;
+    text-align: center;
+}
+
+.addButton {
+    display: block;
+
+}
+
+.closeButton {
+    background-color: rgba(0, 0, 0, 0);
+    color: $main-color-green;
+    font-size: 30px;
+    align-self: flex-end;
+    padding: 0px;
+}
+
+.readButton {
+    margin-top: 20px;
+    width: 200px;
+    align-self: center;
+}
+
+.tableButton {
+    border: none;
+    padding: 0;
+    width: 40px;
+    height: 30px;
+    font-size: 16px;
+    background-color: $main-color-green
+}
+
+.button--blue {
+    background-color: rgb(69, 69, 224);
+}
+
+.button--red {
+    background-color: rgb(252, 31, 31);
+}
+
+.buttonLink {
+    padding: 0px;
+}
+
+
+
+
+@media screen and (min-width: 480px) {
+    .headerVisitorButton a {
+        font-size: 20px;
+    }
+
+    .archiveButton {
+        align-self: initial;
+    }
+
+    .saveButton {
+        align-self: flex-end;
+    }
+}
+
+
+
+
+
+
+// .modal__button {
+//     background: none;
+//     border: none;
+//     font-size: 20px;
+//     color: $main-color-green;
+// }
+
+// .form button, .button {
+//     padding: 10px 20px;
+//     width: fit-content;
+//     text-transform: uppercase;
+//     color: white;
+//     background-color: $main-color-green;
+//     border: none;
+//     border-radius: 3px;
+//     font-weight: bold;
+//     font-size: 16px;
+//     margin-top: 20px;
+//     font-family: 'Patua One';
+//     display: flex;
+//     justify-content: center;
+//     text-decoration: none;
+// }
+
+
+
+
+// .photoModal__button {
+//     align-self: flex-end;
+//     padding: 0px;
+// }
+
+// .modal__form button {
+//     align-self: flex-end;
+// }
+
+// .titleContainer__button {
+//     margin-top: 30px;
+//     border: none;
+//     border-radius: 4px;
+//     padding: 8px 18px;
+//     background-color: $main-color-green;
+//     font-size: 16px;
+// }
+
+
+
+
+
+// .button--flash {
+//     position: relative;
+//     font-size: 10px;
+//     animation: pulse 1.5s ease-in-out infinite;
+//     &::after {
+//         content: "!";
+//         position: absolute;
+//         top: 0;
+//         border: 1px solid red;
+//         border-radius: 50%;
+//         width: 12px;
+//         height: 12px;
+//         background-color: red;
+//         color: white;
+//         font-family: sans-serif;
+//         font-size: 10px;
+//         left: 0;
+//         transform: translate(-50%, -50%);
+
+//         @media screen and (min-width: 480px) {
+//             left: inherit;
+//             right: 0;
+//             transform: translate(50%, -50%);
+//         }
+//     }
+// }
+
+// @keyframes pulse {
+//     0% {
+//         color: white;
+//         // color: $main-color-grey;
+//         transform: font-size(1);
+//     }
+
+//     50% {
+//         color: rgba(255, 255, 255, 0.1);
+//         transform: font-size(1);
+//     }
+
+//     100% {
+//         color: white;
+//         // color: $main-color-grey;
+//         transform: font-size(1);
+//     }
+// }
+
+
+
+
+// .messageModal__button {
+//     margin: auto;
+//     margin-bottom: 20px;
+// }
+
+
+// .archiveMessagesButton {
+//     margin-bottom: 40px;
+// }
+
+
+
+// .profil .button {
+//     margin: auto;
+// }
+
+
+// .table__buttonTd {
+//     display: flex;
+//     justify-content: space-around;
+// }
+
+// table .button {
+//     margin: 0px;
+//     padding: 5px 0px;
+//     width: 40%;
+// }
+
+// .button--blue {
+//     background-color: rgb(69, 69, 224);
+// }
+
+// .button--red {
+//     background-color: rgb(252, 31, 31);
+// }
+
+
+// @media screen and (min-width: 480px) {
+//     .mediasActionsContainer__button {
+//         padding: 10px 20px;
+//         font-size: 20px;
+//     }
+// }

@@ -165,7 +165,7 @@ export default function ContactForm() {
                         ></textarea>
                         {errors.includes('message') && <label htmlFor='message'>Votre message doit contenir 5 caractères minimum</label>}
                     </div>
-                    <button type="submit">Envoyer</button>
+                    <button type="submit" className='greenButton sendButton'>Envoyer</button>
                 </fieldset>
             </form>
         </div>

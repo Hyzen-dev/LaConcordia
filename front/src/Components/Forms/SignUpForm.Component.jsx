@@ -194,7 +194,7 @@ export default function SignUpForm() {
                         onChange={onCaptchaChange}
                     />
 
-                    <button type="submit">S'inscrire</button>
+                    <button type="submit" className='greenButton'>S'inscrire</button>
                 </fieldset>
             </form>
         </div >

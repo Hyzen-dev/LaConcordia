@@ -8,7 +8,7 @@ import ContactForm from '../../../Components/Forms/ContactForm.Component';
 
 export default function Contact() {
   return (
-    <div>
+    <div className='pagePattern'>
       <Helmet><title>La Concordia - Contact</title></Helmet>
 
       <div id='category'>
@@ -17,7 +17,7 @@ export default function Contact() {
         <h3>Vous souhaitez intégrer notre formation ?</h3>
       </div>
 
-      <div className='pagePattern'>
+      <div className='pagePattern__content'>
         <div>
           <h3 className='pagePattern__subheading'>Contact</h3>
           <div className='separator'></div>

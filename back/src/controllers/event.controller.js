@@ -55,7 +55,7 @@ exports.GetAll = async (req, res) => {
 
 exports.GetById = async (req, res) => {
     try {
-        const { id } = req.params;
+        const { id } = req.body;
 
         if (!id || isNaN(id)) {
             return res.status(400).json({
@@ -76,7 +76,7 @@ exports.GetById = async (req, res) => {
         return res.status(200).json({
             error: false,
             message: "L'évènement a été récupéré.",
-            post: event
+            data: event
         });
     } catch (error){
         console.log("error");

@@ -6,19 +6,17 @@ import CreateForm from '../../../Components/Forms/CreateForm.Component';
 
 export default function AlbumsCreate() {
   return (
-    <div>
+    <div className='usersPage'>
       <Helmet><title>La Concordia - Galerie médias</title></Helmet>
 
-      <div className='usersPage'>
         <div id='category'>
           <h2>Médias</h2>
           <h3>Création d'un nouvel album</h3>
         </div>
-        <div className='pagePattern'>
+        <div className='usersPage__content'>
           {/* Intégration du composant "CreateForm" */}
           <CreateForm />
         </div>
       </div>
-    </div>
   )
 }

@@ -11,14 +11,13 @@ export default function SheetsUpdate() {
   const sheet = SheetsDatas.find((sheet) => sheet.id === parseInt(id));
 
   return (
-    <div>
+    <div className='usersPage'>
       <Helmet><title>La Concordia - Partitions</title></Helmet>
 
-      <div className='usersPage'>
         <div id='category'>
           <h2>Modification de la partition "{sheet.title}"</h2>
         </div>
-        <div className='pagePattern'>
+        <div className='usersPage__content'>
 
           <form action="post">
             <fieldset className='form'>
@@ -28,6 +27,5 @@ export default function SheetsUpdate() {
 
         </div>
       </div>
-    </div>
   )
 }

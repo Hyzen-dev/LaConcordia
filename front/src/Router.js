@@ -9,7 +9,7 @@ import { SignUp, SignIn } from './Pages/Visitors/MemberSpace/exports';
 import { EventsCreate, EventsList, EventsUpdate, AlbumsCreate, AlbumsList, AlbumUpdate, Messages, NewsCreate, NewsList, NewsUpdate, Notifications, Profil, SheetsCreate, SheetsList, SheetsUpdate, SheetsUsers, UsersUpdate, UserUpdate } from './Pages/Users/exports';
 import Footer from './Components/Footer/Footer.Component';
 import ApiHandler from './service/ApiHandler';
-import LoadingScreen from './Components/LoadingScreen.Component';
+import LoadingScreen from './Components/LoadingScreen/LoadingScreen.Component';
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';

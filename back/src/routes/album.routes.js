@@ -4,6 +4,7 @@ const albumController = require("../controllers/album.controller");
 const upload = require("../utils/multer.utils");
 
 router.post('/create', upload.single("thumbnail"), albumController.Create);
+router.post('/find', albumController.GetById);
 
 router.get('/', albumController.GetAll);
 

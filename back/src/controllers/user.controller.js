@@ -298,82 +298,49 @@ exports.GetAll = async (req, res) => {
             message: "Les utilisateurs ont bien été récupérés",
             data: users
         })
-        // const formattedUser = [];
-
-        // await users.map(async (user, index) => {
-
-        //     // Rôles 
-        //     const roles = await UserRole.findAll({ where: { userId: user.id } });
-        //     const rolesDetails = await Role.findAll();
-        //     const userRoles = [];
-        //     roles.forEach((role) => {
-        //         rolesDetails.forEach((role2) => {
-        //             if (role2.id === role.roleId) {
-        //                 const userRoleData = {
-        //                     name: role2.name,
-        //                     label: role2.label
-        //                 }
-        //                 userRoles.push(userRoleData);
-        //             }
-        //         })
-        //     });
-
-        //     // Instruments
-        //     const instruments = await UserInstrument.findAll({ where: { userId: user.id } });
-        //     const instrumentsDetails = await Instrument.findAll();
-        //     const userInstruments = [];
-        //     instruments.forEach((instrument) => {
-        //         instrumentsDetails.forEach((instrument2) => {
-        //             if (instrument2.id === instrument.instrumentId) {
-        //                 const instrumentData = {
-        //                     name: instrument2.name,
-        //                     label: instrument2.label,
-        //                 }
-        //                 userInstruments.push(instrumentData);
-        //             }
-        //         })
-        //     });
-
-        //     // Status
-        //     const status = await UserStatus.findAll({ where: { userId: user.id } });
-        //     const statusDetails = await Status.findAll();
-        //     const userStatus = [];
-        //     status.forEach((data) => {
-        //         statusDetails.forEach((status2) => {
-        //             if (status2.id === data.statusId) {
-        //                 const statusData = {
-        //                     name: status2.name,
-        //                     label: status2.label,
-        //                     type: status2.type
-        //                 }
-        //                 userStatus.push(statusData);
-        //             }
-        //         })
-        //     });
-
-        //     // user.dataValues.userRoles = userRoles;
-        //     // user.dataValues.userInstruments = userInstruments;
-        //     // user.dataValues.userStatus = userStatus;
+    } catch (error) {
+        console.log("error");
+        return res.status(500).json({
+            error: true,
+            message: "Une erreur interne est survenue, veuillez réessayer plus tard."
+        })
+    }
+}
 
 
-        //     await formattedUser.push({
-        //         id: user.id,
-        //         firstName: user.firstName,
-        //         lastName: user.lastName,
-        //         email: user.email,
-        //         phone: user.phone,
-        //         deletionDate: user.deletionDate,
-        //         userInstruments,
-        //         userStatus,
-        //         userRoles
-        //     });
+exports.GetAllBase = async (req, res) => {
+    try {
+        const users = await User.findAll({ where: { isPublic: true } });
 
-        //     if (index === users.length - 1) {
-              
-        //     }
-        // })
+        const formattedUsers = [];
 
+        const userStatus = await UserStatus.findAll();
 
+        const formattedUserStatus = [];
+
+        userStatus.forEach((userStatusData) => {
+            formattedUserStatus.push({ userId: userStatusData.userId, statusId: userStatusData.statusId });
+        });
+
+        users.map((user, index) => {
+            if (formattedUserStatus.filter((status) => status.userId === user.id).length > 0) {
+                const userData = {
+                    id: user.id,
+                    firstName: user.firstName,
+                    lastName: user.lastName
+                }
+                
+                formattedUsers.push(userData);
+            }
+
+            if (index === users.length - 1) {
+                return res.status(200).json({
+                    error: false,
+                    message: "Les utilisateurs ont bien été récupérés",
+                    data: formattedUsers
+                })
+            }
+        })
     } catch (error) {
         console.log("error");
         return res.status(500).json({
@@ -610,7 +577,6 @@ exports.ArchiveUser = async (req, res) => {
             });
         }
 
-
         await user.update(userData);
 
         return res.status(200).json({
@@ -619,6 +585,93 @@ exports.ArchiveUser = async (req, res) => {
         });
     } catch (error) {
         console.error(error);
+        return res.status(500).json({
+            error: true,
+            message: "Une erreur interne est survenue, veuillez réessayer plus tard."
+        });
+    }
+}
+
+
+
+
+
+exports.UserUpdate = async (req, res) => {
+    try {
+        const { id } = req.body;
+
+        if (!id || isNaN(id)) {
+            return res.status(400).json({
+                error: true,
+                message: "Requête invalide."
+            });
+        }
+
+        const user = await User.findOne({ where: { id: id } });
+
+        if (!user) {
+            return res.status(404).json({
+                error: true,
+                message: "Utilisateur introuvable."
+            });
+        }
+        
+
+        const { firstName, lastName, email } = req.body;
+        let { phoneNumber } = req.body;
+
+        if (!firstName || !lastName || !email ) {
+            return res.status(400).json({
+                error: true,
+                message: "Requête invalide."
+            });
+        }
+
+        const nameRegex = /^[a-zA-Z]+$/;
+        const emailRegex = /^[a-zA-Z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/i;
+
+        if (!nameRegex.test(firstName) || !nameRegex.test(lastName)) {
+            return res.status(400).json({
+                error: true,
+                message: "Le nom et le prénom doivent contenir au moins 2 caractères et ne doivent pas contenir de chiffres."
+            });
+        }
+
+        if (!emailRegex.test(email)) {
+            return res.status(400).json({
+                error: true,
+                message: "L'adresse email est invalide."
+            });
+        }
+
+        if (phoneNumber) {
+            const phoneData = await phone(phoneNumber, { country: 'FR' })
+            if (!phoneData.isValid) {
+                return res.status(400).json({
+                    error: true,
+                    message: 'Le numéro de téléphone est incorrect.'
+                })
+            } else {
+                phoneNumber = phoneData.phoneNumber
+            }
+        }
+
+
+
+
+
+
+
+
+        await user.update(userData);
+
+        return res.status(200).json({
+            error: false,
+            message: "Les informations de l'utilisateur ont bien été mises à jour."
+        });
+
+    } catch (error) {
+        console.log(error)
         return res.status(500).json({
             error: true,
             message: "Une erreur interne est survenue, veuillez réessayer plus tard."

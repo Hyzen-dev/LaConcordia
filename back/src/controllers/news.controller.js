@@ -2,9 +2,12 @@ const News = require("../models/news.model");
 
 exports.Create = async (req, res) => {
     try {
-        const { title, description, content, authorId } = req.body;
-        const thumbnail = req.file.filename;
+        const { title, description, content } = req.body;
 
+        const { id: authorId } = req.decoded;
+        
+        const thumbnail = req.file.filename;
+        
         if (!title || !thumbnail || !description || !content || !authorId) {
             return res.status(400).json({
                 error: true,
@@ -25,9 +28,10 @@ exports.Create = async (req, res) => {
             message: "L'actualité a bien été créée."
         });
     } catch (error){
-        console.log("error");
+        console.log("error", error);
+        const errorMessage = error?.message;
         return res.status(500).json({
-            error: true,
+            error: errorMessage,
             message: "Une erreur interne est survenue, veuillez réessayer plus tard."
         })
     }
@@ -53,7 +57,7 @@ exports.GetAll = async (req, res) => {
 
 exports.GetById = async (req, res) => {
     try {
-        const { id } = req.params;
+        const { id } = req.body;
 
         if (!id || isNaN(id)) {
             return res.status(400).json({
@@ -74,7 +78,7 @@ exports.GetById = async (req, res) => {
         return res.status(200).json({
             error: false,
             message: "L'actualité a été récupérée.",
-            post: news
+            data: news
         });
     } catch (error){
         console.log("error");
@@ -87,6 +91,39 @@ exports.GetById = async (req, res) => {
 
 exports.Update = async (req, res) => {
     try {
+        const { id, title, description, content } = req.body;
+        const picture = req.file;
+        console.log(req.body, req.file)
+
+        if (!id || isNaN(id)) {
+            return res.status(400).json({
+                error: true,
+                message: "Requête invalide."
+            });
+        }
+
+        const news = await News.findOne({ where: { id: id } });
+
+        if (!news) {
+            return res.status(404).json({
+                error: true,
+                message: "L'article est introuvable."
+            });
+        }
+
+        const newsData = {
+            title: title || news.title,
+            description: description || news.description,
+            content: content || news.content,
+            thumbnail: picture?.filename || news.thumbnail
+        }
+
+        await news.update(newsData);
+
+        return res.status(200).json({
+            error: false,
+            message: "L'article a bien été mis à jour."
+        });
 
     } catch (error){
         console.log("error");

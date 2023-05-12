@@ -11,7 +11,6 @@
 #root {
   display: flex;
   flex-direction: column;
-  // justify-content: space-between;
   min-height: 100vh;
 }
 
@@ -25,7 +24,7 @@ li {
   list-style-type: none;
 }
 
-.link {
+.link{
   text-decoration: none;
 }
 
@@ -41,6 +40,7 @@ li {
         font-family: "Patua One";
         font-weight: 400;
         font-size: 18px !important;
+        margin-top: 50px;
 
         @media screen and (min-width: 768px) {
           font-size: 16px !important;
@@ -63,10 +63,54 @@ li {
   transform: translate(-50%, -50%);
 }
 
+.mainLoadingScreen {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, 50%);
+}
+
 @media screen and (min-width: 480px) {
 
 
   .loadingScreen {
     left: 60%;
   }
+}
+
+.ql-snow.ql-toolbar button, .ql-snow .ql-toolbar button {
+  margin-top: 0 !important;
+}
+
+.ql-snow .ql-formats {
+  display: flex !important;
+  align-items: center !important;
+}
+
+.ql-toolbar.ql-snow {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+}
+
+.ql-toolbar.ql-snow, .ql-container.ql-snow {
+  border: 1px solid rgb(109, 182, 76) !important;
+}
+
+.ql-container.ql-snow {
+  border-top: 0 !important;
+  background-color: rgb(235, 235, 235) !important;
+}
+
+.ql-editor {
+  min-height: 150px;
+  resize: vertical;
+}
+
+.rdt_Table {
+  overflow: hidden !important;
+}
+
+.dlUCce {
+  overflow: hidden !important;
 }
