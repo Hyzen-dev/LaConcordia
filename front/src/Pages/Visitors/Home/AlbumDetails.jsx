@@ -69,13 +69,13 @@ export default function AlbumDetails() {
                 <h3>{album.title}</h3>
             </div>
 
-            <div className='pagePattern__content'>
+            <div className='pagePattern__cardsContent'>
                 {album.length <= 0 || allMedias.length <= 0 ? <MainLoadingScreen /> : <>
 
                     {allMedias.length <= 0 || !allMedias[0]?.file ?
                         <MainLoadingScreen /> :
                         <div>
-                            <div className='mediasCardContainer'>
+                            <div className='cardsContainer'>
                                 {/* Utilisation d'une expression JSX qui vérifie si currentPageData existe et contient au moins un élément avec une propriété name. Si c'est le cas, la méthode map() est utilisée pour créer une nouvelle liste de Composants MediasCard. Si currentPageData est vide ou n'a pas de propriété name, rien n'est renvoyé. */}
                                 {currentPageData && currentPageData[0]?.file && currentPageData.length > 0 ? currentPageData.map((item, k) => (
                                     <MediasCard selectedCard={selectedMedias} setSelectedCard={setSelectedMedias} mediasCard={item} key={k} album={album.title} />

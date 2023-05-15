@@ -10,15 +10,17 @@
 
 @import './button';
 
+@import './Cards/mediasCard';
+@import './Cards/cards';
+@import './Cards/albumsCard';
+@import './Cards/cardsContainer';
+
 @import './Visitors/pattern/headerVisitors';
 @import './Visitors/pattern/homeNavbar';
 @import './Visitors/pattern/navbar';
 
 @import './Visitors/content/about';
-@import './Visitors/content/mediasCard';
 @import './Visitors/content/band';
-@import './Visitors/content/cards';
-@import './Visitors/content/albumsCard';
 @import './Visitors/content/musicSchool';
 @import './Visitors/content/signIng';
 @import './Visitors/content/signUp';
@@ -29,7 +31,6 @@
 @import './Users/content/profil';
 @import './Users/content/table';
 @import './Users/content/notification';
-@import './Users/content/cardsContainer';
 @import './Users/content/messages';
 
 @import './footer';

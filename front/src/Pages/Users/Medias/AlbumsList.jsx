@@ -4,6 +4,8 @@ import { Helmet } from 'react-helmet';
 import Sweetpagination from 'sweetpagination';
 import AlbumCard from '../../../Components/Cards/AlbumCard.Component';
 import { useApi } from '../../../Router';
+import MainLoadingScreen from '../../../Components/LoadingScreen/MainLoadingScreen.Component';
+
 
 
 // Page AlbumsList qui renvoi la liste des albums déjà créés.
@@ -35,27 +37,31 @@ export default function AlbumsList() {
         <h3>Modifiez ou supprimez un album</h3>
       </div>
 
-      <div className='usersPage__content'>
 
-        <Link to='/espace-membre/medias/creation' className='link add'><button className='greenButton'>Ajouter un nouvel album</button></Link>
+      <Link to='/espace-membre/medias/creation' className='link add'><button className='greenButton'>Ajouter un nouvel album</button></Link>
 
-        <div className="medias-cards-container usersCardsContainer">
 
-          {/* Utilisation d'une expression JSX qui vérifie si "currentPageData" existe et contient au moins un élément avec une propriété "title". Si c'est le cas, la méthode map() est utilisée pour créer une nouvelle liste de Composant "AlbumCard". Si "currentPageData" est vide ou n'a pas de propriété "title", rien n'est renvoyé. */}
-          {currentPageData && currentPageData[0]?.thumbnail && currentPageData.length > 0 ? currentPageData.map((item, k) => (
-            <AlbumCard albumCard={item} key={k} />
-          )) : null}
-        </div>
+      {allAlbums.length <= 0 ? <MainLoadingScreen /> :
+        <>
+          <div className="cardsContainer">
 
-        {/* Intégration du module "SweetPagination", qui permet l'affichage de 6 cartes albums par page */}
-        <Sweetpagination
-          currentPageData={setCurrentPageData}
-          dataPerPage={6}
-          getData={allAlbums}
-          navigation={true}
-          getStyle={'pagination-style'}
-        />
-      </div>
+            {/* Utilisation d'une expression JSX qui vérifie si "currentPageData" existe et contient au moins un élément avec une propriété "title". Si c'est le cas, la méthode map() est utilisée pour créer une nouvelle liste de Composant "AlbumCard". Si "currentPageData" est vide ou n'a pas de propriété "title", rien n'est renvoyé. */}
+            {currentPageData && currentPageData[0]?.thumbnail && currentPageData.length > 0 ? currentPageData.map((item, k) => (
+              <AlbumCard albumCard={item} key={k} />
+            )) : null}
+          </div>
+
+          <div className='pagination'>
+            {/* Intégration du module "SweetPagination", qui permet l'affichage de 6 cartes albums par page */}
+            <Sweetpagination
+              currentPageData={setCurrentPageData}
+              dataPerPage={6}
+              getData={allAlbums}
+              navigation={true}
+              getStyle={'pagination-style'}
+            />
+          </div>
+        </>}
     </div>
   )
 }

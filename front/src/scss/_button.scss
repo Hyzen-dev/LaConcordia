@@ -23,10 +23,13 @@ button, .button {
 
 .firstButton {
     background-color: $main-color-darkGrey;
+    font-size: 14px;
 }
 
 .secondButton {
     background-color: $main-color-grey;
+    font-size: 14px;
+
 }
 
 .mediasActionsContainer__button {
@@ -53,7 +56,6 @@ button, .button {
 
 .addButton {
     display: block;
-
 }
 
 .closeButton {

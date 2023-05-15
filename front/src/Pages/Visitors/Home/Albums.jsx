@@ -32,10 +32,10 @@ export default function Medias() {
                 <h2>Galerie médias</h2>
             </div>
 
-            <div className='pagePattern__content'>
+            <div className='pagePattern__cardsContent'>
                 {allAlbums.length <= 0 ? <MainLoadingScreen /> :
                     <>
-                        <div className='albumCardContainer'>
+                        <div className='cardsContainer'>
                             {currentPageData && currentPageData[0]?.title && currentPageData.length > 0 ? currentPageData.map((item, k) => {
                                 return <AlbumCard albumCard={item} key={k} />
                             }) : null}

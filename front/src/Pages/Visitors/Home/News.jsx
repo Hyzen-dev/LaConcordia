@@ -36,7 +36,7 @@ export default function News() {
         </h2>
       </div>
 
-      <div className='pagePattern__content'>
+      <div>
         {allNews.length <= 0 ? <MainLoadingScreen /> :
           <>
 

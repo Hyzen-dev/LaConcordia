@@ -17,10 +17,10 @@ export default function NewsCard(props) {
         year: 'numeric',
         month: 'long',
         day: 'numeric'
-      })} - ${new Date(createdAt).toLocaleTimeString('fr-FR', {
+    })} - ${new Date(createdAt).toLocaleTimeString('fr-FR', {
         hour: '2-digit',
         minute: '2-digit'
-      })}`;
+    })}`;
 
     // Si l'url débute bien par "espace-membre", on affiche uniquement la div "cards", dans laquelle se trouve la photo de couverture, les premiers caractères de l'article, la date de création et le lien vers la localisation de l'évènement
     if (isUsersPage) {
@@ -29,13 +29,11 @@ export default function NewsCard(props) {
                 <Link to={`/espace-membre/actualites/gestion/${id}`} className='link'>
                     <img src={`${apiUrl}/images/${thumbnail}`} alt="photo" className='cards__img' />
                     <div className='cards__content'>
-                        <h3 className='cards__title'>{title}</h3>
+                        <h3 className='cards__content__title'>{title}</h3>
 
                         {/* Le taille du contenu de l'article est divisée afin de ne laisser apparaitre que les premiers caractères de l'article */}
-                        <p className='cards__content__content'>{description}</p>
-                        <div className='cards__content__footer newsFooter'>
-                            <p className='cards__content__footer__date'>{formattedDate}</p>
-                        </div>
+                        <p className='cards__content__summary'>{description}</p>
+                        <p className='cards__content__date'>{formattedDate}</p>
                     </div>
                 </Link>
             </div>
@@ -49,11 +47,9 @@ export default function NewsCard(props) {
                 <Link to={`/actualites/${id}`} className='link'>
                     <img width={'100%'} src={`${apiUrl}/images/${thumbnail}`} alt="photo" className='cards__img' />
                     <div className='cards__content'>
-                        <h3 className='cards__title'>{title}</h3>
-                        <p className='cards__content__content'>{description}</p>
-                        <div className='cards__content__footer newsFooter'>
-                            <p className='cards__content__footer__date'>{formattedDate}</p>
-                        </div>
+                        <h3 className='cards__content__title'>{title}</h3>
+                        <p className='cards__content__summary'>{description}</p>
+                        <p className='cards__content__date'>{formattedDate}</p>
                     </div>
                 </Link>
             </div>
