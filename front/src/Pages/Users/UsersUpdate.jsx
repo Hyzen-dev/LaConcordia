@@ -22,7 +22,7 @@ const FilterComponent = ({ filterText, onFilter, onClear }) => {
         aria-label="Search Input"
         value={filterText}
         onChange={onFilter} />
-      <button type="button" onClick={onClear}>X</button>
+      <button type="button" onClick={onClear} className='undoButton'><i className="fa-solid fa-square-xmark"></i></button>
     </>
   )
 }

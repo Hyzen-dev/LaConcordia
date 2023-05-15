@@ -46,7 +46,7 @@ export default function Profil(props) {
   }
 
   return (
-    <div className='usersPage'>
+    <div className='tablePage'>
       <Helmet><title>La Concordia - Mon profil</title></Helmet>
 
         {!user?.userRoles || user.length <= 0 || !roles || !status || !instruments ? <LoadingScreen /> :
