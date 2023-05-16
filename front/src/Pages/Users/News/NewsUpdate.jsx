@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import NewsDatas from './../../../data/News';
-import UpdateForm from '../../../Components/Forms/UpdateForm.Component';
 import { useApi } from '../../../Router';
 import LoadingScreen from '../../../Components/LoadingScreen/LoadingScreen.Component';
 

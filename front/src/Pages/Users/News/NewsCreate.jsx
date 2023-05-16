@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
-import CreateForm from '../../../Components/Forms/CreateForm.Component';
-// Page NewsCreate qui affiche le formulaire de création d'une nouvelle actualité.
 import { useApi } from '../../../Router';
 
 import 'react-quill/dist/quill.snow.css'; // Importez le thème "snow" par défaut
