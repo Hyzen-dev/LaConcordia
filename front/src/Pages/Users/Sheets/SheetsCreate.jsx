@@ -4,6 +4,7 @@ import CreateForm from '../../../Components/Forms/CreateForm.Component';
 import { Viewer, Worker } from '@react-pdf-viewer/core';
 // import file from './../../../assets/sheets.pdf'
 import '@react-pdf-viewer/default-layout/lib/styles/index.css';
+import { Link } from 'react-router-dom';
 
 
 // Page SheetsCreate qui affiche le formulaire de création d'une nouvelle partition.
@@ -19,6 +20,9 @@ export default function SheetsCreate() {
         <h2>Partitions</h2>
         <h3>Ajouter une nouvelle partition</h3>
       </div>
+      <Link to='/espace-membre/partitions/gestion' className='returnButton'>
+          <i class="fa-solid fa-circle-up fa-rotate-270"></i>
+        </Link>
       <div className='usersPage__content'>
         {/* Intégration du composant "CreateForm" */}
         <CreateForm setFile={setFile} />

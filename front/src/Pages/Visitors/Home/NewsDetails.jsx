@@ -38,6 +38,9 @@ export default function NewsDetails() {
         <h2>{news.title}</h2>
         <h3>{formattedDate}</h3>
       </div>
+        <Link to='/actualites' className='returnButton'>
+          <i class="fa-solid fa-circle-up fa-rotate-270"></i>
+        </Link>
       <div className='pagePattern__content'>
         {news.length <= 0 || !news.content ? <MainLoadingScreen /> :
           <>

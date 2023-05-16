@@ -114,3 +114,7 @@ li {
 .dlUCce {
   overflow: hidden !important;
 }
+
+.ReactModal__Content--after-open, .ReactModalPortal>div {
+  z-index: 999 !important;
+}

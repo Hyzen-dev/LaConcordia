@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import UpdateForm from '../../../Components/Forms/UpdateForm.Component';
 import SheetsDatas from './../../../data/Sheets';
@@ -17,14 +17,17 @@ export default function SheetsUpdate() {
         <div id='category'>
           <h2>Modification de la partition "{sheet.title}"</h2>
         </div>
-        <div className='usersPage__content'>
 
+        <Link to='/espace-membre/partitions/gestion' className='returnButton'>
+          <i class="fa-solid fa-circle-up fa-rotate-270"></i>
+        </Link>
+
+        <div className='usersPage__content'>
           <form action="post">
             <fieldset className='form'>
               <UpdateForm />
             </fieldset>
           </form>
-
         </div>
       </div>
   )

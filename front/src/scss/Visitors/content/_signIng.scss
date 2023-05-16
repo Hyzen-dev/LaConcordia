@@ -8,3 +8,11 @@
         }
     }
 }
+
+.resetPasswordLink {
+    color: $main-color-darkGrey;
+    text-decoration: none;
+    display: block;
+    width: fit-content;
+    font-style: italic;
+}

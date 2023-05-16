@@ -39,7 +39,7 @@ export default function UpdateForm() {
             <div className='form createForm'>
                 <label htmlFor="title" className='pagePattern__subheading'>{title}</label>
                 <input type="text" name='title' value={event.title} />
-                <textarea name="" id="" cols="30" rows="10" value={event.content}></textarea>
+                <textarea name="content" id="content" cols="30" rows="10" value={event.content}></textarea>
                 <label htmlFor="download" className='greenButton button importButton'>Ajouter une photo pour illustrer votre évènement</label>
                 <input type="file" name="download" id='download' className='downloadInput' onChange={handleMediasChange} />
                 {medias && <img src={medias} alt="Uploaded file" width={'60%'} />}

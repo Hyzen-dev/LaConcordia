@@ -9,9 +9,11 @@ const customStyles = {
     height: 'fit-content',
     margin: 'auto',
     backgroundColor: 'rgba(217, 217, 217)',
+    zIndex: '999',
   },
   overlay: {
     backgroundColor: 'rgba(0, 0, 0, 0.75)',
+    zIndex: '999',
   }
 };
 

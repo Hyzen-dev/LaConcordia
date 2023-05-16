@@ -1,6 +1,8 @@
 .modal {
     display: flex;
     flex-direction: column;
+    z-index: 999;
+
 
     &__mediasTitle {
         color: white;
@@ -41,11 +43,14 @@
         // margin: 0px;
 
         &__medias {
-            // margin: auto;
-            // max-height: 460px;
-            width: 75%;
-            max-width: 650px;
+            max-height: 450px;
+            // width: 75%;
+            // max-width: 750px;
             margin: 0 auto;
+            overflow: hidden;
+            object-fit: cover;
+            object-position: center;
         }
     }
 }
+

@@ -70,6 +70,10 @@ export default function AlbumDetails() {
             </div>
 
             <div className='pagePattern__cardsContent'>
+                <Link to='/albums' className='returnButton'>
+                    <i class="fa-solid fa-circle-up fa-rotate-270"></i>
+                </Link>
+
                 {album.length <= 0 || allMedias.length <= 0 ? <MainLoadingScreen /> : <>
 
                     {allMedias.length <= 0 || !allMedias[0]?.file ?

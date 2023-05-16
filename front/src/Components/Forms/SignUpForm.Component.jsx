@@ -3,7 +3,8 @@ import ReCAPTCHA from "react-google-recaptcha";
 import { useApi } from '../../Router';
 import { useNavigate } from 'react-router-dom';
 import { toastNotification, updateToastNotification } from '../../Router';
-// Composant SignUpForm utilisé sur la page "SignUp"
+// Composant SignUpForm utlisé sur la page "SignUp"
+
 
 export default function SignUpForm() {
     const navigate = useNavigate();
@@ -89,7 +90,7 @@ export default function SignUpForm() {
             }
         } else {
             updateToastNotification(toastId, 'success', 'Votre compte a bien été créé, vous devez maintenant valider votre email.')
-            navigate('/connexion');
+            navigate('/verification');
         }
     }
 

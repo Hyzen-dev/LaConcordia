@@ -36,6 +36,9 @@ export default function EventsDetails() {
         <h2>{event.title}</h2>
         <h3>{formattedDate}</h3>
       </div>
+        <Link to='/evenements' className='returnButton'>
+          <i class="fa-solid fa-circle-up fa-rotate-270"></i>
+        </Link>
       <div className='pagePattern__content'>
         <p>{event.content}</p>
       </div>

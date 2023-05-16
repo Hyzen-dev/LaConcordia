@@ -656,13 +656,6 @@ exports.UserUpdate = async (req, res) => {
             }
         }
 
-
-
-
-
-
-
-
         await user.update(userData);
 
         return res.status(200).json({

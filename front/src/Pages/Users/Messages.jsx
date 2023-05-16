@@ -146,7 +146,7 @@ export default function Messages(props) {
                         <tr key={message.id}>
                           <td>{formattedDate}</td>
                           <td>{message.subject}</td>
-                          <td>
+                          <td className='buttonCell'>
                             {message.isRead ?
                               <button className='tableButton button--static' onClick={() => handleModal(message)}><i className="fa-solid fa-eye"></i></button>
                               :

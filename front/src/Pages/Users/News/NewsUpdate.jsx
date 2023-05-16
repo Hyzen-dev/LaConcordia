@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import NewsDatas from './../../../data/News';
 import UpdateForm from '../../../Components/Forms/UpdateForm.Component';
@@ -114,38 +114,42 @@ export default function NewsUpdate() {
     <div className='usersPage'>
       <Helmet><title>La Concordia - Actualié</title></Helmet>
 
-        <div id='category'>
-          <h2>Modification de l'actualité "{news.title}"</h2>
-        </div>
-        
-        <div className='usersPage__content'>
-
-          {news.length <= 0 || !news.title ? <LoadingScreen /> : <>
-            <form onSubmit={(event) => handleSubmit(event)}>
-              <fieldset className='form'>
-                <div className='form createForm'>
-                  <label htmlFor="title" className='usersPage__subheading'>Titre de l'article</label>
-                  <input type="text" name='title' placeholder={"Ajouter le titre"} value={title} onChange={(event) => setTitle(event.currentTarget.value)} />
-
-                  <label htmlFor="description" className='usersPage__subheading'>Description courte</label>
-                  <textarea value={description} onChange={(event) => setDescription(event.currentTarget.value)} name="description" id="description" placeholder='Ajouter une description courte, exemple : "Bienvenue sur notre site !"'></textarea>
-
-                  <label htmlFor="content" className='usersPage__subheading'>Contenu de l'article</label>
-                  <ReactQuill id="content" theme="snow"
-                    modules={Editor.modules}
-                    formats={Editor.formats} value={richContent} onChange={handleRichContentChange} />
-
-                  <label htmlFor="download" className='greenButton button importButton'>Ajouter une photo pour illustrer votre évènement</label>
-                  <input type="file" name="download" id='download' className='downloadInput' onChange={handleMediasChange} />
-
-                  {medias ? <img src={URL.createObjectURL(medias)} alt="Image de l'article" className='downloadImage' /> : showedImage ? <img src={`${useApi.baseUrl}/images/${showedImage}`} alt="Image de l'article" className='downloadImage' /> : null}
-
-                  <button className='greenButton sendButton'>Mettre à jour</button>
-                </div>
-              </fieldset>
-            </form>
-          </>}
-        </div>
+      <div id='category'>
+        <h2>Modification de l'actualité "{news.title}"</h2>
       </div>
+
+      <Link to='/espace-membre/actualites/gestion' className='returnButton'>
+        <i class="fa-solid fa-circle-up fa-rotate-270"></i>
+      </Link>
+
+      <div className='usersPage__content'>
+
+        {news.length <= 0 || !news.title ? <LoadingScreen /> : <>
+          <form onSubmit={(event) => handleSubmit(event)}>
+            <fieldset className='form'>
+              <div className='form createForm'>
+                <label htmlFor="title" className='usersPage__subheading'>Titre de l'article</label>
+                <input type="text" name='title' placeholder={"Ajouter le titre"} value={title} onChange={(event) => setTitle(event.currentTarget.value)} />
+
+                <label htmlFor="description" className='usersPage__subheading'>Description courte</label>
+                <textarea value={description} onChange={(event) => setDescription(event.currentTarget.value)} name="description" id="description" placeholder='Ajouter une description courte, exemple : "Bienvenue sur notre site !"'></textarea>
+
+                <label htmlFor="content" className='usersPage__subheading'>Contenu de l'article</label>
+                <ReactQuill id="content" theme="snow"
+                  modules={Editor.modules}
+                  formats={Editor.formats} value={richContent} onChange={handleRichContentChange} />
+
+                <label htmlFor="download" className='greenButton button importButton'>Ajouter une photo pour illustrer votre évènement</label>
+                <input type="file" name="download" id='download' className='downloadInput' onChange={handleMediasChange} />
+
+                {medias ? <img src={URL.createObjectURL(medias)} alt="Image de l'article" className='downloadImage' /> : showedImage ? <img src={`${useApi.baseUrl}/images/${showedImage}`} alt="Image de l'article" className='downloadImage' /> : null}
+
+                <button className='greenButton sendButton'>Mettre à jour</button>
+              </div>
+            </fieldset>
+          </form>
+        </>}
+      </div>
+    </div>
   )
 }

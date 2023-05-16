@@ -7,7 +7,7 @@ import { useApi } from '../../../Router';
 import 'react-quill/dist/quill.snow.css'; // Importez le thème "snow" par défaut
 import ReactQuill from 'react-quill';
 import { toastNotification, updateToastNotification } from '../../../Router';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function NewsCreate() {
 
@@ -109,6 +109,9 @@ export default function NewsCreate() {
         <h2>Actualités</h2>
         <h3>Création d'une nouvelle actualité</h3>
       </div>
+      <Link to='/espace-membre/actualites/gestion' className='returnButton'>
+        <i class="fa-solid fa-circle-up fa-rotate-270"></i>
+      </Link>
       <div className='usersPage__content'>
         {/* Intégration du composant "CreateForm" */}
         <form onSubmit={(event) => handleSubmit(event)} className='form createForm'>

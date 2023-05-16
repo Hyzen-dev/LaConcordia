@@ -7,6 +7,9 @@ export default function EventCard(props) {
 
     // Intégration des données "thumbnail", "title", "content", "createdAt" et "id" en tant que props.
     const { thumbnail, title, content, createdAt, id } = props.eventCard;
+    const { apiUrl } = props;
+
+    console.log(title)
 
     // Création de la variable "isUsersPage" qui vérifie si l'url actuel débute par "espace-membre". Le but étant que si l'url ne débute pas par "espace-membre", un lien redirige le visiteur pour consulter l'article complet.
     const isUsersPage = window.location.pathname.startsWith('/espace-membre');
@@ -26,7 +29,7 @@ export default function EventCard(props) {
         return (
             <div className='cards usersCards'>
                 <Link to={`/espace-membre/evenements/gestion/${id}`} className='link'>
-                    <img src={thumbnail} alt="photo" className='cards__img' />
+                    <img src={`${apiUrl}/images/${thumbnail}`} alt="photo" className='cards__img' />
                     <div className='cards__content' >
                         <h3 className='cards__content__title'>{title}</h3>
 
@@ -46,7 +49,7 @@ export default function EventCard(props) {
         return (
             <div className='cards'>
                 <Link to={`/evenements/${id}`} className='link'>
-                    <img src={thumbnail} alt="photo" className='cards__img' />
+                    <img width={'100%'} src={`${apiUrl}/images/${thumbnail}`} alt="photo" className='cards__img' />
                     <div className='cards__content'>
                         <h3 className='cards__content__title'>{title}</h3>
                         <p className='cards__content__summary'>{content.substring(0, (content.length / 60))} [...]</p>

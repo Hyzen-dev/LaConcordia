@@ -129,6 +129,7 @@ export default function UsersUpdate() {
       sortable: true,
     },
     {
+      name: '?',
       style: {
         width: 10 + 'px',
       },
@@ -149,6 +150,7 @@ export default function UsersUpdate() {
           <i style={{ color: 'white', fontSize: 12 + 'px' }} className='fas fa-xmark'></i>
         }
       </div>,
+      sortable: true,
     }
   ];
 

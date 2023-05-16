@@ -5,7 +5,7 @@ import UsersPage from './Components/Users/UsersPage';
 import { About, Events, EventsDetails, Albums, AlbumDetails, News, NewsDetails } from './Pages/Visitors/Home/exports';
 import { Band, Committee, MusicSchool } from './Pages/Visitors/Informations/exports';
 import Contact from './Pages/Visitors/Contact/Contact';
-import { SignUp, SignIn } from './Pages/Visitors/MemberSpace/exports';
+import { SignUp, SignIn, EmailVerification, ResetPassword } from './Pages/Visitors/MemberSpace/exports';
 import { EventsCreate, EventsList, EventsUpdate, AlbumsCreate, AlbumsList, AlbumUpdate, Messages, NewsCreate, NewsList, NewsUpdate, Notifications, Profil, SheetsCreate, SheetsList, SheetsUpdate, SheetsUsers, UsersUpdate, UserUpdate } from './Pages/Users/exports';
 import Footer from './Components/Footer/Footer.Component';
 import ApiHandler from './service/ApiHandler';
@@ -184,6 +184,14 @@ function RouterContainer() {
 
               <Route path='connexion'>
                 <Route index element={<SignIn fetchProfile={fetchProfile} />} />
+              </Route>
+
+              <Route path='verification'>
+                <Route index element={<EmailVerification />} />
+              </Route>
+
+              <Route path='reinitialisation-mdp'>
+                <Route index element={<ResetPassword />} />
               </Route>
 
               <Route path='*' element={<Navigate to='/' replace />} />

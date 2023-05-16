@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import UpdateForm from '../../../Components/Forms/UpdateForm.Component';
 import AlbumsDatas from './../../../data/Albums';
@@ -17,6 +17,9 @@ export default function AlbumUpdate() {
         <div id='category'>
           <h2>Modification de l'album <br /> "{album.name}"</h2>
         </div>
+        <Link to='/espace-membre/medias/gestion' className='returnButton'>
+          <i class="fa-solid fa-circle-up fa-rotate-270"></i>
+        </Link>
         <div className='usersPage__content'>
           <form action="post">
             <fieldset className='form'>

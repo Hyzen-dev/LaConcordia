@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useApi } from '../../Router';
 import { toastNotification, updateToastNotification } from '../../Router';
 // Composant SignInForm utilisé sur la page "SignIn".
@@ -87,6 +87,7 @@ export default function SignInForm(props) {
               value={password}
             />
             {errors.includes('password') && <label htmlFor='passwordInput'>Veuillez renseigner un mot de passe</label>}
+            <Link to='/reinitialisation-mdp' className='resetPasswordLink'>Mot de passe oublié ?</Link>
           </div>
           <button type="submit" className='greenButton'>Se connecter</button>
         </fieldset>

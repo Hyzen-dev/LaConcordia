@@ -7,9 +7,12 @@ const customStyles = {
   content: {
     border: 'none',
     backgroundColor: 'rgba(0, 0, 0, 0)',
+    zindex: '999'
+
   },
   overlay: {
     backgroundColor: 'rgba(0, 0, 0, 0.75)',
+    zindex: '999'
   }
 };
 

@@ -12,12 +12,14 @@ export default function Events() {
   // Utilisation du Hook useState pour définir les données de la page actuelle et leur état. "currentPageData" est initialisé avec un tableau de deux cases vides grâce à la méthode "fill()" d'un nouvel objet Array. Cette variable est utilisée par "SweetPagination" pour afficher les évènements de la page courante.
   const [currentPageData, setCurrentPageData] = useState(new Array(2).fill());
 
-
   const [allEvents, setAllEvents] = useState([])
 
   const fetchAllEvents = async () => {
     const response = await useApi.events.GetAll();
-    return setAllEvents(response.data);
+    const events = response.data.sort((a, b) => {
+      return new Date(b.createdAt) - new Date(a.createdAt);
+    });
+    return setAllEvents(events);
   }
 
   useEffect(() => {
@@ -33,14 +35,14 @@ export default function Events() {
         <h2>Évènements à venir</h2>
       </div>
 
-      <div className='pagePattern__content'>
+      <div>
         {allEvents.length <= 0 ? <MainLoadingScreen /> :
           <>
 
             <div className="cardsContainer">
               {/* Utilisation d'une expression JSX qui vérifie si "currentPageData" existe et contient au moins un élément avec une propriété "name". Si c'est le cas, la méthode map() est utilisée pour créer une nouvelle liste de Composants "EventCard". Si "currentPageData" est vide ou n'a pas de propriété "thumbnail", rien n'est renvoyé. */}
               {currentPageData && currentPageData[0]?.thumbnail && currentPageData.length > 0 ? currentPageData.map((item, k) => (
-                <EventCard eventCard={item} key={k} />
+                <EventCard apiUrl={useApi.baseUrl} eventCard={item} key={k} />
               )) : null}
             </div>
 
