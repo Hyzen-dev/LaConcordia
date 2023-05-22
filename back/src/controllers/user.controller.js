@@ -594,6 +594,59 @@ exports.ArchiveUser = async (req, res) => {
 
 
 
+exports.UserNotification = async (req, res) => {
+    try {
+        const { id, state } = req.body;
+
+        if (!id || isNaN(id)) {
+            return res.status(400).json({
+                error: true,
+                message: "Requête invalide."
+            });
+        }
+
+        const user = await User.findOne({ where: { id: id } });
+
+        if (!user) {
+            return res.status(404).json({
+                error: true,
+                message: "Utilisateur introuvable."
+            });
+        }
+
+        const userData = {
+            notification: state ? true : false,
+        }
+
+        if (state && user.notification) {
+            return res.status(400).json({
+                error: true,
+                message: "Les notifications sont activées."
+            });
+        } else if (!state && !user.deletionDate) {
+            return res.status(400).json({
+                error: true,
+                message: "Les notifications ne sont pas activées."
+            });
+        }
+
+        await user.update(userData);
+
+        return res.status(200).json({
+            error: false,
+            message: state ? "Les notification ont bien été activées" : "Les notification ont bien été désactivées."
+        });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({
+            error: true,
+            message: "Une erreur interne est survenue, veuillez réessayer plus tard."
+        });
+    }
+}
+
+
+
 
 
 exports.UserUpdate = async (req, res) => {

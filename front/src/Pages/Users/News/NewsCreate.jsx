@@ -113,11 +113,17 @@ export default function NewsCreate() {
       <div className='usersPage__content'>
         {/* Intégration du composant "CreateForm" */}
         <form onSubmit={(event) => handleSubmit(event)} className='form createForm'>
+          
           <label htmlFor="title" className='usersPage__subheading'>Titre de l'actualité</label>
+
           <input value={title} onChange={(event) => setTitle(event.currentTarget.value)} type="text" name='title' placeholder='Ajouter le titre' />
+
           <label htmlFor="description" className='usersPage__subheading'>Description courte</label>
+
           <textarea value={description} onChange={(event) => setDescription(event.currentTarget.value)} name="description" id="description" placeholder='Ajouter une description courte, exemple : "Bienvenue sur notre site !"'></textarea>
+
           <label htmlFor="content" className='usersPage__subheading'>Contenu de l'actualité</label>
+
           <ReactQuill id="content" theme="snow"
             modules={Editor.modules}
             formats={Editor.formats} value={richContent} onChange={handleRichContentChange} />

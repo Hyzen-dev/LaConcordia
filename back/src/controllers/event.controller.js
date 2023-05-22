@@ -2,10 +2,13 @@ const Event = require("../models/event.model");
 
 exports.Create = async (req, res) => {
     try {
-        const { title, address, content, eventDate, authorId } = req.body;
+        const { title, content, eventDate } = req.body;
+
+        const { id: authorId } = req.decoded;
+
         const thumbnail = req.file.filename;
 
-        if (!title || !thumbnail || !address || !content || !eventDate || !authorId) {
+        if (!title || !thumbnail || !content || !eventDate || !authorId) {
             return res.status(400).json({
                 error: true,
                 message: "Requête invalide."
@@ -16,9 +19,8 @@ exports.Create = async (req, res) => {
         await new Event({
             title: title,
             thumbnail: thumbnail,
-            address: address,
-            content: content,
             eventDate: eventDate,
+            content: content,
             authorId: authorId
         }).save();
 

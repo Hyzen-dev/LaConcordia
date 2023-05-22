@@ -6,6 +6,7 @@ const { authenticateUser } = require("../middlewares/authentication.middleware")
 const restricted = require("../middlewares/restricted.middleware");
 
 router.post('/create', [authenticateUser, restricted(["administrator"]), upload.single('thumbnail')], newsController.Create);
+
 router.post('/find', newsController.GetById);
  
 router.get('/', newsController.GetAll);

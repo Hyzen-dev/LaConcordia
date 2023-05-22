@@ -35,10 +35,6 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE'
       },
-      address: {
-        type: Sequelize.TEXT('long'),
-        allowNull: false
-      },
       createdAt: {
         type: Sequelize.DATE,
         allowNull: false

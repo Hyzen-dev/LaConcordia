@@ -29,10 +29,6 @@ Event.init({
       authorId: {
         type: DataTypes.INTEGER,
       },
-      address: {
-        type: DataTypes.TEXT('long'),
-        allowNull: false
-      },
 }, {
     sequelize,
     tableName: 'events',

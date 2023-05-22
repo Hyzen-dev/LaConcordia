@@ -109,6 +109,9 @@ class ApiHandler {
         ArchiveUser: async (data) => {
             return await this.#PATCH_REQUEST("/user/archive", data, this.accessToken)
         },
+        UserNotification: async (data) => {
+            return await this.#PATCH_REQUEST("user/notification", data, this.accessToken)
+        },
         GetById: async (data) => {
             return await this.#POST_REQUEST("/user/find", data, this.accessToken)
         }
@@ -182,6 +185,9 @@ class ApiHandler {
 
     // Events methods
     events = {
+        Create: async (data) => {
+            return await this.#POST_REQUEST("/event/create", data, this.accessToken, { multipart: true })
+        },
         GetAll: async () => {
             return await this.#GET_REQUEST("/event")
         },

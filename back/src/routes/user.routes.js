@@ -17,6 +17,7 @@ router.get('/all', [authenticateUser, restricted(["administrator"])], userContro
 router.get('/allbase', userController.GetAllBase);
 
 router.patch('/archive', [authenticateUser, restricted(["administrator"])], userController.ArchiveUser);
+router.patch('/notification', [authenticateUser, restricted(["administrator"])], userController.UserNotification);
 router.patch('/update', [authenticateUser, restricted(["administrator"])], userController.UserUpdate)
 
 module.exports = router;
