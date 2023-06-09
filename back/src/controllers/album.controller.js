@@ -1,10 +1,11 @@
 const Album = require("../models/album.model");
 const Media = require("../models/media.model");
+
 exports.Create = async (req, res) => {
     try {
         const { title } = req.body;
         const thumbnail = req.file.filename;
-        
+
         if (!title || !thumbnail) {
             return res.status(400).json({
                 error: true,
@@ -12,19 +13,21 @@ exports.Create = async (req, res) => {
             });
         }
 
-        const albumData = {
+        const album = await new Album({
             title: title,
             thumbnail: thumbnail
-        }
+        }).save();
 
-        await new Album(albumData).save();
+        const albumId = album.id; // Récupérer l'ID de l'album
 
         return res.status(201).json({
             error: false,
-            message: "L'album a bien été créé."
+            id: {albumId},
+            message: `L'album a bien été créé ${albumId}.`,
         });
-    } catch (error){
+    } catch (error) {
         console.log("error");
+        const errorMessage = error?.message;
         return res.status(500).json({
             error: true,
             message: "Une erreur interne est survenue, veuillez réessayer plus tard."
@@ -41,7 +44,7 @@ exports.GetAll = async (req, res) => {
             message: "Les albums ont bien été récupérés",
             data: albums
         })
-    } catch (error){
+    } catch (error) {
         console.log("error");
         return res.status(500).json({
             error: true,
@@ -75,9 +78,9 @@ exports.GetById = async (req, res) => {
         return res.status(200).json({
             error: false,
             message: "L'album a été récupéré.",
-            data: {album, medias}
+            data: { album, medias }
         });
-    } catch (error){
+    } catch (error) {
         console.log("error");
         return res.status(500).json({
             error: true,
@@ -88,8 +91,37 @@ exports.GetById = async (req, res) => {
 
 exports.Update = async (req, res) => {
     try {
+        const { id, title } = req.body;
+        const thumbnail = req.file;
 
-    } catch (error){
+        if (!id || isNaN(id)) {
+            return res.status(400).json({
+                error: true,
+                message: "Requête invalide."
+            });
+        }
+
+        const album = await Album.findOne({ where: { id: id } });
+
+        if (!album) {
+            return res.status(404).json({
+                error: true,
+                message: "L'album est introuvable."
+            });
+        }
+
+        const albumData = {
+            title: title || news.title,
+            thumbnail: thumbnail?.filename || album.thumbnail
+        }
+
+        await album.update(albumData);
+
+        return res.status(200).json({
+            error: false,
+            message: "L'album a bien été mis à jour."
+        });
+    } catch (error) {
         console.log("error");
         return res.status(500).json({
             error: true,
@@ -100,8 +132,31 @@ exports.Update = async (req, res) => {
 
 exports.Delete = async (req, res) => {
     try {
+        const { id } = req.body;
 
-    } catch (error){
+        if (!id || isNaN(id)) {
+            return res.status(400).json({
+                error: true,
+                message: "Requête invalide."
+            });
+        }
+
+        const album = await Album.findOne({ where: { id: id } });
+
+        if (!album) {
+            return res.status(404).json({
+                error: true,
+                message: "L'album est introuvable."
+            });
+        }
+        
+        await album.destroy();
+
+        return res.status(201).json({
+            error: false,
+            message: "L'album a bien été supprimée."
+        });
+    } catch (error) {
         console.log("error");
         return res.status(500).json({
             error: true,

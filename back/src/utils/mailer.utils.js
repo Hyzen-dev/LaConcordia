@@ -42,6 +42,35 @@ const sendMail = async (type, args, email) => {
                 text: `Nous avons bien reçu votre demande, nous vous répondrons dans les plus brefs délais - ${firstname} ${lastname} (${mail}) : ${content}.`, // plain text body
                 html: `<b>Nous avons bien reçu votre demande, nous vous répondrons dans les plus brefs délais - ${firstname} ${lastname} (${mail}) : ${content}.</b>`, // html body
             });
+        } else if (type === "resetPassword") {
+            const { code } = args;
+
+            // send mail with defined transport object
+            info = await transporter.sendMail({
+                from: `"MyAPI 👻" <noreply@laconcordia.fr>`,
+                to: `${email}`,
+                subject: "Reset password ✔",
+                text: `Your reset password code is : ${code}.`,
+                html: `<b>Your reset password code is : ${code}.</b>`,
+            });
+        } else if (type === "newNews") {
+            // send mail with defined transport object
+            info = await transporter.sendMail({
+                from: `"MyAPI 👻" <noreply@laconcordia.fr>`,
+                to: `${email}`,
+                subject: "Nouvelle actualité ✔",
+                text: `Une nouvelle actualité a été publiée sur le site, vous pouvez la consulter en vous rendant sur la page des actualités.`,
+                html: `<b>Une nouvelle actualité a été publiée sur le site, vous pouvez la consulter en vous rendant sur la page des actualités.</b>`,
+            });
+        } else if (type === "newEvent") {
+            // send mail with defined transport object
+            info = await transporter.sendMail({
+                from: `"MyAPI 👻" <noreply@laconcordia.fr>`,
+                to: `${email}`,
+                subject: "Nouvel événement ✔",
+                text: `Un nouvel événement a été publié sur le site, vous pouvez le consulter en vous rendant sur la page des événements.`,
+                html: `<b>Un nouvel événement a été publié sur le site, vous pouvez le consulter en vous rendant sur la page des événements.</b>`,
+            });
         }
 
         console.log("Message sent: %s", info.messageId);

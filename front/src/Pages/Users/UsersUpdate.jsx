@@ -1,16 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { useApi } from '../../Router';
-import { Link } from 'react-router-dom';
 import LoadingScreen from '../../Components/LoadingScreen/LoadingScreen.Component';
-import Button from '@mui/material/Button';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
 import { useNavigate } from 'react-router-dom';
 import DataTable from 'react-data-table-component';
-
-
-import { Icon } from '@mui/material';
 
 const FilterComponent = ({ filterText, onFilter, onClear }) => {
   return (
@@ -68,10 +61,10 @@ export default function UsersUpdate() {
   const handleDelete = async (id, state) => {
     const response = await useApi.user.ArchiveUser({ id: id, state: state });
     if (response.status === 200) {
-      console.log(response)
+      // console.log(response)
       fetchAllUsers();
     } else {
-      console.log(response);
+      // console.log(response);
     }
   }
 
@@ -103,13 +96,11 @@ export default function UsersUpdate() {
     headCells: {
       style: {
         overflow: 'hidden',
-
       },
     },
     cells: {
       style: {
         overflow: 'hidden',
-
       },
     },
   }
@@ -133,6 +124,7 @@ export default function UsersUpdate() {
       style: {
         width: 10 + 'px',
       },
+      selector: row => row.deletionDate,
       cell: row => <div style={{
         marginLeft: 'auto',
         display: 'flex',
@@ -142,9 +134,9 @@ export default function UsersUpdate() {
         padding: 8 + 'px',
         width: 8 + 'px',
         height: 8 + 'px',
-        backgroundColor: row.isArchived ? 'red' : 'green',
+        backgroundColor: row.deletionDate ? 'red' : 'green',
       }}>
-        {!row.isArchived ?
+        {!row.deletionDate ?
           <i style={{ color: 'white', fontSize: 12 + 'px' }} className='fas fa-check'></i>
           :
           <i style={{ color: 'white', fontSize: 12 + 'px' }} className='fas fa-xmark'></i>
@@ -201,85 +193,6 @@ export default function UsersUpdate() {
           subHeaderComponent={subHeaderComponentMemo}
           persistTableHead
         />
-
-        {/* <div className='tablePage__content'>
-          <table className='table'>
-            <thead>
-              <tr>
-                <th className='table__header'>Nom</th>
-                <th className='table__header'>Prénom</th>
-                <th className='table__buttonHeader'>Profil</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              {allUsers.sort(sortUsers).map((user) => {
-                if (!user.deletionDate) {
-                  return (
-                    <tr key={user.id} className='table__rows'>
-                      <td>{user.lastName}</td>
-                      <td>{user.firstName}</td>
-                      <td className='table__buttonTd'>
-                        <Link to={`/espace-membre/utilisateurs/${user.id}`} className='link button'>
-                          <button className='button'>
-                            <i className="fa-solid fa-pencil"></i>
-                          </button>
-                        </Link>
-
-                        <button className='button button--red' onClick={() => handleDelete(user.id, true)} ><i className="fa-solid fa-xmark"></i></button>
-
-
-                      </td>
-                    </tr>
-                  );
-                } else {
-                  return null;
-                }
-              })}
-            </tbody>
-          </table>
-
-          <button className='button archiveMessagesButton' onClick={handleArchiveUsers}>Utilisateurs archivés</button>
-
-          {showArchivedUsers ?
-            allUsers.filter((user) => user.deletionDate).length <= 0 ?
-              <p className='table__noData'>Aucun message archivé</p>
-              :
-              <table className='table'>
-                <thead>
-                  <tr>
-                    <th className='table__header'>Nom</th>
-                    <th className='table__header'>Prénom</th>
-                    <th className='table__buttonHeader'>Profil</th>
-                  </tr>
-                </thead>
-
-                <tbody>
-                  {allUsers.sort(sortUsers).map((user) => {
-                    if (user.deletionDate) {
-                      return (
-                        <tr key={user.id} className='table__rows'>
-                          <td>{user.lastName}</td>
-                          <td>{user.firstName}</td>
-                          <td className='table__buttonTd'>
-                            <Link to={`/espace-membre/utilisateurs/${user.id}`} className='link button'>
-                              <button className='button'>
-                                <i className="fa-solid fa-pencil"></i>
-                              </button>
-                            </Link>
-
-                            <button className='button button--blue' onClick={() => handleDelete(user.id, false)}><i className="fa-solid fa-arrows-rotate"></i></button>
-                          </td>
-                        </tr>
-                      );
-                    } else {
-                      return null;
-                    }
-                  })}
-                </tbody>
-              </table>
-            : null}
-        </div> */}
       </>}
     </div>
   )

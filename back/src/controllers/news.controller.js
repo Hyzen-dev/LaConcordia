@@ -1,8 +1,10 @@
 const News = require("../models/news.model");
+const User = require("../models/user.model");
+const { sendMail } = require("../utils/mailer.utils");
 
 exports.Create = async (req, res) => {
     try {
-        const { title, description, content } = req.body;
+        const { title, description, content, isNotified } = req.body;
 
         const { id: authorId } = req.decoded;
         
@@ -22,6 +24,14 @@ exports.Create = async (req, res) => {
             content: content,
             authorId: authorId
         }).save();
+
+        if (isNotified) {
+            const usersWithNotification = await User.findAll({ where: { notification: true } });
+
+            usersWithNotification.forEach(async (user) => {
+                await sendMail("newNews", {}, user.email);
+            });
+        }
         
         return res.status(201).json({
             error: false,
@@ -136,7 +146,31 @@ exports.Update = async (req, res) => {
 
 exports.Delete = async (req, res) => {
     try {
+        const { id } = req.body;
 
+        if (!id || isNaN(id)) {
+            return res.status(400).json({
+                error: true,
+                message: "Requête invalide."
+            });
+        }
+
+        const news = await News.findOne({ where: { id: id } });
+
+        if (!news) {
+            return res.status(404).json({
+                error: true,
+                message: "L'actualité est introuvable."
+            });
+        }
+        
+        await news.destroy();
+
+        return res.status(201).json({
+            error: false,
+            message: "L'actualité a bien été supprimée."
+        });
+        
     } catch (error){
         console.log("error");
         return res.status(500).json({

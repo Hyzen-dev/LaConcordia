@@ -108,7 +108,19 @@ button, .button {
     margin-bottom: 20px;
 }
 
+.suspendButton {
+    background-color: red;
+    margin: auto;
+}
 
+.activeButton {
+    margin: auto;
+}
+
+.deletedButton {
+    background-color: red;
+    align-self: flex-end;
+}
 
 
 @media screen and (min-width: 480px) {
@@ -179,51 +191,50 @@ button, .button {
 
 
 
-// .button--flash {
-//     position: relative;
-//     font-size: 10px;
-//     animation: pulse 1.5s ease-in-out infinite;
-//     &::after {
-//         content: "!";
-//         position: absolute;
-//         top: 0;
-//         border: 1px solid red;
-//         border-radius: 50%;
-//         width: 12px;
-//         height: 12px;
-//         background-color: red;
-//         color: white;
-//         font-family: sans-serif;
-//         font-size: 10px;
-//         left: 0;
-//         transform: translate(-50%, -50%);
+.button--flash {
+    position: relative;
+    animation: pulse 1.5s ease-in-out infinite;
+    &::after {
+        content: "!";
+        position: absolute;
+        top: 0;
+        border: 1px solid red;
+        border-radius: 50%;
+        width: 12px;
+        height: 12px;
+        background-color: red;
+        color: white;
+        font-family: sans-serif;
+        font-size: 10px;
+        left: 0;
+        transform: translate(-50%, -50%);
 
-//         @media screen and (min-width: 480px) {
-//             left: inherit;
-//             right: 0;
-//             transform: translate(50%, -50%);
-//         }
-//     }
-// }
+        @media screen and (min-width: 480px) {
+            left: inherit;
+            right: 0;
+            transform: translate(50%, -50%);
+        }
+    }
+}
 
-// @keyframes pulse {
-//     0% {
-//         color: white;
-//         // color: $main-color-grey;
-//         transform: font-size(1);
-//     }
+@keyframes pulse {
+    0% {
+        color: white;
+        // color: $main-color-grey;
+        transform: font-size(1);
+    }
 
-//     50% {
-//         color: rgba(255, 255, 255, 0.1);
-//         transform: font-size(1);
-//     }
+    50% {
+        color: rgba(255, 255, 255, 0.1);
+        transform: font-size(1);
+    }
 
-//     100% {
-//         color: white;
-//         // color: $main-color-grey;
-//         transform: font-size(1);
-//     }
-// }
+    100% {
+        color: white;
+        // color: $main-color-grey;
+        transform: font-size(1);
+    }
+}
 
 
 

@@ -68,20 +68,20 @@ export default function Band() {
       <div className='bandPage pagePatter__content'>
         {!allStatus || allStatus.length <= 0 || !allUsers || allUsers.length <= 0 || !allUserStatus || allUserStatus.length <= 0 ? <MainLoadingScreen /> : <>
           <div className='harmonie'>
-            {allStatus.map((status) => {
+            {allStatus.map((status, key) => {
               if (status.type === 'DirectionHarmonie') {
                 return (
-                  <div key={status.id}>
-                    <h3 className='bandCategory'>{status.label}</h3>
+                  <div key={key}>
+                    <h3 className='pagePattern__subheading'>{status.label}</h3>
                     <div className='separator'></div>
-                    {allUserStatus.map((userstatus) => {
+                    {allUserStatus.map((userstatus, index) => {
                       if (userstatus.statusId === status.id) {
                         return (
-                          <div key={userstatus.userId}>
-                            {allUsers.map((user) => {
+                          <div key={index}>
+                            {allUsers.map((user, id) => {
                               if (userstatus.userId === user.id) {
                                 return (
-                                  <div key={user.id} className='bandMembers'>
+                                  <div key={id} className='bandMembers'>
                                     <p>{user.firstName} {user.lastName}</p>
                                   </div>
                                 )
@@ -100,31 +100,31 @@ export default function Band() {
             })}
 
 
-            {allStatus.map((status) => {
+            {allStatus.map((status, key) => {
               if (status.type === 'MusicienHarmonie') {
                 return (
-                  <div key={status.id}>
-                    {allInstruments.map((instrument) => {
+                  <div key={key}>
+                    {allInstruments.map((instrument, index) => {
                       if (instrument.statusId === status.id) {
                         return (
-                          <div key={instrument.id} className='bandCategory'>
-                            <h3>{instrument.label}</h3>
+                          <div key={index} >
+                            <h3 className='pagePattern__subheading'>{instrument.label}</h3>
                             <div className='separator'></div>
-                            {allUserInstruments.map((userinstrument) => {
+                            {allUserInstruments.map((userinstrument, id) => {
                               if (instrument.id === userinstrument.instrumentId) {
                                 return (
-                                  <>
-                                    {allUsers.map((user) => {
+                                  <div key={id}>
+                                    {allUsers.map((user, userId) => {
                                       if (user.id === userinstrument.userId) {
                                         return (
-                                          <div className='bandMembers'>
-                                            <p>{user.firstName}</p>
+                                          <div key={userId} className='bandMembers'>
+                                            <p>{user.firstName} {user.lastName}</p>
                                           </div>
                                         )
                                       }
                                       return null
                                     })}
-                                  </>
+                                  </div>
                                 )
                               }
                               return null
@@ -143,20 +143,20 @@ export default function Band() {
 
 
           <div className='clique'>
-            {allStatus.map((status) => {
+            {allStatus.map((status, key) => {
               if (status.type === 'DirectionClique') {
                 return (
-                  <div key={status.id} className='clique__content'>
-                    <h3 className='bandCategory'>{status.label}</h3>
+                  <div key={key} className='clique__content'>
+                    <h3 className='pagePattern__subheading'>{status.label}</h3>
                     <div className='separator'></div>
-                    {allUserStatus.map((userstatus) => {
+                    {allUserStatus.map((userstatus, index) => {
                       if (userstatus.statusId === status.id) {
                         return (
-                          <div key={userstatus.userId}>
-                            {allUsers.map((user) => {
+                          <div key={index}>
+                            {allUsers.map((user, id) => {
                               if (userstatus.userId === user.id) {
                                 return (
-                                  <div key={user.id} className='bandMembers'>
+                                  <div key={id} className='bandMembers'>
                                     <p>{user.firstName} {user.lastName}</p>
                                   </div>
                                 )
@@ -175,31 +175,31 @@ export default function Band() {
             })}
 
 
-            {allStatus.map((status) => {
+            {allStatus.map((status, key) => {
               if (status.type === 'MusicienClique') {
                 return (
-                  <div key={status.id}>
-                    {allInstruments.map((instrument) => {
+                  <div key={key}>
+                    {allInstruments.map((instrument, index) => {
                       if (instrument.statusId === status.id) {
                         return (
-                          <div key={instrument.id} className='clique__content'>
-                            <h3 className='bandCategory' >{instrument.label}</h3>
+                          <div key={index} className='clique__content'>
+                            <h3 className='pagePattern__subheading'>{instrument.label}</h3>
                             <div className='separator'></div>
-                            {allUserInstruments.map((userinstrument) => {
+                            {allUserInstruments.map((userinstrument, id) => {
                               if (instrument.id === userinstrument.instrumentId) {
                                 return (
-                                  <>
-                                    {allUsers.map((user) => {
+                                  <div key={id}>
+                                    {allUsers.map((user, userId) => {
                                       if (user.id === userinstrument.userId) {
                                         return (
-                                          <div className='bandMembers'>
-                                            <p>{user.firstName}</p>
+                                          <div key={userId} className='bandMembers'>
+                                            <p>{user.firstName} {user.lastName}</p>
                                           </div>
                                         )
                                       }
                                       return null
                                     })}
-                                  </>
+                                  </div>
                                 )
                               }
                               return null

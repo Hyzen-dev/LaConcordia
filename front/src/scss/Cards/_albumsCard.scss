@@ -1,6 +1,7 @@
 .albumCard {
     border-radius: 2px;
-    width: 100%;
+    width: 300px;
+    margin: auto;
 
     &__title {
         background-color: $main-color-darkGrey;
@@ -26,6 +27,7 @@
 
 @media screen and (min-width: 480px) {
     .albumCard {
+        width: 200px;
 
         &__img {
             height: 150px;
@@ -33,7 +35,6 @@
     }
 
 }
-
 
 
 @media screen and (min-width: 1280px) {

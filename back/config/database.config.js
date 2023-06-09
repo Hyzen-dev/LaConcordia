@@ -8,6 +8,7 @@ const sequelize = new Sequelize({
     database: config.database,
     port: config.port,
     dialect: config.dialect,
+    logging: false
 });
 
 module.exports = sequelize;

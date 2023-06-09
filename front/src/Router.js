@@ -67,6 +67,7 @@ export const updateToastNotification = (id, type, message) => {
 
 function RouterContainer() {
   const [user, setUser] = useState({});
+  const [notification, setNotification] = useState(false);
   const [isLogged, setIsLogged] = useState(Boolean(localStorage.getItem('accessToken')) || false);
 
 
@@ -84,10 +85,11 @@ function RouterContainer() {
   const fetchProfile = async () => {
     const response = await useApi.user.GetProfile()
     if (response && !response.error) {
-      console.log(response.data.data)
-      if (response.data.data.deletionDate) return logout();
-      setUser(response.data.data)
+      // console.log(response.data)
+      if (response.data.deletionDate) return logout();
+      setUser(response.data)
       setIsLogged(true)
+      setNotification(response.data.notification);
       return true
     } else if (response && response.error) {
       logout()
@@ -105,7 +107,7 @@ function RouterContainer() {
 
 
   // Création des states relatifs aux messages / messages lus / message selectionné
-  
+
   const [selectedMessage, setSelectedMessage] = useState({});
   const [readMessages, setReadMessages] = useState([]);
   const [allMessages, setAllMessages] = useState([])
@@ -113,33 +115,50 @@ function RouterContainer() {
 
   const fetchAllMessages = async () => {
     const response = await useApi.message.GetAll();
-    return setAllMessages(response.data);
+    // console.log("fetchAllMessages", response.data)
+    console.log("userRoles", user.userRoles)
+    console.log("checkRole", checkRole(['administrator', 'committee']));
+    if (checkRole(['administrator', 'committee'])) {
+      return setAllMessages(response.data);
+    } else {
+      return setAllMessages([]);
+    }
   }
 
-  useEffect(() => {
-    fetchAllMessages()
-  }, []);
-
-
-
-
-
-
-
-
-
-
-
-
-
+  
   const location = useLocation();
   const [isPanelRoute, setIsPanelRoute] = useState(false);
-
+  
   useEffect(() => {
     setIsPanelRoute(location.pathname.startsWith('/espace-membre'));
   }, [location.pathname]);
 
-  if (isLogged && !user) return <LoadingScreen />;
+  useEffect(() => {
+    if (isLogged && user?.userRoles) {
+      fetchAllMessages()
+    }
+  }, [isLogged, user?.userRoles]);
+  
+  
+  
+  const checkRole = (selectedRoles) => {
+    const currentRoles = user?.userRoles?.map(role => role.name);
+    
+    return selectedRoles.some((role) => currentRoles?.includes(role));
+  }
+  
+  const checkStatus = (selectedStatus) => {
+    const currentStatus = user?.userStatus?.map(status => status.type);
+    
+    return selectedStatus.some((status) => currentStatus?.includes(status));
+  }
+  
+  if (isLogged && (!user || !user.userRoles)) {
+    return <LoadingScreen />
+  } else {
+    // fetchAllMessages()
+  };
+  
   return (
     <>
       {isPanelRoute ? <UsersPage logout={logout} isLogged={isLogged} setIsLogged={setIsLogged} user={user} allMessages={allMessages} /> : <HeaderVisitors isLogged={isLogged} />}
@@ -170,6 +189,7 @@ function RouterContainer() {
             <Route path='harmonie-clique' element={<Band />} />
             <Route path='ecole-de-musique' element={<MusicSchool />} />
             <Route path='commission' element={<Committee />} />
+            <Route path='*' element={<Navigate to='/' replace />} />
           </Route>
 
           <Route path='contact'>
@@ -199,68 +219,97 @@ function RouterContainer() {
             :
             <Route path='espace-membre'>
 
-              <Route index element={<Profil user={user} />} />
+              <Route index element={<Profil user={user} notification={notification} setNotification={setNotification} />} />
 
-              <Route path='notifications'>
+              {/* <Route path='notifications'>
                 <Route index element={<Notifications />} />
-              </Route>
+              </Route> */}
 
-              <Route path='messages'>
-                <Route index element={
-                  <Messages
-                    selectedMessage={selectedMessage}
-                    setSelectedMessage={setSelectedMessage}
-                    readMessages={readMessages}
-                    setReadMessages={setReadMessages}
-                    allMessages={allMessages}
-                    setAllMessages={setAllMessages}
-                    messageIsRead={messageIsRead}
-                    setMessageIsRead={setMessageIsRead}
-                    fetchAllMessages={fetchAllMessages}
-                  />}
-                />
-              </Route>
 
-              <Route path='partitions'>
-                <Route path='gestion'>
-                  <Route index element={<SheetsList />} />
-                  <Route path=':id' element={<SheetsUpdate />} />
+              {
+                checkRole(['administrator', 'committee']) ?
+                  <Route path='messages'>
+                    <Route index element={
+                      <Messages
+                        selectedMessage={selectedMessage}
+                        setSelectedMessage={setSelectedMessage}
+                        readMessages={readMessages}
+                        setReadMessages={setReadMessages}
+                        allMessages={allMessages}
+                        setAllMessages={setAllMessages}
+                        messageIsRead={messageIsRead}
+                        setMessageIsRead={setMessageIsRead}
+                        fetchAllMessages={fetchAllMessages}
+                      />}
+                    />
+                    <Route path='*' element={<Navigate to='/espace-membre' replace />} />
+                  </Route>
+                  :
+                  null
+              }
+
+              {checkRole(["administrator", "musician", "professor", "archivist", "chief"]) &&
+                <Route path='partitions'>
+                  {checkRole(["administrator", "archivist", "chief"]) &&
+                    <Route path='gestion'>
+                      <Route index element={<SheetsList />} />
+                      <Route path=':id' element={<SheetsUpdate />} />
+                    </Route>
+                  }
+                  <Route path='mes-partitions' element={<SheetsUsers user={user} />} />
+                  <Route path='creation' element={<SheetsCreate />} />
+                  <Route path='*' element={<Navigate to='/espace-membre' replace />} />
                 </Route>
-                <Route path='mes-partitions' element={<SheetsUsers />} />
-                <Route path='creation' element={<SheetsCreate />} />
-              </Route>
-
-              <Route path='evenements'>
-                <Route path='gestion'>
-                  <Route index element={<EventsList />} />
-                  <Route path=':id' element={<EventsUpdate />} />
+              }
+              {checkRole(["administrator", "redactor", "professor", "photographer"]) &&
+                <Route path='evenements'>
+                  <Route path='gestion'>
+                    <Route index element={<EventsList />} />
+                    <Route path=':id' element={<EventsUpdate />} />
+                  </Route>
+                  <Route path='creation' element={<EventsCreate />} />
+                  <Route path='*' element={<Navigate to='/espace-membre' replace />} />
                 </Route>
-                <Route path='creation' element={<EventsCreate />} />
-              </Route>
+              }
 
-              <Route path='medias'>
-                <Route path='gestion'>
-                  <Route index element={<AlbumsList />} />
-                  <Route path=':id' element={<AlbumUpdate />} />
+              {checkRole(["administrator", "photographer"]) &&
+
+                <Route path='medias'>
+                  <Route path='gestion'>
+                    <Route index element={<AlbumsList />} />
+                    <Route path=':id' element={<AlbumUpdate />} />
+                  </Route>
+                  <Route path='creation' element={<AlbumsCreate />} />
+                  <Route path='*' element={<Navigate to='/espace-membre' replace />} />
                 </Route>
-                <Route path='creation' element={<AlbumsCreate />} />
-              </Route>
+              }
 
-              <Route path='actualites'>
-                <Route path='gestion'>
-                  <Route index element={<NewsList />} />
-                  <Route path=':id' element={<NewsUpdate />} />
+              {checkRole(["administrator", "redactor", "professor", "photographer"]) &&
+
+                <Route path='actualites'>
+                  <Route path='gestion'>
+                    <Route index element={<NewsList />} />
+                    <Route path=':id' element={<NewsUpdate />} />
+                  </Route>
+                  <Route path='creation' element={<NewsCreate />} />
+                  <Route path='*' element={<Navigate to='/espace-membre' replace />} />
                 </Route>
-                <Route path='creation' element={<NewsCreate />} />
-              </Route>
+              }
 
-              <Route path='utilisateurs'>
-                <Route index element={<UsersUpdate />} />
-                <Route path=':id' element={<UserUpdate />} />
-              </Route>
+
+              {checkRole(["administrator"]) &&
+                <Route path='utilisateurs'>
+                  <Route index element={<UsersUpdate />} />
+                  <Route path=':id' element={<UserUpdate />} />
+                </Route>
+              }
+
+              <Route path='*' element={<Navigate to='/espace-membre' replace />} />
             </Route>
           }
+
         </Route>
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
       <Footer />
     </>)

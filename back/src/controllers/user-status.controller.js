@@ -1,4 +1,7 @@
 const UserStatus = require("../models/user-status.model");
+const Status = require('./../models/status.model');
+const User = require("../models/user.model");
+const { Op } = require("sequelize");
 
 exports.Create = async (req, res) => {
     try {
@@ -108,9 +111,33 @@ exports.Update = async (req, res) => {
 
 exports.Delete = async (req, res) => {
     try {
+        const { userId, statusId } = req.body;
 
+        if (!userId || !statusId || isNaN(userId) || isNaN(statusId)) {
+            return res.status(400).json({
+                error: true,
+                message: "Requête invalide."
+            });
+        }
+
+        const userStatus = await UserStatus.findOne({ where: { [Op.and]: [{ userId: userId }, { statusId: statusId }] } });
+
+        if (!userStatus) {
+            return res.status(404).json({
+                error: true,
+                message: "La relation entre utilisateur et status est introuvable."
+            });
+        }
+        
+
+        await userStatus.destroy();
+
+        return res.status(201).json({
+            error: false,
+            message: "La relation entre utilisateur et status a bien été supprimée."
+        });
     } catch (error){
-        console.log("error");
+        console.log(error);
         return res.status(500).json({
             error: true,
             message: "Une erreur interne est survenue, veuillez réessayer plus tard."

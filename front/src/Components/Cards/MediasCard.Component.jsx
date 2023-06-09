@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import ModalPhoto from '../Modal/ModalPhoto.Component';
+import { useApi } from '../../Router';
 
 // Composant MediasCard qui est utilisé sur la page AlbumDetails.
 
@@ -26,10 +27,11 @@ export default function MediasCard(props) {
     };
 
 
+
     return (
-        <div className='mediasCard'>
+        <div key={id} className='mediasCard'>
             {/* Intégration des props "picture" et "title" en tant que valeur des attributs "src" et "alt". Utilisation de l'attribut "onClick" avec la fonction "handleClick" afin de rendre active la div "mediasActionsContainer". */}
-            <img src={file} alt={file.split('/')[file.split('/').length - 1]} className='mediasCard__photo' onClick={handleClick} />
+            <img src={`${useApi.baseUrl}/images/${file}`} alt={file.split('/')[file.split('/').length - 1]} className='mediasCard__photo' onClick={handleClick} />
 
             {/* La classe de la div dépend de la valeur de la varibale "click", si vrai la valeur "active" est ajouté au nom de la classe. */}
             <div className={selectedCard === id ? "mediasActionsContainer active" : "mediasActionsContainer"} onClick={handleClick}>
@@ -45,7 +47,7 @@ export default function MediasCard(props) {
                 <div className='modal photoModal'>
                     {/* Lors du clic sur le bouton, la valeur de "showModal" devient fausse afin de fermer la modale */}
                     <button className='closeButton' onClick={() => setShowModal(false)}><i className="fa-solid fa-square-xmark"></i></button>
-                    <img src={file} alt={file.split('/')[file.split('/').length - 1]} className='modal__medias' />
+                    <img src={`${useApi.baseUrl}/images/${file}`} alt={file.split('/')[file.split('/').length - 1]} className='modal__medias' />
                     <p className='modal__mediasTitle'>{album}</p>
                 </div>
             </ModalPhoto>

@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import Sweetpagination from 'sweetpagination';
 import MediasCard from '../../../Components/Cards/MediasCard.Component';
-import AlbumsDatas from '../../../data/Albums';
-import PhotosDatas from '../../../data/Photos';
 import { useApi } from '../../../Router';
 import MainLoadingScreen from '../../../Components/LoadingScreen/MainLoadingScreen.Component';
 // Page AlbumDetail, qui renvoi l'ensemble des médias de l'album sur lequel l'utilisateur à cliqué.
@@ -13,32 +11,51 @@ export default function AlbumDetails() {
 
     // Utilisation du Hook useState pour définir les données de la page actuelle et leur états. "currentPageData" est initialisé avec un tableau de deux cases vides grâce à la méthode "fill()" d'un nouvel objet Array. Cette variable est utilisée par "SweetPagination" pour afficher les médias de la page courante.
     const [currentPageData, setCurrentPageData] = useState(new Array(2).fill());
-
+    const [noData, setNoData] = useState(false);
     // Création des variables 
     const [album, setAlbum] = useState({})
-    const [allMedias, setAllMedias] = useState([])
+    const [medias, setMedias] = useState([]);
     const [selectedMedias, setSelectedMedias] = useState({})
 
     // Récupération de l'id de l'album via les params
     const { id } = useParams();
+    const albumId = id
+
+    const navigate = useNavigate();
 
 
     // Récupération de l'album en fonction de son id récupéré dans les params
     const fetchAlbum = async () => {
         const response = await useApi.albums.GetById({ id: parseInt(id) });
-        setAlbum(response.data.data.album);
-        setAllMedias(response.data.data.medias);
+        setAlbum(response.data.album);
+        setMedias(response.data.medias);
         return true;
     }
+
+    const fetchMedias = async () => {
+        const response = await useApi.medias.GetByAlbumId({ albumId: albumId });
+        // console.log(response)
+        if (response.error) return navigate('/albums');
+
+        if (response.data.length <= 0) {
+            setNoData(true)
+        } else {
+            setNoData(false)
+        }
+
+        await setMedias(response.data)
+    }
+
     useEffect(() => {
         fetchAlbum()
+        fetchMedias()
     }, []);
 
 
     // // Récupération de tous les médias en fonction de l'albumId récupéré dans les params
     // const fetchAllMedias = async () => {
     //     const response = await useApi.medias.GetByAlbumId({ albumId: parseInt(id) });
-    //     return setAllMedias(response.data.data);
+    //     return setAllMedias(response.data);
     // }
     // useEffect(() => {
     //     fetchAllMedias()
@@ -53,11 +70,12 @@ export default function AlbumDetails() {
     // Récupération du médias selectionné
     // const fetchSelectedMedias = async () => {
     //     const response = await useApi.medias.GetById({ id: "???" });
-    //     return setSelectedMedias(response.data.data);
+    //     return setSelectedMedias(response.data);
     // }
     // useEffect(() => {
     //     fetchSelectedMedias()
     // }, []);
+
 
 
     return (
@@ -71,12 +89,13 @@ export default function AlbumDetails() {
 
             <div className='pagePattern__cardsContent'>
                 <Link to='/albums' className='returnButton'>
-                    <i class="fa-solid fa-circle-up fa-rotate-270"></i>
+                    <i className="fa-solid fa-circle-up fa-rotate-270"></i>
                 </Link>
 
-                {album.length <= 0 || allMedias.length <= 0 ? <MainLoadingScreen /> : <>
 
-                    {allMedias.length <= 0 || !allMedias[0]?.file ?
+                {noData ? <p>Aucun média à afficher</p> : album.length <= 0 || medias.length <= 0 ? <MainLoadingScreen /> : <>
+
+                    {medias.length <= 0 || !medias[0]?.file ?
                         <MainLoadingScreen /> :
                         <div>
                             <div className='cardsContainer'>
@@ -92,7 +111,7 @@ export default function AlbumDetails() {
                                 <Sweetpagination
                                     currentPageData={setCurrentPageData}
                                     dataPerPage={6}
-                                    getData={allMedias}
+                                    getData={medias}
                                     navigation={true}
                                     getStyle={'pagination-style'}
                                 />

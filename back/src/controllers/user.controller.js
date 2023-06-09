@@ -170,10 +170,7 @@ exports.ResendVerification = async (req, res) => {
             });
         }
 
-
-
         const user = await User.findOne({ where: { email: email } });
-
 
         if (!user) {
             return res.status(401).json({
@@ -260,6 +257,7 @@ exports.SignIn = async (req, res) => {
         if (!user.isActive) {
             return res.status(401).json({
                 error: true,
+                isNotVerified: true,
                 message: "Ce compte n'est pas activé."
             });
         }
@@ -327,9 +325,10 @@ exports.GetAllBase = async (req, res) => {
                 const userData = {
                     id: user.id,
                     firstName: user.firstName,
-                    lastName: user.lastName
+                    lastName: user.lastName,
+                    notification: user.notification
                 }
-                
+
                 formattedUsers.push(userData);
             }
 
@@ -349,8 +348,6 @@ exports.GetAllBase = async (req, res) => {
         })
     }
 }
-
-
 
 exports.GetProfile = async (req, res) => {
     try {
@@ -398,6 +395,7 @@ exports.GetProfile = async (req, res) => {
             instrumentsDetails.forEach((instrument2) => {
                 if (instrument2.id === instrument.instrumentId) {
                     const instrumentData = {
+                        id: instrument2.id,
                         name: instrument2.name,
                         label: instrument2.label,
                     }
@@ -427,11 +425,13 @@ exports.GetProfile = async (req, res) => {
             error: false,
             data:
             {
+                id: user.id,
                 firstName: user.firstName,
                 lastName: user.lastName,
                 email: user.email,
                 phone: user.phone,
                 deletionDate: user.deletionDate,
+                notification: user.notification,
                 userInstruments,
                 userStatus,
                 userRoles
@@ -474,6 +474,7 @@ exports.GetById = async (req, res) => {
             rolesDetails.forEach((role2) => {
                 if (role2.id === role.roleId) {
                     const userRoleData = {
+                        id: role2.id,
                         name: role2.name,
                         label: role2.label
                     }
@@ -492,6 +493,7 @@ exports.GetById = async (req, res) => {
             instrumentsDetails.forEach((instrument2) => {
                 if (instrument2.id === instrument.instrumentId) {
                     const instrumentData = {
+                        id: instrument2.id,
                         name: instrument2.name,
                         label: instrument2.label,
                     }
@@ -508,6 +510,7 @@ exports.GetById = async (req, res) => {
             statusDetails.forEach((status2) => {
                 if (status2.id === data.statusId) {
                     const statusData = {
+                        id: status2.id,
                         name: status2.name,
                         label: status2.label,
                         type: status2.type
@@ -562,6 +565,7 @@ exports.ArchiveUser = async (req, res) => {
         }
 
         const userData = {
+            accessToken: null,
             deletionDate: state ? new Date(Date.now()) : null,
         }
 
@@ -581,7 +585,7 @@ exports.ArchiveUser = async (req, res) => {
 
         return res.status(200).json({
             error: false,
-            message: state ? "L'utilisateur a bien été archivé." : "L'utilisateur a bien été désarchivé."
+            message: state ? "L'utilisateur a bien été archivé" : "L'utilisateur a bien été désarchivé."
         });
     } catch (error) {
         console.error(error);
@@ -593,10 +597,10 @@ exports.ArchiveUser = async (req, res) => {
 }
 
 
-
-exports.UserNotification = async (req, res) => {
+exports.UserUpdate = async (req, res) => {
     try {
-        const { id, state } = req.body;
+        const { id, firstName, lastName, email } = req.body;
+        let { phoneNumber } = req.body;
 
         if (!id || isNaN(id)) {
             return res.status(400).json({
@@ -615,69 +619,10 @@ exports.UserNotification = async (req, res) => {
         }
 
         const userData = {
-            notification: state ? true : false,
-        }
-
-        if (state && user.notification) {
-            return res.status(400).json({
-                error: true,
-                message: "Les notifications sont activées."
-            });
-        } else if (!state && !user.deletionDate) {
-            return res.status(400).json({
-                error: true,
-                message: "Les notifications ne sont pas activées."
-            });
-        }
-
-        await user.update(userData);
-
-        return res.status(200).json({
-            error: false,
-            message: state ? "Les notification ont bien été activées" : "Les notification ont bien été désactivées."
-        });
-    } catch (error) {
-        console.error(error);
-        return res.status(500).json({
-            error: true,
-            message: "Une erreur interne est survenue, veuillez réessayer plus tard."
-        });
-    }
-}
-
-
-
-
-
-exports.UserUpdate = async (req, res) => {
-    try {
-        const { id } = req.body;
-
-        if (!id || isNaN(id)) {
-            return res.status(400).json({
-                error: true,
-                message: "Requête invalide."
-            });
-        }
-
-        const user = await User.findOne({ where: { id: id } });
-
-        if (!user) {
-            return res.status(404).json({
-                error: true,
-                message: "Utilisateur introuvable."
-            });
-        }
-        
-
-        const { firstName, lastName, email } = req.body;
-        let { phoneNumber } = req.body;
-
-        if (!firstName || !lastName || !email ) {
-            return res.status(400).json({
-                error: true,
-                message: "Requête invalide."
-            });
+            firstName: firstName || user.firstName,
+            lastName: lastName || user.lastName,
+            email: email || user.email,
+            phoneNumber: phoneNumber || user.phoneNumber,
         }
 
         const nameRegex = /^[a-zA-Z]+$/;
@@ -713,7 +658,7 @@ exports.UserUpdate = async (req, res) => {
 
         return res.status(200).json({
             error: false,
-            message: "Les informations de l'utilisateur ont bien été mises à jour."
+            message: "Le profil a bien été mis à jour."
         });
 
     } catch (error) {
@@ -722,5 +667,224 @@ exports.UserUpdate = async (req, res) => {
             error: true,
             message: "Une erreur interne est survenue, veuillez réessayer plus tard."
         });
+    }
+}
+
+
+exports.PasswordUpdate = async (req, res) => {
+    try {
+        const { email, currentPassword, newPassword, confirmationPassword } = req.body;
+
+        if (!email || !currentPassword || !newPassword || !confirmationPassword) {
+            return res.status(400).json({ message: 'Requête invalide.' });
+        }
+
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/i;
+
+        if (!passwordRegex.test(newPassword)) {
+            return res.status(400).json({
+                error: true,
+                message: "Le mot de passe doit contenir au moins 8 caractères dont une majuscule, une minuscule, un chiffre et un caractère spécial."
+            });
+        }
+
+        const user = await User.findOne({ where: { email: email } });
+
+        const isPasswordValid = await comparePassword(currentPassword, user.password);
+
+        if (!isPasswordValid) {
+            return res.status(400).json({
+                error: true,
+                message: "Le mot de passe actuel est incorrect."
+            });
+        }
+
+        const encodedPassword = await encryptPassword(newPassword);
+
+        const passwordData = {
+            password: encodedPassword
+        }
+
+        await user.update(passwordData);
+
+        return res.status(201).json({
+            error: false,
+            message: "Le mot de passe a bien été mis à jour."
+        });
+
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: 'Une erreur s\'est produite lors de la mise à jour du mot de passe.' });
+    }
+}
+
+
+exports.NotificationUpdate = async (req, res) => {
+    try {
+        const { email, notification } = req.body;
+
+        if (!email || !["false", "true"].includes(String(notification))) {
+            return res.status(400).json({ message: 'Requête invalide.' });
+        }
+
+        const user = await User.findOne({ where: { email: email } });
+
+        const notificationData = {
+            notification: notification
+        }
+
+        if (user.notification === notification) {
+            return res.status(400).json({
+                error: true,
+                message: "Les notifications sont déjà à jour."
+            });
+        }
+        
+        await user.update(notificationData);
+
+        return res.status(201).json({
+            error: false,
+            message: "Les notifications ont bien été mises à jour."
+        });
+
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: 'Une erreur s\'est produite lors de la mise à jour des notifications.' });
+    }
+}
+
+
+
+
+exports.PasswordReset = async (req, res) => {
+    try {
+        const { email } = req.body;
+
+        if (!email) {
+            return res.status(400).json({ message: 'Requête invalide.' });
+        }
+
+        const user = await User.findOne({ where: { email: email } });
+
+        if (!user) {
+            return res.status(200).json({
+                error: true,
+                message: "Si l'adresse email que vous avez renseigné est dans notre base de données, vous recevrez le code de réinitialisation par mail d'ici quelques minutes."
+            });
+        }
+
+        const code = Math.floor(100000 + Math.random() * 900000);
+
+        const userData = {
+            passwordResetCode: code,
+            passwordResetCodeExpiration: new Date(Date.now() + 15 * 60 * 1000)
+        }
+
+        await sendMail("resetPassword", { code: code }, user.email);
+
+        await user.update(userData);
+
+        return res.status(200).json({
+            error: false,
+            message: "Si l'adresse email que vous avez renseigné est dans notre base de données, vous recevrez le code de réinitialisation par mail d'ici quelques minutes."
+        });
+
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: 'Une erreur s\'est produite lors de la mise à jour du mot de passe.' });
+    }
+}
+
+
+exports.CheckResetCode = async (req, res) => {
+    try {
+        const { email, code } = req.body;
+
+        if (!email || !code) {
+            return res.status(400).json({ message: 'Requête invalide.' });
+        }
+
+        const user = await User.findOne({ where: { [Op.and]: { email: email, passwordResetCode: code } } });
+
+        if (!user) {
+            return res.status(400).json({
+                error: true,
+                message: "Le code de vérification est incorrect et ou a expiré."
+            });
+        }
+
+        const expirationDate = user.passwordResetCodeExpiration;
+
+        if (expirationDate < new Date()) {
+            return res.status(401).json({
+                error: true,
+                message: "Le code a expiré."
+            });
+        }
+
+        return res.status(201).json({
+            error: false,
+            message: "Le code est valide."
+        });
+
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: 'Une erreur s\'est produite lors de la vérification du code.' });
+    }
+}
+
+exports.PasswordResetUpdate = async (req, res) => {
+    try {
+        const { email, code, password } = req.body;
+
+        if (!email || !password || !code) {
+            return res.status(400).json({ message: 'Requête invalide.' });
+        }
+
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/i;
+
+        if (!passwordRegex.test(password)) {
+            return res.status(400).json({
+                error: true,
+                message: "Le mot de passe doit contenir au moins 8 caractères dont une majuscule, une minuscule, un chiffre et un caractère spécial."
+            });
+        }
+
+        const user = await User.findOne({ where: { [Op.and]: { email: email, passwordResetCode: code } } });
+
+        if (!user) {
+            return res.status(400).json({
+                error: true,
+                message: "Le code de vérification est incorrect et ou a expiré."
+            });
+        }
+
+        const expirationDate = user.passwordResetCodeExpiration;
+
+        if (expirationDate < new Date()) {
+            return res.status(401).json({
+                error: true,
+                message: "Le code a expiré."
+            });
+        }
+
+        const encodedPassword = await encryptPassword(password);
+
+        const passwordData = {
+            password: encodedPassword,
+            passwordResetCode: null,
+            passwordResetCodeExpiration: null
+        }
+
+        await user.update(passwordData);
+
+        return res.status(201).json({
+            error: false,
+            message: "Le mot de passe a bien été mis à jour."
+        });
+
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: 'Une erreur s\'est produite lors de la mise à jour du mot de passe.' });
     }
 }

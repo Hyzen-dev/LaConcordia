@@ -53,6 +53,14 @@ User.init({
         type: DataTypes.DATE,
         allowNull: true
       },
+      passwordResetCode: {
+        type: DataTypes.STRING,
+        allowNull: true
+      },
+      passwordResetCodeExpiration: {
+        type: DataTypes.DATE,
+        allowNull: true
+      },
       accessToken: {
         type: DataTypes.TEXT('long'),
         allowNull: true

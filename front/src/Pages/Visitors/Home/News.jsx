@@ -10,21 +10,28 @@ import MainLoadingScreen from '../../../Components/LoadingScreen/MainLoadingScre
 export default function News() {
 
   // Utilisation du Hook useState pour définir les données de la page actuelle et leur état. "currentPageData" est initialisé avec un tableau de deux cases vides grâce à la méthode "fill()" d'un nouvel objet Array. Cette variable est utilisée par "SweetPagination" pour afficher les actualités de la page courante.
-  const [currentPageData, setCurrentPageData] = useState(new Array(2).fill());
-
-  const [allNews, setAllNews] = useState([])
+  const [currentPageData, setCurrentPageData] = useState({});
+  const [noData, setNoData] = useState(false);
+  const [allNews, setAllNews] = useState(null)
 
   const fetchAllNews = async () => {
     const response = await useApi.news.GetAll();
     const news = response.data.sort((a, b) => {
       return new Date(b.createdAt) - new Date(a.createdAt);
     });
+
+    if (news.length <= 0) {
+      setNoData(true);
+    }
+
     return setAllNews(news);
   }
 
   useEffect(() => {
-    fetchAllNews()
+    fetchAllNews();
+    // console.log(currentPageData)
   }, []);
+  // console.log(currentPageData)
 
   return (
     <div className='pagePattern'>
@@ -37,14 +44,14 @@ export default function News() {
       </div>
 
       <div>
-        {allNews.length <= 0 ? <MainLoadingScreen /> :
+        {noData ? <p>Aucune actualité à afficher</p> : !allNews || allNews.length <= 0 ? <MainLoadingScreen /> :
           <>
 
             <div className="cardsContainer">
               {/* Utilisation d'une expression JSX qui vérifie si "currentPageData" existe et contient au moins un élément avec une propriété "thumbnail". Si c'est le cas, la méthode map() est utilisée pour créer une nouvelle liste de Composants "NewsCard". Si "currentPageData" est vide ou n'a pas de propriété "thumbnail", rien n'est renvoyé. */}
               {currentPageData && currentPageData[0]?.thumbnail && currentPageData.length > 0 ? currentPageData.map((item, k) => (
                 <NewsCard apiUrl={useApi.baseUrl} newsCard={item} key={k} />
-              )) : null}
+              )) : <p>Aucune actualité à afficher</p>}
             </div>
 
             <div className='pagination'>
@@ -52,13 +59,13 @@ export default function News() {
               <Sweetpagination
                 currentPageData={setCurrentPageData}
                 dataPerPage={6}
-                getData={allNews}
+                getData={allNews || []}
                 navigation={true}
                 getStyle={'pagination-style'}
               />
             </div>
           </>}
-          </div>
+      </div>
     </div>
   )
 }

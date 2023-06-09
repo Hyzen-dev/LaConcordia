@@ -4,7 +4,6 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
-
 }
 
 
@@ -16,7 +15,8 @@
 
 .form input,
 .form textarea,
-.form select {
+.form select,
+.searchInput {
     border: 1px solid $main-color-green;
     background-color: rgb(235, 235, 235);
     font-size: 16px;
@@ -26,7 +26,8 @@
 }
 
 .form input,
-.form select {
+.form select,
+.searchInput {
     height: 35px;
 }
 
@@ -53,6 +54,34 @@
     font-size: 18px;
 }
 
+.downloadImage {
+    width: 150px;
+    margin: auto;
+    max-height: 300px;
+    overflow: hidden;
+    object-fit: cover;
+    box-shadow: 0px 6px 12px rgb(200, 200, 200);
+    border-radius: 2px;
+}
+
+.searchInput {
+    width: 60%;
+    margin: auto;
+    margin-bottom: 20px;
+}
+
+.notificationContainer {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    font-style: italic;
+}
+
+.notificationCheckbox {
+    // height: 20px !important;
+    width: 18px !important;
+}
+
 @media screen and (min-width: 1280px) {
 
     .form {
@@ -64,5 +93,9 @@
         &__box input {
             width: 50%;
         }
+    }
+
+    .downloadImage {
+        width: 400px;
     }
 }

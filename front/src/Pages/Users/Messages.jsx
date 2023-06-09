@@ -16,15 +16,14 @@ export default function Messages(props) {
     setShowModal(true)
     setReadMessages([...readMessages, data.id]);
   }
-
   const handleDelete = async (id, state) => {
     const response = await useApi.message.ArchiveMessage({ id: id, state: state });
-    if (response.status === 200) {
-      console.log(response)
+    if (!response.error) {
+      // console.log(response)
       setSelectedMessage({});
-      fetchAllMessages();
+      await fetchAllMessages();
     } else {
-      console.log(response);
+      // console.log(response);
     }
   }
 
@@ -47,8 +46,8 @@ export default function Messages(props) {
   const handleReadMessage = async (message, state) => {
     const { id } = message;
     const response = await useApi.message.IsReadMessage({ id: id, state: state });
-    if (response.status === 200) {
-      console.log(response);
+    if (!response.error) {
+      // console.log(response);
       const updatedSelectedMessage = { ...selectedMessage, isRead: !selectedMessage.isRead };
       setSelectedMessage(updatedSelectedMessage)
       setMessageIsRead(!messageIsRead);
@@ -58,7 +57,7 @@ export default function Messages(props) {
         const updatedSelectedMessage = { ...selectedMessage, isRead: !selectedMessage.isRead };
         setSelectedMessage(updatedSelectedMessage)
       }
-      console.log(response);
+      // console.log(response);
     }
   };
 

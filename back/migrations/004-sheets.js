@@ -22,10 +22,10 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
-      authorId: {
+      instrumentId: {
         type: Sequelize.INTEGER,
         references: {
-          model: "users",
+          model: "instruments",
           key: 'id'
         },
         onUpdate: 'CASCADE',

@@ -8,16 +8,19 @@ export default function UsersPage(props) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(isLogged)
+    // console.log(isLogged)
     if (!isLogged || user?.length <= 0) {
       logout()
       navigate('/connexion');
     }
   }, []);
+
   return (
+
     <div id='usersPage'>
       <HeaderUsers user={user} allMessages={allMessages} />
       <NavbarUsers logout={logout} user={user} />
     </div>
+    
   )
 }

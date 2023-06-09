@@ -4,10 +4,9 @@ import makeAnimated from 'react-select/animated';
 
 const animatedComponents = makeAnimated();
 
-export default function SelectComponent(props) {
-  const { readonly, options, userData } = props;
+export default function SelectComponent({ readonly, options, userData, onChange }) {
+  // const { readonly, options, userData } = props;
 
-  console.log(readonly)
 
   const formattedOptions = [];
   const defaultValues = [];
@@ -15,6 +14,7 @@ export default function SelectComponent(props) {
 
     options.forEach((option) => {
       formattedOptions.push({
+        id: option.id,
         value: option.name,
         label: option.label
       })
@@ -38,6 +38,7 @@ export default function SelectComponent(props) {
       defaultValue={defaultValues || []}
       isMulti
       options={formattedOptions || []}
+      onChange={(e) => onChange(e)}
     />
   );
 }

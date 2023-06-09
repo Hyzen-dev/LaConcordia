@@ -1,4 +1,6 @@
 const UserRole = require("../models/user-role.model");
+const Roles = require('./../models/role.model');
+const User = require('./../models/user.model');
 const { Op } = require("sequelize");
 
 exports.Create = async (req, res) => {
@@ -12,29 +14,21 @@ exports.Create = async (req, res) => {
             });
         }
 
-        const isRelationExist = await UserRole.findOne({ where: { [Op.and]: { userId: userId, roleId: roleId } } });
-        const isRoleExist = await Role.findOne({ where: { id: roleId } });
+        const isRoleExist = await Roles.findOne({ where: { id: roleId } });
         const isUserExist = await User.findOne({ where: { id: userId } });
 
-        if (isRoleExist || isUserExist || isRelationExist) {
-            if (isRelationExist) {
-                return res.status(409).json({
-                    error: true,
-                    message: "La relation entre utilisateur et role existe déjà."
-                });
-            } else {
-                return res.status(404).json({
-                    error: true,
-                    message: isRoleExist && isUserExist ? "La relation entre utilisateur et role est introuvable." : isRoleExist ? "Le role est introuvable." : "L'utilisateur est introuvable."
-                });
-            }
+        if (!isRoleExist || !isUserExist) {
+            return res.status(404).json({
+                error: true,
+                message: !isRoleExist && !isUserExist ? "L'utilisateur et le rôle sont introuvables." : !isRoleExist ? "Le rôle est introuvable." : "L'utilisateur est introuvable."
+            });
         }
 
         await new UserRole({ userId: userId, roleId: roleId }).save();
 
         return res.status(201).json({
             error: false,
-            message: "La relation entre utilisateur et role a bien été créée."
+            message: "La relation entre utilisateur et rôle a bien été créée."
         });
     } catch (error) {
         console.log("error");
@@ -117,12 +111,35 @@ exports.Update = async (req, res) => {
 
 exports.Delete = async (req, res) => {
     try {
+        const { userId, roleId } = req.body;
 
+        if (!userId || !roleId || isNaN(userId) || isNaN(roleId)) {
+            return res.status(400).json({
+                error: true,
+                message: "Requête invalide."
+            });
+        }
+
+        const userRole = await UserRole.findOne({ where: { [Op.and]: [{ userId: userId }, { roleId: roleId }] } });
+
+        if (!userRole) {
+            return res.status(404).json({
+                error: true,
+                message: "La relation entre utilisateur et rôle est introuvable."
+            });
+        }
+        
+        await userRole.destroy();
+
+        return res.status(201).json({
+            error: false,
+            message: "La relation entre utilisateur et rôle a bien été supprimée."
+        });
     } catch (error) {
-        console.log("error");
+        console.log(error);
         return res.status(500).json({
             error: true,
             message: "Une erreur interne est survenue, veuillez réessayer plus tard."
-        })
+        });
     }
 }

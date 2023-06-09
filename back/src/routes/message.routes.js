@@ -3,21 +3,21 @@ const router = express.Router();
 const messageController = require("../controllers/message.controller");
 const { authenticateUser } = require("../middlewares/authentication.middleware");
 const restricted = require("../middlewares/restricted.middleware");
-
+const checkStatus = require("../middlewares/checkStatus.middleware");
 
 router.post('/create', messageController.Create);
 
-router.get('/', messageController.GetAll);
+router.get('/', [authenticateUser, restricted(["administrator", "committee"])], messageController.GetAll);
 
-router.get('/:id', messageController.GetById);
+router.get('/:id', [authenticateUser, restricted(["administrator", "committee"])], messageController.GetById);
 
-router.patch('/update', messageController.Update);
+router.patch('/update', [authenticateUser, restricted(["administrator", "committee"])], messageController.Update);
 
-router.delete('/delete', messageController.Delete);
+router.delete('/delete', [authenticateUser, restricted(["administrator", "committee"])], messageController.Delete);
 
-router.patch('/archive', [authenticateUser, restricted(["administrator"])], messageController.ArchiveMessage);
+router.patch('/archive', [authenticateUser, restricted(["administrator", "committee"])], messageController.ArchiveMessage);
 
-router.patch('/read', [authenticateUser, restricted(["administrator"])], messageController.IsReadMessage);
+router.patch('/read', [authenticateUser, restricted(["administrator", "committee"])], messageController.IsReadMessage);
 
 
 module.exports = router;

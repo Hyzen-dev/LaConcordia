@@ -4,6 +4,8 @@ import Sweetpagination from 'sweetpagination';
 import EventCard from '../../../Components/Cards/EventCard.Component';
 import { useApi } from '../../../Router';
 import MainLoadingScreen from '../../../Components/LoadingScreen/MainLoadingScreen.Component';
+import parse from 'html-react-parser';
+
 
 // Page Events, qui retourne la liste des évènements consultables par les visiteurs.
 
@@ -11,7 +13,7 @@ export default function Events() {
 
   // Utilisation du Hook useState pour définir les données de la page actuelle et leur état. "currentPageData" est initialisé avec un tableau de deux cases vides grâce à la méthode "fill()" d'un nouvel objet Array. Cette variable est utilisée par "SweetPagination" pour afficher les évènements de la page courante.
   const [currentPageData, setCurrentPageData] = useState(new Array(2).fill());
-
+  const [noData, setNoData] = useState(false);
   const [allEvents, setAllEvents] = useState([])
 
   const fetchAllEvents = async () => {
@@ -19,6 +21,12 @@ export default function Events() {
     const events = response.data.sort((a, b) => {
       return new Date(b.createdAt) - new Date(a.createdAt);
     });
+    
+    // console.log(events);
+    if (response.data.length === 0) {
+      setNoData(true);
+    }
+
     return setAllEvents(events);
   }
 
@@ -36,7 +44,8 @@ export default function Events() {
       </div>
 
       <div>
-        {allEvents.length <= 0 ? <MainLoadingScreen /> :
+
+        {noData ? <p>Aucune actualité à afficher</p> : !allEvents || allEvents.length <= 0 ? <MainLoadingScreen /> :
           <>
 
             <div className="cardsContainer">

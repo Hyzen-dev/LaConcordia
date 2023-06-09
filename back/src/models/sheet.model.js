@@ -22,7 +22,7 @@ Sheet.init({
         type: DataTypes.STRING,
         allowNull: false
       },
-      authorId: {
+      instrumentId: {
         type: DataTypes.INTEGER,
       },
 }, {

@@ -10,7 +10,7 @@ export default function SignInForm(props) {
 
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
-  const [errors, setErrors] = useState([])
+  const [error, setError] = useState([])
 
   // Création de la fonction "verification" qui empeche le navigateur de recharger la page lors du clic sur le bouton "Se connecter" du formulaire.
   const verification = async (event) => {
@@ -20,7 +20,7 @@ export default function SignInForm(props) {
       password
     }
 
-    setErrors([]);
+    setError([]);
     const newError = [];
 
     const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]{2,}\.[a-zA-Z]{2,4}$/;
@@ -33,7 +33,7 @@ export default function SignInForm(props) {
       newError.push('password');
     }
 
-    setErrors(newError);
+    setError(newError);
 
     if (newError.length > 0) {
       return;
@@ -43,11 +43,11 @@ export default function SignInForm(props) {
     const response = await useApi.user.SignIn(userData);
 
 
-    if (response && response.data && response.data.token) {
+    if (response && response.token) {
       updateToastNotification(toastId, 'success', 'Connexion réussie, redirection en cours...');
 
-      localStorage.setItem("accessToken", response.data.token);
-      useApi.updateAccessToken(response.data.token);
+      localStorage.setItem("accessToken", response.token);
+      useApi.updateAccessToken(response.token);
       const profileResponse = await fetchProfile();
 
       if (profileResponse) {
@@ -55,11 +55,15 @@ export default function SignInForm(props) {
 
         setEmail("");
         setPassword("");
-      } 
+      }
+      
     } else {
       if (response.archived) {
         updateToastNotification(toastId, 'error', response.message);
         navigate("/contact#contactForm");
+      } else if (response.isNotVerified) {
+        updateToastNotification(toastId, 'error', response.message);
+        navigate("/verification");
       } else {
         updateToastNotification(toastId, 'error', 'E-mail ou mot de passe incorrect');
       }
@@ -73,21 +77,21 @@ export default function SignInForm(props) {
       <form method="post" onSubmit={(event) => verification(event)}>
         <fieldset className='form'>
           <div className="form__inputError">
-            <input id='emailInput' style={errors.includes('email') ? { border: 1 + 'px solid red' } : null} type="email" name="email" placeholder='E-mail*'
+            <input id='emailInput' style={error.includes('email') ? { border: 1 + 'px solid red' } : null} type="email" name="email" placeholder='E-mail*'
               onChange={(event) => setEmail(event.currentTarget.value)}
               value={email}
             />
-            {errors.includes('email') && <label htmlFor='emailInput'>Veuillez renseigner un e-mail valide</label>}
+            {error.includes('email') && <label htmlFor='emailInput'>Veuillez renseigner un e-mail valide</label>}
           </div>
 
           <div className='form__inputError'>
             <input type="password" name="password" placeholder='Mot de passe*'
-              style={errors.includes('password') ? { border: 1 + 'px solid red' } : null}
+              style={error.includes('password') ? { border: 1 + 'px solid red' } : null}
               onChange={(event) => setPassword(event.currentTarget.value)}
               value={password}
             />
-            {errors.includes('password') && <label htmlFor='passwordInput'>Veuillez renseigner un mot de passe</label>}
-            <Link to='/reinitialisation-mdp' className='resetPasswordLink'>Mot de passe oublié ?</Link>
+            {error.includes('password') && <label htmlFor='passwordInput'>Veuillez renseigner un mot de passe</label>}
+            <Link to='/reinitialisation-mdp' className='italicLink'>Mot de passe oublié ?</Link>
           </div>
           <button type="submit" className='greenButton'>Se connecter</button>
         </fieldset>

@@ -13,16 +13,19 @@ export default function Committee() {
 
   const fetchAllUsers = async () => {
     const response = await useApi.user.GetBase();
+    // console.log("users", response.data)
     return setAllUsers(response.data);
   }
 
   const fetchAllStatus = async () => {
     const response = await useApi.status.GetAll();
+    // console.log("status", response.data)
     return setAllStatus(response.data);
   }
 
   const fetchAllUserStatus = async () => {
     const response = await useApi.userStatus.GetAll();
+    // console.log("userstatus", response.data)
     return setAllUserStatus(response.data);
   }
 
@@ -47,21 +50,24 @@ export default function Committee() {
       <div className='committee pagePattern__content'>
         {!allStatus || allStatus.length <= 0 || !allUsers || allUsers.length <= 0 || !allUserStatus || allUserStatus.length <= 0 ? <MainLoadingScreen /> : <>
           {/* Les données "StatusDatas" sont mappées afin d'afficher les labels des status dont le type est "Committee". Pour chacun de ces labels, les membres ayant ce status sont affichés grace à l'utilisation de la fonction ".map" sur les données "UsersDatas". */}
-          {allStatus.map((status) => {
+          {allStatus.map((status, key) => {
+            // console.log("status", status)
             if (status.type === 'Committee') {
+              // console.log("status", status)
               return (
-                <div key={status.id}>
+                <div key={key}>
                   <h3 className='pagePattern__subheading'>{status.label}</h3>
                   <div className='separator'></div>
 
-                  {allUserStatus.map((userstatus) => {
+                  {allUserStatus.map((userstatus, index) => {
                     if (userstatus.statusId === status.id) {
+                      // console.log("userstatus", userstatus)
                       return (
-                        <div key={userstatus.userId}>
-                          {allUsers.map((user) => {
+                        <div key={index} className='committeeContainer'>
+                          {allUsers.map((user, id) => {
                             if (userstatus.userId === user.id) {
                               return (
-                                <div key={user.id}>
+                                <div key={id}>
                                   <p>{user.firstName} {user.lastName}</p>
                                 </div>
                               )

@@ -1,23 +1,22 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import Modal from '../../../Components/Modal/ModalPdf.Component';
 import { Viewer, Worker } from '@react-pdf-viewer/core';
-import file from './../../../assets/sheets.pdf'
 import '@react-pdf-viewer/default-layout/lib/styles/index.css';
-import InstrumentsDatas from './../../../data/Instruments';
-import SheetsDatas from './../../../data/Sheets';
-import userInstrument from '../../../data/User-Instrument';
-import sheetInstrument from '../../../data/Sheet-Instrument';
-import { Link } from 'react-router-dom';
+import { useApi } from '../../../Router';
+import MainLoadingScreen from '../../../Components/LoadingScreen/MainLoadingScreen.Component';
+
 
 // Page SheetsUser qui renvoi la liste des partitions liées aux instruments pratiqués par l'utilisateur.
 
-export default function SheetsUser() {
+export default function SheetsUser(props) {
 
   const [showModal, setShowModal] = useState(false);
 
   const [selectedSheet, setSelectedSheet] = useState({});
 
+  const { user } = props
+  const userId = user.id
 
   const handleModal = (data) => {
     setSelectedSheet(data);
@@ -26,13 +25,39 @@ export default function SheetsUser() {
 
 
 
+  const [sheets, setSheets] = useState([])
+
+  const fetchSheets = async () => {
+    const response = await useApi.sheets.GetAll();
+    return setSheets(response.data);
+  }
+
+  const fetchUserInstruments = async () => {
+    const response = await useApi.userInstruments.GetByUserId({ userId: userId });
+    // console.log(response.data.instrumentId)
+
+  }
+
+  useEffect(() => {
+    fetchSheets()
+    fetchUserInstruments()
+  }, []);
+
+
+  const [searchQuery, setSearchQuery] = useState('');
 
 
 
 
+  const filteredSheets = sheets.filter((sheet) => {
+    const titleMatch = sheet.title.toLowerCase().includes(searchQuery.toLowerCase());
+    const artistMatch = sheet.artist.toLowerCase().includes(searchQuery.toLowerCase());
+    return titleMatch || artistMatch;
+  });
 
+  const sortedInstruments = user.userInstruments ? user.userInstruments.sort((a, b) => a.label.localeCompare(b.label)) : [];
 
-
+  const sortedSheets = filteredSheets.sort((a, b) => b.createdAt.localeCompare(a.createdAt));
 
   return (
     <div className='tablePage'>
@@ -46,87 +71,81 @@ export default function SheetsUser() {
 
       <div className='tablePage__content'>
 
-        {userInstrument.map((userinstrument) => {
-          if (userinstrument.userId === 1) {
-            return (
-              <>
-                {InstrumentsDatas.map((instrument) => {
-                  if (userinstrument.instrumentId === instrument.id) {
-                    return (
-                      <div className='tabelPage__content'>
-                        <h2>{instrument.label}</h2>
-                        <div className='separator'></div>
 
-                        <table>
-                          <thead>
-                            <tr>
-                              <th>Titre</th>
-                              <th>Partition</th>
+
+
+        {!user.userInstruments || sheets.length <= 0 ? <MainLoadingScreen /> :
+          <>
+
+            <input type="text" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} placeholder="Rechercher une partition" className='searchInput' />
+
+
+            <div className='tablePage__content'>
+              {sortedInstruments.map((instrument, key) => {
+                const instrumentSheets = sortedSheets.filter((sheet) => sheet.instrumentId === instrument.id);
+
+                if (instrumentSheets.length > 0) {
+                  return (
+                    <div key={key} className='tabelPage__content'>
+                      <h2>{instrument.label}</h2>
+                      <div className='separator'></div>
+                      <table className='sheetTable'>
+                        <thead>
+                          <tr>
+                            <th>Titre</th>
+                            <th>Artiste</th>
+                            <th>Partition</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {instrumentSheets.map((sheet, index) => (
+                            <tr key={index}>
+                              <td>{sheet.title}</td>
+                              <td>{sheet.artist}</td>
+                              <td >
+                                <div className='buttonCell'>
+                                  <button onClick={() => handleModal(sheet)} className='tableButton'>
+                                    <i className="fa-solid fa-eye"></i>
+                                  </button>
+                                  <button className='tableButton'>
+                                    <i className="fa-solid fa-file-arrow-down"></i>
+                                  </button>
+                                </div>
+                              </td>
                             </tr>
-                          </thead>
-                          <tbody>
-                            {sheetInstrument.map((sheetinstrument) => {
-                              if (userinstrument.instrumentId === sheetinstrument.instrumentId) {
-                                return (
-                                  <>
-                                    {SheetsDatas.map((sheet) => {
-                                      if (sheet.id === sheetinstrument.sheetId) {
-                                        return (
-                                          <tr>
-                                            <td>{sheet.title}</td>
-                                            <td className='buttonCell'>
-                                              <button onClick={() => handleModal(sheet)} className='tableButton'>
-                                                <i className="fa-solid fa-eye"></i>
-                                              </button>
-                                              {/* <a href={file} download className='link'> */}
-                                              <button className='tableButton'>
-                                                <i className="fa-solid fa-file-arrow-down"></i>
-                                              </button>
-                                              {/* </a> */}
-                                            </td>
-                                          </tr>
-                                        )
-                                      }
-                                      return null
-                                    })}
-                                  </>
-                                )
-                              }
-                              return null
-                            })}
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  );
+                } else {
+                  return null;
+                }
+              })}
 
-                          </tbody>
-                        </table>
-                      </div>
-                    )
-                  }
-                  return null
-                })}
-              </>
-            )
-          }
-          return null
-        })}
-        <Modal showModal={showModal} setShowModal={setShowModal}>
-          <div className='modal'>
-            <button className='closeButton' onClick={() => setShowModal(false)}><i className="fa-solid fa-square-xmark"></i></button>
-            <div className='modal__header'>
-              <h2>{selectedSheet.title}</h2>
+              <Modal showModal={showModal} setShowModal={setShowModal}>
+                <div className='modal'>
+                  <button className='closeButton' onClick={() => setShowModal(false)}><i className="fa-solid fa-square-xmark"></i></button>
+                  <div className='modal__header'>
+                    <h2>{selectedSheet.title}</h2>
+                  </div>
+                  <p>{selectedSheet.artist}</p>
+                  <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js">
+                    <div
+                      style={{
+                        height: '400px',
+                        width: '700px',
+                        padding: '20px 0px',
+                        backgroundColor: 'none',
+                      }}
+                    >
+                      <Viewer fileUrl={`${useApi.baseUrl}/images/${selectedSheet.sheetFile}`} />
+                    </div>
+                  </Worker>
+                </div>
+              </Modal>
             </div>
-            <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js">
-              <div
-                style={{
-                  height: '400px',
-                  width: '700px',
-                  padding: '20px 0px',
-                  backgroundColor: 'none',
-                }}
-              >
-                <Viewer fileUrl={file} />
-              </div>
-            </Worker>
-          </div>
-        </Modal>
+          </>}
       </div>
     </div>
   )

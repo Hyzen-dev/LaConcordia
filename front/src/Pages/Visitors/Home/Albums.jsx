@@ -4,6 +4,7 @@ import Sweetpagination from 'sweetpagination';
 import AlbumCard from '../../../Components/Cards/AlbumCard.Component';
 import { useApi } from '../../../Router';
 import MainLoadingScreen from '../../../Components/LoadingScreen/MainLoadingScreen.Component';
+import albums from '../../../data/Albums';
 
 // Page Medias, qui retourne la liste des albums consultables par les visiteurs.
 
@@ -11,11 +12,16 @@ export default function Medias() {
 
     // Utilisation du Hook useState pour définir les données de la page actuelle et leur états. "currentPageData" est initialisé avec un tableau de deux cases vides grâce à la méthode "fill()" d'un nouvel objet Array. Cette variable est utilisée par "SweetPagination" pour afficher les albums de la page courante.
     const [currentPageData, setCurrentPageData] = useState(new Array(2).fill());
-
+    const [noData, setNoData] = useState(false);
     const [allAlbums, setAllAlbums] = useState([])
 
     const fetchAllAlbums = async () => {
         const response = await useApi.albums.GetAll();
+
+        if (response.data.length <= 0) {
+            setNoData(true);
+        }
+
         return setAllAlbums(response.data);
     }
 
@@ -33,11 +39,12 @@ export default function Medias() {
             </div>
 
             <div className='pagePattern__cardsContent'>
-                {allAlbums.length <= 0 ? <MainLoadingScreen /> :
+
+                {noData ? <p>Aucun album à afficher</p> : !allAlbums || allAlbums.length <= 0 ? <MainLoadingScreen /> :
                     <>
                         <div className='cardsContainer'>
                             {currentPageData && currentPageData[0]?.title && currentPageData.length > 0 ? currentPageData.map((item, k) => {
-                                return <AlbumCard albumCard={item} key={k} />
+                                return <AlbumCard apiUrl={useApi.baseUrl} albumCard={item} key={k} />
                             }) : null}
                         </div>
 

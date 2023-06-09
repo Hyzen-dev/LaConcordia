@@ -2,9 +2,11 @@ const Sheet = require("../models/sheet.model");
 
 exports.Create = async (req, res) => {
     try {
-        const { title, sheetFile, artist, authorId} = req.body;
+        const { title, artist, instrumentId } = req.body;
+        const sheetFile = req.file.filename;
 
-        if (!title || !sheetFile || !artist || !authorId) {
+
+        if (!title || !sheetFile || !artist || !instrumentId) {
             return res.status(400).json({
                 error: true,
                 message: "Requête invalide."
@@ -15,7 +17,7 @@ exports.Create = async (req, res) => {
             title: title,
             sheetFile: sheetFile,
             artist: artist,
-            authorId: authorId
+            instrumentId: instrumentId
         }).save();
 
         return res.status(201).json({
@@ -23,7 +25,7 @@ exports.Create = async (req, res) => {
             message: "La partition a bien été créée."
         });
     } catch (error){
-        console.log("error");
+        console.log(error);
         return res.status(500).json({
             error: true,
             message: "Une erreur interne est survenue, veuillez réessayer plus tard."
@@ -51,7 +53,7 @@ exports.GetAll = async (req, res) => {
 
 exports.GetById = async (req, res) => {
     try {
-        const { id } = req.params;
+        const { id } = req.body;
 
         if (!id || isNaN(id)) {
             return res.status(400).json({
@@ -71,8 +73,8 @@ exports.GetById = async (req, res) => {
 
         return res.status(200).json({
             error: false,
-            message: "La partition a été récupérée.",
-            post: sheet
+            message: "La partition a été récupéré.",
+            data: sheet
         });
     } catch (error){
         console.log("error");
@@ -85,9 +87,42 @@ exports.GetById = async (req, res) => {
 
 exports.Update = async (req, res) => {
     try {
+        const { id, title, artist, instrumentId } = req.body;
+
+        const sheetFile = req?.file?.filename;
+
+        if (!id || isNaN(id)) {
+            return res.status(400).json({
+                error: true,
+                message: "Requête invalide."
+            });
+        }
+
+        const sheet = await Sheet.findOne({ where: { id: id } });
+
+        if (!sheet) {
+            return res.status(404).json({
+                error: true,
+                message: "La partition est introuvable."
+            });
+        }
+
+        const sheetData = {
+            title: title || sheet.title,
+            artist: artist || sheet.artist,
+            instrumentId: instrumentId || sheet.instrumentId,
+            sheetFile: sheetFile || sheet.sheetFile
+        }
+
+        await sheet.update(sheetData);
+
+        return res.status(200).json({
+            error: false,
+            message: "La partition a bien été mis à jour."
+        });
 
     } catch (error){
-        console.log("error");
+        console.log(error);
         return res.status(500).json({
             error: true,
             message: "Une erreur interne est survenue, veuillez réessayer plus tard."
@@ -97,7 +132,30 @@ exports.Update = async (req, res) => {
 
 exports.Delete = async (req, res) => {
     try {
+        const { id } = req.body;
 
+        if (!id || isNaN(id)) {
+            return res.status(400).json({
+                error: true,
+                message: "Requête invalide."
+            });
+        }
+
+        const sheet = await Sheet.findOne({ where: { id: id } });
+
+        if (!sheet) {
+            return res.status(404).json({
+                error: true,
+                message: "La partition est introuvable."
+            });
+        }
+        
+        await sheet.destroy();
+
+        return res.status(201).json({
+            error: false,
+            message: "La partition a bien été supprimée."
+        });
     } catch (error){
         console.log("error");
         return res.status(500).json({

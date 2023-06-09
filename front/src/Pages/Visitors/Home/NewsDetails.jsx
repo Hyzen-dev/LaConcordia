@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { useApi } from '../../../Router';
 import parse from 'html-react-parser';
@@ -12,9 +12,12 @@ export default function NewsDetails() {
   const [news, setNews] = useState({})
   const { id } = useParams();
 
+  const navigate = useNavigate();
   const fetchNews = async () => {
     const response = await useApi.news.GetById({ id: parseInt(id) });
-    return setNews(response.data.data);
+    if (response.error) return navigate('/actualites');
+    // console.log(response.data)
+    return setNews(response.data);
   }
 
   useEffect(() => {
@@ -39,10 +42,10 @@ export default function NewsDetails() {
         <h3>{formattedDate}</h3>
       </div>
         <Link to='/actualites' className='returnButton'>
-          <i class="fa-solid fa-circle-up fa-rotate-270"></i>
+          <i className="fa-solid fa-circle-up fa-rotate-270"></i>
         </Link>
       <div className='pagePattern__content'>
-        {news.length <= 0 || !news.content ? <MainLoadingScreen /> :
+        {news.length <= 0 || !news.content || !news.createdAt ? <MainLoadingScreen /> :
           <>
             {parse(news.content, {})}
           </>

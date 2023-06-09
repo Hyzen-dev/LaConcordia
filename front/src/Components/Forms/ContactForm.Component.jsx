@@ -15,7 +15,7 @@ export default function ContactForm() {
     const [subject, setSubject] = useState("")
     const [message, setMessage] = useState("")
 
-    const [errors, setErrors] = useState([])
+    const [error, setError] = useState([])
 
     const verification = async (event) => {
         event.preventDefault()
@@ -29,7 +29,7 @@ export default function ContactForm() {
             message
         }
 
-        setErrors([]);
+        setError([]);
 
         const newError = [];
 
@@ -63,28 +63,35 @@ export default function ContactForm() {
         }
 
 
-        setErrors(newError);
+        setError(newError);
 
         if (newError.length > 0) {
             return;
         }
 
-        // const response = await useApi.message.Create(messageData);
-        const response = {
-            error: true
-        }
+        const response = await useApi.message.Create(messageData);
+        // const response = {
+        //     error: true
+        // }
 
         const toastId = toastNotification('loading', 'Veuillez patienter...');
 
         if (response.error) {
-            console.log('Une erreur est survenue');
+            // console.log('Une erreur est survenue');
             if (response.message) {
                 updateToastNotification(toastId, 'error', 'Une erreur est survenue : ' + response.message + '.')
             } else {
                 updateToastNotification(toastId, 'error', 'Une erreur est survenue, veuillez réessayer plus tard.')
             }
         } else {
-            updateToastNotification(toastId, 'success', 'Votre compte a bien été créé, vous devez maintenant valider votre email.')
+            setFirstName('');
+            setLastName('');
+            setEmail('');
+            setPhone('');
+            setSubject('');
+            setMessage('');
+
+            updateToastNotification(toastId, 'success', 'Votre demande nous a bien été transmise, nous vous répondrons dans les plus brefs délais.')
         }
 
     }
@@ -97,73 +104,79 @@ export default function ContactForm() {
                     <div className='form__box'>
                         <div className="form__inputError">
                             <input
-                                style={errors.includes('lastName') ? { border: 1 + 'px solid red' } : null}
+                                style={error.includes('lastName') ? { border: 1 + 'px solid red' } : null}
                                 type="text" name="lastname"
                                 id="lastname"
                                 placeholder='Nom *'
+                                value={lastName}
                                 onChange={(event) => setLastName(event.currentTarget.value)}
                             />
-                            {errors.includes('lastName') && <label htmlFor='lastname'>Veuillez renseigner un nom valide</label>}
+                            {error.includes('lastName') && <label htmlFor='lastname'>Veuillez renseigner un nom valide</label>}
                         </div>
                         <div className='form__inputError'>
                             <input
-                                style={errors.includes('firstName') ? { border: 1 + 'px solid red' } : null}
+                                style={error.includes('firstName') ? { border: 1 + 'px solid red' } : null}
                                 type="text"
                                 name="firstname"
                                 id="firstname"
                                 placeholder='Prénom *'
+                                value={firstName}
                                 onChange={(event) => setFirstName(event.currentTarget.value)}
                             />
-                            {errors.includes('firstName') && <label htmlFor='firstname'>Veuillez renseigner un prénom valide</label>}
+                            {error.includes('firstName') && <label htmlFor='firstname'>Veuillez renseigner un prénom valide</label>}
                         </div>
 
                     </div>
                     <div className='form__box'>
                         <div className='form__inputError'>
                             <input
-                                style={errors.includes('phone') ? { border: 1 + 'px solid red' } : null}
+                                style={error.includes('phone') ? { border: 1 + 'px solid red' } : null}
                                 type="tel"
                                 name="phone"
                                 id="phone"
                                 placeholder='Téléphone'
+                                value={phone}
                                 onChange={(event) => setPhone(event.currentTarget.value)}
                             />
-                            {errors.includes('phone') && <label htmlFor='phone'>Veuillez renseigner un numéro de téléphone valide</label>}
+                            {error.includes('phone') && <label htmlFor='phone'>Veuillez renseigner un numéro de téléphone valide</label>}
                         </div>
                         <div className='form__inputError'>
                             <input
-                                style={errors.includes('email') ? { border: 1 + 'px solid red' } : null}
+                                style={error.includes('email') ? { border: 1 + 'px solid red' } : null}
                                 type="email"
                                 name="email"
                                 id='email'
                                 placeholder='E-mail *'
+                                value={email}
                                 onChange={(event) => setEmail(event.currentTarget.value)}
 
                             />
-                            {errors.includes('email') && <label htmlFor='email'>Veuillez renseigner une adresse mail valide</label>}
+                            {error.includes('email') && <label htmlFor='email'>Veuillez renseigner une adresse mail valide</label>}
                         </div>
                     </div>
                     <div className='form__inputError'>
                         <input
-                            style={errors.includes('subject') ? { border: 1 + 'px solid red' } : null}
+                            style={error.includes('subject') ? { border: 1 + 'px solid red' } : null}
                             type="text"
                             name="subject"
                             id="subject"
                             placeholder='Sujet *'
+                            value={subject}
                             onChange={(event) => setSubject(event.currentTarget.value)}
                         />
-                        {errors.includes('subject') && <label htmlFor='subject'>Le sujet de votre message doit contenir 5 caractères minimum</label>}
-                        {errors.includes('subjectLength') && <label htmlFor='subject'>Le sujet de votre message ne doit pas contenir plus de 255 caractères</label>}
+                        {error.includes('subject') && <label htmlFor='subject'>Le sujet de votre message doit contenir 5 caractères minimum</label>}
+                        {error.includes('subjectLength') && <label htmlFor='subject'>Le sujet de votre message ne doit pas contenir plus de 255 caractères</label>}
                     </div>
                     <div className='form__inputError'>
                         <textarea
-                            style={errors.includes('message') ? { border: 1 + 'px solid red' } : null}
+                            style={error.includes('message') ? { border: 1 + 'px solid red' } : null}
                             name="message"
                             id="message"
                             placeholder='Message *'
+                            value={message}
                             onChange={(event) => setMessage(event.currentTarget.value)}
                         ></textarea>
-                        {errors.includes('message') && <label htmlFor='message'>Votre message doit contenir 5 caractères minimum</label>}
+                        {error.includes('message') && <label htmlFor='message'>Votre message doit contenir 5 caractères minimum</label>}
                     </div>
                     <button type="submit" className='greenButton sendButton'>Envoyer</button>
                 </fieldset>

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { useApi } from '../../../Router';
+import parse from 'html-react-parser';
 import MainLoadingScreen from '../../../Components/LoadingScreen/MainLoadingScreen.Component';
 
 // Page EventsDetail qui retourne le détail de l'évènement sur lequel le visiteur a cliqué.
@@ -10,15 +11,20 @@ export default function EventsDetails() {
 
   const [event, setEvent] = useState({})
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const fetchEvent = async () => {
     const response = await useApi.events.GetById({ id: parseInt(id) });
-    return setEvent(response.data.data);
+    if (response.error) return navigate('/evenements');
+
+    return setEvent(response.data);
   }
   useEffect(() => {
     fetchEvent()
   }, []);
 
+  if (event.length <= 0 || !event.thumbnail) return <MainLoadingScreen />
+  
   const formattedDate = `${new Date(event.eventDate).toLocaleDateString('fr-FR', {
     year: 'numeric',
     month: 'long',
@@ -28,7 +34,6 @@ export default function EventsDetails() {
     minute: '2-digit'
   })}`;
 
-  if (event.length <= 0) return <MainLoadingScreen />;
   return (
     <div className='pagePattern'>
       <Helmet><title>La Concordia - Évènements</title></Helmet>
@@ -36,11 +41,13 @@ export default function EventsDetails() {
         <h2>{event.title}</h2>
         <h3>{formattedDate}</h3>
       </div>
-        <Link to='/evenements' className='returnButton'>
-          <i class="fa-solid fa-circle-up fa-rotate-270"></i>
-        </Link>
+      <Link to='/evenements' className='returnButton'>
+        <i className="fa-solid fa-circle-up fa-rotate-270"></i>
+      </Link>
       <div className='pagePattern__content'>
-        <p>{event.content}</p>
+        <>
+          {typeof event.content === 'string' ? parse(event.content, {}) : null}
+        </>
       </div>
     </div>
   )

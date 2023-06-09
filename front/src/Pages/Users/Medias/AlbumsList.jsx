@@ -47,7 +47,7 @@ export default function AlbumsList() {
 
             {/* Utilisation d'une expression JSX qui vérifie si "currentPageData" existe et contient au moins un élément avec une propriété "title". Si c'est le cas, la méthode map() est utilisée pour créer une nouvelle liste de Composant "AlbumCard". Si "currentPageData" est vide ou n'a pas de propriété "title", rien n'est renvoyé. */}
             {currentPageData && currentPageData[0]?.thumbnail && currentPageData.length > 0 ? currentPageData.map((item, k) => (
-              <AlbumCard albumCard={item} key={k} />
+              <AlbumCard apiUrl={useApi.baseUrl} albumCard={item} key={k} />
             )) : null}
           </div>
 

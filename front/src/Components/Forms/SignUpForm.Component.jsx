@@ -10,7 +10,7 @@ export default function SignUpForm() {
     const navigate = useNavigate();
     // Création de la fonction "onCaptchaChange" qui permet l'affichage de la valeur de la réponse du Captcha dans la console.
     const onCaptchaChange = (value) => {
-        console.log("Captcha value:", value);
+        // console.log("Captcha value:", value);
     }
 
     // Utilisation du Hook useState pour définir les variables relatives aux champs du formulaire et leur état.
@@ -20,8 +20,7 @@ export default function SignUpForm() {
     const [phone, setPhone] = useState("")
     const [password, setPassword] = useState("")
     const [passwordConfirmation, setPasswordConfirmation] = useState("")
-
-    const [errors, setErrors] = useState([])
+    const [error, setError] = useState([])
 
     // Création de la fonction "verification" qui empeche le navigateur de recharger la page lors du clic sur le bouton "Se connecter" du formulaire.
     const verification = async (event) => {
@@ -35,7 +34,7 @@ export default function SignUpForm() {
             password
         }
 
-        setErrors([]);
+        setError([]);
 
         const nameRegex = /^[a-zA-Z]+$/;
         const emailRegex = /^[a-zA-Z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/i;
@@ -70,7 +69,7 @@ export default function SignUpForm() {
             }
         }
 
-        setErrors(newError);
+        setError(newError);
 
         if (newError.length > 0) {
             return;
@@ -100,7 +99,7 @@ export default function SignUpForm() {
                 <fieldset className='form'>
                     <div className='form__box'>
                         <div className='form__inputError'>
-                            <input style={errors.includes("lastName") ? { border: 1 + 'px solid red' } : null}
+                            <input style={error.includes("lastName") ? { border: 1 + 'px solid red' } : null}
                                 type="text"
                                 id='lastname'
                                 name='lastname'
@@ -109,11 +108,11 @@ export default function SignUpForm() {
                                 onChange={(event) => setLastName(event.currentTarget.value)}
                                 value={lastName}
                             />
-                            {errors.includes("lastName") && <label htmlFor="lastname">Le nom doit contenir au moins 2 caractères et ne doit pas contenir de chiffres.</label>}
+                            {error.includes("lastName") && <label htmlFor="lastname">Le nom doit contenir au moins 2 caractères et ne doit pas contenir de chiffres</label>}
                         </div>
 
                         <div className='form__inputError'>
-                            <input style={errors.includes("firstName") ? { border: 1 + 'px solid red' } : null}
+                            <input style={error.includes("firstName") ? { border: 1 + 'px solid red' } : null}
                                 type="text"
                                 id='firstname'
                                 name='firstname'
@@ -122,13 +121,13 @@ export default function SignUpForm() {
                                 onChange={(event) => setFirstName(event.currentTarget.value)}
                                 value={firstName}
                             />
-                            {errors.includes("firstName") && <label htmlFor="firstname">Le prénom doit contenir au moins 2 caractères et ne doit pas contenir de chiffres.</label>}
+                            {error.includes("firstName") && <label htmlFor="firstname">Le prénom doit contenir au moins 2 caractères et ne doit pas contenir de chiffres</label>}
                         </div>
                     </div>
 
                     <div className='form__box'>
                         <div className='form__inputError'>
-                            <input style={errors.includes("email") ? { border: 1 + 'px solid red' } : null}
+                            <input style={error.includes("email") ? { border: 1 + 'px solid red' } : null}
                                 type="email"
                                 id='email'
                                 name='email'
@@ -137,11 +136,11 @@ export default function SignUpForm() {
                                 onChange={(event) => setEmail(event.currentTarget.value)}
                                 value={email}
                             />
-                            {errors.includes("email") && <label htmlFor="email">L'adresse email est invalide.</label>}
+                            {error.includes("email") && <label htmlFor="email">L'adresse email est invalide</label>}
                         </div>
 
                         <div className='form__inputError'>
-                            <input style={errors.includes("phone") ? { border: 1 + 'px solid red' } : null}
+                            <input style={error.includes("phone") ? { border: 1 + 'px solid red' } : null}
                                 type="tel"
                                 id='phone'
                                 name='phone'
@@ -151,7 +150,7 @@ export default function SignUpForm() {
                                 onChange={(event) => setPhone(event.currentTarget.value)}
                                 value={phone}
                             />
-                            {errors.includes("phone") && < label htmlFor="phone">Le numéro de téléphone est invalide.</label>}
+                            {error.includes("phone") && < label htmlFor="phone">Le numéro de téléphone est invalide</label>}
                         </div>
                     </div>
 
@@ -162,7 +161,7 @@ export default function SignUpForm() {
                     </select>
 
                     <div className='form__inputError'>
-                        <input style={errors.includes("password") ? { border: 1 + 'px solid red' } : null}
+                        <input style={error.includes("password") ? { border: 1 + 'px solid red' } : null}
                             type="password"
                             id='password1'
                             name="password1"
@@ -171,15 +170,15 @@ export default function SignUpForm() {
                             value={password}
                             placeholder='Mot de passe *'
                         />
-                        {errors.includes("password") && <label htmlFor="password1">Le mot de passe doit contenir au moins 8 caractères dont une majuscule, une minuscule, un chiffre et un caractère spécial.</label>}
+                        {error.includes("password") && <label htmlFor="password1">Le mot de passe doit contenir au moins 8 caractères dont une majuscule, une minuscule, un chiffre et un caractère spécial</label>}
                     </div>
 
                     <div className='form__inputError'>
-                        <input style={errors.includes("passwordConfirmation") ? { border: 1 + 'px solid red' } : null} type="password" id='password2' name="password2" placeholder='Confirmation *'
+                        <input style={error.includes("passwordConfirmation") ? { border: 1 + 'px solid red' } : null} type="password" id='password2' name="password2" placeholder='Confirmation *'
                             onChange={(event) => setPasswordConfirmation(event.currentTarget.value)}
                             value={passwordConfirmation}
                         />
-                        {errors.includes("passwordConfirmation") && <label htmlFor="password2">Le mot de passe ne correspond pas</label>}
+                        {error.includes("passwordConfirmation") && <label htmlFor="password2">Le mot de passe ne correspond pas</label>}
                     </div>
 
                     <div className='form__checkbox' >

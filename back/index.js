@@ -17,7 +17,6 @@ app.use('/media', require('./src/routes/media.routes'));
 app.use('/message', require('./src/routes/message.routes'));
 app.use('/news', require('./src/routes/news.routes'));
 app.use('/role', require('./src/routes/role.routes'));
-app.use('/sheet-instrument', require('./src/routes/sheet-instrument.routes'));
 app.use('/sheet', require('./src/routes/sheet.routes'));
 app.use('/status', require('./src/routes/status.routes'));
 app.use('/user-instrument', require('./src/routes/user-instrument.routes'));

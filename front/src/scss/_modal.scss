@@ -51,6 +51,10 @@
             object-fit: cover;
             object-position: center;
         }
+
+        &__form input {
+            width: 350px;
+        }
     }
 }
 

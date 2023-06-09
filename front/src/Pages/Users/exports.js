@@ -8,7 +8,6 @@ import Messages from "./Messages";
 import NewsCreate from "./News/NewsCreate";
 import NewsList from "./News/NewsList";
 import NewsUpdate from "./News/NewsUpdate";
-import Notifications from "./Notifications";
 import Profil from "./Profil";
 import SheetsCreate from "./Sheets/SheetsCreate";
 import SheetsList from "./Sheets/SheetsList";
@@ -19,4 +18,4 @@ import UserUpdate from "./UserUpdate";
 
 
 
-export { EventsCreate, EventsList, EventsUpdate, AlbumsCreate, AlbumsList, AlbumUpdate, Messages, NewsCreate, NewsList, NewsUpdate, Notifications, Profil, SheetsCreate, SheetsList, SheetsUpdate, SheetsUsers, UsersUpdate, UserUpdate }
+export { EventsCreate, EventsList, EventsUpdate, AlbumsCreate, AlbumsList, AlbumUpdate, Messages, NewsCreate, NewsList, NewsUpdate, Profil, SheetsCreate, SheetsList, SheetsUpdate, SheetsUsers, UsersUpdate, UserUpdate }

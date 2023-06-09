@@ -58,6 +58,14 @@ module.exports = {
         type: Sequelize.DATE,
         allowNull: true
       },
+      passwordResetCode: {
+        type: Sequelize.STRING,
+        allowNull: true
+      },
+      passwordResetCodeExpiration: {
+        type: Sequelize.DATE,
+        allowNull: true
+      },
       accessToken: {
         type: Sequelize.TEXT('long'),
         allowNull: true

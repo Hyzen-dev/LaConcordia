@@ -4,10 +4,10 @@ const { sendMail } = require("../utils/mailer.utils");
 
 exports.Create = async (req, res) => {
     try {
-        const { lastname, firstname, mail, subject, content } = req.body;
-        let { phone: phoneNumber } = req.body;
-
-        if (!lastname || !firstname || !mail || !subject || !content) {
+        const { lastName, firstName, email, subject, message } = req.body;
+        let { phoneNumber } = req.body;
+        console.log("req.body", req.body)
+        if (!lastName || !firstName || !email || !subject || !message) {
             return res.status(400).json({
                 error: true,
                 message: "Requête invalide."
@@ -27,15 +27,15 @@ exports.Create = async (req, res) => {
             }
         }
 
-        const sendedMail = await sendMail("contact", { lastname, firstname, mail, phoneNumber, subject, content }, mail);
+        const sendedMail = await sendMail("contact", { lastName, firstName, email, phoneNumber, subject, message }, email);
 
         await new Message({
-            firstname,
-            lastname,
-            mail,
+            firstname: firstName,
+            lastname: lastName,
+            mail: email,
             phone: phoneNumber || null,
             subject,
-            deletionDate
+            content: message,
         }).save();
 
         return res.status(201).json({
