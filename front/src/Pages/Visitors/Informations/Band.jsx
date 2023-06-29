@@ -1,10 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
-import StatusDatas from '../../../data/Status';
-import UsersDatas from './../../../data/Users';
-import UserStatus from '../../../data/User-Status';
-import InstrumentsDatas from '../../../data/Instruments';
-import UserInstrument from './../../../data/User-Instrument';
 import { useApi } from '../../../Router';
 import MainLoadingScreen from '../../../Components/LoadingScreen/MainLoadingScreen.Component';
 
@@ -65,7 +60,7 @@ export default function Band() {
         <h3>Effectif actuel</h3>
       </div>
 
-      <div className='bandPage pagePatter__content'>
+      <div className='bandPage pagePattern__content'>
         {!allStatus || allStatus.length <= 0 || !allUsers || allUsers.length <= 0 || !allUserStatus || allUserStatus.length <= 0 ? <MainLoadingScreen /> : <>
           <div className='harmonie'>
             {allStatus.map((status, key) => {

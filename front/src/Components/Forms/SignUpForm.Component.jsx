@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import ReCAPTCHA from "react-google-recaptcha";
 import { useApi } from '../../Router';
 import { useNavigate } from 'react-router-dom';
 import { toastNotification, updateToastNotification } from '../../Router';
@@ -8,10 +7,6 @@ import { toastNotification, updateToastNotification } from '../../Router';
 
 export default function SignUpForm() {
     const navigate = useNavigate();
-    // Création de la fonction "onCaptchaChange" qui permet l'affichage de la valeur de la réponse du Captcha dans la console.
-    const onCaptchaChange = (value) => {
-        // console.log("Captcha value:", value);
-    }
 
     // Utilisation du Hook useState pour définir les variables relatives aux champs du formulaire et leur état.
     const [firstName, setFirstName] = useState("")
@@ -21,6 +16,7 @@ export default function SignUpForm() {
     const [password, setPassword] = useState("")
     const [passwordConfirmation, setPasswordConfirmation] = useState("")
     const [error, setError] = useState([])
+
 
     // Création de la fonction "verification" qui empeche le navigateur de recharger la page lors du clic sur le bouton "Se connecter" du formulaire.
     const verification = async (event) => {
@@ -38,7 +34,7 @@ export default function SignUpForm() {
 
         const nameRegex = /^[a-zA-Z]+$/;
         const emailRegex = /^[a-zA-Z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/i;
-        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/i;
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/i;
         const phoneRegex = /^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$/;
 
         const newError = [];
@@ -155,7 +151,7 @@ export default function SignUpForm() {
                     </div>
 
                     <select name="civility">
-                        <option value="Civilité" disabled>Civilité</option>
+                        <option value="Civilité" disabled selected>Civilité</option>
                         <option value="Madame">Madame</option>
                         <option value="Monsieur">Monsieur</option>
                     </select>
@@ -187,12 +183,6 @@ export default function SignUpForm() {
                             Souhaitez-vous recevoir les actualités et les évènements de La Concordia par mail
                         </label>
                     </div>
-
-                    {/* Intégration du Captcha afin de renforcer la sécurité du formulaire */}
-                    <ReCAPTCHA
-                        sitekey="###"
-                        onChange={onCaptchaChange}
-                    />
 
                     <button type="submit" className='greenButton'>S'inscrire</button>
                 </fieldset>

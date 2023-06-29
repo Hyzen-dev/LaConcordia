@@ -13,6 +13,7 @@ export default function UsersPage(props) {
       logout()
       navigate('/connexion');
     }
+    // eslint-disable-next-line
   }, []);
 
   return (
@@ -21,6 +22,6 @@ export default function UsersPage(props) {
       <HeaderUsers user={user} allMessages={allMessages} />
       <NavbarUsers logout={logout} user={user} />
     </div>
-    
+
   )
 }

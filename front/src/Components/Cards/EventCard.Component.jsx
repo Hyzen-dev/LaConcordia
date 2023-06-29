@@ -33,7 +33,7 @@ export default function EventCard(props) {
         return (
             <div key={id} className='cards usersCards'>
                 <Link to={`/espace-membre/evenements/gestion/${id}`} className='link'>
-                    <img src={`${apiUrl}/images/${thumbnail}`} alt="photo" className='cards__img' />
+                    <img src={`${apiUrl}/images/${thumbnail}`} alt="Couverture" className='cards__img' />
                     <div className='cards__content' >
                         <h3 className='cards__content__title'>{title}</h3>
 
@@ -56,7 +56,7 @@ export default function EventCard(props) {
         return (
             <div key={id} className='cards'>
                 <Link to={`/evenements/${id}`} className='link'>
-                    <img width={'100%'} src={`${apiUrl}/images/${thumbnail}`} alt="photo" className='cards__img' />
+                    <img width={'100%'} src={`${apiUrl}/images/${thumbnail}`} alt="Couverture" className='cards__img' />
                     <div className='cards__content'>
                         <h3 className='cards__content__title'>{title}</h3>
 

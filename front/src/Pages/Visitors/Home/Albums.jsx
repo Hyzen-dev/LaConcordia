@@ -4,7 +4,6 @@ import Sweetpagination from 'sweetpagination';
 import AlbumCard from '../../../Components/Cards/AlbumCard.Component';
 import { useApi } from '../../../Router';
 import MainLoadingScreen from '../../../Components/LoadingScreen/MainLoadingScreen.Component';
-import albums from '../../../data/Albums';
 
 // Page Medias, qui retourne la liste des albums consultables par les visiteurs.
 

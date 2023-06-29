@@ -20,11 +20,12 @@ export default function EventsDetails() {
     return setEvent(response.data);
   }
   useEffect(() => {
-    fetchEvent()
+    fetchEvent();
+    // eslint-disable-next-line
   }, []);
 
   if (event.length <= 0 || !event.thumbnail) return <MainLoadingScreen />
-  
+
   const formattedDate = `${new Date(event.eventDate).toLocaleDateString('fr-FR', {
     year: 'numeric',
     month: 'long',

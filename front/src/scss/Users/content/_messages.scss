@@ -1,8 +1,3 @@
-
-
-
-
-
 .messageModal {
 
     &__content {
@@ -14,10 +9,6 @@
         margin-bottom: 10px;
     }
 }
-
-
-
-
 
 .mailto {
     margin-left: 20px;
@@ -42,11 +33,8 @@
 
 
 @media screen and (min-width: 480px) {
-  
-.messageModal {
-    width: 600px;
 
-
-}  
+    .messageModal {
+        width: 600px;
+    }
 }
-

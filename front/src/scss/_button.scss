@@ -5,8 +5,7 @@ button, .button {
     width: fit-content;
     border-radius: 4px;
     color: white;
-    font-weight: bold;
-
+    font-weight: 500 !important;
 }
 
 .greenButton {
@@ -103,9 +102,7 @@ button, .button {
 .returnButton {
     color: $main-color-green;
     font-size: 30px;
-    margin-left: 95%;
     display: block;
-    margin-bottom: 20px;
 }
 
 .suspendButton {
@@ -121,74 +118,6 @@ button, .button {
     background-color: red;
     align-self: flex-end;
 }
-
-
-@media screen and (min-width: 480px) {
-    .headerVisitorButton a {
-        font-size: 20px;
-    }
-
-    .archiveButton {
-        align-self: initial;
-    }
-
-    .saveButton {
-        align-self: flex-end;
-    }
-}
-
-
-
-
-
-
-// .modal__button {
-//     background: none;
-//     border: none;
-//     font-size: 20px;
-//     color: $main-color-green;
-// }
-
-// .form button, .button {
-//     padding: 10px 20px;
-//     width: fit-content;
-//     text-transform: uppercase;
-//     color: white;
-//     background-color: $main-color-green;
-//     border: none;
-//     border-radius: 3px;
-//     font-weight: bold;
-//     font-size: 16px;
-//     margin-top: 20px;
-//     font-family: 'Patua One';
-//     display: flex;
-//     justify-content: center;
-//     text-decoration: none;
-// }
-
-
-
-
-// .photoModal__button {
-//     align-self: flex-end;
-//     padding: 0px;
-// }
-
-// .modal__form button {
-//     align-self: flex-end;
-// }
-
-// .titleContainer__button {
-//     margin-top: 30px;
-//     border: none;
-//     border-radius: 4px;
-//     padding: 8px 18px;
-//     background-color: $main-color-green;
-//     font-size: 16px;
-// }
-
-
-
 
 
 .button--flash {
@@ -237,48 +166,13 @@ button, .button {
 }
 
 
+@media screen and (min-width: 480px) {
 
+    .archiveButton {
+        align-self: initial;
+    }
 
-// .messageModal__button {
-//     margin: auto;
-//     margin-bottom: 20px;
-// }
-
-
-// .archiveMessagesButton {
-//     margin-bottom: 40px;
-// }
-
-
-
-// .profil .button {
-//     margin: auto;
-// }
-
-
-// .table__buttonTd {
-//     display: flex;
-//     justify-content: space-around;
-// }
-
-// table .button {
-//     margin: 0px;
-//     padding: 5px 0px;
-//     width: 40%;
-// }
-
-// .button--blue {
-//     background-color: rgb(69, 69, 224);
-// }
-
-// .button--red {
-//     background-color: rgb(252, 31, 31);
-// }
-
-
-// @media screen and (min-width: 480px) {
-//     .mediasActionsContainer__button {
-//         padding: 10px 20px;
-//         font-size: 20px;
-//     }
-// }
+    .saveButton {
+        align-self: flex-end;
+    }
+}

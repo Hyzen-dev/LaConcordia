@@ -23,7 +23,7 @@ export default function Contact() {
           <div className='separator'></div>
           <p>Salle Léon URBAIN</p>
           <p>Ecole de Musique rue Ferrer 62750 LOOS EN GOHELLE</p>
-          <p>+33 X.XX.XX.XX.XX</p>
+          <p>03.21.28.21.05</p>
         </div>
 
         <div id='contactForm'>

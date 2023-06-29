@@ -18,10 +18,13 @@ export default function AlbumUpdate() {
   const albumId = id
   const [album, setAlbum] = useState({})
   const [title, setTitle] = useState('');
+  // eslint-disable-next-line
   const [currentTitle, setCurrentTitle] = useState('');
   const [thumbnail, setThumbnail] = useState(null);
   const [error, setError] = useState([]);
+  // eslint-disable-next-line
   const [showedImage, setShowedImage] = useState('');
+  // eslint-disable-next-line
   const [currentThumbnail, setTCurrentThumbnail] = useState(null);
   const [medias, setMedias] = useState([]);
   const [newMedias, setNewMedias] = useState([]);
@@ -47,9 +50,9 @@ export default function AlbumUpdate() {
       // console.log(response)
       await setMedias(response.data)
     }
-
     fetchData();
     fetchMedias();
+    // eslint-disable-next-line
   }, [])
 
   const navigate = useNavigate();
@@ -60,16 +63,16 @@ export default function AlbumUpdate() {
     setError([]);
     const newError = [];
 
-    
+
     if (title.length < 3) {
       newError.push('title');
     }
-    
+
     if (newError.length > 0) {
       setError(newError);
       return;
     }
-    
+
     const toastId = toastNotification('loading', 'Veuillez patienter...');
     const albumResponse = await useApi.albums.Update({ title: title, thumbnail: thumbnail === null || thumbnail === showedImage ? null : thumbnail, id: id })
 
@@ -125,13 +128,14 @@ export default function AlbumUpdate() {
     };
   }
 
-  const handleThumbnailChange = (event) => {
-    const format = event.target.files[0].type;
+  const handleThumbnailChange = (e) => {
+    const extension = e.target.files[0].type;
 
-    if (!format.split("/").includes('image')) {
-      return toastNotification('error', 'Le format de l\'image n\'est pas valide.');
+    if (!extension.split("/").includes('image')) {
+      return toastNotification('error', 'Le format du fichier ');
     }
-    return setThumbnail(event.target.files[0]);
+
+    setThumbnail(e.target.files[0]);
   }
 
 
@@ -173,6 +177,8 @@ export default function AlbumUpdate() {
 
     setNewMedias(filesToAdd)
   }
+
+
 
 
   const handleDeleteAlbum = async (id) => {
@@ -253,7 +259,7 @@ export default function AlbumUpdate() {
             </fieldset>
           </form>
 
-          {thumbnail ? <img src={URL.createObjectURL(thumbnail)} alt="Image de l'article" className='downloadImage' /> : showedImage ? <img src={`${useApi.baseUrl}/images/${showedImage}`} alt="Image de l'article" className='downloadImage' /> : null}
+          {thumbnail ? <img src={URL.createObjectURL(thumbnail)} alt="Médias de l'article" className='downloadImage' /> : showedImage ? <img src={`${useApi.baseUrl}/images/${showedImage}`} alt="Médias de l'article" className='downloadImage' /> : null}
 
           <div className='separator'></div>
 

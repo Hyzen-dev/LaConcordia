@@ -40,12 +40,9 @@
 @media screen and (min-width: 480px) {
 
     .modal {
-        // margin: 0px;
 
         &__medias {
             max-height: 450px;
-            // width: 75%;
-            // max-width: 750px;
             margin: 0 auto;
             overflow: hidden;
             object-fit: cover;

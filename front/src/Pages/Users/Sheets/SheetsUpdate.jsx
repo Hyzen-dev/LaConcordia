@@ -15,6 +15,7 @@ export default function SheetsUpdate() {
   const [artist, setArtist] = useState('');
   const [instrumentId, setInstrumentId] = useState(null);
   const [sheetFile, setSheetFile] = useState(null);
+  // eslint-disable-next-line
   const [newSheetFile, setNewSheetFile] = useState(null);
   const [instruments, setInstruments] = useState([])
   const [error, setError] = useState([]);
@@ -37,7 +38,8 @@ export default function SheetsUpdate() {
       return setInstruments(response.data);
     }
     fetchData();
-    fetchInstruments()
+    fetchInstruments();
+            // eslint-disable-next-line
   }, [])
 
   const handleSubmit = async (event) => {
@@ -67,7 +69,7 @@ export default function SheetsUpdate() {
     const toastId = toastNotification('loading', 'Veuillez patienter...');
 
     const response = await useApi.sheets.Update({ title: title, artist: artist, instrumentId: instrumentId, sheetFile: newSheetFile || sheetFile, id: id })
-    
+
     if (!response) {
       return updateToastNotification(toastId, 'error', 'Une erreur est survenue, veuillez réessayer plus tard.');
     }
@@ -203,7 +205,7 @@ export default function SheetsUpdate() {
                   : null}
 
                 <button className='greenButton saveButton'>Enregistrer</button>
-                
+
               </div>
             </fieldset>
           </form>

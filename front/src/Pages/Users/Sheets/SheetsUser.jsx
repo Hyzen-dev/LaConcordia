@@ -5,7 +5,7 @@ import { Viewer, Worker } from '@react-pdf-viewer/core';
 import '@react-pdf-viewer/default-layout/lib/styles/index.css';
 import { useApi } from '../../../Router';
 import MainLoadingScreen from '../../../Components/LoadingScreen/MainLoadingScreen.Component';
-
+import { saveAs } from 'file-saver';
 
 // Page SheetsUser qui renvoi la liste des partitions liées aux instruments pratiqués par l'utilisateur.
 
@@ -18,6 +18,8 @@ export default function SheetsUser(props) {
   const { user } = props
   const userId = user.id
 
+  const [noData, setNoData] = useState(false);
+
   const handleModal = (data) => {
     setSelectedSheet(data);
     setShowModal(true);
@@ -29,18 +31,23 @@ export default function SheetsUser(props) {
 
   const fetchSheets = async () => {
     const response = await useApi.sheets.GetAll();
+
+    if (response.data.length <= 0) {
+      setNoData(true);
+    }
     return setSheets(response.data);
   }
 
   const fetchUserInstruments = async () => {
+    // eslint-disable-next-line
     const response = await useApi.userInstruments.GetByUserId({ userId: userId });
     // console.log(response.data.instrumentId)
-
   }
 
   useEffect(() => {
-    fetchSheets()
-    fetchUserInstruments()
+    fetchSheets();
+    fetchUserInstruments();
+    // eslint-disable-next-line
   }, []);
 
 
@@ -59,6 +66,13 @@ export default function SheetsUser(props) {
 
   const sortedSheets = filteredSheets.sort((a, b) => b.createdAt.localeCompare(a.createdAt));
 
+
+  const downloadFile = (sheet) => {
+    console.log(sheet)
+    const url = `${useApi.baseUrl}/images/${sheet.sheetFile}`;
+    saveAs(url, sheet.title);
+  }
+
   return (
     <div className='tablePage'>
       <Helmet><title>La Concordia - Partitions</title></Helmet>
@@ -71,10 +85,7 @@ export default function SheetsUser(props) {
 
       <div className='tablePage__content'>
 
-
-
-
-        {!user.userInstruments || sheets.length <= 0 ? <MainLoadingScreen /> :
+        {noData ? <p>Aucune partition à afficher</p> : !user.userInstruments || sheets.length <= 0 ? <MainLoadingScreen /> :
           <>
 
             <input type="text" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} placeholder="Rechercher une partition" className='searchInput' />
@@ -107,7 +118,7 @@ export default function SheetsUser(props) {
                                   <button onClick={() => handleModal(sheet)} className='tableButton'>
                                     <i className="fa-solid fa-eye"></i>
                                   </button>
-                                  <button className='tableButton'>
+                                  <button className='tableButton' onClick={() => downloadFile(sheet)}>
                                     <i className="fa-solid fa-file-arrow-down"></i>
                                   </button>
                                 </div>

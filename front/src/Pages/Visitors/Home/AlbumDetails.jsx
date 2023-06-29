@@ -6,8 +6,11 @@ import MediasCard from '../../../Components/Cards/MediasCard.Component';
 import { useApi } from '../../../Router';
 import MainLoadingScreen from '../../../Components/LoadingScreen/MainLoadingScreen.Component';
 // Page AlbumDetail, qui renvoi l'ensemble des médias de l'album sur lequel l'utilisateur à cliqué.
+import { saveAs } from "file-saver";
 
-export default function AlbumDetails() {
+export default function AlbumDetails(props) {
+
+    const { isLogged } = props;
 
     // Utilisation du Hook useState pour définir les données de la page actuelle et leur états. "currentPageData" est initialisé avec un tableau de deux cases vides grâce à la méthode "fill()" d'un nouvel objet Array. Cette variable est utilisée par "SweetPagination" pour afficher les médias de la page courante.
     const [currentPageData, setCurrentPageData] = useState(new Array(2).fill());
@@ -46,35 +49,36 @@ export default function AlbumDetails() {
         await setMedias(response.data)
     }
 
+    const downloadAlbum = async () => {
+        const images = medias.map(media => `${useApi.baseUrl}/images/${media.file}`)
+
+        // Fetch all images from : useApi.baseUrl + /images/ + media.file
+        const fetchedImages = await Promise.all(images.map(async (image) => {
+            const response = await fetch(image);
+            const blob = await response.blob();
+            // Create a image file from the blob at correct format (not a zip)
+            const imageFile = new File([blob], image.split('/').pop(), { type: blob.type });
+            return imageFile;
+        }));
+
+        // Create a zip file from the images
+        const zip = require('jszip')();
+        for (let file = 0; file < fetchedImages.length; file++) {
+            zip.file(fetchedImages[file].name, fetchedImages[file]);
+        }
+        zip.generateAsync({ type: "blob" }).then(content => {
+            saveAs(content, `${album.title}.zip`);
+        });
+
+    }
+
     useEffect(() => {
-        fetchAlbum()
-        fetchMedias()
+        fetchAlbum();
+        fetchMedias();
+        // eslint-disable-next-line
     }, []);
 
 
-    // // Récupération de tous les médias en fonction de l'albumId récupéré dans les params
-    // const fetchAllMedias = async () => {
-    //     const response = await useApi.medias.GetByAlbumId({ albumId: parseInt(id) });
-    //     return setAllMedias(response.data);
-    // }
-    // useEffect(() => {
-    //     fetchAllMedias()
-    // }, []);
-
-
-    // console.log(album)
-    // console.log(allMedias)
-
-
-
-    // Récupération du médias selectionné
-    // const fetchSelectedMedias = async () => {
-    //     const response = await useApi.medias.GetById({ id: "???" });
-    //     return setSelectedMedias(response.data);
-    // }
-    // useEffect(() => {
-    //     fetchSelectedMedias()
-    // }, []);
 
 
 
@@ -88,9 +92,17 @@ export default function AlbumDetails() {
             </div>
 
             <div className='pagePattern__cardsContent'>
-                <Link to='/albums' className='returnButton'>
-                    <i className="fa-solid fa-circle-up fa-rotate-270"></i>
-                </Link>
+                <div className='pagePattern__cardsContent__button'>
+                    <div className='downloadAlbum'>
+
+                        {isLogged ? <button onClick={downloadAlbum} className='greenButton'>Télécharger l'album</button> : null}
+
+
+                    </div>
+                    <Link to='/albums' className='returnButton'>
+                        <i className="fa-solid fa-circle-up fa-rotate-270"></i>
+                    </Link>
+                </div>
 
 
                 {noData ? <p>Aucun média à afficher</p> : album.length <= 0 || medias.length <= 0 ? <MainLoadingScreen /> : <>
@@ -98,6 +110,7 @@ export default function AlbumDetails() {
                     {medias.length <= 0 || !medias[0]?.file ?
                         <MainLoadingScreen /> :
                         <div>
+
                             <div className='cardsContainer'>
                                 {/* Utilisation d'une expression JSX qui vérifie si currentPageData existe et contient au moins un élément avec une propriété name. Si c'est le cas, la méthode map() est utilisée pour créer une nouvelle liste de Composants MediasCard. Si currentPageData est vide ou n'a pas de propriété name, rien n'est renvoyé. */}
                                 {currentPageData && currentPageData[0]?.file && currentPageData.length > 0 ? currentPageData.map((item, k) => (

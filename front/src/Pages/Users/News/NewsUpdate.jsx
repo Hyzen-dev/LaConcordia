@@ -4,9 +4,14 @@ import { Helmet } from 'react-helmet';
 import { useApi } from '../../../Router';
 import LoadingScreen from '../../../Components/LoadingScreen/LoadingScreen.Component';
 import 'react-quill/dist/quill.snow.css'; // Importez le thème "snow" par défaut
-import ReactQuill from 'react-quill';
+import ReactQuill, { Quill } from 'react-quill';
 import { toastNotification, updateToastNotification } from '../../../Router';
 import { useNavigate } from 'react-router-dom';
+import ImageCompress from 'quill-image-compress';
+
+Quill.register({
+  'modules/imageCompress': ImageCompress,
+}, true);
 
 export default function NewsUpdate() {
 
@@ -30,6 +35,7 @@ export default function NewsUpdate() {
       setNews(data);
     }
     fetchData();
+    // eslint-disable-next-line
   }, [])
 
   const navigate = useNavigate();
@@ -106,17 +112,25 @@ export default function NewsUpdate() {
       clipboard: {
         // toggle to add extra line breaks when pasting HTML:
         matchVisual: false,
-      }
+      },
+      imageCompress: {
+        quality: 0.7, // default
+        maxWidth: 1000, // default
+        maxHeight: 1000, // default
+        imageType: 'image/jpeg', // default
+        debug: false, // default
+        suppressErrorLogging: false, // default
+        insertIntoEditor: undefined, // default
+        include: ['image/jpeg', 'image/jpg', 'image/png'], // default
+      },
     },
     formats: [
       'header', 'font', 'size',
       'bold', 'italic', 'underline', 'strike', 'blockquote',
       'list', 'bullet', 'indent',
       'link', 'image', 'video'
-    ]
+    ],
   };
-
-
 
   const handleDelete = async (id) => {
     const toastId = toastNotification('loading', 'Veuillez patienter...');
@@ -231,7 +245,7 @@ export default function NewsUpdate() {
                   onChange={handleMediasChange}
                 />
 
-                {medias ? <img src={URL.createObjectURL(medias)} alt="Image de l'article" className='downloadImage' /> : showedImage ? <img src={`${useApi.baseUrl}/images/${showedImage}`} alt="Image de l'article" className='downloadImage' /> : null}
+                {medias ? <img src={URL.createObjectURL(medias)} alt="Couverture" className='downloadImage' /> : showedImage ? <img src={`${useApi.baseUrl}/images/${showedImage}`} alt="Couverture" className='downloadImage' /> : null}
 
                 <button className='greenButton sendButton'>Mettre à jour</button>
               </div>

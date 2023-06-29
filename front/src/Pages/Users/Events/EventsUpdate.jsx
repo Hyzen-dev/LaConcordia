@@ -5,9 +5,14 @@ import { useApi } from '../../../Router';
 import LoadingScreen from '../../../Components/LoadingScreen/LoadingScreen.Component';
 import moment from 'moment';
 import 'react-quill/dist/quill.snow.css'; // Importez le thème "snow" par défaut
-import ReactQuill from 'react-quill';
+import ReactQuill, { Quill } from 'react-quill';
 import { toastNotification, updateToastNotification } from '../../../Router';
 import { useNavigate } from 'react-router-dom';
+import ImageCompress from 'quill-image-compress';
+
+Quill.register({
+  'modules/imageCompress': ImageCompress,
+}, true);
 
 export default function EventsUpdate() {
 
@@ -31,6 +36,7 @@ export default function EventsUpdate() {
       setEvents(data);
     }
     fetchData();
+    // eslint-disable-next-line
   }, [])
 
   const navigate = useNavigate();
@@ -110,15 +116,26 @@ export default function EventsUpdate() {
         ['clean']
       ],
       clipboard: {
+        // toggle to add extra line breaks when pasting HTML:
         matchVisual: false,
-      }
+      },
+      imageCompress: {
+        quality: 0.7, // default
+        maxWidth: 1000, // default
+        maxHeight: 1000, // default
+        imageType: 'image/jpeg', // default
+        debug: false, // default
+        suppressErrorLogging: false, // default
+        insertIntoEditor: undefined, // default
+        include: ['image/jpeg', 'image/jpg', 'image/png'], // default
+      },
     },
     formats: [
       'header', 'font', 'size',
       'bold', 'italic', 'underline', 'strike', 'blockquote',
       'list', 'bullet', 'indent',
       'link', 'image', 'video'
-    ]
+    ],
   };
 
   const formattedDate = moment(eventDate).format('YYYY-MM-DDTHH:mm');
@@ -243,11 +260,11 @@ export default function EventsUpdate() {
                     className='downloadInput'
                     onChange={handleMediasChange}
                   />
-                  
+
                   {error.includes('thumbnail') ? <label htmlFor="download">Veuillez ajouter une photo de couverture</label> : null}
                 </div>
 
-                {medias ? <img src={URL.createObjectURL(medias)} alt="Image de l'article" className='downloadImage' /> : showedImage ? <img src={`${useApi.baseUrl}/images/${showedImage}`} alt="Image de l'article" className='downloadImage' /> : null}
+                {medias ? <img src={URL.createObjectURL(medias)} alt="Médias de l'article" className='downloadImage' /> : showedImage ? <img src={`${useApi.baseUrl}/images/${showedImage}`} alt="Médias de l'article" className='downloadImage' /> : null}
 
                 <button className='greenButton sendButton'>Mettre à jour</button>
               </div>

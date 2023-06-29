@@ -21,28 +21,11 @@ const FilterComponent = ({ filterText, onFilter, onClear }) => {
 }
 
 export default function UsersUpdate() {
-  const data = [
-    {
-      id: 1,
-      firstName: 'John',
-      lastName: 'Doe',
-      isArchived: false,
-    },
-    {
-      id: 2,
-      firstName: 'Jonathan',
-      lastName: 'Smith',
-      isArchived: true,
-    },
-  ]
 
   const [allUsers, setAllUsers] = useState([])
 
   const [filterText, setFilterText] = useState('');
   const [resetPaginationToggle, setResetPaginationToggle] = useState(false);
-
-
-
 
   const fetchAllUsers = async () => {
     const response = await useApi.user.GetAll();
@@ -54,57 +37,6 @@ export default function UsersUpdate() {
   }, []);
 
   const navigate = useNavigate();
-
-  
-
-
-  const handleDelete = async (id, state) => {
-    const response = await useApi.user.ArchiveUser({ id: id, state: state });
-    if (response.status === 200) {
-      // console.log(response)
-      fetchAllUsers();
-    } else {
-      // console.log(response);
-    }
-  }
-
-  function sortUsers(a, b) {
-    if (a.deletionDate === null && b.deletionDate !== null) {
-      return -1; // a avant b
-    } else if (a.deletionDate !== null && b.deletionDate === null) {
-      return 1; // b avant a
-    } else {
-      return 0; // aucun changement
-    }
-  }
-
-  const [showArchivedUsers, setShowArchivedUsers] = useState(false);
-
-  const handleArchiveUsers = () => {
-    setShowArchivedUsers(!showArchivedUsers);
-  }
-
-
-  const customStyles = {
-    overlay: {
-    },
-    rows: {
-      style: {
-        overflow: 'hidden',
-      },
-    },
-    headCells: {
-      style: {
-        overflow: 'hidden',
-      },
-    },
-    cells: {
-      style: {
-        overflow: 'hidden',
-      },
-    },
-  }
-
 
 
 
@@ -120,7 +52,7 @@ export default function UsersUpdate() {
       sortable: true,
     },
     {
-      name: '?',
+      name: 'Status',
       style: {
         width: 10 + 'px',
       },

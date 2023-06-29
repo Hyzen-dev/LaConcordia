@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import Modal from '../../Components/Modal/Modal.Component';
 import { useApi } from '../../Router';
-import { Link } from 'react-router-dom';
 import LoadingScreen from '../../Components/LoadingScreen/LoadingScreen.Component';
 
 export default function Messages(props) {
 
-  const { selectedMessage, setSelectedMessage, readMessages, setReadMessages, allMessages, setAllMessages, messageIsRead, setMessageIsRead, fetchAllMessages } = props
+  const { selectedMessage, setSelectedMessage, readMessages, setReadMessages, allMessages,  messageIsRead, setMessageIsRead, fetchAllMessages } = props
 
   const [showModal, setShowModal] = useState(false);
 
@@ -109,6 +108,8 @@ export default function Messages(props) {
                       </td>
                     </tr>
                   )
+                } else {
+                  return null;
                 }
               })}
             </tbody>
@@ -155,6 +156,8 @@ export default function Messages(props) {
                           </td>
                         </tr>
                       )
+                    } else {
+                      return null;
                     }
                   })}
                 </tbody>

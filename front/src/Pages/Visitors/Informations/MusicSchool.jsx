@@ -57,7 +57,7 @@ export default function MusicSchool() {
               <strong>L'école de musique est ouverte du Lundi au Samedi.</strong><br />
               <span className='musicSchool__address'>Salle Léon Urbain, École de Musique, rue Ferrer, 62750 LOOS EN GOHELLE</span>
             </p>
-            <p className='musicSchool__contact'>Pour tout renseignement, veuillez nous contacter via <Link to={'/contact'} className='musicSchool__contact__color'>cette page</Link>, ou par téléphone au <strong className='musicSchool__contact__color'>+33.X.XX.XX.XX.XX</strong></p>
+            <p className='musicSchool__contact'>Pour tout renseignement, veuillez nous contacter via <Link to={'/contact'} className='musicSchool__contact__color'>cette page</Link>, ou par téléphone au <strong className='musicSchool__contact__color'>03.21.28.21.05</strong></p>
           </div>
         </div>
       </div>

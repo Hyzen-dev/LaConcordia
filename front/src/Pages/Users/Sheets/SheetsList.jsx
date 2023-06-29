@@ -15,8 +15,15 @@ export default function SheetsList() {
   const [sheets, setSheets] = useState([])
   const [instruments, setInstruments] = useState([])
 
+  const [noData, setNoData] = useState(false);
+
   const fetchSheets = async () => {
     const response = await useApi.sheets.GetAll();
+
+    if (response.data.length <= 0) {
+      setNoData(true);
+    }
+
     return setSheets(response.data);
   }
 
@@ -60,9 +67,9 @@ export default function SheetsList() {
         <h3>Modifiez ou supprimez une partition</h3>
       </div>
 
+      <Link to='/espace-membre/partitions/creation' className='link add'><button className='greenButton'>Ajouter une nouvelle partition</button></Link>
 
-
-      {instruments.length <= 0 || sheets.length <= 0 ? <MainLoadingScreen /> :
+      {noData ? <p>Aucune partition à afficher</p> : instruments.length <= 0 || sheets.length <= 0 ? <MainLoadingScreen /> :
         <>
           <div className='tablePage__content'>
 
@@ -70,6 +77,7 @@ export default function SheetsList() {
               <thead>
                 <tr>
                   <th>Titre</th>
+                  <th>Artiste</th>
                   <th>Instruments</th>
                   <th>Partition</th>
                 </tr>
@@ -81,6 +89,7 @@ export default function SheetsList() {
                   return (
                     <tr key={key}>
                       <td>{sheet.title}</td>
+                      <td>{sheet.artist}</td>
                       <td>{instrument ? instrument.label : ''}</td>
 
 

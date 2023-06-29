@@ -19,7 +19,7 @@ export default function AlbumCard(props) {
         return (
             <div key={id} className='albumCard'>
                 <Link to={`/espace-membre/medias/gestion/${id}`} className='link'>
-                    <img src={`${apiUrl}/images/${thumbnail}`} alt="photo" className='albumCard__img' />
+                    <img src={`${apiUrl}/images/${thumbnail}`} alt="Couverture" className='albumCard__img' />
 
                     <div>
                         {title.length < 10 ? <h3 className='albumCard__title'>{title}</h3>
@@ -37,7 +37,7 @@ export default function AlbumCard(props) {
         return (
             <div key={id} className='albumCard'>
                 <Link to={`/albums/${id}`} className='link'>
-                    <img src={`${apiUrl}/images/${thumbnail}`} alt="photo" className='albumCard__img' />
+                    <img src={`${apiUrl}/images/${thumbnail}`} alt="Couverture" className='albumCard__img' />
 
                     <div>
                         {title.length < 10 ? <h3 className='albumCard__title'>{title}</h3>

@@ -22,10 +22,11 @@ export default function ResetPassword() {
 
         setError([]);
         const newError = [];
-        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/i;
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/i;
 
         if (step === 1) {
             setStep(2);
+            // eslint-disable-next-line
             const response = await useApi.user.ResetPassword({ email: email });
             updateToastNotification(toastId, "success", "Un code de vérification vous a été envoyé par mail");
             // console.log(response);
@@ -52,7 +53,7 @@ export default function ResetPassword() {
 
                 updateToastNotification(toastId, "error", "Les mots de passe ne correspondent pas");
             } else {
-
+                // eslint-disable-next-line
                 const response = await useApi.user.UpdateResetPassword({ email: email, code: code, password: password });
 
                 updateToastNotification(toastId, "success", "Le mot de passe a bien été modifié")
@@ -84,15 +85,15 @@ export default function ResetPassword() {
                 {step === 1 ?
                     <form onSubmit={(e) => handleForm(e, 1)}>
                         <fieldset className='form'>
-                                <input
-                                    type="email"
-                                    name="email"
-                                    id="email"
-                                    value={email}
-                                    onChange={(e) => setEmail(e.currentTarget.value)}
-                                    placeholder='Saisissez votre adresse mail *'
-                                    required
-                                />
+                            <input
+                                type="email"
+                                name="email"
+                                id="email"
+                                value={email}
+                                onChange={(e) => setEmail(e.currentTarget.value)}
+                                placeholder='Saisissez votre adresse mail *'
+                                required
+                            />
 
                             <button className='greenButton saveButton'>Valider</button>
                         </fieldset>
@@ -110,7 +111,7 @@ export default function ResetPassword() {
                                         value={email}
                                         required
                                         disabled
-                                    /> 
+                                    />
                                 </div>
 
                                 <div className='form__inputError'>

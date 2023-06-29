@@ -17,11 +17,8 @@ const customStyles = {
 
 
 export default function Modal(props) {
-  const { showModal, setShowModal } = props;
+  const { showModal } = props;
 
-  const handleModal = (status) => {
-    setShowModal(status)
-  }
 
   return (
     <ReactModal isOpen={showModal} style={customStyles}>

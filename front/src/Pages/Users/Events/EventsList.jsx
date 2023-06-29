@@ -16,11 +16,18 @@ export default function EventsList() {
 
   const [allEvents, setAllEvents] = useState([])
 
+  const [noData, setNoData] = useState(false);
+
   const fetchAllEvents = async () => {
     const response = await useApi.events.GetAll();
     const events = response.data.sort((a, b) => {
       return new Date(b.createdAt) - new Date(a.createdAt);
     });
+
+    if (response.data.length <= 0) {
+      setNoData(true);
+    }
+
     return setAllEvents(events);
   }
 
@@ -41,7 +48,7 @@ export default function EventsList() {
 
       <Link to='/espace-membre/evenements/creation' className='link add'><button className='greenButton'>Ajouter un nouvel évènement</button></Link>
 
-      {allEvents.length <= 0 ? <MainLoadingScreen /> :
+      {noData ? <p>Aucun évènement à afficher</p> : allEvents.length <= 0 ? <MainLoadingScreen /> :
         <>
           <div className='cardsContainer'>
             {/* Utilisation d'une expression JSX qui vérifie si "currentPageData" existe et contient au moins un élément avec une propriété "thumbnail". Si c'est le cas, la méthode map() est utilisée pour créer une nouvelle liste de Composant "EventCard". Si "currentPageData" est vide ou n'a pas de propriété "thumbnail", rien n'est renvoyé. */}

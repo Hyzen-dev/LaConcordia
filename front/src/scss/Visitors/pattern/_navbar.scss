@@ -16,6 +16,7 @@
 
         &__logoContainer {
             display: flex;
+            align-items: center;
             gap: 10px;
             z-index: 997;
 
@@ -25,6 +26,8 @@
 
             &__title {
                 font-family: 'Patua One';
+                margin: 0px;
+                font-weight: 500 !important;
             }
         }
 
@@ -55,6 +58,7 @@
             margin: auto;
             padding: 20px 0px;
             font-weight: bold;
+            
 
             &__link {
                 color: white;
@@ -94,7 +98,7 @@
 }
 
 
-@media screen and (min-width: 480px) {
+@media screen and (min-width: 769px) {
 
     .navbar {
         width: 80%;
@@ -125,10 +129,15 @@
             font-size: 16px;
             transform: none;
             transition: none;
+            justify-content: flex-end;
+            gap: 16px;
 
             &__title {
                 border: none;
                 padding: 0px;
+                width: initial;
+                margin: 0px;
+                justify-content: center;
                 font-weight: 300;
                 display: flex;
                 flex-direction: column;

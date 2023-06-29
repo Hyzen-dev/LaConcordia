@@ -1,10 +1,10 @@
 .bandPage {
         gap: 0px;
-        display: flex;
 }
 
 .bandCategory {
         text-transform: uppercase;
+        font-weight: 500 !important;
 }
 
 .bandMembers {
@@ -12,9 +12,10 @@
 }
 
 
-@media screen and (min-width: 1280px) {
+@media screen and (min-width: 769px) {
 
         .bandPage {
+                display: flex;
                 flex-direction: row;
                 justify-content: space-between;
         }

@@ -1,6 +1,7 @@
 const Event = require("../models/event.model");
 const User = require("../models/user.model");
 const { sendMail } = require("../utils/mailer.utils");
+const jwt = require("jsonwebtoken");
 
 exports.Create = async (req, res) => {
     try {
@@ -18,19 +19,27 @@ exports.Create = async (req, res) => {
         }
 
         // Join the user name from the authorId from user table
-        await new Event({
+        // await new Event({
+        //     title: title,
+        //     thumbnail: thumbnail,
+        //     eventDate: eventDate,
+        //     content: content,
+        //     authorId: authorId
+        // }).save();
+
+
+        await Event.create({
             title: title,
             thumbnail: thumbnail,
             eventDate: eventDate,
             content: content,
             authorId: authorId
-        }).save();
+        });
 
-        
         if (isNotified) {
             const usersWithNotification = await User.findAll({ where: { notification: true } });
 
-            usersWithNotification.forEach(async user => {
+            usersWithNotification.forEach(async (user) => {
                 await sendMail("newEvent", {}, user.email);
             });
         }
@@ -40,7 +49,7 @@ exports.Create = async (req, res) => {
             message: "L'évènement a bien été créé."
         });
     } catch (error) {
-        console.log("error");
+        console.log(error);
         return res.status(500).json({
             error: true,
             message: "Une erreur interne est survenue, veuillez réessayer plus tard."
@@ -164,7 +173,7 @@ exports.Delete = async (req, res) => {
                 message: "L'évènement est introuvable."
             });
         }
-        
+
         await event.destroy();
 
         return res.status(201).json({

@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import ModalPhoto from '../Modal/ModalPhoto.Component';
 import { useApi } from '../../Router';
+import { saveAs } from 'file-saver';
+
 
 // Composant MediasCard qui est utilisé sur la page AlbumDetails.
 
@@ -27,19 +29,29 @@ export default function MediasCard(props) {
     };
 
 
+    const downloadFile = () => {
+        const url = `${useApi.baseUrl}/images/${file}`;
+        saveAs(url, file);
+     }
+
+    const extension = file.split('.').pop()
 
     return (
         <div key={id} className='mediasCard'>
-            {/* Intégration des props "picture" et "title" en tant que valeur des attributs "src" et "alt". Utilisation de l'attribut "onClick" avec la fonction "handleClick" afin de rendre active la div "mediasActionsContainer". */}
-            <img src={`${useApi.baseUrl}/images/${file}`} alt={file.split('/')[file.split('/').length - 1]} className='mediasCard__photo' onClick={handleClick} />
+            {["mp4", "webm", "ogg"].includes(extension) ?
+                <div className='videoIcon'>
+                    <video src={`${useApi.baseUrl}/images/${file}`} alt={file.split('/')[file.split('/').length - 1]} className='mediasCard__photo' onClick={handleClick} />
+                </div>
+                :
+                <div className='photoIcon'>
+                    <img src={`${useApi.baseUrl}/images/${file}`} alt={file.split('/')[file.split('/').length - 1]} className='mediasCard__photo' onClick={handleClick} />
+                </div>
+            }
 
-            {/* La classe de la div dépend de la valeur de la varibale "click", si vrai la valeur "active" est ajouté au nom de la classe. */}
             <div className={selectedCard === id ? "mediasActionsContainer active" : "mediasActionsContainer"} onClick={handleClick}>
-                {/* Lors du clic sur le bouton, la valeur de "showModal" devient vrai afin d'afficher la modale */}
                 <button onClick={() => setShowModal(true)} className='mediasActionsContainer__button firstButton' >Visualiser</button>
-                {/* <a href='' download='image.jpg'> */}
-                <a target='_blank' download={file.split('/')[file.split('/').length - 1]} href={file} className='mediasActionsContainer__button secondButton' >Télécharger</a>
-                {/* </a> */}
+
+                <button onClick={() => downloadFile()} className='mediasActionsContainer__button secondButton' >Télécharger</button>
             </div>
 
             {/* Intégration du composant ModalPhoto. Les variables "showModal" et "setShowModal" sont envoyés en tant que props au composant */}
@@ -47,7 +59,12 @@ export default function MediasCard(props) {
                 <div className='modal photoModal'>
                     {/* Lors du clic sur le bouton, la valeur de "showModal" devient fausse afin de fermer la modale */}
                     <button className='closeButton' onClick={() => setShowModal(false)}><i className="fa-solid fa-square-xmark"></i></button>
-                    <img src={`${useApi.baseUrl}/images/${file}`} alt={file.split('/')[file.split('/').length - 1]} className='modal__medias' />
+                    {
+                        ["mp4", "webm", "ogg"].includes(extension) ?
+                            <video controls autoplay src={`${useApi.baseUrl}/images/${file}`} alt={file.split('/')[file.split('/').length - 1]} className='modal__medias' />
+                            :
+                            <img src={`${useApi.baseUrl}/images/${file}`} alt={file.split('/')[file.split('/').length - 1]} className='modal__medias' />
+                    }
                     <p className='modal__mediasTitle'>{album}</p>
                 </div>
             </ModalPhoto>

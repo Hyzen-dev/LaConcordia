@@ -27,7 +27,7 @@ export default function NewsCard(props) {
         return (
             <div key={id} className='cards usersCards'>
                 <Link to={`/espace-membre/actualites/gestion/${id}`} className='link'>
-                    <img src={`${apiUrl}/images/${thumbnail}`} alt="photo" className='cards__img' />
+                    <img src={`${apiUrl}/images/${thumbnail}`} alt="Couverture" className='cards__img' />
                     <div className='cards__content'>
                         <h3 className='cards__content__title'>{title}</h3>
 
@@ -45,7 +45,7 @@ export default function NewsCard(props) {
         return (
             <div key={id} className='cards'>
                 <Link to={`/actualites/${id}`} className='link'>
-                    <img width={'100%'} src={`${apiUrl}/images/${thumbnail}`} alt="photo" className='cards__img' />
+                    <img width={'100%'} src={`${apiUrl}/images/${thumbnail}`} alt="Couverture" className='cards__img' />
                     <div className='cards__content'>
                         <h3 className='cards__content__title'>{title}</h3>
                         <p className='cards__content__summary'>{description}</p>

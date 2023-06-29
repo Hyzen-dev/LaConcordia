@@ -19,7 +19,7 @@ export default function Navbar(props) {
       <div className='navbar__header'>
 
         <div className='navbar__header__logoContainer'>
-          <img src={require('./../../assets/logo.png')} className='navbar__header__logoContainer__logo' />
+          <img src={require('./../../assets/logo.png')} className='navbar__header__logoContainer__logo' alt='logo' />
           <h1 className='navbar__header__logoContainer__title'>La Concordia</h1>
         </div>
 

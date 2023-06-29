@@ -1,3 +1,4 @@
+@import './normalize';
 @import './variables.scss';
 
 @import './base';
@@ -32,7 +33,6 @@
 
 @import './Users/content/profil';
 @import './Users/content/table';
-// @import './Users/content/notification';
 @import './Users/content/messages';
 
 @import './footer';

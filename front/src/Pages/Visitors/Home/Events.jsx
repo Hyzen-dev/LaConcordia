@@ -4,8 +4,6 @@ import Sweetpagination from 'sweetpagination';
 import EventCard from '../../../Components/Cards/EventCard.Component';
 import { useApi } from '../../../Router';
 import MainLoadingScreen from '../../../Components/LoadingScreen/MainLoadingScreen.Component';
-import parse from 'html-react-parser';
-
 
 // Page Events, qui retourne la liste des évènements consultables par les visiteurs.
 

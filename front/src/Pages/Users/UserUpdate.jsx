@@ -56,8 +56,8 @@ export default function UserUpdate() {
         fetchRoles()
         fetchStatus()
         fetchInstruments()
+        // eslint-disable-next-line
     }, []);
-
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -157,33 +157,48 @@ export default function UserUpdate() {
                         <h3 className='usersPage__subheading'>Informations personnelles</h3>
                         <div className='separator'></div>
 
-
                         <form onSubmit={(event) => handleSubmit(event)}>
                             <fieldset className='form'>
-                                <input
-                                    type="text"
-                                    name='lastname'
-                                    value={lastName}
-                                    onChange={(event) => setLastName(event.currentTarget.value)}
-                                />
-                                <input
-                                    type="text"
-                                    name='firstname'
-                                    value={firstName}
-                                    onChange={(event) => setFirstName(event.currentTarget.value)}
-                                />
-                                <input
-                                    type="email"
-                                    name='email'
-                                    value={email}
-                                    onChange={(event) => setEmail(event.currentTarget.value)}
-                                />
-                                <input
-                                    type="phone"
-                                    name='phoneNumber'
-                                    value={phoneNumber}
-                                    onChange={(event) => setPhoneNumber(event.currentTarget.value)}
-                                />
+
+                                <div className='form__inputError'>
+                                    <input
+                                        type="text"
+                                        name='lastname'
+                                        value={lastName}
+                                        onChange={(event) => setLastName(event.currentTarget.value)}
+                                    />
+                                    {error.includes("lastName") && <label htmlFor="lastname">Le nom doit contenir au moins 2 caractères et ne doit pas contenir de chiffres</label>}
+                                </div>
+
+                                <div className='form__inputError'>
+                                    <input
+                                        type="text"
+                                        name='firstname'
+                                        value={firstName}
+                                        onChange={(event) => setFirstName(event.currentTarget.value)}
+                                    />
+                                    {error.includes("firstName") && <label htmlFor="firstame">Le prénom doit contenir au moins 2 caractères et ne doit pas contenir de chiffres</label>}
+                                </div>
+
+                                <div className='form__inputError'>
+                                    <input
+                                        type="email"
+                                        name='email'
+                                        value={email}
+                                        onChange={(event) => setEmail(event.currentTarget.value)}
+                                    />
+                                    {error.includes("email") && <label htmlFor="firstame">L'adresse email est invalide</label>}
+                                </div>
+
+                                <div className='form__inputError'>
+                                    <input
+                                        type="phone"
+                                        name='phoneNumber'
+                                        value={phoneNumber}
+                                        onChange={(event) => setPhoneNumber(event.currentTarget.value)}
+                                    />
+                                    {error.includes("phoneNumber") && <label htmlFor="phoneNumber">Le numéro de téléphone est invalide</label>}
+                                </div>
 
                                 <button className='greenButton saveButton'>Enregistrer</button>
                             </fieldset>
@@ -213,6 +228,6 @@ export default function UserUpdate() {
                     <button className='greenButton suspendButton' onClick={() => handleDelete(parseInt(id), true)} >Susprendre ce compte utilisateur</button>
                 }
             </>}
-        </div>
+        </div >
     )
 }

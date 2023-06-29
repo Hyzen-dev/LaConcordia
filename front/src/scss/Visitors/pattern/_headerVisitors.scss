@@ -14,17 +14,24 @@
         width: 80%;
         margin: auto;
         font-family: 'Patua One';
+        font-weight: 400;
         margin-bottom: 20px;
     }
 
     &__link {
         color: white;
+        font-weight: 500;
+        font-size: 12px !important;
     }
 }
 
 @media screen and (min-width: 480px) {
     .titleContainer {
         margin: 100px;
+
+        &__link {
+            font-size: 16px !important;
+        }
     }
 }
 
@@ -37,6 +44,10 @@
         &__title {
             font-size: 32px;
             width: 35%;
+        }
+
+        &__link {
+            font-size: 18px !important;
         }
     }
 }

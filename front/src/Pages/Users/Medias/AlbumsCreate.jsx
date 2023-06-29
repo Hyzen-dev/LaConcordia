@@ -41,8 +41,6 @@ export default function AlbumsCreate() {
 
       const response = await useApi.albums.Create({ title: title, thumbnail: thumbnail })
 
-      const albumId = await (response.id.albumId)
-
       await setAlbumId(response.id.albumId)
 
       if (!response) {
@@ -189,7 +187,7 @@ export default function AlbumsCreate() {
               {error.includes('thumbnail') && <label htmlFor='download'>Veuillez ajouter une photo de couverture</label>}
             </div>
 
-            {thumbnail ? <img src={URL.createObjectURL(thumbnail)} alt="Image de l'article" className='downloadImage' /> : thumbnail ? <img src={`${useApi.baseUrl}/images/${thumbnail}`} alt="Image de l'article" className='downloadImage' /> : null}
+            {thumbnail ? <img src={URL.createObjectURL(thumbnail)} alt="Médias de l'article" className='downloadImage' /> : thumbnail ? <img src={`${useApi.baseUrl}/images/${thumbnail}`} alt="Medias de l'article" className='downloadImage' /> : null}
 
             <button className='greenButton saveButton'>Créer l'album</button>
 

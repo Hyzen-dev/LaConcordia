@@ -52,7 +52,7 @@ export default function Committee() {
           {/* Les données "StatusDatas" sont mappées afin d'afficher les labels des status dont le type est "Committee". Pour chacun de ces labels, les membres ayant ce status sont affichés grace à l'utilisation de la fonction ".map" sur les données "UsersDatas". */}
           {allStatus.map((status, key) => {
             // console.log("status", status)
-            if (status.type === 'Committee') {
+            if (status.type === 'committee') {
               // console.log("status", status)
               return (
                 <div key={key}>

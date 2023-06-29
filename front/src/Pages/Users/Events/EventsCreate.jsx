@@ -3,9 +3,15 @@ import { Helmet } from 'react-helmet';
 import { useApi } from '../../../Router';
 
 import 'react-quill/dist/quill.snow.css'; // Importez le thème "snow" par défaut
-import ReactQuill from 'react-quill';
+import ReactQuill, { Quill } from 'react-quill';
 import { toastNotification, updateToastNotification } from '../../../Router';
 import { Link, useNavigate } from 'react-router-dom';
+
+import ImageCompress from 'quill-image-compress';
+
+Quill.register({
+  'modules/imageCompress': ImageCompress,
+}, true);
 
 export default function EventsCreate() {
 
@@ -15,7 +21,6 @@ export default function EventsCreate() {
   const [richContent, setRichContent] = useState('');
   const [error, setError] = useState([]);
   const [isNotified, setIsNotified] = useState(false);
-  const currentDate = new Date()
 
   const navigate = useNavigate();
 
@@ -88,14 +93,24 @@ export default function EventsCreate() {
       clipboard: {
         // toggle to add extra line breaks when pasting HTML:
         matchVisual: false,
-      }
+      },
+      imageCompress: {
+        quality: 0.7, // default
+        maxWidth: 1000, // default
+        maxHeight: 1000, // default
+        imageType: 'image/jpeg', // default
+        debug: false, // default
+        suppressErrorLogging: false, // default
+        insertIntoEditor: undefined, // default
+        include: ['image/jpeg', 'image/jpg', 'image/png'], // default
+      },
     },
     formats: [
       'header', 'font', 'size',
       'bold', 'italic', 'underline', 'strike', 'blockquote',
       'list', 'bullet', 'indent',
       'link', 'image', 'video'
-    ]
+    ],
   };
 
   const handleMediasChange = (event, type) => {
@@ -193,7 +208,7 @@ export default function EventsCreate() {
             {error.includes('medias') ? <label htmlFor="download">Veuillez ajouter une photo de couverture</label> : null}
           </div>
 
-          {medias ? <img src={URL.createObjectURL(medias)} alt="Image de l'article" className='downloadImage' /> : medias ? <img src={`${useApi.baseUrl}/images/${medias}`} alt="Image de l'article" className='downloadImage' /> : null}
+          {medias ? <img src={URL.createObjectURL(medias)} alt="Couverture" className='downloadImage' /> : medias ? <img src={`${useApi.baseUrl}/images/${medias}`} alt="Couverture" className='downloadImage' /> : null}
 
           <div className='notificationContainer'>
             <input
