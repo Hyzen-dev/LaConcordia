@@ -18,7 +18,7 @@ exports.Create = async (req, res) => {
             thumbnail: thumbnail
         }).save();
 
-        const albumId = album.id; // Récupérer l'ID de l'album
+        const albumId = album.id;
 
         return res.status(201).json({
             error: false,
@@ -34,6 +34,9 @@ exports.Create = async (req, res) => {
         })
     }
 }
+
+// [... AJOUT DES AUTRES FONCTIONS DU CRUD ...]
+
 
 exports.GetAll = async (req, res) => {
     try {
@@ -88,6 +91,14 @@ exports.GetById = async (req, res) => {
         })
     }
 }
+
+// [... AJOUT DES AUTRES FONCTIONS DU CRUD ...]
+
+
+
+
+
+
 
 exports.Update = async (req, res) => {
     try {

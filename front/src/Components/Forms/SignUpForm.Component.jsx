@@ -73,6 +73,7 @@ export default function SignUpForm() {
 
         const toastId = toastNotification('loading', 'Veuillez patienter...');
         const response = await useApi.user.SignUp(userData);
+        
         if (!response) {
             return updateToastNotification(toastId, 'error', 'Une erreur est survenue, veuillez réessayer plus tard.');
         }

@@ -14,6 +14,13 @@ import LoadingScreen from './Components/LoadingScreen/LoadingScreen.Component';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+import ReactDOM from 'react-dom';
+import ReactGA from 'react-ga';
+
+
+const TRACKING_ID = "G-5CZN01LR04";
+ReactGA.initialize(TRACKING_ID);
+
 export const useApi = new ApiHandler(localStorage.getItem('accessToken') || null);
 
 export function Router() {
@@ -35,6 +42,10 @@ export function Router() {
     </BrowserRouter>
   );
 }
+
+
+
+
 
 export const toastNotification = (type, message) => {
   return toast[type](message, {
@@ -70,6 +81,14 @@ function RouterContainer() {
   const [isLogged, setIsLogged] = useState(Boolean(localStorage.getItem('accessToken')) || false);
 
 
+
+
+  useEffect(() => {
+    ReactGA.pageview(window.location.pathname + window.location.search);
+  }, []);
+
+
+
   const logout = (reason) => {
     if (reason === "logout") {
       toastNotification('info', 'Vous êtes désormais déconnecté.')
@@ -84,7 +103,6 @@ function RouterContainer() {
   const fetchProfile = async () => {
     const response = await useApi.user.GetProfile()
     if (response && !response.error) {
-      // console.log(response.data)
       if (response.data.deletionDate) return logout();
       setUser(response.data)
       setIsLogged(true)
@@ -127,6 +145,7 @@ function RouterContainer() {
 
 
   const location = useLocation();
+  
   const [isPanelRoute, setIsPanelRoute] = useState(false);
 
   useEffect(() => {

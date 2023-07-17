@@ -179,9 +179,13 @@ export default function EventsCreate() {
             Descriptif de l'évènement
           </label>
 
-          <ReactQuill id="content" theme="snow"
+          <ReactQuill id="content"
+            theme="snow"
             modules={Editor.modules}
-            formats={Editor.formats} value={richContent} onChange={handleRichContentChange} />
+            formats={Editor.formats}
+            value={richContent}
+            onChange={handleRichContentChange}
+          />
 
           <div className='form__inputError'>
             {error.includes('richContent') ? <label htmlFor="richContent">Le contenu de votre article doit contenir 5 caractères minimum</label> : null}

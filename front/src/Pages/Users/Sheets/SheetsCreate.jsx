@@ -198,7 +198,10 @@ export default function SheetsCreate() {
                   height: '600px',
                   padding: '20px 0px',
                 }}
-              ><Viewer fileUrl={URL.createObjectURL(sheetFile)} />
+              >
+                <Viewer
+                  fileUrl={URL.createObjectURL(sheetFile)}
+                />
               </div>
             </Worker>
             : null}

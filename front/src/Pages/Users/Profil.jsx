@@ -73,7 +73,6 @@ export default function Profil(props) {
     event.preventDefault();
 
     const toastId = toastNotification('loading', 'Veuillez patienter...');
-
     const response = await useApi.user.UpdateNotification({ notification: notification, email: user.email })
 
     if (!response) {

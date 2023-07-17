@@ -4,8 +4,6 @@ const userController = require("../controllers/user.controller");
 const { authenticateUser } = require("../middlewares/authentication.middleware");
 const restricted = require("../middlewares/restricted.middleware");
 
-
-// SignUp
 router.post('/signup', userController.SignUp);
 router.post('/signin', userController.SignIn);
 router.post('/verify', userController.VerifyAccount);
@@ -15,13 +13,17 @@ router.post('/find', [authenticateUser, restricted(["administrator"])], userCont
 router.post('/reset-password', userController.PasswordReset);
 router.post('/check-reset-code', userController.CheckResetCode);
 router.post('/update-reset-password', userController.PasswordResetUpdate);
-
 router.get('/all', [authenticateUser, restricted(["administrator"])], userController.GetAll);
 router.get('/allbase', userController.GetAllBase);
-
 router.patch('/archive', [authenticateUser, restricted(["administrator"])], userController.ArchiveUser);
 router.patch('/update', [authenticateUser, restricted(["administrator"])], userController.UserUpdate)
 router.patch('/update-password', authenticateUser, userController.PasswordUpdate);
 router.patch('/update-notification', authenticateUser, userController.NotificationUpdate);
 
 module.exports = router;
+
+
+
+
+
+

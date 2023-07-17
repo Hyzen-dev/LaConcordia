@@ -14,6 +14,7 @@ const authenticateUser = async (req, res, next) => {
         }
 
         const token = req.headers.authorization.split(" ")[1];
+        
         let user = await User.findOne({
             where: {
             accessToken: token

@@ -1,15 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import { Helmet } from 'react-helmet';
-import Modal from '../../../Components/Modal/ModalPdf.Component';
 import { Viewer, Worker } from '@react-pdf-viewer/core';
+import '@react-pdf-viewer/core/lib/styles/index.css'
+import { defaultLayoutPlugin } from '@react-pdf-viewer/default-layout'
 import '@react-pdf-viewer/default-layout/lib/styles/index.css';
+import { Helmet } from 'react-helmet';
 import { useApi } from '../../../Router';
 import MainLoadingScreen from '../../../Components/LoadingScreen/MainLoadingScreen.Component';
 import { saveAs } from 'file-saver';
+import Modal from '../../../Components/Modal/ModalPdf.Component';
 
 // Page SheetsUser qui renvoi la liste des partitions liées aux instruments pratiqués par l'utilisateur.
 
 export default function SheetsUser(props) {
+
+  const newplugin = defaultLayoutPlugin()
+
 
   const [showModal, setShowModal] = useState(false);
 
@@ -19,6 +24,7 @@ export default function SheetsUser(props) {
   const userId = user.id
 
   const [noData, setNoData] = useState(false);
+
 
   const handleModal = (data) => {
     setSelectedSheet(data);
@@ -144,13 +150,15 @@ export default function SheetsUser(props) {
                   <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js">
                     <div
                       style={{
-                        height: '400px',
+                        height: '450px',
                         width: '700px',
                         padding: '20px 0px',
                         backgroundColor: 'none',
-                      }}
-                    >
-                      <Viewer fileUrl={`${useApi.baseUrl}/images/${selectedSheet.sheetFile}`} />
+                      }}>
+                      <Viewer
+                        fileUrl={`${useApi.baseUrl}/images/${selectedSheet.sheetFile}`}
+                        plugins={[newplugin]}
+                      />
                     </div>
                   </Worker>
                 </div>

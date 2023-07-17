@@ -19,10 +19,10 @@
 @media screen and (min-width: 1280px) {
     .cardsContainer {
         // grid-template-columns: repeat(3, 1fr);
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        // grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         gap: 40px;
     }
     .usersPage .cardsContainer {
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        // grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     }
 }
